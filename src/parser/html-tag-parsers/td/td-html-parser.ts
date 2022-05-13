@@ -1,15 +1,16 @@
-import type { ElementStruct } from "../../../jsx/jsx.types";
-import { BaseHTMLParser } from "../../base-html-parser/base-html-parser";
+import { HTMLElement } from "../../base-html-parser/base-html-parser";
 import type { HTMLElementStruct } from "../../types";
 
-export class TdHTMLParser extends BaseHTMLParser {
+export class TdHTMLParser extends HTMLElement {
   static readonly tag = "td";
 
-  static attributes: Record<string, string> = {};
+  static attributes = {
+    colspan: "colspan",
+    headers: "headers",
+    rowspan: "rowspan",
+  } as const;
 
-  static events: Record<string, string> = {};
-
-  static parse(template: ElementStruct): HTMLElementStruct {
+  static toStruct(template: JSX.Element): HTMLElementStruct {
     return this.resolveElement(template);
   }
 }

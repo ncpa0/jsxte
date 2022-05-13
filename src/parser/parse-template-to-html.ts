@@ -1,53 +1,44 @@
-import type { ElementStruct } from "../jsx/jsx.types";
-import { DOMFragment } from "./dom-fragment/dom-fragment";
+import { pad } from "../utilities/pad";
+import { mapAttributesToHtmlTagString } from "./attribute-to-html-tag-string";
 import { getHTMLStruct } from "./get-html-struct";
-import { bindAttributes } from "./state-binders/bind-attributes";
-import { bindChildren } from "./state-binders/bind-children";
-import { bindEventListeners } from "./state-binders/bind-event-listeners";
-import { bindInnerText } from "./state-binders/bind-inner-text";
 
-export type ParsingResult = {
-  element: HTMLElement | DOMFragment;
-  destroy(): void;
-};
-
-export const parseTemplateToHTML = (
-  jsxTemplate: ElementStruct
-): ParsingResult => {
-  if (typeof jsxTemplate.tag === "string") {
-    const htmlStruct = getHTMLStruct(jsxTemplate);
-    if (jsxTemplate.tag === "") {
-      const element = new DOMFragment();
-
-      const childrenBinds = bindChildren(element, htmlStruct.children);
-
-      return {
-        element,
-        destroy() {
-          childrenBinds.unbind();
-        },
-      };
-    } else {
-      const element = document.createElement(jsxTemplate.tag);
-
-      const attributesBinds = bindAttributes(element, htmlStruct);
-      const eventsBinds = bindEventListeners(element, htmlStruct);
-      const innerTextBinds = bindInnerText(element, htmlStruct);
-      const childrenBinds = bindChildren(element, htmlStruct.children);
-
-      return {
-        element,
-        destroy() {
-          attributesBinds.unbind();
-          eventsBinds.unbind();
-          innerTextBinds.unbind();
-          childrenBinds.unbind();
-        },
-      };
-    }
+export const jsxElemToHTML = (element: JSX.Element, indent = 0): string => {
+  if (element.type === "textNode") {
+    const indentPadding = pad(indent);
+    return indentPadding + element.text;
   }
 
-  const template = jsxTemplate.tag(jsxTemplate.props);
+  if (typeof element.tag !== "string") {
+    if (typeof element.tag !== "function") {
+      console.log(element);
+    }
+    const subElem = element.tag(element.props);
+    return jsxElemToHTML(subElem, indent);
+  } else {
+    const htmlStruct = getHTMLStruct(element);
 
-  return parseTemplateToHTML(template);
+    if (htmlStruct.tag === "") {
+      const results: string[] = [];
+      for (const child of htmlStruct.children) {
+        results.push(jsxElemToHTML(child, indent + 2));
+      }
+      return results.join("\n");
+    } else {
+      const indentPadding = pad(indent);
+
+      const startTag =
+        [
+          `${indentPadding}<${htmlStruct.tag}`,
+          ...mapAttributesToHtmlTagString(htmlStruct.attributes),
+        ].join(" ") + ">";
+      const endTag = `${indentPadding}</${htmlStruct.tag}>`;
+      const children: string[] = [];
+
+      for (const child of htmlStruct.children) {
+        children.push(jsxElemToHTML(child, indent + 2));
+      }
+
+      return [startTag, ...children, endTag].join("\n");
+    }
+  }
 };

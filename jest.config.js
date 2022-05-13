@@ -1,21 +1,17 @@
-/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
+/** @type {import("ts-jest/dist/types").InitialOptionsTsJest} */
 module.exports = {
   preset: "ts-jest",
-  testRegex: ".*__tests__/.+(\.test\.(ts|js|tsx|jsx))$",
+  testRegex: ".*__tests__/.+(.test.(ts|js|tsx|jsx))$",
   transform: {
-    "^.+\.(ts|tsx)$": "ts-jest",
+    "^.+.(ts|tsx)$": "ts-jest",
   },
-  testEnvironment: "jsdom",
-  roots: ["<rootDir>"],
+  testEnvironment: "node",
   collectCoverageFrom: ["src/**/*.(ts|js|tsx|jsx)"],
   coverageReporters: ["html", "text"],
-  coverageThreshold: {
-    global: {
-      branches: 0,
-      functions: 0,
-      lines: 0,
-      statements: 0,
-    },
+  roots: ["<rootDir>"],
+  modulePaths: ["<rootDir>"],
+  moduleNameMapper: {
+    "^@jsx/(.*)$": "<rootDir>/src/jsx/$1",
   },
   coveragePathIgnorePatterns: [
     "/node_modules/",
@@ -26,4 +22,10 @@ module.exports = {
     "/.husky/",
     "/.vscode/",
   ],
+  globals: {
+    "ts-jest": {
+      tsconfig: "tsconfig.test.json",
+      autoMapModuleNames: true,
+    },
+  },
 };

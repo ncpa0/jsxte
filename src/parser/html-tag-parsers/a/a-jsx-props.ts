@@ -1,5 +1,4 @@
 import type { HTMLPropsFor, Rewrap } from "../../types";
-import type { AHTMLAttributes } from "./a-attributes.types";
-import type { AHTMLEvents } from "./a-events.types";
+import type { AHTMLParser } from "./a-html-parser";
 
-export type AnchorProps = Rewrap<HTMLPropsFor<AHTMLAttributes, AHTMLEvents>>;
+export type AnchorProps = Rewrap<HTMLPropsFor<typeof AHTMLParser>>;

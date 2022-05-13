@@ -1,15 +1,22 @@
-import type { ElementStruct } from "../../../jsx/jsx.types";
-import { BaseHTMLParser } from "../../base-html-parser/base-html-parser";
+import { HTMLElement } from "../../base-html-parser/base-html-parser";
 import type { HTMLElementStruct } from "../../types";
 
-export class VideoHTMLParser extends BaseHTMLParser {
+export class VideoHTMLParser extends HTMLElement {
   static readonly tag = "video";
 
-  static attributes: Record<string, string> = {};
+  static attributes = {
+    autoplay: "autoplay",
+    controls: "controls",
+    height: "height",
+    loop: "loop",
+    muted: "muted",
+    poster: "poster",
+    preload: "preload",
+    src: "src",
+    width: "width",
+  } as const;
 
-  static events: Record<string, string> = {};
-
-  static parse(template: ElementStruct): HTMLElementStruct {
+  static toStruct(template: JSX.Element): HTMLElementStruct {
     return this.resolveElement(template);
   }
 }

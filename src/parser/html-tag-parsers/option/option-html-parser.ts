@@ -1,15 +1,17 @@
-import type { ElementStruct } from "../../../jsx/jsx.types";
-import { BaseHTMLParser } from "../../base-html-parser/base-html-parser";
+import { HTMLElement } from "../../base-html-parser/base-html-parser";
 import type { HTMLElementStruct } from "../../types";
 
-export class OptionHTMLParser extends BaseHTMLParser {
+export class OptionHTMLParser extends HTMLElement {
   static readonly tag = "option";
 
-  static attributes: Record<string, string> = {};
+  static attributes = {
+    disabled: "disabled",
+    label: "label",
+    selected: "selected",
+    value: "value",
+  } as const;
 
-  static events: Record<string, string> = {};
-
-  static parse(template: ElementStruct): HTMLElementStruct {
+  static toStruct(template: JSX.Element): HTMLElementStruct {
     return this.resolveElement(template);
   }
 }

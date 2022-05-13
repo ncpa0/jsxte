@@ -1,15 +1,25 @@
-import type { ElementStruct } from "../../../jsx/jsx.types";
-import { BaseHTMLParser } from "../../base-html-parser/base-html-parser";
+import { HTMLElement } from "../../base-html-parser/base-html-parser";
 import type { HTMLElementStruct } from "../../types";
 
-export class ImgHTMLParser extends BaseHTMLParser {
+export class ImgHTMLParser extends HTMLElement {
   static readonly tag = "img";
 
-  static attributes: Record<string, string> = {};
+  static attributes = {
+    alt: "alt",
+    crossorigin: "crossorigin",
+    height: "height",
+    ismap: "ismap",
+    loading: "loading",
+    longdesc: "longdesc",
+    referrerpolicy: "referrerpolicy",
+    sizes: "sizes",
+    src: "src",
+    srcset: "srcset",
+    usemap: "usemap",
+    width: "width",
+  } as const;
 
-  static events: Record<string, string> = {};
-
-  static parse(template: ElementStruct): HTMLElementStruct {
+  static toStruct(template: JSX.Element): HTMLElementStruct {
     return this.resolveElement(template);
   }
 }

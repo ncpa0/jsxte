@@ -1,7 +1,4 @@
 import type { HTMLPropsFor, Rewrap } from "../../types";
-import type { ButtonHTMLAttributes } from "./button-attributes.types";
-import type { ButtonHTMLEvents } from "./button-events.types";
+import type { ButtonHTMLParser } from "./button-html-parser";
 
-export type ButtonProps = Rewrap<
-  HTMLPropsFor<ButtonHTMLAttributes, ButtonHTMLEvents>
->;
+export type ButtonProps = Rewrap<HTMLPropsFor<typeof ButtonHTMLParser>>;

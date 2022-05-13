@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renderToHTML should correctly generate html from component base jsx structure 1`] = `
+"<html>
+  <head>
+    <meta charset=\\"utf-8\\">
+    </meta>
+    <meta http-equiv=\\"X-UA-Compatible\\">
+    </meta>
+    <title>
+      Page Title
+    </title>
+    <meta name=\\"viewport\\">
+    </meta>
+    <link rel=\\"stylesheet\\">
+    </link>
+  </head>
+  <body>
+    <div class=\\"main-container\\">
+        <h2>
+          Hello World!
+        </h2>
+        <input value=\\"write here\\">
+        </input>
+        <button style>
+          Submit
+        </button>
+    </div>
+  </body>
+</html>"
+`;
+
+exports[`renderToHTML should correctly generate html from simple jsx 1`] = `
+"<div id=\\"container\\">
+  <h1>
+    Hello World
+  </h1>
+  <h2>
+    Prop Title
+  </h2>
+</div>"
+`;

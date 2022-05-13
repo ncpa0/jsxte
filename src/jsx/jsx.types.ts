@@ -1,26 +1,43 @@
 import type { BaseHTMLProps } from "../parser/base-html-parser/base-html-jsx-props";
 import type { AnchorProps } from "../parser/html-tag-parsers/a/a-jsx-props";
 import type { ButtonProps } from "../parser/html-tag-parsers/button/button-jsx-props";
+import type { ColgroupProps } from "../parser/html-tag-parsers/colgroup/colgroup-jsx-props";
+import type { ImgProps } from "../parser/html-tag-parsers/img/img-jsx-props";
 import type { InputProps } from "../parser/html-tag-parsers/input/input-jsx-props";
+import type { LabelProps } from "../parser/html-tag-parsers/label/label-jsx-props";
+import type { LiProps } from "../parser/html-tag-parsers/li/li-jsx.props";
+import type { LinkProps } from "../parser/html-tag-parsers/link/link-jsx-props";
+import type { MetaProps } from "../parser/html-tag-parsers/meta/meta-jsx-props";
+import type { OptionProps } from "../parser/html-tag-parsers/option/option-jsx-props";
+import type { ScriptProps } from "../parser/html-tag-parsers/script/script-jsx-props";
+import type { SelectProps } from "../parser/html-tag-parsers/select/select-jsx-props";
+import type { TdProps } from "../parser/html-tag-parsers/td/td-jsx-props";
+import type { ThProps } from "../parser/html-tag-parsers/th/th-jsx-props";
 
 export type ElemOrList<T> = T | T[];
 
-export type ElementStructChildren = ElemOrList<ElementStruct | string>;
-
-export type ElementStructProps = {
-  key?: any;
-  children?: ElementStructChildren;
-  [k: string]: any;
-};
-
-export type ElementStruct = {
-  tag: string | ((props: ElementStructProps) => ElementStruct);
-  props: ElementStructProps;
-};
+export type TJSXComponent<P extends object = {}> = (
+  props: JSX.ElementProps & P
+) => JSX.Element;
 
 declare global {
   namespace JSX {
-    type Element = ElementStruct;
+    type ElementProps = {
+      children?: ElemOrList<Element>;
+      [k: string]: any;
+    };
+
+    type Element =
+      | {
+          type: "tag";
+          tag: string | ((props: ElementProps) => Element);
+          props: ElementProps;
+        }
+      | {
+          type: "textNode";
+          text: string;
+        };
+
     type IntrinsicElements = {
       a: BaseHTMLProps<AnchorProps>;
       abbr: BaseHTMLProps;
@@ -43,7 +60,7 @@ declare global {
       cite: BaseHTMLProps;
       code: BaseHTMLProps;
       col: BaseHTMLProps;
-      colgroup: BaseHTMLProps;
+      colgroup: BaseHTMLProps<ColgroupProps>;
       data: BaseHTMLProps;
       datalist: BaseHTMLProps;
       dd: BaseHTMLProps;
@@ -74,21 +91,21 @@ declare global {
       html: BaseHTMLProps;
       i: BaseHTMLProps;
       iframe: BaseHTMLProps;
-      img: BaseHTMLProps;
+      img: BaseHTMLProps<ImgProps>;
       input: BaseHTMLProps<InputProps>;
       ins: BaseHTMLProps;
       kbd: BaseHTMLProps;
       keygen: BaseHTMLProps;
-      label: BaseHTMLProps;
+      label: BaseHTMLProps<LabelProps>;
       legend: BaseHTMLProps;
-      li: BaseHTMLProps;
-      link: BaseHTMLProps;
+      li: BaseHTMLProps<LiProps>;
+      link: BaseHTMLProps<LinkProps>;
       main: BaseHTMLProps;
       map: BaseHTMLProps;
       mark: BaseHTMLProps;
       menu: BaseHTMLProps;
       menuitem: BaseHTMLProps;
-      meta: BaseHTMLProps;
+      meta: BaseHTMLProps<MetaProps>;
       meter: BaseHTMLProps;
       nav: BaseHTMLProps;
       noindex: BaseHTMLProps;
@@ -96,7 +113,7 @@ declare global {
       object: BaseHTMLProps;
       ol: BaseHTMLProps;
       optgroup: BaseHTMLProps;
-      option: BaseHTMLProps;
+      option: BaseHTMLProps<OptionProps>;
       output: BaseHTMLProps;
       p: BaseHTMLProps;
       param: BaseHTMLProps;
@@ -110,9 +127,9 @@ declare global {
       s: BaseHTMLProps;
       samp: BaseHTMLProps;
       slot: BaseHTMLProps;
-      script: BaseHTMLProps;
+      script: BaseHTMLProps<ScriptProps>;
       section: BaseHTMLProps;
-      select: BaseHTMLProps;
+      select: BaseHTMLProps<SelectProps>;
       small: BaseHTMLProps;
       source: BaseHTMLProps;
       span: BaseHTMLProps;
@@ -124,10 +141,10 @@ declare global {
       table: BaseHTMLProps;
       template: BaseHTMLProps;
       tbody: BaseHTMLProps;
-      td: BaseHTMLProps;
+      td: BaseHTMLProps<TdProps>;
       textarea: BaseHTMLProps;
       tfoot: BaseHTMLProps;
-      th: BaseHTMLProps;
+      th: BaseHTMLProps<ThProps>;
       thead: BaseHTMLProps;
       time: BaseHTMLProps;
       title: BaseHTMLProps;

@@ -1,15 +1,17 @@
-import type { ElementStruct } from "../../../jsx/jsx.types";
-import { BaseHTMLParser } from "../../base-html-parser/base-html-parser";
+import { HTMLElement } from "../../base-html-parser/base-html-parser";
 import type { HTMLElementStruct } from "../../types";
 
-export class MetaHTMLParser extends BaseHTMLParser {
+export class MetaHTMLParser extends HTMLElement {
   static readonly tag = "meta";
 
-  static attributes: Record<string, string> = {};
+  static readonly attributes = {
+    "http-equiv": "http-equiv",
+    charset: "charset",
+    content: "content",
+    name: "name",
+  } as const;
 
-  static events: Record<string, string> = {};
-
-  static parse(template: ElementStruct): HTMLElementStruct {
+  static toStruct(template: JSX.Element): HTMLElementStruct {
     return this.resolveElement(template);
   }
 }

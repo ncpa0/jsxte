@@ -1,15 +1,22 @@
-import type { ElementStruct } from "../../../jsx/jsx.types";
-import { BaseHTMLParser } from "../../base-html-parser/base-html-parser";
+import { HTMLElement } from "../../base-html-parser/base-html-parser";
 import type { HTMLElementStruct } from "../../types";
 
-export class LinkHTMLParser extends BaseHTMLParser {
+export class LinkHTMLParser extends HTMLElement {
   static readonly tag = "link";
 
-  static attributes: Record<string, string> = {};
+  static attributes = {
+    crossorigin: "crossorigin",
+    href: "href",
+    hreflang: "hreflang",
+    media: "media",
+    referrerpolicy: "referrerpolicy",
+    rel: "rel",
+    sizes: "sizes",
+    title: "title",
+    type: "type",
+  };
 
-  static events: Record<string, string> = {};
-
-  static parse(template: ElementStruct): HTMLElementStruct {
+  static toStruct(template: JSX.Element): HTMLElementStruct {
     return this.resolveElement(template);
   }
 }

@@ -1,7 +1,4 @@
 import type { HTMLPropsFor, Rewrap } from "../../types";
-import type { InputHTMLAttributes } from "./input-attributes.types";
-import type { InputHTMLEvents } from "./input-events.types";
+import type { InputHTMLParser } from "./input-html-parser";
 
-export type InputProps = Rewrap<
-  HTMLPropsFor<InputHTMLAttributes, InputHTMLEvents>
->;
+export type InputProps = Rewrap<HTMLPropsFor<typeof InputHTMLParser>>;

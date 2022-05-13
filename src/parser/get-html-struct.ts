@@ -1,5 +1,4 @@
-import type { ElementStruct } from "../jsx/jsx.types";
-import { BaseHTMLParser } from "./base-html-parser/base-html-parser";
+import { HTMLElement } from "./base-html-parser/base-html-parser";
 import { AHTMLParser } from "./html-tag-parsers/a/a-html-parser";
 import { AbbrHTMLParser } from "./html-tag-parsers/abbr/abbr-html-parser";
 import { AddressHTMLParser } from "./html-tag-parsers/address/address-html-parser";
@@ -120,12 +119,12 @@ import { WbrHTMLParser } from "./html-tag-parsers/wbr/wbr-html-parser";
 import { WebviewHTMLParser } from "./html-tag-parsers/webview/webview-html-parser";
 import type { HTMLElementStruct } from "./types";
 
-export type HTMLParser = {
+export type HTMLStructFactory = {
   tag: string;
-  parse(template: ElementStruct): HTMLElementStruct;
+  toStruct(template: JSX.Element): HTMLElementStruct;
 };
 
-export const HTMLParsers: HTMLParser[] = [
+export const HTMLParsers: HTMLStructFactory[] = [
   AHTMLParser,
   AbbrHTMLParser,
   AddressHTMLParser,
@@ -246,12 +245,14 @@ export const HTMLParsers: HTMLParser[] = [
   SvgHTMLParser,
 ];
 
-export const getHTMLStruct = (template: ElementStruct) => {
-  const parser = HTMLParsers.find((p) => p.tag === template.tag);
+export const getHTMLStruct = (element: JSX.Element): HTMLElementStruct => {
+  const parser = HTMLParsers.find(
+    (p) => element.type === "tag" && element.tag === p.tag
+  );
 
   if (parser) {
-    return parser.parse(template);
+    return parser.toStruct(element);
   }
 
-  return BaseHTMLParser.resolveElement(template);
+  return HTMLElement.resolveElement(element);
 };

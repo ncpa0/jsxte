@@ -1,13 +1,10 @@
-import type { ElementStruct } from "../jsx/jsx.types";
-import type { EventCallback } from "./base-html-parser/events.types";
+export type RendererHTMLAttributes = [string, string | undefined][];
 
 export type HTMLElementStruct = {
   tag: string;
   key?: any;
-  children: ElementStruct[];
-  attributes: [string, string | undefined][];
-  events: [string, EventCallback][];
-  text: string | undefined;
+  children: JSX.Element[];
+  attributes: RendererHTMLAttributes;
 };
 
 export type Rewrap<T extends object> = T extends infer OBJ
@@ -16,8 +13,8 @@ export type Rewrap<T extends object> = T extends infer OBJ
     }
   : never;
 
-export type HTMLPropsFor<Attributes, Events> = {
-  [K in keyof Attributes]?: Attributes[K];
-} & {
-  [K in keyof Events]?: (e: Events[K]) => void;
+export type HTMLPropsFor<
+  Attributes extends { attributes: Record<string, string> }
+> = {
+  [K in keyof Attributes["attributes"]]?: string;
 };
