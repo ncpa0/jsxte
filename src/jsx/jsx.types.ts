@@ -1,6 +1,7 @@
 import type { BaseHTMLProps } from "../parser/base-html-parser/base-html-jsx-props";
 import type { AnchorProps } from "../parser/html-tag-parsers/a/a-jsx-props";
 import type { ButtonProps } from "../parser/html-tag-parsers/button/button-jsx-props";
+import type { ColProps } from "../parser/html-tag-parsers/col/col-jsx-props";
 import type { ColgroupProps } from "../parser/html-tag-parsers/colgroup/colgroup-jsx-props";
 import type { ImgProps } from "../parser/html-tag-parsers/img/img-jsx-props";
 import type { InputProps } from "../parser/html-tag-parsers/input/input-jsx-props";
@@ -17,7 +18,7 @@ import type { ThProps } from "../parser/html-tag-parsers/th/th-jsx-props";
 export type ElemOrList<T> = T | T[];
 
 export type TJSXComponent<P extends object = {}> = (
-  props: JSX.ElementProps & P
+  props: { children?: JSX.Element | JSX.Element[] | string | string[] } & P
 ) => JSX.Element;
 
 declare global {
@@ -59,7 +60,7 @@ declare global {
       caption: BaseHTMLProps;
       cite: BaseHTMLProps;
       code: BaseHTMLProps;
-      col: BaseHTMLProps;
+      col: BaseHTMLProps<ColProps>;
       colgroup: BaseHTMLProps<ColgroupProps>;
       data: BaseHTMLProps;
       datalist: BaseHTMLProps;

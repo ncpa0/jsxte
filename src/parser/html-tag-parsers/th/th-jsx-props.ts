@@ -1,4 +1,4 @@
 import type { HTMLPropsFor, Rewrap } from "../../types";
-import type { TheadHTMLParser } from "../thead/thead-html-parser";
+import type { ThHTMLParser } from "./th-html-parser";
 
-export type ThProps = Rewrap<HTMLPropsFor<typeof TheadHTMLParser>>;
+export type ThProps = Rewrap<HTMLPropsFor<typeof ThHTMLParser>>;

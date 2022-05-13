@@ -1,15 +1,9 @@
 import { isObjectKey } from "../../utilities/is-object-key";
 import type { HTMLElementStruct, RendererHTMLAttributes } from "../types";
-import type { BaseHTMLAttributes } from "./attributes.types";
-
-const createAttributeMap = <T extends Record<keyof BaseHTMLAttributes, string>>(
-  v: T
-): T => v;
-
 export class HTMLElement {
   static readonly tag: string = "";
 
-  private static baseAttributes = createAttributeMap({
+  private static baseAttributes = {
     class: "class",
     draggable: "draggable",
     id: "id",
@@ -17,7 +11,7 @@ export class HTMLElement {
     slot: "slot",
     style: "style",
     title: "title",
-  } as const);
+  } as const;
   static attributes: Record<string, string> = {};
 
   static resolveAttributes(element: JSX.Element): RendererHTMLAttributes {
@@ -26,19 +20,19 @@ export class HTMLElement {
     const attributes: HTMLElementStruct["attributes"] = [];
 
     for (const [key, prop] of Object.entries(element.props)) {
-      if (key.startsWith("data-")) {
-        attributes.push([key, prop.toString()]);
-        break;
+      if (key.startsWith("data-") || key.startsWith("aria-")) {
+        attributes.push([key, prop?.toString()]);
+        continue;
       }
       if (isObjectKey(key, this.baseAttributes)) {
         const attributeName = this.baseAttributes[key];
-        attributes.push([attributeName, prop.toString()]);
-        break;
+        attributes.push([attributeName, prop?.toString()]);
+        continue;
       }
       if (isObjectKey(key, this.attributes)) {
         const attributeName = this.attributes[key]!;
-        attributes.push([attributeName, prop.toString()]);
-        break;
+        attributes.push([attributeName, prop?.toString()]);
+        continue;
       }
     }
 
