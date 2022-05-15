@@ -1,14 +1,14 @@
-import type { ElemOrList } from "./jsx.types";
-
 type CreateElementProps = {
   [k: string]: any;
-  children?: ElemOrList<JSX.Element | string> | undefined;
+  children?: JSX.ElementChildren;
 };
 
 export const createElement = (
-  tag: string,
+  tag: string | ((props: any) => JSX.Element),
   props?: CreateElementProps,
-  ...children: Array<ElemOrList<JSX.Element | string>>
+  ...children: Array<
+    JSX.Element | string | number | Array<JSX.Element | string | number>
+  >
 ): JSX.Element => {
   props ??= {};
 
@@ -16,28 +16,36 @@ export const createElement = (
     props.children = [
       ...(props.children
         ? Array.isArray(props.children)
-          ? props.children
+          ? props.children.flat(2)
           : [props.children]
         : []),
-      ...children.flat(),
+      ...children.flat(2),
     ];
   }
 
   if (props?.children) {
     if (typeof props.children === "string") {
       props.children = { type: "textNode", text: props.children };
+    } else if (typeof props.children === "number") {
+      props.children = {
+        type: "textNode",
+        text: (props.children as number).toString(),
+      };
     } else if (Array.isArray(props.children)) {
       props.children = props.children.map((child): JSX.Element => {
         if (typeof child === "string") {
           return { type: "textNode", text: child };
+        } else if (typeof child === "number") {
+          return { type: "textNode", text: (child as number).toString() };
         }
-        return child;
+        return child as JSX.Element;
       });
     }
   }
 
   return {
     type: "tag",
+    // @ts-expect-error
     tag,
     props: props as JSX.ElementProps,
   };

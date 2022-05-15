@@ -2,6 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "rootDirs": ["./__tests__", "./src"],
+    "jsx": "react",
     "jsxFactory": "jsx",
     "jsxFragmentFactory": "Fragment"
   },

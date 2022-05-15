@@ -1,3 +1,4 @@
+import type { JSXSyncElem } from "../jsx/jsx.types";
 import { HTMLElement } from "./base-html-parser/base-html-parser";
 import { AHTMLParser } from "./html-tag-parsers/a/a-html-parser";
 import { AbbrHTMLParser } from "./html-tag-parsers/abbr/abbr-html-parser";
@@ -245,7 +246,15 @@ export const HTMLParsers: HTMLStructFactory[] = [
   SvgHTMLParser,
 ];
 
-export const getHTMLStruct = (element: JSX.Element): HTMLElementStruct => {
+export const getHTMLStruct = (element: JSXSyncElem): HTMLElementStruct => {
+  if (
+    element.type === "tag" &&
+    typeof element.tag === "string" &&
+    element.tag.includes("-")
+  ) {
+    return HTMLElement.resolveWebComponentElement(element);
+  }
+
   const parser = HTMLParsers.find(
     (p) => element.type === "tag" && element.tag === p.tag
   );

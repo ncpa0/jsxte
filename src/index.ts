@@ -1,2 +1,1 @@
-export * from "./jsx/jsx.types";
-export { renderToHTML } from "./parser/render-to-html";
+export { renderToHtml, renderToHtmlAsync } from "./parser/render-to-html";

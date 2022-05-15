@@ -13,8 +13,8 @@
     "ts-jest": "^28.0.2",
     "typescript": "^4.6.4"
   },
-  "name": "tjsx",
-  "version": "1.0.0",
+  "name": "jsx-template-engine",
+  "version": "0.0.1",
   "main": "./dist/index.js",
   "scripts": {
     "build": "tsc",
@@ -22,14 +22,20 @@
     "tsc": "tsc --noEmit",
     "test": "jest --coverage"
   },
-  "keywords": [],
+  "keywords": [
+    "jsx",
+    "template",
+    "engine",
+    "express",
+    "node"
+  ],
   "repository": {
-    "url": ""
+    "url": "https://github.com/ncpa0cpl/JSX-Template-Engine"
   },
   "description": "",
   "license": "MIT",
   "author": {
-    "name": "",
-    "email": ""
+    "name": "Szymon Bretner (ncpa0cpl)",
+    "email": "szymonb21@gmail.com"
   }
 }

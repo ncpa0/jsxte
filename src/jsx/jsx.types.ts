@@ -15,31 +15,57 @@ import type { SelectProps } from "../parser/html-tag-parsers/select/select-jsx-p
 import type { TdProps } from "../parser/html-tag-parsers/td/td-jsx-props";
 import type { ThProps } from "../parser/html-tag-parsers/th/th-jsx-props";
 
-export type ElemOrList<T> = T | T[];
+export type JSXTagElem = {
+  type: "tag";
+  tag:
+    | string
+    | ((props: JSX.ElementProps) => Element)
+    | ((props: JSX.ElementProps) => Promise<Element>);
+  props: JSX.ElementProps;
+};
 
-export type TJSXComponent<P extends object = {}> = (
-  props: { children?: JSX.Element | JSX.Element[] | string | string[] } & P
-) => JSX.Element;
+export type JSXTextNodeElem = {
+  type: "textNode";
+  text: string;
+};
+
+export type JSXSyncElem = JSXTagElem | JSXTextNodeElem;
 
 declare global {
   namespace JSX {
+    type PropsWithChildren<P extends object> = P & {
+      children?: JSX.ElementChildren;
+    };
+
+    type Component<P extends object = {}> = (
+      props: PropsWithChildren<P>
+    ) => JSX.Element;
+
+    type AsynComponent<P extends object = {}> = (
+      props: PropsWithChildren<P>
+    ) => Promise<JSX.Element>;
+
+    type ElementChildren =
+      | JSX.Element
+      | string
+      | number
+      | Array<
+          JSX.Element | string | number | Array<JSX.Element | string | number>
+        >;
+
     type ElementProps = {
-      children?: ElemOrList<Element>;
+      children?: ElementChildren;
       [k: string]: any;
     };
 
     type Element =
-      | {
-          type: "tag";
-          tag: string | ((props: ElementProps) => Element);
-          props: ElementProps;
-        }
-      | {
-          type: "textNode";
-          text: string;
-        };
+      | JSXTagElem
+      | JSXTextNodeElem
+      | Promise<JSXTagElem | JSXTextNodeElem>;
 
-    type IntrinsicElements = {
+    type LibraryManagedAttributes<T, PropsWithChildren> = PropsWithChildren;
+
+    interface IntrinsicElements {
       a: BaseHTMLProps<AnchorProps>;
       abbr: BaseHTMLProps;
       address: BaseHTMLProps;
@@ -160,6 +186,8 @@ declare global {
 
       // SVG
       svg: BaseHTMLProps;
-    };
+
+      // web components
+    }
   }
 }
