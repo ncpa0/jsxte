@@ -10,3 +10,4 @@ src
 .prettierrc.json
 jest.config.js
 yarn-error.log
+tsconfig.test.json
