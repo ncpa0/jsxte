@@ -5,7 +5,7 @@ import type { HTMLElementStruct, RendererHTMLAttributes } from "../types";
 export class HTMLElement {
   static readonly tag: string = "";
 
-  private static baseAttributes = {
+  static baseAttributes = {
     class: "class",
     draggable: "draggable",
     id: "id",
