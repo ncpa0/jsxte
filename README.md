@@ -1,16 +1,16 @@
-# JSX Template Engine
+# xtemplates
 
-A JSX based templating engine for browsers or Node environments.
+A JSX based html templating engine for browsers or Node environments.
 
 ## Getting started
 
-To use the JSX Template Engine you will have to set up your transpiler to use this package for trnasforming the JSX syntax, if you use typescript for transpiling all you have to do is set these options in the tsconfig:
+To use the xtemplates you will have to set up your transpiler to use this package for trnasforming the JSX syntax, if you use typescript for transpiling all you have to do is set these options in the tsconfig:
 
 ```json
 {
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "jsx-template-engine"
+    "jsxImportSource": "xtemplates"
   }
 }
 ```
@@ -20,7 +20,7 @@ If you use something else, like babel you will also need to adapt the configurat
 Once you are done with that you can start writing your templates and rendering them.
 
 ```tsx
-import { renderToHtml } from "jsx-template-engine";
+import { renderToHtml } from "xtemplates";
 
 const Header = (props: { label: string }) => {
   return <h1>{props.label}</h1>;
@@ -49,7 +49,7 @@ const html = renderToHtml(App, { label: "Hello World!" });
 In case you use the templates in a server app in a Node environemnt you might want to include some data from the database in the html you serve to the client. To make it easier to fetch what's needed and marry it with the templates you can make your components asynchronous and send async requests from within them.
 
 ```tsx
-import { renderToHtmlAsync } from "jsx-template-engine";
+import { renderToHtmlAsync } from "xtemplates";
 
 const Header = () => {
   return <h1>Hello World</h1>;

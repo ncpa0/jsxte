@@ -15,3 +15,5 @@ tsconfig.json
 yarn-error.log
 yarn.lock
 package-lock.json
+jsx-runtime.d.ts
+jsx-runtime.js

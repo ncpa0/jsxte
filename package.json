@@ -13,7 +13,7 @@
     "ts-jest": "^28.0.2",
     "typescript": "^4.6.4"
   },
-  "name": "jsx-template-engine",
+  "name": "xtemplates",
   "version": "0.0.1",
   "main": "./dist/index.js",
   "scripts": {
@@ -27,12 +27,14 @@
     "template",
     "engine",
     "express",
-    "node"
+    "node",
+    "browser",
+    "html"
   ],
   "repository": {
-    "url": "https://github.com/ncpa0cpl/JSX-Template-Engine"
+    "url": "https://github.com/ncpa0cpl/xtemplates"
   },
-  "description": "",
+  "description": "JSX-based html templating engine for browsers or Node environments.",
   "license": "MIT",
   "author": {
     "name": "Szymon Bretner (ncpa0cpl)",
