@@ -1,16 +1,16 @@
-# xtemplates
+# JSX Template Engine
 
 A JSX based html templating engine for browsers or Node environments.
 
 ## Getting started
 
-To use the xtemplates you will have to set up your transpiler to use this package for trnasforming the JSX syntax, if you use typescript for transpiling all you have to do is set these options in the tsconfig:
+To use the jsxte you will have to set up your transpiler to use this package for transforming the JSX syntax, if you use typescript for transpiling all you have to do is set these options in the tsconfig:
 
 ```json
 {
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "xtemplates"
+    "jsxImportSource": "jsxte"
   }
 }
 ```
@@ -20,7 +20,7 @@ If you use something else, like babel you will also need to adapt the configurat
 Once you are done with that you can start writing your templates and rendering them.
 
 ```tsx
-import { renderToHtml } from "xtemplates";
+import { renderToHtml } from "jsxte";
 
 const Header = (props: { label: string }) => {
   return <h1>{props.label}</h1>;
@@ -46,10 +46,10 @@ const html = renderToHtml(App, { label: "Hello World!" });
 
 ## Asynchronous Components
 
-In case you use the templates in a server app in a Node environemnt you might want to include some data from the database in the html you serve to the client. To make it easier to fetch what's needed and marry it with the templates you can make your components asynchronous and send async requests from within them.
+In case you use the templates in a server app in a Node environment you might want to include some data from the database in the html you serve to the client. To make it easier to fetch what's needed and marry it with the templates you can make your components asynchronous and send async requests from within them.
 
 ```tsx
-import { renderToHtmlAsync } from "xtemplates";
+import { renderToHtmlAsync } from "jsxte";
 
 const Header = () => {
   return <h1>Hello World</h1>;
@@ -60,20 +60,20 @@ const ToDoList = async () => {
 
   return (
     <table>
-        <thenad>
-            <tr>
-                <th>Label</th>
-                <th>Is Done?</th>
-            </tr>
-        </thead>
-        <tbody>
+      <thead>
+        <tr>
+          <th>Label</th>
+          <th>Is Done?</th>
+        </tr>
+      </thead>
+      <tbody>
         {todos.map((todo) => (
-            <tr>
-                <td>{todo.label}</td>
-                <td>{todo.isDone ? "yes" : "no"}</td>
-            </tr>
+          <tr>
+            <td>{todo.label}</td>
+            <td>{todo.isDone ? "yes" : "no"}</td>
+          </tr>
         ))}
-        </tbody>
+      </tbody>
     </table>
   );
 };
