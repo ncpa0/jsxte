@@ -41,7 +41,7 @@ declare global {
       props: PropsWithChildren<P>
     ) => JSX.Element;
 
-    type AsynComponent<P extends object = {}> = (
+    type AsyncComponent<P extends object = {}> = (
       props: PropsWithChildren<P>
     ) => Promise<JSX.Element>;
 

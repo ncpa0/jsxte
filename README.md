@@ -4,7 +4,7 @@ A JSX based html templating engine for browsers or Node environments.
 
 ## Getting started
 
-To use the jsxte you will have to set up your transpiler to use this package for transforming the JSX syntax, if you use typescript for transpiling all you have to do is set these options in the tsconfig:
+To use the `jsxte` you will have to set up your transpiler to use this package for transforming the JSX syntax, if you use typescript for transpiling all you have to do is set these options in the tsconfig:
 
 ```json
 {
@@ -98,3 +98,26 @@ const App = () => {
 // If your component contains an asynchronous component at any point, `renderToHtmlAsync` needs to be used instead of `renderToHtml`
 const html = await renderToHtmlAsync(App, { label: "Hello World!" });
 ```
+
+## Express JS View Engine
+
+You can also use `jsxte` with the Express View Engine. To do that, use the `expressExtend` to add the engine support, specify the views directory and then use the express response method `.render()`. The `.render()` method takes the component props as it's second argument.
+
+```ts
+import express from "express";
+import { expressExtend } from "jsxte";
+
+const app = express();
+expressExtend(app);
+
+app.set("views", path.resolve(__dirname, "views"));
+
+app.get("/", (_, resp) => {
+  const indexProps = {
+    /* ... */
+  };
+  resp.render("index", indexProps); // will render the component located in the ./views file
+});
+```
+
+For this approach to work, the JSX Components must be exported as defaults (ex. `export default () => <div></div>` or `exports.default = () => <div></div>`) and the views must be transpiled to `.js` files.
