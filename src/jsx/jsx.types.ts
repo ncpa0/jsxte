@@ -1,19 +1,19 @@
-import type { BaseHTMLProps } from "../parser/base-html-parser/base-html-jsx-props";
-import type { AnchorProps } from "../parser/html-tag-parsers/a/a-jsx-props";
-import type { ButtonProps } from "../parser/html-tag-parsers/button/button-jsx-props";
-import type { ColProps } from "../parser/html-tag-parsers/col/col-jsx-props";
-import type { ColgroupProps } from "../parser/html-tag-parsers/colgroup/colgroup-jsx-props";
-import type { ImgProps } from "../parser/html-tag-parsers/img/img-jsx-props";
-import type { InputProps } from "../parser/html-tag-parsers/input/input-jsx-props";
-import type { LabelProps } from "../parser/html-tag-parsers/label/label-jsx-props";
-import type { LiProps } from "../parser/html-tag-parsers/li/li-jsx.props";
-import type { LinkProps } from "../parser/html-tag-parsers/link/link-jsx-props";
-import type { MetaProps } from "../parser/html-tag-parsers/meta/meta-jsx-props";
-import type { OptionProps } from "../parser/html-tag-parsers/option/option-jsx-props";
-import type { ScriptProps } from "../parser/html-tag-parsers/script/script-jsx-props";
-import type { SelectProps } from "../parser/html-tag-parsers/select/select-jsx-props";
-import type { TdProps } from "../parser/html-tag-parsers/td/td-jsx-props";
-import type { ThProps } from "../parser/html-tag-parsers/th/th-jsx-props";
+import type { BaseHTMLProps } from "../html-parser/base-html-parser/base-html-jsx-props";
+import type { AnchorProps } from "../html-parser/html-tag-parsers/a/a-jsx-props";
+import type { ButtonProps } from "../html-parser/html-tag-parsers/button/button-jsx-props";
+import type { ColProps } from "../html-parser/html-tag-parsers/col/col-jsx-props";
+import type { ColgroupProps } from "../html-parser/html-tag-parsers/colgroup/colgroup-jsx-props";
+import type { ImgProps } from "../html-parser/html-tag-parsers/img/img-jsx-props";
+import type { InputProps } from "../html-parser/html-tag-parsers/input/input-jsx-props";
+import type { LabelProps } from "../html-parser/html-tag-parsers/label/label-jsx-props";
+import type { LiProps } from "../html-parser/html-tag-parsers/li/li-jsx.props";
+import type { LinkProps } from "../html-parser/html-tag-parsers/link/link-jsx-props";
+import type { MetaProps } from "../html-parser/html-tag-parsers/meta/meta-jsx-props";
+import type { OptionProps } from "../html-parser/html-tag-parsers/option/option-jsx-props";
+import type { ScriptProps } from "../html-parser/html-tag-parsers/script/script-jsx-props";
+import type { SelectProps } from "../html-parser/html-tag-parsers/select/select-jsx-props";
+import type { TdProps } from "../html-parser/html-tag-parsers/td/td-jsx-props";
+import type { ThProps } from "../html-parser/html-tag-parsers/th/th-jsx-props";
 
 export type JSXTagElem = {
   type: "tag";
