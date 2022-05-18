@@ -131,20 +131,25 @@ export class HTMLElement {
   static resolveElement(element: JSXSyncElem): HTMLElementStruct {
     const children = this.resolveChildren(element);
     const attributes = this.resolveAttributes(element);
-    const key = this.resolveKey(element);
 
     return {
       tag: this.tag,
-      key,
       children,
       attributes,
     };
   }
 
   static resolveWebComponentElement(element: JSXTagElem): HTMLElementStruct {
-    const struct = this.resolveElement(element);
-    struct.tag = element.tag.toString();
+    const children = this.resolveChildren(element);
+    const { children: _, ...attributes } = element.props;
 
-    return struct;
+    return {
+      tag: element.tag.toString(),
+      children,
+      attributes: Object.entries(attributes).map(([k, v]) => [
+        k,
+        v?.toString(),
+      ]),
+    };
   }
 }

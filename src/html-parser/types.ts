@@ -2,7 +2,6 @@ export type RendererHTMLAttributes = [string, string | undefined][];
 
 export type HTMLElementStruct = {
   tag: string;
-  key?: any;
   children: JSX.Element[];
   attributes: RendererHTMLAttributes;
 };
