@@ -1,4 +1,4 @@
-import { renderToHtmlAsync } from "../parser/render-to-html";
+import { renderToHtmlAsync } from "../html-parser/render-to-html";
 
 /**
  * Express.js support.
