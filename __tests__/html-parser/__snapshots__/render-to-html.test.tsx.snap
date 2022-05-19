@@ -5,7 +5,7 @@ exports[`renderToHTML should correctly generate html from component base jsx str
   <head>
     <meta charset=\\"utf-8\\">
     </meta>
-    <meta http-equiv=\\"X-UA-Compatible\\" content=\\"IE=edge\\">
+    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\">
     </meta>
     <title>
       Page Title
@@ -48,7 +48,7 @@ exports[`renderToHTML should correctly parse async components 1`] = `
   <head>
     <meta charset=\\"utf-8\\">
     </meta>
-    <meta http-equiv=\\"X-UA-Compatible\\" content=\\"IE=edge\\">
+    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\">
     </meta>
     <title>
       Page Title

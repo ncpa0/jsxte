@@ -5,7 +5,12 @@ import { getHTMLStruct } from "./get-html-struct";
 
 const isSyncElem = (e: JSX.Element): e is JSXSyncElem => true;
 
-export const jsxElemToHtmlSync = (element: JSX.Element, indent = 0): string => {
+export const jsxElemToHtmlSync = (
+  element: JSX.Element,
+  options?: { indent?: number; attributeMap?: Record<string, string> }
+): string => {
+  const { attributeMap = {}, indent = 0 } = options ?? {};
+
   if (!isSyncElem(element)) throw new Error("");
 
   if (element.type === "textNode") {
@@ -22,14 +27,16 @@ export const jsxElemToHtmlSync = (element: JSX.Element, indent = 0): string => {
       );
     }
 
-    return jsxElemToHtmlSync(subElem, indent);
+    return jsxElemToHtmlSync(subElem, { indent, attributeMap });
   } else {
-    const htmlStruct = getHTMLStruct(element);
+    const htmlStruct = getHTMLStruct(element, attributeMap);
 
     if (htmlStruct.tag === "") {
       const results: string[] = [];
       for (const child of htmlStruct.children) {
-        results.push(jsxElemToHtmlSync(child, indent + 2));
+        results.push(
+          jsxElemToHtmlSync(child, { indent: indent + 2, attributeMap })
+        );
       }
       return results.join("\n");
     } else {
@@ -44,7 +51,9 @@ export const jsxElemToHtmlSync = (element: JSX.Element, indent = 0): string => {
       const children: string[] = [];
 
       for (const child of htmlStruct.children) {
-        children.push(jsxElemToHtmlSync(child, indent + 2));
+        children.push(
+          jsxElemToHtmlSync(child, { indent: indent + 2, attributeMap })
+        );
       }
 
       return [startTag, ...children, endTag].join("\n");
@@ -54,8 +63,10 @@ export const jsxElemToHtmlSync = (element: JSX.Element, indent = 0): string => {
 
 export const jsxElemToHtmlAsync = async (
   element: JSX.Element,
-  indent = 0
+  options?: { indent?: number; attributeMap?: Record<string, string> }
 ): Promise<string> => {
+  const { attributeMap = {}, indent = 0 } = options ?? {};
+
   if (!isSyncElem(element)) throw new Error("");
 
   if (element.type === "textNode") {
@@ -66,14 +77,16 @@ export const jsxElemToHtmlAsync = async (
   if (typeof element.tag !== "string") {
     const subElem = (await element.tag(element.props)) as any as JSXSyncElem;
 
-    return await jsxElemToHtmlAsync(subElem, indent);
+    return await jsxElemToHtmlAsync(subElem, { indent, attributeMap });
   } else {
-    const htmlStruct = getHTMLStruct(element);
+    const htmlStruct = getHTMLStruct(element, attributeMap);
 
     if (htmlStruct.tag === "") {
       const results: string[] = [];
       for (const child of htmlStruct.children) {
-        results.push(await jsxElemToHtmlAsync(child, indent + 2));
+        results.push(
+          await jsxElemToHtmlAsync(child, { indent: indent + 2, attributeMap })
+        );
       }
       return results.join("\n");
     } else {
@@ -88,7 +101,9 @@ export const jsxElemToHtmlAsync = async (
       const children: string[] = [];
 
       for (const child of htmlStruct.children) {
-        children.push(await jsxElemToHtmlAsync(child, indent + 2));
+        children.push(
+          await jsxElemToHtmlAsync(child, { indent: indent + 2, attributeMap })
+        );
       }
 
       return [startTag, ...children, endTag].join("\n");
