@@ -1,9 +1,9 @@
 export const mapAttributeName = (
   attributeName: string,
   map: Record<string, string>
-) => {
-  if (attributeName in map) {
-    return map[attributeName];
+): string => {
+  if (attributeName in map && map[attributeName]) {
+    return map[attributeName]!;
   }
   return attributeName;
 };
