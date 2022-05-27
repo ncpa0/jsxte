@@ -1,4 +1,5 @@
 import { renderToHtmlAsync } from "../html-parser/render-to-html";
+import { createElement } from "../jsx/jsx-runtime";
 
 /**
  * Express.js support.
@@ -16,7 +17,7 @@ const __express = async <P extends object>(
   try {
     // eslint-disable-next-line
     const Component: JSX.AsyncComponent<P> = require(filePath).default;
-    const html = await renderToHtmlAsync(Component, options);
+    const html = await renderToHtmlAsync(createElement(Component, options));
     return callback(null, html);
   } catch (e) {
     callback(e);

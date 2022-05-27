@@ -19,7 +19,7 @@ describe("renderToHTML", () => {
       );
     };
 
-    const html = renderToHtml(Component, { title: "Prop Title" });
+    const html = renderToHtml(<Component title="Prop Title" />);
 
     expect(html).toMatchSnapshot();
   });
@@ -76,7 +76,7 @@ describe("renderToHTML", () => {
       );
     };
 
-    const html = renderToHtml(App, {});
+    const html = renderToHtml(<App />);
 
     expect(html).toMatchSnapshot();
   });
@@ -94,7 +94,7 @@ describe("renderToHTML", () => {
       );
     };
 
-    const html = renderToHtml(App, {});
+    const html = renderToHtml(<App />);
 
     expect(html).toMatchSnapshot();
   });
@@ -157,9 +157,9 @@ describe("renderToHTML", () => {
       );
     };
 
-    expect(() => renderToHtml(App, {})).toThrowError();
+    expect(() => renderToHtml(<App />)).toThrowError();
 
-    const html = await renderToHtmlAsync(App, {});
+    const html = await renderToHtmlAsync(<App />);
     expect(html).toMatchSnapshot();
   });
 });

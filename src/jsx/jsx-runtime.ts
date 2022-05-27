@@ -4,7 +4,10 @@ type CreateElementProps = {
 };
 
 export const createElement = (
-  tag: string | ((props: any) => JSX.Element),
+  tag:
+    | string
+    | ((props: any) => JSX.Element)
+    | ((props: any) => Promise<JSX.Element>),
   props?: CreateElementProps,
   ...children: Array<
     JSX.Element | string | number | Array<JSX.Element | string | number>

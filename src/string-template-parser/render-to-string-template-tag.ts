@@ -1,7 +1,25 @@
+/* eslint-disable max-len */
 import { jsxElemToTagFuncArgsSync } from "./jsx-elem-to-strings";
 import type { StringTemplateTag } from "./string-template-tag-type";
 
 export type StringTemplateParserOptions = {
+  /**
+   * Mappings for html attribute names. Attributes defined in
+   * here will get renamed during the rendering to whatever is set.
+   *
+   * @example
+   *   const options = {
+   *     attributeMap: { onclick: "@click" },
+   *   };
+   *
+   *   renderToStringTemplateTag(
+   *     html,
+   *     <button onclick={handle}>Click Me</button>,
+   *     options
+   *   );
+   *   // Will give the same result as
+   *   html`<button @click="${handle}">Click Me</button>`;
+   */
   attributeMap?: Record<string, string>;
 };
 
