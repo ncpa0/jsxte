@@ -8,6 +8,7 @@ src
 .eslintrc.json
 .gitignore
 .prettierrc.json
+git-hook-tasks.config.json
 jest.config.js
 yarn-error.log
 tsconfig.test.json
