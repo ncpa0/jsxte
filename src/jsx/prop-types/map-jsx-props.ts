@@ -1,3 +1,3 @@
-export type MapTagProps = {
+export interface MapTagProps {
   name?: string;
-};
+}

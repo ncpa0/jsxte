@@ -14,10 +14,7 @@ export class HTMLElementResolver {
 
     for (const [key, prop] of Object.entries(element.props)) {
       if (key !== "children") {
-        attributes.push([
-          mapAttributeName(key, this.attributeMap),
-          prop?.toString(),
-        ]);
+        attributes.push([mapAttributeName(key, this.attributeMap), prop]);
       }
     }
 

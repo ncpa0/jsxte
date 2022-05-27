@@ -1,4 +1,4 @@
-export type CanvasTagProps = {
-  height?: string;
-  width?: string;
-};
+export interface CanvasTagProps {
+  height?: string | number;
+  width?: string | number;
+}

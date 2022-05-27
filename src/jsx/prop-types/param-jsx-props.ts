@@ -1,4 +1,4 @@
-export type ParamTagProps = {
+export interface ParamTagProps {
   name?: string;
   value?: string;
-};
+}

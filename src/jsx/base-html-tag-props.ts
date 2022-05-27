@@ -1,6 +1,6 @@
 import type { Rewrap } from "../html-parser/types";
 
-export type AttributeBool = "true" | "false";
+export type AttributeBool = true | false | "true" | "false";
 
 export type BaseHTMLTagProps = {
   children?: JSX.ElementChildren;

@@ -1,7 +1,7 @@
 import type { AttributeBool } from "../base-html-tag-props";
 import type { Target } from "./shared/target";
 
-export type FormTagProps = {
+export interface FormTagProps {
   "accept-charset"?: string;
   action?: string;
   autocomplete?: "on" | "off";
@@ -24,4 +24,4 @@ export type FormTagProps = {
     | "prev"
     | "search";
   target?: Target;
-};
+}

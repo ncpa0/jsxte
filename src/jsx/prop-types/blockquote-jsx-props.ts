@@ -1,3 +1,3 @@
-export type BlockquoteTagProps = {
+export interface BlockquoteTagProps {
   cite?: string;
-};
+}

@@ -24,7 +24,7 @@ export type InputType =
   | "url"
   | "week";
 
-export type InputTagProps = {
+export interface InputTagProps {
   accept?: string;
   alt?: string;
   autocomplete?: "on" | "off";
@@ -41,22 +41,22 @@ export type InputTagProps = {
   formmethod?: "get" | "post";
   formnovalidate?: string;
   formtarget?: string;
-  height?: string;
+  height?: string | number;
   list?: string;
-  max?: string;
-  maxlength?: string;
-  min?: string;
-  minlength?: string;
+  max?: string | number;
+  maxlength?: string | number;
+  min?: string | number;
+  minlength?: string | number;
   multiple?: string;
   name?: string;
   pattern?: string;
   placeholder?: string;
-  readonly?: string;
-  required?: string;
-  size?: string;
+  readonly?: AttributeBool;
+  required?: AttributeBool;
+  size?: string | number;
   src?: string;
   step?: string;
   type?: InputType;
   value?: string;
-  width?: string;
-};
+  width?: string | number;
+}

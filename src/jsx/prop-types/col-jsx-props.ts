@@ -1,3 +1,3 @@
-export type ColTagProps = {
-  span?: string | undefined;
-};
+export interface ColTagProps {
+  span?: string | number;
+}

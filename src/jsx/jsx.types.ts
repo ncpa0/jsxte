@@ -3,6 +3,7 @@ import type { AnchorTagProps } from "./prop-types/a-jsx-props";
 import type { AreaTagProps } from "./prop-types/area-jsx-props";
 import type { AudioTagProps } from "./prop-types/audio-jsx-props";
 import type { BaseTagProps } from "./prop-types/base-jsx-props";
+import type { BdoTagProps } from "./prop-types/bdo-jsx-props";
 import type { BlockquoteTagProps } from "./prop-types/blockquote-jsx-props";
 import type { ButtonTagProps } from "./prop-types/button-jsx-props";
 import type { CanvasTagProps } from "./prop-types/canvas-jsx-props";
@@ -12,6 +13,7 @@ import type { DataTagProps } from "./prop-types/data-jsx-props";
 import type { DelTagProps } from "./prop-types/del-jsx-props";
 import type { DetailsTagProps } from "./prop-types/details-jsx-props";
 import type { DialogTagProps } from "./prop-types/dialog-jsx-props";
+import type { EmbedTagProps } from "./prop-types/embed-jsx-props";
 import type { FieldsetTagProps } from "./prop-types/fieldset-jsx-prop";
 import type { FormTagProps } from "./prop-types/form-jsx-props";
 import type { HtmlTagProps } from "./prop-types/html-jsx-props";
@@ -40,6 +42,9 @@ import type { StyleTagProps } from "./prop-types/style-jsx-props";
 import type { TdTagProps } from "./prop-types/td-jsx-props";
 import type { TextareaTagProps } from "./prop-types/textarea-jsx-props";
 import type { ThTagProps } from "./prop-types/th-jsx-props";
+import type { TimeTagProps } from "./prop-types/time-jsx-props";
+import type { TrackTagProps } from "./prop-types/track-jsx-props";
+import type { VideoTagProps } from "./prop-types/video-jsx-props";
 
 export type JSXTagElem = {
   type: "tag";
@@ -102,7 +107,7 @@ declare global {
       b: HTMLProps;
       base: HTMLProps<BaseTagProps>;
       bdi: HTMLProps;
-      bdo: HTMLProps;
+      bdo: HTMLProps<BdoTagProps>;
       big: HTMLProps;
       blockquote: HTMLProps<BlockquoteTagProps>;
       body: HTMLProps;
@@ -125,7 +130,7 @@ declare global {
       dl: HTMLProps;
       dt: HTMLProps;
       em: HTMLProps;
-      embed: HTMLProps;
+      embed: HTMLProps<EmbedTagProps>;
       fieldset: HTMLProps<FieldsetTagProps>;
       figcaption: HTMLProps;
       figure: HTMLProps;
@@ -199,14 +204,14 @@ declare global {
       tfoot: HTMLProps;
       th: HTMLProps<ThTagProps>;
       thead: HTMLProps;
-      time: HTMLProps;
+      time: HTMLProps<TimeTagProps>;
       title: HTMLProps;
       tr: HTMLProps;
-      track: HTMLProps;
+      track: HTMLProps<TrackTagProps>;
       u: HTMLProps;
       ul: HTMLProps;
       var: HTMLProps;
-      video: HTMLProps;
+      video: HTMLProps<VideoTagProps>;
       wbr: HTMLProps;
       webview: HTMLProps;
 

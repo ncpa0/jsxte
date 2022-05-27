@@ -1,12 +1,15 @@
-export type ButtonTagProps = {
-  disabled?: string | undefined;
-  form?: string | undefined;
-  formaction?: string | undefined;
-  formenctype?: string | undefined;
-  formmethod?: string | undefined;
-  formnovalidate?: string | undefined;
-  formtarget?: string | undefined;
-  name?: string | undefined;
-  type?: string | undefined;
-  value?: string | undefined;
-};
+import type { AttributeBool } from "../base-html-tag-props";
+
+export interface ButtonTagProps {
+  autofocus?: AttributeBool;
+  disabled?: string;
+  form?: string;
+  formaction?: string;
+  formenctype?: string;
+  formmethod?: string;
+  formnovalidate?: string;
+  formtarget?: string;
+  name?: string;
+  type?: "button" | "reset" | "submit";
+  value?: string;
+}

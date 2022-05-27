@@ -1,4 +1,4 @@
-export type InsTagProps = {
+export interface InsTagProps {
   cite?: string;
   datetime?: string;
-};
+}

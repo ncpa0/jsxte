@@ -1,3 +1,3 @@
-export type LiTagProps = {
+export interface LiTagProps {
   value?: string;
-};
+}

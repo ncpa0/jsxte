@@ -1,4 +1,4 @@
-export type ProgressTagProps = {
-  max?: string;
-  value?: string;
-};
+export interface ProgressTagProps {
+  max?: string | number;
+  value?: string | number;
+}

@@ -1,7 +1,7 @@
 import type { AttributeBool } from "../base-html-tag-props";
 
-export type FieldsetTagProps = {
+export interface FieldsetTagProps {
   disabled?: AttributeBool;
   form?: string;
   name?: string;
-};
+}

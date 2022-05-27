@@ -1,3 +1,3 @@
-export type DataTagProps = {
+export interface DataTagProps {
   value?: string;
-};
+}

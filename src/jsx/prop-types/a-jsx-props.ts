@@ -1,14 +1,27 @@
 import type { RefererPolicy } from "./shared/referer-policy";
-import type { Relationship } from "./shared/relationship";
+import type { Target } from "./shared/target";
 
-export type AnchorTagProps = {
+export interface AnchorTagProps {
   download?: string;
   href?: string;
   hreflang?: string;
   ping?: string;
   media?: string;
   referrerpolicy?: RefererPolicy;
-  rel?: Relationship;
-  target?: string;
+  rel?:
+    | "alternate"
+    | "author"
+    | "bookmark"
+    | "external"
+    | "help"
+    | "license"
+    | "next"
+    | "nofollow"
+    | "noreferrer"
+    | "noopener"
+    | "prev"
+    | "search"
+    | "tag";
+  target?: Target;
   type?: string;
-};
+}

@@ -13,7 +13,8 @@ describe("renderToHTML", () => {
         <div id="container" class={"bordered active"}>
           <h1>Hello World</h1>
           <h2>{props.title}</h2>
-          <button onclick={'console.log("Hello World!")'}></button>
+          <button onclick={'console.log("Hello World!")'}>Click me!</button>
+          <input autofocus={true} disabled={false} draggable />
         </div>
       );
     };

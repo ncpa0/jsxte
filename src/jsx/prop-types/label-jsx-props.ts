@@ -1,4 +1,4 @@
-export type LabelTagProps = {
-  for?: string | undefined;
-  form?: string | undefined;
-};
+export interface LabelTagProps {
+  for?: string;
+  form?: string;
+}

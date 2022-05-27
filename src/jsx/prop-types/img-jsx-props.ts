@@ -1,14 +1,17 @@
-export type ImgTagProps = {
-  alt?: string | undefined;
-  crossorigin?: string | undefined;
-  height?: string | undefined;
-  ismap?: string | undefined;
-  loading?: string | undefined;
-  longdesc?: string | undefined;
-  referrerpolicy?: string | undefined;
-  sizes?: string | undefined;
-  src?: string | undefined;
-  srcset?: string | undefined;
-  usemap?: string | undefined;
-  width?: string | undefined;
-};
+import type { AttributeBool } from "../base-html-tag-props";
+import type { RefererPolicy } from "./shared/referer-policy";
+
+export interface ImgTagProps {
+  alt?: string;
+  crossorigin?: "anonymous" | "use-credentials";
+  height?: string | number;
+  ismap?: AttributeBool;
+  loading?: "eager" | "lazy";
+  longdesc?: string;
+  referrerpolicy?: RefererPolicy;
+  sizes?: string;
+  src?: string;
+  srcset?: string;
+  usemap?: string;
+  width?: string | number;
+}

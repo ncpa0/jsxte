@@ -1,4 +1,4 @@
-export type StyleTagProps = {
+export interface StyleTagProps {
   media?: string;
   type?: string;
-};
+}

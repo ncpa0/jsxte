@@ -1,6 +1,8 @@
-export type OptionTagProps = {
-  disabled?: string | undefined;
-  label?: string | undefined;
-  selected?: string | undefined;
-  value?: string | undefined;
-};
+import type { AttributeBool } from "../base-html-tag-props";
+
+export interface OptionTagProps {
+  disabled?: AttributeBool;
+  label?: string;
+  selected?: AttributeBool;
+  value?: string;
+}

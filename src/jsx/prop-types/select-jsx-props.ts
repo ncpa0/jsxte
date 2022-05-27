@@ -1,11 +1,11 @@
 import type { AttributeBool } from "../base-html-tag-props";
 
-export type SelectTagProps = {
+export interface SelectTagProps {
   autofocus?: AttributeBool;
   disabled?: AttributeBool;
   form?: string;
   multiple?: AttributeBool;
   name?: string;
   required?: AttributeBool;
-  size?: string;
-};
+  size?: string | number;
+}
