@@ -1,3 +1,3 @@
-export type HtmlTagProps = {
+export interface HtmlTagProps {
   xmlns?: string;
-};
+}

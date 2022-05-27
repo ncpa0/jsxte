@@ -1,8 +1,7 @@
 import type { Crossorigin } from "./shared/crossorigin";
 import type { RefererPolicy } from "./shared/referer-policy";
-import type { Relationship } from "./shared/relationship";
 
-export type LinkTagProps = {
+export interface LinkTagProps {
   crossorigin?: Crossorigin;
   href?: string;
   hreflang?: string;
@@ -27,4 +26,4 @@ export type LinkTagProps = {
   sizes?: string;
   title?: string;
   type?: string;
-};
+}

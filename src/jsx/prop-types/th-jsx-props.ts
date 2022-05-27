@@ -1,7 +1,7 @@
-export type ThTagProps = {
-  abbr?: string | undefined;
-  colspan?: string | undefined;
-  headers?: string | undefined;
-  rowspan?: string | undefined;
-  scope?: string | undefined;
-};
+export interface ThTagProps {
+  abbr?: string;
+  colspan?: string | number;
+  headers?: string;
+  rowspan?: string | number;
+  scope?: "col" | "colgroup" | "row" | "rowgroup";
+}

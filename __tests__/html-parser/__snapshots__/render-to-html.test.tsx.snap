@@ -39,7 +39,10 @@ exports[`renderToHTML should correctly generate html from simple jsx 1`] = `
     Prop Title
   </h2>
   <button onclick=\\"console.log(&quot;Hello World!&quot;)\\">
+    Click me!
   </button>
+  <input autofocus draggable>
+  </input>
 </div>"
 `;
 

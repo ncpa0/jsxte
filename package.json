@@ -18,9 +18,9 @@
   "main": "./dist/index.js",
   "scripts": {
     "build": "tsc",
-    "lint": "eslint .",
-    "tsc": "tsc --noEmit",
-    "test": "jest --coverage"
+    "test:lint": "eslint .",
+    "test:tsc": "tsc --noEmit",
+    "test:jest": "jest --coverage"
   },
   "keywords": [
     "jsx",
@@ -39,5 +39,8 @@
   "author": {
     "name": "Szymon Bretner (ncpa0cpl)",
     "email": "szymonb21@gmail.com"
+  },
+  "dependencies": {
+    "git-hook-tasks": "ncpa0cpl/git-hook-tasks"
   }
 }

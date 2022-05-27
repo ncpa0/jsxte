@@ -873,6 +873,11 @@ array-union@^2.1.0:
   resolved "https://registry.yarnpkg.com/array-union/-/array-union-2.1.0.tgz#b798420adbeb1de828d84acd8a2e23d3efe85e8d"
   integrity sha512-HGyxoOTYUyCM6stUe6EJgnd4EoewAI7zMdfqO+kGjnlZmBDz/cR5pf8r/cR4Wq60sL/p0IkcjUEEPwS3GFrIyw==
 
+async-await-queue@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/async-await-queue/-/async-await-queue-1.2.1.tgz#baf459f5fbac902b060a88fee4da853fd86f2128"
+  integrity sha512-v2j+/EMzAnuJZ8I4570KJMFhi6G9g3WZyFh6cPnmQSJh3nLao77XpRt01kyFegQazPSKvue1yaIYDp/NfV/b0g==
+
 babel-jest@^28.1.0:
   version "28.1.0"
   resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-28.1.0.tgz#95a67f8e2e7c0042e7b3ad3951b8af41a533b5ea"
@@ -1017,7 +1022,7 @@ chalk@^2.0.0:
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
-chalk@^4.0.0:
+chalk@^4.0.0, chalk@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.2.tgz#aac4e2b7734a740867aeb16bf02aad556a1e7a01"
   integrity sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==
@@ -1044,6 +1049,12 @@ cjs-module-lexer@^1.0.0:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/cjs-module-lexer/-/cjs-module-lexer-1.2.2.tgz#9f84ba3244a512f3a54e5277e8eef4c489864e40"
   integrity sha512-cOU9usZw8/dXIXKtwa8pM0OTJQuJkxMN6w30csNRUerHfeQ5R6U3kkU/FtJeIf3M202OHfY2U8ccInBG7/xogA==
+
+clify.js@ncpa0cpl/clify.js:
+  version "1.0.3"
+  resolved "https://codeload.github.com/ncpa0cpl/clify.js/tar.gz/f2a18a7163fe2a7473a2406a3198ed3882018016"
+  dependencies:
+    chalk "^4.1.2"
 
 cliui@^7.0.2:
   version "7.0.4"
@@ -1167,6 +1178,11 @@ diff@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/diff/-/diff-5.0.0.tgz#7ed6ad76d859d030787ec35855f5b1daf31d852b"
   integrity sha512-/VTCrvm5Z0JGty/BWHljh+BAiw3IK+2j87NGMu8Nwc/f48WoDAC395uomO9ZD117ZOBaHmkX1oyLvkVM/aIT3w==
+
+dilswer@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/dilswer/-/dilswer-1.2.0.tgz#5d6f2e1c9e2f68ae01f7236aaf3dea0d503da7e4"
+  integrity sha512-D3lczlJDSccxU3EZCP0xwQI8xM7TDIqQzkZ0oN74dbIPHL1JIQ6rHjpGgPbCzD6jyXVMKdCijRTompku1T63mg==
 
 dir-glob@^3.0.1:
   version "3.0.1"
@@ -1503,6 +1519,17 @@ get-stream@^6.0.0:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/get-stream/-/get-stream-6.0.1.tgz#a262d8eef67aced57c2852ad6167526a43cbf7b7"
   integrity sha512-ts6Wi+2j3jQjqi70w5AlN8DFnkSwC+MqmxEzdEALB2qXZYV3X/b1CTfgPLGJNMeAWxdPfU8FO1ms3NUfaHCPYg==
+
+git-hook-tasks@ncpa0cpl/git-hook-tasks:
+  version "1.0.0"
+  resolved "git+ssh://git@github.com/ncpa0cpl/git-hook-tasks.git#42574e069d11845ab538c955b3acea15527752a3"
+  dependencies:
+    async-await-queue "^1.2.1"
+    chalk "^4.0.0"
+    clify.js ncpa0cpl/clify.js
+    dilswer "^1.2.0"
+    node-os-walk "^1.0.0"
+    strip-ansi "^6.0.1"
 
 glob-parent@^5.1.2:
   version "5.1.2"
@@ -2486,6 +2513,11 @@ node-int64@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/node-int64/-/node-int64-0.4.0.tgz#87a9065cdb355d3182d8f94ce11188b825c68a3b"
   integrity sha1-h6kGXNs1XTGC2PlM4RGIuCXGijs=
+
+node-os-walk@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/node-os-walk/-/node-os-walk-1.0.0.tgz#fd9d3ef214f615060fa1b0439361359321e804a1"
+  integrity sha512-fnviFGVjwLVw3+4QK/iZwVXskwdsg8Bauw2NDyeHTn/g7FJh0XecBoVCZtDbuFB5ZYBs43UiX55MujFneu1giQ==
 
 node-releases@^2.0.3:
   version "2.0.4"

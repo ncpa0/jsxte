@@ -1,5 +1,5 @@
-export type TdTagProps = {
-  colspan?: string | undefined;
-  headers?: string | undefined;
-  rowspan?: string | undefined;
-};
+export interface TdTagProps {
+  colspan?: string | number;
+  headers?: string;
+  rowspan?: string | number;
+}

@@ -1,4 +1,4 @@
-export type DelTagProps = {
+export interface DelTagProps {
   cite?: string;
   datetime?: string;
-};
+}

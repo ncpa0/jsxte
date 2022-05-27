@@ -1,7 +1,7 @@
 import type { RefererPolicy } from "./shared/referer-policy";
-import type { Relationship } from "./shared/relationship";
+import type { Target } from "./shared/target";
 
-export type AreaTagProps = {
+export interface AreaTagProps {
   alt?: string;
   coords?: string;
   download?: string;
@@ -9,8 +9,20 @@ export type AreaTagProps = {
   hreflang?: string;
   media?: string;
   referrerpolicy?: RefererPolicy;
-  rel?: Relationship;
+  rel?:
+    | "alternate"
+    | "author"
+    | "bookmark"
+    | "help"
+    | "license"
+    | "next"
+    | "nofollow"
+    | "noreferrer"
+    | "prefetch"
+    | "prev"
+    | "search"
+    | "tag";
   shape?: "default" | "rect" | "circle" | "poly";
-  target?: string;
+  target?: Target;
   type?: string;
-};
+}

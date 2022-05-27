@@ -1,0 +1,21 @@
+{
+  "packageManager": "yarn",
+  "hooks": {
+    "pre-push": [
+      {
+        "name": "TypeScript",
+        "script": "test:tsc"
+      },
+      {
+        "name": "ESLint",
+        "script": "test:lint"
+      },
+      {
+        "name": "Jest",
+        "script": "test:jest"
+      }
+    ],
+    "pre-commit": [],
+    "post-commit": []
+  }
+}

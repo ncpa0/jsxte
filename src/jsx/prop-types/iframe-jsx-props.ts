@@ -1,11 +1,11 @@
 import type { AttributeBool } from "../base-html-tag-props";
 import type { RefererPolicy } from "./shared/referer-policy";
 
-export type IframeTagProps = {
+export interface IframeTagProps {
   allow?: string;
   allowfullscreen?: AttributeBool;
   allowpaymentrequest?: AttributeBool;
-  height?: string;
+  height?: string | number;
   loading?: "eager" | "lazy";
   name?: string;
   referrerpolicy?: RefererPolicy;
@@ -18,5 +18,5 @@ export type IframeTagProps = {
     | "allow-top-navigation";
   src?: string;
   srcdoc?: string;
-  width?: string;
-};
+  width?: string | number;
+}

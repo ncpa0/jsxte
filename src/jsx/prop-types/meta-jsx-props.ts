@@ -1,4 +1,4 @@
-export type MetaTagProps = {
+export interface MetaTagProps {
   "http-equiv"?:
     | "content-security-policy"
     | "content-type"
@@ -14,4 +14,4 @@ export type MetaTagProps = {
     | "generator"
     | "keywords"
     | "viewport";
-};
+}

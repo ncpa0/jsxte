@@ -1,5 +1,5 @@
 import type { AttributeBool } from "../base-html-tag-props";
 
-export type DialogTagProps = {
+export interface DialogTagProps {
   open?: AttributeBool;
-};
+}
