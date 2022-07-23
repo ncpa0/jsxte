@@ -34,9 +34,11 @@ export const jsxElemToHtmlSync = (
     if (htmlStruct.tag === "") {
       const results: string[] = [];
       for (const child of htmlStruct.children) {
-        results.push(
-          jsxElemToHtmlSync(child, { indent: indent + 2, attributeMap })
-        );
+        const renderedChild = jsxElemToHtmlSync(child, {
+          indent: indent + 2,
+          attributeMap,
+        });
+        if (renderedChild.length > 0) results.push(renderedChild);
       }
       return results.join("\n");
     } else {
@@ -51,9 +53,12 @@ export const jsxElemToHtmlSync = (
       const children: string[] = [];
 
       for (const child of htmlStruct.children) {
-        children.push(
-          jsxElemToHtmlSync(child, { indent: indent + 2, attributeMap })
-        );
+        const renderedChild = jsxElemToHtmlSync(child, {
+          indent: indent + 2,
+          attributeMap,
+        });
+
+        if (renderedChild.length > 0) children.push(renderedChild);
       }
 
       return [startTag, ...children, endTag].join("\n");
@@ -84,9 +89,11 @@ export const jsxElemToHtmlAsync = async (
     if (htmlStruct.tag === "") {
       const results: string[] = [];
       for (const child of htmlStruct.children) {
-        results.push(
-          await jsxElemToHtmlAsync(child, { indent: indent + 2, attributeMap })
-        );
+        const renderedChild = await jsxElemToHtmlAsync(child, {
+          indent: indent + 2,
+          attributeMap,
+        });
+        if (renderedChild.length > 0) results.push(renderedChild);
       }
       return results.join("\n");
     } else {
@@ -101,9 +108,11 @@ export const jsxElemToHtmlAsync = async (
       const children: string[] = [];
 
       for (const child of htmlStruct.children) {
-        children.push(
-          await jsxElemToHtmlAsync(child, { indent: indent + 2, attributeMap })
-        );
+        const renderedChild = await jsxElemToHtmlAsync(child, {
+          indent: indent + 2,
+          attributeMap,
+        });
+        if (renderedChild.length > 0) children.push(renderedChild);
       }
 
       return [startTag, ...children, endTag].join("\n");

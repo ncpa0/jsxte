@@ -76,7 +76,9 @@ describe("renderToHTML", () => {
       );
     };
 
-    const html = renderToHtml(<App />);
+    const structure = <App />;
+
+    const html = renderToHtml(structure);
 
     expect(html).toMatchSnapshot();
   });
@@ -161,5 +163,71 @@ describe("renderToHTML", () => {
 
     const html = await renderToHtmlAsync(<App />);
     expect(html).toMatchSnapshot();
+  });
+
+  it("should correctly handle nulls, undefined and boolean values", () => {
+    const StandardDiv = () => {
+      return (
+        <div>
+          <div></div>
+          <div></div>
+          <div>{[<span>before</span>, <span>after</span>]}</div>
+        </div>
+      );
+    };
+
+    const DivWithNulls = () => {
+      return (
+        <div>
+          <div>{null}</div>
+          <div>{[null]}</div>
+          <div>{[<span>before</span>, null, null, <span>after</span>]}</div>
+        </div>
+      );
+    };
+
+    const DivWithUndefined = () => {
+      return (
+        <div>
+          <div>{undefined}</div>
+          <div>{[undefined]}</div>
+          <div>
+            {[<span>before</span>, undefined, undefined, <span>after</span>]}
+          </div>
+        </div>
+      );
+    };
+
+    const DivWithFalse = () => {
+      return (
+        <div>
+          <div>{false}</div>
+          <div>{[false]}</div>
+          <div>{[<span>before</span>, false, false, <span>after</span>]}</div>
+        </div>
+      );
+    };
+
+    const DivWithTrue = () => {
+      return (
+        <div>
+          <div>{true}</div>
+          <div>{[true]}</div>
+          <div>{[<span>before</span>, true, true, <span>after</span>]}</div>
+        </div>
+      );
+    };
+
+    const renderedStandardDiv = renderToHtml(<StandardDiv />);
+
+    const renderedDivWithNulls = renderToHtml(<DivWithNulls />);
+    const renderedDivWithUndefined = renderToHtml(<DivWithUndefined />);
+    const renderedDivWithFalse = renderToHtml(<DivWithFalse />);
+    const renderedDivWithTrue = renderToHtml(<DivWithTrue />);
+
+    expect(renderedStandardDiv).toEqual(renderedDivWithNulls);
+    expect(renderedStandardDiv).toEqual(renderedDivWithUndefined);
+    expect(renderedStandardDiv).toEqual(renderedDivWithFalse);
+    expect(renderedStandardDiv).toEqual(renderedDivWithTrue);
   });
 });
