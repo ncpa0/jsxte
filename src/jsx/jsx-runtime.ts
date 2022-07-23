@@ -36,13 +36,25 @@ export const createElement = (
       };
     } else if (Array.isArray(props.children)) {
       props.children = props.children.map((child): JSX.Element => {
-        if (typeof child === "string") {
+        if (
+          typeof child === "boolean" ||
+          child === null ||
+          child === undefined
+        ) {
+          return { type: "tag", tag: Fragment, props: {} };
+        } else if (typeof child === "string") {
           return { type: "textNode", text: child };
         } else if (typeof child === "number") {
           return { type: "textNode", text: (child as number).toString() };
         }
         return child as JSX.Element;
       });
+    } else if (
+      typeof props.children === "boolean" ||
+      props.children === null ||
+      props.children === undefined
+    ) {
+      props.children = [];
     }
   }
 
