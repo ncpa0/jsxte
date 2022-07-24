@@ -101,6 +101,49 @@ const App = () => {
 const html = await renderToHtmlAsync(<App label="Hello World!" />);
 ```
 
+## Extending the typings
+
+JSXTE should be able to parse any html attributes you put in, as well as custom web component tags, although you may see type errors if you use anything that is not defined in the library typings. If you wish to use them it is recommended you extend the typings to disable said errors.
+
+### Adding custom web component tags
+
+To add a typing for a custom web component simply add a declare block in one of your project `.ts` or `.tsx` files, like this one:
+
+```tsx
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      "my-custom-web-component": {
+        /* here include the attributes your component can take */
+        "data-example-attribute"?: string;
+      };
+    }
+  }
+}
+
+// with it it's possible to use this without type errors:
+const MyComponent = () => (
+  <my-custom-web-component data-example-attribute="Hello"></my-custom-web-component>
+);
+```
+
+### Adding a global html attribute
+
+There is a dictionary of html attributes that are available for every default html tag, that dictionary can be extended like so:
+
+```tsx
+declare global {
+  namespace JSXTE {
+    interface BaseHTMLTagProps {
+      "new-attribute"?: string;
+    }
+  }
+}
+
+// with it it's possible to use this without type errors:
+const MyComponent = () => <div new-attribute="Hello"></div>;
+```
+
 ## Express JS View Engine
 
 You can also use `jsxte` with the Express View Engine. To do that, use the `expressExtend` to add the engine support, specify the views directory and then use the express response method `.render()`. The `.render()` method takes the component props as it's second argument.
