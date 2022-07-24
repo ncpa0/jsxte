@@ -1,9 +1,8 @@
-import type { JSXSyncElem } from "../jsx/jsx.types";
 import { pad } from "../utilities/pad";
 import { mapAttributesToHtmlTagString } from "./attribute-to-html-tag-string";
 import { getHTMLStruct } from "./get-html-struct";
 
-const isSyncElem = (e: JSX.Element): e is JSXSyncElem => true;
+const isSyncElem = (e: JSX.Element): e is JSXTE.SyncElement => true;
 
 export const jsxElemToHtmlSync = (
   element: JSX.Element,
@@ -19,7 +18,7 @@ export const jsxElemToHtmlSync = (
   }
 
   if (typeof element.tag !== "string") {
-    const subElem = element.tag(element.props) as any as JSXSyncElem;
+    const subElem = element.tag(element.props) as any as JSXTE.SyncElement;
 
     if (subElem instanceof Promise) {
       throw new Error(
@@ -75,7 +74,9 @@ export const jsxElemToHtmlAsync = async (
   }
 
   if (typeof element.tag !== "string") {
-    const subElem = (await element.tag(element.props)) as any as JSXSyncElem;
+    const subElem = (await element.tag(
+      element.props
+    )) as any as JSXTE.SyncElement;
 
     return await jsxElemToHtmlAsync(subElem, { indent, attributeMap });
   } else {

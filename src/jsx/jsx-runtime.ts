@@ -1,6 +1,6 @@
 type CreateElementProps = {
   [k: string]: any;
-  children?: JSX.ElementChildren;
+  children?: JSXTE.ElementChildren;
 };
 
 export const createElement = (
@@ -50,7 +50,7 @@ export const createElement = (
     type: "tag",
     // @ts-expect-error
     tag,
-    props: props as JSX.ElementProps,
+    props: props as JSXTE.ElementProps,
   };
 };
 

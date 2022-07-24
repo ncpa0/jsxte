@@ -22,8 +22,49 @@ declare global {
   namespace JSXTE {
     interface AttributeAcceptedTypes {}
 
+    export type TagElement = {
+      type: "tag";
+      tag:
+        | string
+        | ((props: ElementProps) => Element)
+        | ((props: ElementProps) => Promise<Element>);
+      props: ElementProps;
+    };
+
+    export type TextNodeElement = {
+      type: "textNode";
+      text: string;
+    };
+
+    export type SyncElement = TagElement | TextNodeElement;
+
+    type ElementChildren =
+      | JSX.Element
+      | string
+      | number
+      | Array<
+          JSX.Element | string | number | Array<JSX.Element | string | number>
+        >;
+
+    type ElementProps = {
+      children?: ElementChildren;
+      [k: string]: any;
+    };
+
+    type PropsWithChildren<P extends object> = P & {
+      children?: JSXTE.ElementChildren;
+    };
+
+    type Component<P extends object = {}> = (
+      props: PropsWithChildren<P>
+    ) => JSX.Element;
+
+    type AsyncComponent<P extends object = {}> = (
+      props: PropsWithChildren<P>
+    ) => Promise<JSX.Element>;
+
     export interface BaseHTMLTagProps {
-      children?: JSX.ElementChildren;
+      children?: ElementChildren;
 
       accesskey?: string;
       class?: string;

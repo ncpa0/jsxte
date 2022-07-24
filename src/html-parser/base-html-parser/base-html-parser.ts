@@ -1,4 +1,3 @@
-import type { JSXTagElem } from "../../jsx/jsx.types";
 import { mapAttributeName } from "../../string-template-parser/map-attribute-name";
 import type { HTMLElementStruct, RendererHTMLAttributes } from "../types";
 
@@ -9,7 +8,7 @@ export class HTMLElementResolver {
     this.attributeMap = attributeMap;
   }
 
-  resolveAttributes(element: JSXTagElem): RendererHTMLAttributes {
+  resolveAttributes(element: JSXTE.TagElement): RendererHTMLAttributes {
     const attributes: HTMLElementStruct["attributes"] = [];
 
     for (const [key, prop] of Object.entries(element.props)) {
@@ -21,7 +20,7 @@ export class HTMLElementResolver {
     return attributes;
   }
 
-  resolveChildren(element: JSXTagElem): JSX.Element[] {
+  resolveChildren(element: JSXTE.TagElement): JSX.Element[] {
     if (!element.props.children) return [];
 
     if (Array.isArray(element.props.children))
@@ -30,7 +29,7 @@ export class HTMLElementResolver {
     return [element.props.children as JSX.Element];
   }
 
-  resolveElement(element: JSXTagElem): HTMLElementStruct {
+  resolveElement(element: JSXTE.TagElement): HTMLElementStruct {
     const children = this.resolveChildren(element);
     const attributes = this.resolveAttributes(element);
 

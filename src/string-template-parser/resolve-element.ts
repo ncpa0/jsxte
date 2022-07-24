@@ -1,5 +1,3 @@
-import type { JSXTagElem } from "../jsx/jsx.types";
-
 type GetArrayFromUnion<U> = Exclude<U, Exclude<U, Array<any>>>;
 type GetNonArraysFromUnion<U> = Exclude<U, Array<any>>;
 
@@ -17,7 +15,7 @@ function asArray<T>(v: T): AsArray<T> {
   }
 }
 
-export const resolveElement = (element: JSXTagElem) => {
+export const resolveElement = (element: JSXTE.TagElement) => {
   const { children, ...attributes } = element.props;
 
   return {

@@ -1,8 +1,7 @@
-import type { JSXSyncElem } from "../jsx/jsx.types";
 import { mapAttributeName } from "./map-attribute-name";
 import { resolveElement } from "./resolve-element";
 
-const isSyncElem = (e: JSX.Element): e is JSXSyncElem => true;
+const isSyncElem = (e: JSX.Element): e is JSXTE.SyncElement => true;
 
 type TagFunctionArgs = [string[], any[]];
 
@@ -27,7 +26,7 @@ export const jsxElemToTagFuncArgsSync = (
   }
 
   if (typeof element.tag !== "string") {
-    const subElem = element.tag(element.props) as any as JSXSyncElem;
+    const subElem = element.tag(element.props) as any as JSXTE.SyncElement;
 
     if (subElem instanceof Promise) {
       throw new Error(
