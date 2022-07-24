@@ -46,53 +46,12 @@ import type { TimeTagProps } from "./prop-types/time-jsx-props";
 import type { TrackTagProps } from "./prop-types/track-jsx-props";
 import type { VideoTagProps } from "./prop-types/video-jsx-props";
 
-export type JSXTagElem = {
-  type: "tag";
-  tag:
-    | string
-    | ((props: JSX.ElementProps) => Element)
-    | ((props: JSX.ElementProps) => Promise<Element>);
-  props: JSX.ElementProps;
-};
-
-export type JSXTextNodeElem = {
-  type: "textNode";
-  text: string;
-};
-
-export type JSXSyncElem = JSXTagElem | JSXTextNodeElem;
-
 declare global {
   namespace JSX {
-    type PropsWithChildren<P extends object> = P & {
-      children?: JSX.ElementChildren;
-    };
-
-    type Component<P extends object = {}> = (
-      props: PropsWithChildren<P>
-    ) => JSX.Element;
-
-    type AsyncComponent<P extends object = {}> = (
-      props: PropsWithChildren<P>
-    ) => Promise<JSX.Element>;
-
-    type ElementChildren =
-      | JSX.Element
-      | string
-      | number
-      | Array<
-          JSX.Element | string | number | Array<JSX.Element | string | number>
-        >;
-
-    type ElementProps = {
-      children?: ElementChildren;
-      [k: string]: any;
-    };
-
     type Element =
-      | JSXTagElem
-      | JSXTextNodeElem
-      | Promise<JSXTagElem | JSXTextNodeElem>;
+      | JSXTE.TagElement
+      | JSXTE.TextNodeElement
+      | Promise<JSXTE.TagElement | JSXTE.TextNodeElement>;
 
     type LibraryManagedAttributes<T, PropsWithChildren> = PropsWithChildren;
 

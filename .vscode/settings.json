@@ -4,14 +4,10 @@
     "source.organizeImports": false,
     "source.fixAll.eslint": true
   },
-  "cSpell.words": [
-    "jsxs"
-  ],
+  "cSpell.words": ["jsxs", "JSXTE"],
   "json.schemas": [
     {
-      "fileMatch": [
-        "git-hook-tasks.config.json"
-      ],
+      "fileMatch": ["git-hook-tasks.config.json"],
       "url": "./node_modules/git-hook-tasks/dist/config/json-schema.json"
     }
   ]

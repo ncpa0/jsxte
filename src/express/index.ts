@@ -16,7 +16,7 @@ const __express = async <P extends object>(
 
   try {
     // eslint-disable-next-line
-    const Component: JSX.AsyncComponent<P> = require(filePath).default;
+    const Component: JSXTE.AsyncComponent<P> = require(filePath).default;
     const html = await renderToHtmlAsync(createElement(Component, options));
     return callback(null, html);
   } catch (e) {
