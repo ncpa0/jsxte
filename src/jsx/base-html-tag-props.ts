@@ -22,7 +22,7 @@ declare global {
   namespace JSXTE {
     interface AttributeAcceptedTypes {}
 
-    export type TagElement = {
+    type TagElement = {
       type: "tag";
       tag:
         | string
@@ -31,12 +31,12 @@ declare global {
       props: ElementProps;
     };
 
-    export type TextNodeElement = {
+    type TextNodeElement = {
       type: "textNode";
       text: string;
     };
 
-    export type SyncElement = TagElement | TextNodeElement;
+    type SyncElement = TagElement | TextNodeElement;
 
     type ElementChildren =
       | JSX.Element
@@ -63,7 +63,7 @@ declare global {
       props: PropsWithChildren<P>
     ) => Promise<JSX.Element>;
 
-    export interface BaseHTMLTagProps {
+    interface BaseHTMLTagProps {
       children?: ElementChildren;
 
       accesskey?: string;
