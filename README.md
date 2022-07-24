@@ -17,6 +17,8 @@ To use the `jsxte` you will have to set up your transpiler to use this package f
 
 If you use something else, like babel you will also need to adapt the configuration of that, for example: https://babeljs.io/docs/en/babel-plugin-transform-react-jsx#with-a-configuration-file-recommended
 
+(See example configurations [here](./docs/config-examples/)).
+
 Once you are done with that you can start writing your templates and rendering them.
 
 ```tsx
