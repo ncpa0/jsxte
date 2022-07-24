@@ -33,7 +33,7 @@ describe("renderToHTML", () => {
       return <button style={props.styles}>{props.label}</button>;
     };
 
-    const Template = ({ children }: JSX.ElementProps) => {
+    const Template = ({ children }: JSXTE.ElementProps) => {
       return (
         <html>
           <head>
@@ -113,7 +113,7 @@ describe("renderToHTML", () => {
       return <button style={props.styles}>{props.label}</button>;
     };
 
-    const Template = ({ children }: JSX.ElementProps) => {
+    const Template = ({ children }: JSXTE.ElementProps) => {
       return (
         <html>
           <head>

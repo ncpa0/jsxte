@@ -18,7 +18,7 @@
   "version": "1.0.0",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "rm -rf ./dist && tsc",
+    "build": "rm -rf ./dist && tsc -p tsconfig.build.json",
     "test:lint": "eslint .",
     "test:tsc": "tsc --noEmit",
     "test:jest": "jest --coverage"

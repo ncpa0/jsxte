@@ -4,14 +4,17 @@
     "module": "commonjs",
     "declaration": true,
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDirs": ["./src", "./__tests__"],
     "downlevelIteration": true,
     "strict": true,
     "noUnusedLocals": true,
     "noUncheckedIndexedAccess": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react",
+    "jsxFactory": "jsx",
+    "jsxFragmentFactory": "Fragment"
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "__tests__/**/*"]
 }
