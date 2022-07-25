@@ -22,7 +22,7 @@ exports[`renderToHTML should correctly generate html from component base jsx str
         </h2>
         <input value=\\"write here\\">
         </input>
-        <button style>
+        <button>
           Submit
         </button>
     </div>
@@ -68,7 +68,7 @@ exports[`renderToHTML should correctly parse async components 1`] = `
         </h2>
         <input value=\\"write here\\">
         </input>
-        <button style>
+        <button>
           Submit
         </button>
     </div>
