@@ -1,0 +1,38 @@
+name: Publish
+on:
+  release:
+    types: [released]
+
+env:
+  NPM_TOKEN: ""
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [15.x]
+    steps:
+      - name: Setup Node Environment
+        uses: actions/setup-node@v3
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: master
+      - name: Install dependencies
+        uses: Borales/actions-yarn@v3.0.0
+        with:
+          cmd: install
+      - name: Build
+        uses: Borales/actions-yarn@v3.0.0
+        with:
+          cmd: build
+      - name: Test
+        uses: Borales/actions-yarn@v3.0.0
+        with:
+          cmd: git-hook-tasks pre-push
+      - name: Publish
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_AUTOMATION_TOKEN }}
+          TAG_NAME: ${{ github.event.release.tag_name }}
+        run: ./scripts/publish.sh

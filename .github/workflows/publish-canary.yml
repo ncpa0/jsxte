@@ -1,0 +1,36 @@
+name: Publish canary
+on:
+  push:
+    branches:
+      - "canary"
+
+env:
+  NPM_TOKEN: ""
+
+jobs:
+  publish-canary:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [15.x]
+    steps:
+      - name: Setup Node Environment
+        uses: actions/setup-node@v3
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        uses: Borales/actions-yarn@v3.0.0
+        with:
+          cmd: install
+      - name: Build
+        uses: Borales/actions-yarn@v3.0.0
+        with:
+          cmd: build
+      - name: Test
+        uses: Borales/actions-yarn@v3.0.0
+        with:
+          cmd: git-hook-tasks pre-push
+      - name: Publish Canary
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_AUTOMATION_TOKEN }}
+        run: ./scripts/publish-canary.sh
