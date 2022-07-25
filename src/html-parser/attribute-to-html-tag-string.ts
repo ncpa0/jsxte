@@ -4,13 +4,13 @@ export const attributeToHtmlTagString = ([key, value]: [
   string,
   string | boolean | number | undefined
 ]): string => {
-  if (value === undefined || value === true) {
+  if (value === true) {
     return `${key}`;
   }
-  if (value === false) {
+  if (value === false || value === null || value === undefined) {
     return "";
   }
-  return `${key}="${value?.toString().replace(/"/g, "&quot;")}"`;
+  return `${key}="${value.toString().replace(/"/g, "&quot;")}"`;
 };
 
 export const mapAttributesToHtmlTagString = (
