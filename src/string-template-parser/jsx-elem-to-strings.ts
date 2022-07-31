@@ -1,3 +1,4 @@
+import { ContextMap } from "../context-map/context-map";
 import { mapAttributeName } from "./map-attribute-name";
 import { resolveElement } from "./resolve-element";
 
@@ -17,8 +18,11 @@ const concatToLastStringOrPush = (a: TagFunctionArgs, s?: string) => {
 
 export const jsxElemToTagFuncArgsSync = (
   element: JSX.Element,
-  attributeMap: Record<string, string>
+  attributeMap: Record<string, string>,
+  contextMap: ContextMap = ContextMap.create()
 ): TagFunctionArgs => {
+  contextMap = ContextMap.clone(contextMap);
+
   if (!isSyncElem(element)) throw new Error("");
 
   if (element.type === "textNode") {
@@ -26,7 +30,10 @@ export const jsxElemToTagFuncArgsSync = (
   }
 
   if (typeof element.tag !== "string") {
-    const subElem = element.tag(element.props) as any as JSXTE.SyncElement;
+    const subElem = element.tag(
+      element.props,
+      contextMap
+    ) as any as JSXTE.SyncElement;
 
     if (subElem instanceof Promise) {
       throw new Error(
@@ -34,7 +41,7 @@ export const jsxElemToTagFuncArgsSync = (
       );
     }
 
-    return jsxElemToTagFuncArgsSync(subElem, attributeMap);
+    return jsxElemToTagFuncArgsSync(subElem, attributeMap, contextMap);
   } else {
     const { attributes, children } = resolveElement(element);
 
@@ -44,7 +51,8 @@ export const jsxElemToTagFuncArgsSync = (
       for (const child of children) {
         const [[first, ...strings], tagParams] = jsxElemToTagFuncArgsSync(
           child,
-          attributeMap
+          attributeMap,
+          contextMap
         );
 
         concatToLastStringOrPush(results, first);
@@ -82,7 +90,8 @@ export const jsxElemToTagFuncArgsSync = (
       for (const child of children) {
         const [[first, ...strings], tagParams] = jsxElemToTagFuncArgsSync(
           child,
-          attributeMap
+          attributeMap,
+          contextMap
         );
 
         concatToLastStringOrPush(results, first);

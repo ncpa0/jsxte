@@ -1,3 +1,4 @@
+import { ContextMap } from "../context-map/context-map";
 import { pad } from "../utilities/pad";
 import { mapAttributesToHtmlTagString } from "./attribute-to-html-tag-string";
 import { getHTMLStruct } from "./get-html-struct";
@@ -6,9 +7,11 @@ const isSyncElem = (e: JSX.Element): e is JSXTE.SyncElement => true;
 
 export const jsxElemToHtmlSync = (
   element: JSX.Element,
+  contextMap: ContextMap = ContextMap.create(),
   options?: { indent?: number; attributeMap?: Record<string, string> }
 ): string => {
   const { attributeMap = {}, indent = 0 } = options ?? {};
+  contextMap = ContextMap.clone(contextMap);
 
   if (!isSyncElem(element)) throw new Error("");
 
@@ -18,7 +21,10 @@ export const jsxElemToHtmlSync = (
   }
 
   if (typeof element.tag !== "string") {
-    const subElem = element.tag(element.props) as any as JSXTE.SyncElement;
+    const subElem = element.tag(
+      element.props,
+      contextMap
+    ) as any as JSXTE.SyncElement;
 
     if (subElem instanceof Promise) {
       throw new Error(
@@ -26,14 +32,14 @@ export const jsxElemToHtmlSync = (
       );
     }
 
-    return jsxElemToHtmlSync(subElem, { indent, attributeMap });
+    return jsxElemToHtmlSync(subElem, contextMap, { indent, attributeMap });
   } else {
     const htmlStruct = getHTMLStruct(element, attributeMap);
 
     if (htmlStruct.tag === "") {
       const results: string[] = [];
       for (const child of htmlStruct.children) {
-        const renderedChild = jsxElemToHtmlSync(child, {
+        const renderedChild = jsxElemToHtmlSync(child, contextMap, {
           indent: indent + 2,
           attributeMap,
         });
@@ -52,7 +58,7 @@ export const jsxElemToHtmlSync = (
       const children: string[] = [];
 
       for (const child of htmlStruct.children) {
-        const renderedChild = jsxElemToHtmlSync(child, {
+        const renderedChild = jsxElemToHtmlSync(child, contextMap, {
           indent: indent + 2,
           attributeMap,
         });
@@ -67,9 +73,11 @@ export const jsxElemToHtmlSync = (
 
 export const jsxElemToHtmlAsync = async (
   element: JSX.Element,
+  contextMap: ContextMap = ContextMap.create(),
   options?: { indent?: number; attributeMap?: Record<string, string> }
 ): Promise<string> => {
   const { attributeMap = {}, indent = 0 } = options ?? {};
+  contextMap = ContextMap.clone(contextMap);
 
   if (!isSyncElem(element)) throw new Error("");
 
@@ -80,17 +88,21 @@ export const jsxElemToHtmlAsync = async (
 
   if (typeof element.tag !== "string") {
     const subElem = (await element.tag(
-      element.props
+      element.props,
+      contextMap
     )) as any as JSXTE.SyncElement;
 
-    return await jsxElemToHtmlAsync(subElem, { indent, attributeMap });
+    return await jsxElemToHtmlAsync(subElem, contextMap, {
+      indent,
+      attributeMap,
+    });
   } else {
     const htmlStruct = getHTMLStruct(element, attributeMap);
 
     if (htmlStruct.tag === "") {
       const results: string[] = [];
       for (const child of htmlStruct.children) {
-        const renderedChild = await jsxElemToHtmlAsync(child, {
+        const renderedChild = await jsxElemToHtmlAsync(child, contextMap, {
           indent: indent + 2,
           attributeMap,
         });
@@ -109,7 +121,7 @@ export const jsxElemToHtmlAsync = async (
       const children: string[] = [];
 
       for (const child of htmlStruct.children) {
-        const renderedChild = await jsxElemToHtmlAsync(child, {
+        const renderedChild = await jsxElemToHtmlAsync(child, contextMap, {
           indent: indent + 2,
           attributeMap,
         });

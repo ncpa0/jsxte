@@ -1,3 +1,4 @@
+import type { ContextMap } from "../context-map/context-map";
 import type { Rewrap } from "../html-parser/types";
 
 export type AttributeBool = true | false | "true" | "false";
@@ -26,8 +27,8 @@ declare global {
       type: "tag";
       tag:
         | string
-        | ((props: ElementProps) => Element)
-        | ((props: ElementProps) => Promise<Element>);
+        | ((props: ElementProps, contextMap: ContextMap) => Element)
+        | ((props: ElementProps, contextMap: ContextMap) => Promise<Element>);
       props: ElementProps;
     };
 
@@ -56,11 +57,13 @@ declare global {
     };
 
     type Component<P extends object = {}> = (
-      props: PropsWithChildren<P>
+      props: PropsWithChildren<P>,
+      contextMap: ContextMap
     ) => JSX.Element;
 
     type AsyncComponent<P extends object = {}> = (
-      props: PropsWithChildren<P>
+      props: PropsWithChildren<P>,
+      contextMap: ContextMap
     ) => Promise<JSX.Element>;
 
     interface BaseHTMLTagProps {

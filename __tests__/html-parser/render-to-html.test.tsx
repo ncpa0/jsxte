@@ -5,6 +5,10 @@ import {
 } from "../../src/html-parser/render-to-html";
 // @ts-ignore
 import { jsx, Fragment } from "../../src/jsx/jsx-runtime";
+import { defineContext } from "../../src/context-map/context-map";
+
+const sleep = (t: number) =>
+  new Promise<void>((resolve) => setTimeout(() => resolve(), t));
 
 describe("renderToHTML", () => {
   it("should correctly generate html from simple jsx", () => {
@@ -102,9 +106,6 @@ describe("renderToHTML", () => {
   });
 
   it("should correctly parse async components", async () => {
-    const sleep = (t: number) =>
-      new Promise<void>((resolve) => setTimeout(() => resolve(), t));
-
     const Header = async (props: { title: string }) => {
       await sleep(50);
       return <h2>{props.title}</h2>;
@@ -229,5 +230,296 @@ describe("renderToHTML", () => {
     expect(renderedStandardDiv).toEqual(renderedDivWithUndefined);
     expect(renderedStandardDiv).toEqual(renderedDivWithFalse);
     expect(renderedStandardDiv).toEqual(renderedDivWithTrue);
+  });
+  describe("should properly handle context data", () => {
+    it("should correctly render jsx with context data", () => {
+      const context = defineContext<{ title: string }>();
+
+      const Header: JSXTE.Component = (_, contextMap) => {
+        expect(contextMap.has(context)).toBe(true);
+        const { title } = contextMap.get(context);
+        expect(title).toBe("This title is set via the context");
+        return (
+          <div>
+            <h1>{title}</h1>
+          </div>
+        );
+      };
+
+      const Content: JSXTE.Component = () => {
+        return (
+          <div class="main-container">
+            <Header />
+          </div>
+        );
+      };
+
+      const App: JSXTE.Component = (_, contextMap) => {
+        contextMap.set(context, { title: "This title is set via the context" });
+
+        return (
+          <html>
+            <head>
+              <meta charset="utf-8" />
+              <meta http-equiv="x-ua-compatible" content="IE=edge" />
+              <title>Page Title</title>
+              <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1"
+              />
+              <link
+                rel="stylesheet"
+                type="text/css"
+                media="screen"
+                href="main.css"
+              />
+            </head>
+            <body>
+              <Content />
+            </body>
+          </html>
+        );
+      };
+
+      const html = renderToHtml(<App />);
+
+      expect(html).toMatchSnapshot();
+    });
+
+    it("should correctly render jsx with context data and arrays in between elements", () => {
+      const context = defineContext<{
+        title: string;
+        inputPlaceholder: string;
+        buttonLabel: string;
+      }>();
+
+      const Header: JSXTE.Component = (_, contextMap) => {
+        expect(contextMap.has(context)).toBe(true);
+        const { title } = contextMap.get(context);
+
+        contextMap.set(context, {
+          title,
+          inputPlaceholder:
+            "This should not affect the rendered content, since this component has no children that consume this context.",
+          buttonLabel:
+            "This should not affect the rendered content, since this component has no children that consume this context.",
+        });
+
+        return (
+          <div>
+            <h1>{title}</h1>
+          </div>
+        );
+      };
+
+      const Input: JSXTE.Component = (_, contextMap) => {
+        expect(contextMap.has(context)).toBe(true);
+        const { inputPlaceholder } = contextMap.get(context);
+        expect(inputPlaceholder).toBe("write here");
+        return <input placeholder={inputPlaceholder} />;
+      };
+
+      const Button: JSXTE.Component = (_, contextMap) => {
+        expect(contextMap.has(context)).toBe(true);
+        const { buttonLabel } = contextMap.get(context);
+        expect(buttonLabel).toBe("Submit");
+        return <button>{buttonLabel}</button>;
+      };
+
+      const Content: JSXTE.Component = () => {
+        return <>{[<Header />, <Input />, <Button />]}</>;
+      };
+
+      const App: JSXTE.Component = (_, contextMap) => {
+        contextMap.set(context, {
+          title: "This title is set via the context",
+          buttonLabel: "Submit",
+          inputPlaceholder: "write here",
+        });
+
+        return (
+          <html>
+            <head>
+              <meta charset="utf-8" />
+              <meta http-equiv="x-ua-compatible" content="IE=edge" />
+              <title>Page Title</title>
+              <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1"
+              />
+              <link
+                rel="stylesheet"
+                type="text/css"
+                media="screen"
+                href="main.css"
+              />
+            </head>
+            <body>
+              <Content />
+            </body>
+          </html>
+        );
+      };
+
+      const html = renderToHtml(<App />);
+
+      expect(html).toMatchSnapshot();
+    });
+
+    it("should correctly render jsx with context data and async components", async () => {
+      const context = defineContext<{
+        title: string;
+        inputPlaceholder: string;
+        buttonLabel: string;
+      }>();
+
+      const Header: JSXTE.Component = async (_, contextMap) => {
+        expect(contextMap.has(context)).toBe(true);
+        const { title } = contextMap.get(context);
+
+        contextMap.set(context, {
+          title,
+          inputPlaceholder:
+            "This should not affect the rendered content, since this component has no children that consume this context.",
+          buttonLabel:
+            "This should not affect the rendered content, since this component has no children that consume this context.",
+        });
+
+        await sleep(10);
+        return (
+          <div>
+            <h1>{title}</h1>
+          </div>
+        );
+      };
+
+      const Input: JSXTE.Component = async (_, contextMap) => {
+        expect(contextMap.has(context)).toBe(true);
+        const { inputPlaceholder } = contextMap.get(context);
+        expect(inputPlaceholder).toBe("write here");
+        await sleep(50);
+        return <input placeholder={inputPlaceholder} />;
+      };
+
+      const Button: JSXTE.Component = async (_, contextMap) => {
+        expect(contextMap.has(context)).toBe(true);
+        const { buttonLabel } = contextMap.get(context);
+        expect(buttonLabel).toBe("Submit");
+        await sleep(50);
+        return <button>{buttonLabel}</button>;
+      };
+
+      const Content: JSXTE.Component = () => {
+        return <>{[<Header />, <Input />, <Button />]}</>;
+      };
+
+      const App: JSXTE.Component = async (_, contextMap) => {
+        contextMap.set(context, {
+          title: "This title is set via the context",
+          buttonLabel: "Submit",
+          inputPlaceholder: "write here",
+        });
+
+        return (
+          <html>
+            <head>
+              <meta charset="utf-8" />
+              <meta http-equiv="x-ua-compatible" content="IE=edge" />
+              <title>Page Title</title>
+              <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1"
+              />
+              <link
+                rel="stylesheet"
+                type="text/css"
+                media="screen"
+                href="main.css"
+              />
+            </head>
+            <body>
+              <Content />
+            </body>
+          </html>
+        );
+      };
+
+      const html = await renderToHtmlAsync(<App />);
+
+      expect(html).toMatchSnapshot();
+    });
+
+    it("should correctly override existing context data", async () => {
+      const context = defineContext<{
+        title: string;
+        inputPlaceholder: string;
+      }>();
+
+      const Header: JSXTE.Component = async (_, contextMap) => {
+        expect(contextMap.has(context)).toBe(true);
+        const { title } = contextMap.get(context);
+        expect(title).toBe("This title was overridden");
+        return <h1>{title}</h1>;
+      };
+
+      const Input: JSXTE.Component = async (_, contextMap) => {
+        expect(contextMap.has(context)).toBe(true);
+        const { inputPlaceholder } = contextMap.get(context);
+        expect(inputPlaceholder).toBe("write here");
+        await sleep(50);
+        return <input placeholder={inputPlaceholder} />;
+      };
+
+      const Content: JSXTE.Component = (_, contextMap) => {
+        expect(contextMap.has(context)).toBe(true);
+        const { title } = contextMap.get(context);
+        expect(title).toBe("This title was set in the app component");
+
+        contextMap.update(context, {
+          title: "This title was overridden",
+        });
+
+        return (
+          <>
+            <Header />
+            <Input />
+          </>
+        );
+      };
+
+      const App: JSXTE.Component = async (_, contextMap) => {
+        contextMap.set(context, {
+          title: "This title was set in the app component",
+          inputPlaceholder: "write here",
+        });
+
+        return (
+          <html>
+            <head>
+              <meta charset="utf-8" />
+              <meta http-equiv="x-ua-compatible" content="IE=edge" />
+              <title>Page Title</title>
+              <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1"
+              />
+              <link
+                rel="stylesheet"
+                type="text/css"
+                media="screen"
+                href="main.css"
+              />
+            </head>
+            <body>
+              <Content />
+            </body>
+          </html>
+        );
+      };
+
+      const html = await renderToHtmlAsync(<App />);
+
+      expect(html).toMatchSnapshot();
+    });
   });
 });

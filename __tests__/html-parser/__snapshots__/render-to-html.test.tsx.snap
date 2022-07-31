@@ -91,3 +91,115 @@ exports[`renderToHTML should correctly render jsx with arrays in between element
   </footer>
 </div>"
 `;
+
+exports[`renderToHTML should properly handle context data should correctly override existing context data 1`] = `
+"<html>
+  <head>
+    <meta charset=\\"utf-8\\">
+    </meta>
+    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\">
+    </meta>
+    <title>
+      Page Title
+    </title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    </meta>
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\">
+    </link>
+  </head>
+  <body>
+      <h1>
+        This title was overridden
+      </h1>
+      <input placeholder=\\"write here\\">
+      </input>
+  </body>
+</html>"
+`;
+
+exports[`renderToHTML should properly handle context data should correctly render jsx with context data 1`] = `
+"<html>
+  <head>
+    <meta charset=\\"utf-8\\">
+    </meta>
+    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\">
+    </meta>
+    <title>
+      Page Title
+    </title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    </meta>
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\">
+    </link>
+  </head>
+  <body>
+    <div class=\\"main-container\\">
+      <div>
+        <h1>
+          This title is set via the context
+        </h1>
+      </div>
+    </div>
+  </body>
+</html>"
+`;
+
+exports[`renderToHTML should properly handle context data should correctly render jsx with context data and arrays in between elements 1`] = `
+"<html>
+  <head>
+    <meta charset=\\"utf-8\\">
+    </meta>
+    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\">
+    </meta>
+    <title>
+      Page Title
+    </title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    </meta>
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\">
+    </link>
+  </head>
+  <body>
+      <div>
+        <h1>
+          This title is set via the context
+        </h1>
+      </div>
+      <input placeholder=\\"write here\\">
+      </input>
+      <button>
+        Submit
+      </button>
+  </body>
+</html>"
+`;
+
+exports[`renderToHTML should properly handle context data should correctly render jsx with context data and async components 1`] = `
+"<html>
+  <head>
+    <meta charset=\\"utf-8\\">
+    </meta>
+    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\">
+    </meta>
+    <title>
+      Page Title
+    </title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+    </meta>
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\">
+    </link>
+  </head>
+  <body>
+      <div>
+        <h1>
+          This title is set via the context
+        </h1>
+      </div>
+      <input placeholder=\\"write here\\">
+      </input>
+      <button>
+        Submit
+      </button>
+  </body>
+</html>"
+`;
