@@ -31,5 +31,4 @@ var __exportStar =
   };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.renderToHTML = void 0;
-__exportStar(require("./dist/jsx/jsx.types"), exports);
-__exportStar(require("./dist/jsx/jsx-runtime"), exports);
+__exportStar(require("./dist/legacy/jsx-runtime"), exports);
