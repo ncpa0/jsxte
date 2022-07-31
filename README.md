@@ -24,11 +24,11 @@ Once you are done with that you can start writing your templates and rendering t
 ```tsx
 import { renderToHtml } from "jsxte";
 
-const Header = (props: { label: string }) => {
+const Header: JSXTE.Component = (props: { label: string }) => {
   return <h1>{props.label}</h1>;
 };
 
-const App = (props: { label: string }) => {
+const App: JSXTE.Component = (props: { label: string }) => {
   return (
     <html>
       <head>
@@ -55,11 +55,11 @@ In case you use the templates in a server app in a Node environment you might wa
 ```tsx
 import { renderToHtmlAsync } from "jsxte";
 
-const Header = () => {
+const Header: JSXTE.Component = () => {
   return <h1>Hello World</h1>;
 };
 
-const ToDoList = async () => {
+const ToDoList: JSXTE.Component = async () => {
   const todos = await fetchMyTodosFromDB();
 
   return (
@@ -82,7 +82,7 @@ const ToDoList = async () => {
   );
 };
 
-const App = () => {
+const App: JSXTE.Component = () => {
   return (
     <html>
       <head>
@@ -101,6 +101,37 @@ const App = () => {
 
 // If your component contains an asynchronous component at any point, `renderToHtmlAsync` needs to be used instead of `renderToHtml`
 const html = await renderToHtmlAsync(<App label="Hello World!" />);
+```
+
+## Context
+
+Context Map is a interface provided to each functional component that provides a mechanism for providing any arbitrary data to it's descendant. This is primarily to avoid the prop-drilling.
+
+### Example
+
+```tsx
+import { defineContext } from "jsxte";
+
+const myContext = defineContext<{ foo: string }>();
+
+const App: JSXTE.Component = (props, contextMap) => {
+  // Set the context to a new value, all descendants of this component will have access to it
+  contextMap.set(myContext, { foo: "Hello" });
+
+  return <Foo />;
+};
+
+const Foo: JSXTE.Component = (props, contextMap) => {
+  let label = "";
+
+  // Check if `myContext` is being provided by any of the ancestors
+  if (contextMap.has(myContext)) {
+    // Retrieve the context data
+    label = contextMap.get(myContext).label;
+  }
+
+  return <p>{label}</p>;
+};
 ```
 
 ## Extending the typings
@@ -124,7 +155,7 @@ declare global {
 }
 
 // with it it's possible to use this without type errors:
-const MyComponent = () => (
+const MyComponent: JSXTE.Component = () => (
   <my-custom-web-component data-example-attribute="Hello"></my-custom-web-component>
 );
 ```
