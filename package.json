@@ -3,22 +3,39 @@
     "@types/jest": "^27.5.1",
     "@typescript-eslint/eslint-plugin": "^5.23.0",
     "@typescript-eslint/parser": "^5.23.0",
+    "esbuild": "^0.14.51",
+    "eslint": "^8.15.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "eslint": "^8.15.0",
     "git-hook-tasks": "github:ncpa0cpl/git-hook-tasks",
     "husky": "^8.0.1",
     "jest": "^28.1.0",
-    "prettier-plugin-jsdoc": "^0.3.38",
     "prettier": "^2.6.2",
+    "prettier-plugin-jsdoc": "^0.3.38",
     "ts-jest": "^28.0.2",
-    "typescript": "^4.6.4"
+    "typescript": "^4.7.4"
   },
   "name": "jsxte",
   "version": "1.0.0",
-  "main": "./dist/index.js",
+  "main": "./dist/legacy/index.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/esm/index.mjs",
+      "require": "./dist/cjs/index.cjs"
+    },
+    "./jsx-runtime": {
+      "types": "./dist/types/jsx/jsx-runtime.d.ts",
+      "import": "./dist/esm/jsx-runtime.mjs",
+      "require": "./dist/cjs/jsx-runtime.cjs"
+    }
+  },
   "scripts": {
-    "build": "rm -rf ./dist && tsc -p tsconfig.build.json",
+    "build": "rm -rf ./dist && yarn build:esm && yarn build:cjs && yarn build:types",
+    "build:esm": "node ./scripts/build.mjs esmodule",
+    "build:cjs": "node ./scripts/build.mjs commonjs",
+    "build:types": "tsc -p tsconfig.build.json --emitDeclarationOnly --outDir ./dist/types",
     "test:lint": "eslint .",
     "test:tsc": "tsc --noEmit",
     "test:jest": "jest --coverage"

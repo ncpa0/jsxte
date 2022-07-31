@@ -9,4 +9,6 @@ export {
   type ContextMap,
   defineContext,
 } from "./context-map/context-map";
-export type { HTMLProps, AttributeBool } from "./jsx/base-html-tag-props";
+export type { AttributeBool } from "./jsx/base-html-tag-props";
+export type { HTMLProps } from "./jsx/base-html-tag-props";
+export * from "./jsx/jsx.types";
