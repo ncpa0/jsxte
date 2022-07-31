@@ -1,3 +1,5 @@
+import type { ContextMap } from "../context-map/context-map";
+
 type CreateElementProps = {
   [k: string]: any;
   children?: JSXTE.ElementChildren;
@@ -6,8 +8,8 @@ type CreateElementProps = {
 export const createElement = (
   tag:
     | string
-    | ((props: any) => JSX.Element)
-    | ((props: any) => Promise<JSX.Element>),
+    | ((props: any, contextMap: ContextMap) => JSX.Element)
+    | ((props: any, contextMap: ContextMap) => Promise<JSX.Element>),
   props?: CreateElementProps,
   ...children: Array<
     JSX.Element | string | number | Array<JSX.Element | string | number>
