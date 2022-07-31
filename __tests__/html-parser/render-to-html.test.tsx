@@ -5,7 +5,11 @@ import {
 } from "../../src/html-parser/render-to-html";
 // @ts-ignore
 import { jsx, Fragment } from "../../src/jsx/jsx-runtime";
-import { defineContext } from "../../src/context-map/context-map";
+import {
+  ContextDefinition,
+  ContextMap,
+  defineContext,
+} from "../../src/context-map/context-map";
 
 const sleep = (t: number) =>
   new Promise<void>((resolve) => setTimeout(() => resolve(), t));
@@ -518,6 +522,74 @@ describe("renderToHTML", () => {
       };
 
       const html = await renderToHtmlAsync(<App />);
+
+      expect(html).toMatchSnapshot();
+    });
+
+    it("should correctly handle provider pattern", () => {
+      const myContext = defineContext<{
+        title: string;
+      }>();
+
+      const Provider = <T,>(
+        props: {
+          children?: JSX.Element;
+          context: ContextDefinition<T>;
+          value: T;
+        },
+        contextMap: ContextMap
+      ) => {
+        contextMap.set(props.context, props.value);
+        return <>{props.children}</>;
+      };
+
+      const Header: JSXTE.Component = (_, contextMap) => {
+        expect(contextMap.has(myContext)).toBe(true);
+        const { title } = contextMap.get(myContext);
+        expect(title).toBe("Provided title");
+        return (
+          <div>
+            <h1>{title}</h1>
+          </div>
+        );
+      };
+
+      const Content: JSXTE.Component = () => {
+        return (
+          <div class="main-container">
+            <Header />
+          </div>
+        );
+      };
+
+      const App: JSXTE.Component = (_, contextMap) => {
+        return (
+          <html>
+            <head>
+              <meta charset="utf-8" />
+              <meta http-equiv="x-ua-compatible" content="IE=edge" />
+              <title>Page Title</title>
+              <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1"
+              />
+              <link
+                rel="stylesheet"
+                type="text/css"
+                media="screen"
+                href="main.css"
+              />
+            </head>
+            <Provider context={myContext} value={{ title: "Provided title" }}>
+              <body>
+                <Content />
+              </body>
+            </Provider>
+          </html>
+        );
+      };
+
+      const html = renderToHtml(<App />);
 
       expect(html).toMatchSnapshot();
     });
