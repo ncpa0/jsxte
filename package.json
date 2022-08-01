@@ -10,6 +10,7 @@
     "git-hook-tasks": "github:ncpa0cpl/git-hook-tasks",
     "husky": "^8.0.1",
     "jest": "^28.1.0",
+    "node-os-walk": "^1.0.0",
     "prettier": "^2.6.2",
     "prettier-plugin-jsdoc": "^0.3.38",
     "ts-jest": "^28.0.2",
@@ -26,7 +27,7 @@
       "require": "./dist/cjs/index.cjs"
     },
     "./jsx-runtime": {
-      "types": "./dist/types/jsx/jsx-runtime.d.ts",
+      "types": "./dist/types/jsx-runtime.d.ts",
       "import": "./dist/esm/jsx-runtime.mjs",
       "require": "./dist/cjs/jsx-runtime.cjs"
     }
