@@ -593,5 +593,127 @@ describe("renderToHTML", () => {
 
       expect(html).toMatchSnapshot();
     });
+
+    it("should correctly drill the prop data through multiple components", async () => {
+      const store = defineContext<string>();
+
+      const Title: JSXTE.Component = (_, contextMap) => {
+        const title = contextMap.get(store);
+        return <p>{title}</p>;
+      };
+
+      const Provider = async <T,>(
+        props: JSXTE.PropsWithChildren<{
+          context: ContextDefinition<T>;
+          value: T;
+          sleep?: boolean;
+        }>,
+        contextMap: ContextMap
+      ) => {
+        if (props.sleep) await sleep(Math.random() * 1000);
+        contextMap.set(props.context, props.value);
+        return <>{props.children}</>;
+      };
+
+      const W1 = () => {
+        return (
+          <div>
+            <div>
+              <W2 />
+            </div>
+          </div>
+        );
+      };
+
+      const W2 = () => {
+        return (
+          <div>
+            <div>
+              <W3 />
+            </div>
+          </div>
+        );
+      };
+
+      const W3 = () => {
+        return (
+          <div>
+            <div>
+              <Title />
+            </div>
+          </div>
+        );
+      };
+
+      const html = await renderToHtmlAsync(
+        <html>
+          <body>
+            <Provider context={store} value={"foo"}>
+              <div>
+                <div>
+                  <W1 />
+                </div>
+              </div>
+            </Provider>
+          </body>
+        </html>
+      );
+
+      expect(html).toMatchSnapshot();
+    });
+
+    it("close-by providers should not interfere with each other", async () => {
+      const store = defineContext<string>();
+
+      const Title: JSXTE.Component = (_, contextMap) => {
+        const title = contextMap.get(store);
+        return <p>{title}</p>;
+      };
+
+      const Provider = async <T,>(
+        props: JSXTE.PropsWithChildren<{
+          context: ContextDefinition<T>;
+          value: T;
+          sleep?: number;
+        }>,
+        contextMap: ContextMap
+      ) => {
+        if (props.sleep) await sleep(props.sleep);
+        contextMap.set(props.context, props.value);
+        return <>{props.children}</>;
+      };
+
+      const html = await renderToHtmlAsync(
+        <html>
+          <body>
+            <Provider context={store} value={"foo"}>
+              <Provider sleep={30} context={store} value={"bar"}>
+                <Title />
+              </Provider>
+              {[
+                <Provider context={store} value={"baz"}>
+                  <Title />
+                </Provider>,
+                <Provider sleep={50} context={store} value={"qux"}>
+                  <Title />
+                </Provider>,
+                <Provider sleep={10} context={store} value={"coorg"}>
+                  <Title />
+                </Provider>,
+              ]}
+              <Provider sleep={30} context={store} value={"fred"}>
+                <Title />
+              </Provider>
+              <Provider context={store} value={"thud"}>
+                <Title />
+              </Provider>
+              <Title />
+            </Provider>
+          </body>
+        </html>
+      );
+
+      expect(html).toMatchSnapshot();
+    });
   });
 });
