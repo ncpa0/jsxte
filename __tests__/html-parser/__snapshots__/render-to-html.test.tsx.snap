@@ -92,6 +92,60 @@ exports[`renderToHTML should correctly render jsx with arrays in between element
 </div>"
 `;
 
+exports[`renderToHTML should properly handle context data close-by providers should not interfere with each other 1`] = `
+"<html>
+  <body>
+        <p>
+          bar
+        </p>
+        <p>
+          baz
+        </p>
+        <p>
+          qux
+        </p>
+        <p>
+          coorg
+        </p>
+        <p>
+          fred
+        </p>
+        <p>
+          thud
+        </p>
+      <p>
+        foo
+      </p>
+  </body>
+</html>"
+`;
+
+exports[`renderToHTML should properly handle context data should correctly drill the prop data through multiple components 1`] = `
+"<html>
+  <body>
+      <div>
+        <div>
+          <div>
+            <div>
+              <div>
+                <div>
+                  <div>
+                    <div>
+                      <p>
+                        foo
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </body>
+</html>"
+`;
+
 exports[`renderToHTML should properly handle context data should correctly handle provider pattern 1`] = `
 "<html>
   <head>
