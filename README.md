@@ -134,6 +134,57 @@ const Foo: JSXTE.Component = (props, contextMap) => {
 };
 ```
 
+### Provider/Consumer Pattern
+
+It is possible to incorporate a Provider/Consumer pattern with the ContextMap API.
+
+```tsx
+const makeContextWithProvider = <T,>() => {
+  const ctx = defineContext<T>();
+
+  const Provider: JSXTE.Component<{
+    value: T;
+  }> = (props, contextMap) => {
+    contextMap.set(ctx, props.value);
+    return <>{props.children}</>;
+  };
+
+  const Consumer = (
+    props: { render: (value?: T) => JSX.Element },
+    contextMap: ContextMap
+  ) => {
+    if (contextMap.has(ctx)) {
+      const value = contextMap.get(ctx);
+      return <>{props.render(value)}</>;
+    } else {
+      return <>{props.render()}</>;
+    }
+  };
+
+  return {
+    context: ctx,
+    Provider,
+    Consumer,
+  };
+};
+
+// Use it
+
+const MyContext = makeContextWithProvider<string>();
+
+const App: JSXTE.Component = () => {
+  return (
+    <MyContext.Provider value={"Hello World!"}>
+      <div>
+        <MyContext.Consumer
+          render={(providedValue) => <h1>{providedValue ?? ""}</h1>}
+        />
+      </div>
+    </MyContext.Provider>
+  );
+};
+```
+
 ## Extending the typings
 
 JSXTE should be able to parse any html attributes you put in, as well as custom web component tags, although you may see type errors if you use anything that is not defined in the library typings. If you wish to use them it is recommended you extend the typings to disable said errors.
