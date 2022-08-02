@@ -120,6 +120,21 @@ exports[`renderToHTML should properly handle context data close-by providers sho
 </html>"
 `;
 
+exports[`renderToHTML should properly handle context data correctly handles encapsulated providers 1`] = `
+"<html>
+  <body>
+    <div id=\\"root\\">
+        <div class=\\"template for-magic\\">
+          <div>
+              <input type=\\"text\\" name=\\"repeating_magic_dwarf\\">
+              </input>
+          </div>
+        </div>
+    </div>
+  </body>
+</html>"
+`;
+
 exports[`renderToHTML should properly handle context data should correctly drill the prop data through multiple components 1`] = `
 "<html>
   <body>

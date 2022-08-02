@@ -715,5 +715,86 @@ describe("renderToHTML", () => {
 
       expect(html).toMatchSnapshot();
     });
+
+    it("correctly handles encapsulated providers", () => {
+      const makeContextWithProvider = <T,>() => {
+        const ctx = defineContext<T>();
+
+        return {
+          context: ctx,
+          Provider: (
+            props: JSXTE.PropsWithChildren<{
+              value: T;
+            }>,
+            contextMap: ContextMap
+          ) => {
+            contextMap.set(ctx, props.value);
+            return <>{props.children}</>;
+          },
+          Consumer: (
+            props: { render: (value?: T) => JSX.Element },
+            contextMap: ContextMap
+          ) => {
+            if (contextMap.has(ctx)) {
+              const value = contextMap.get(ctx);
+              return <>{props.render(value)}</>;
+            } else {
+              return <>{props.render()}</>;
+            }
+          },
+        };
+      };
+
+      const MagicalContext = makeContextWithProvider<string>();
+
+      const RollTemplate: JSXTE.Component<{ name: string }> = ({
+        children,
+        name,
+      }) => {
+        return <div class={`template for-${name}`}>{children}</div>;
+      };
+
+      const Repeater: JSXTE.Component<{ name: string }> = ({
+        children,
+        ...props
+      }) => {
+        return (
+          <MagicalContext.Provider value={`repeating_${props.name}_`}>
+            <RollTemplate {...props}>{children}</RollTemplate>
+          </MagicalContext.Provider>
+        );
+      };
+
+      const Input: JSXTE.Component<{ name: string }> = ({ name }) => {
+        return (
+          <MagicalContext.Consumer
+            render={(ctxName) => {
+              const fullName = `${ctxName ?? ""}${name}`;
+              return <input type="text" name={fullName} />;
+            }}
+          />
+        );
+      };
+
+      const App = () => {
+        return (
+          <html>
+            <body>
+              <div id="root">
+                <Repeater name="magic">
+                  <div>
+                    <Input name="dwarf" />
+                  </div>
+                </Repeater>
+              </div>
+            </body>
+          </html>
+        );
+      };
+
+      const html = renderToHtml(<App />);
+
+      expect(html).toMatchSnapshot();
+    });
   });
 });
