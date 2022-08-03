@@ -2,14 +2,15 @@ import "./utilities/array-flat-polyfill";
 
 export * from "./express/index";
 export * from "./jsx/jsx.types";
+export * from "./jsx/prop-types/index";
 
+export { defineContext } from "./context-map/context-map";
 export { renderToHtml, renderToHtmlAsync } from "./html-parser/render-to-html";
 export { renderToStringTemplateTag } from "./string-template-parser/render-to-string-template-tag";
-export {
-  type ContextDefinition,
-  type ContextMap,
-  defineContext,
-} from "./context-map/context-map";
-export type { AttributeBool } from "./jsx/base-html-tag-props";
+
+export type { ContextDefinition, ContextMap } from "./context-map/context-map";
+export type { AttributeBool, HTMLProps } from "./jsx/base-html-tag-props";
 export type { StringTemplateParserOptions } from "./string-template-parser/render-to-string-template-tag";
-export type { HTMLProps } from "./jsx/base-html-tag-props";
+export type { Crossorigin } from "./jsx/prop-types/shared/crossorigin";
+export type { RefererPolicy } from "./jsx/prop-types/shared/referer-policy";
+export type { Target } from "./jsx/prop-types/shared/target";
