@@ -112,11 +112,11 @@ Context Map is a interface provided to each functional component that provides a
 ```tsx
 import { defineContext } from "jsxte";
 
-const myContext = defineContext<{ foo: string }>();
+const myContext = defineContext<{ label: string }>();
 
 const App: JSXTE.Component = (props, contextMap) => {
   // Set the context to a new value, all descendants of this component will have access to it
-  contextMap.set(myContext, { foo: "Hello" });
+  contextMap.set(myContext, { label: "Hello" });
 
   return <Foo />;
 };
