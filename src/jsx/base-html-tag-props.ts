@@ -69,6 +69,7 @@ declare global {
     interface BaseHTMLTagProps {
       children?: ElementChildren;
 
+      is?: string;
       accesskey?: string;
       class?: string;
       contenteditable?: AttributeBool;
