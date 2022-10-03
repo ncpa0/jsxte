@@ -48,10 +48,9 @@ import type { VideoTagProps } from "./prop-types/video-jsx-props";
 
 declare global {
   namespace JSX {
-    type Element =
-      | JSXTE.TagElement
-      | JSXTE.TextNodeElement
-      | Promise<JSXTE.TagElement | JSXTE.TextNodeElement>;
+    type AsyncElement = Promise<JSXTE.TagElement | JSXTE.TextNodeElement>;
+
+    type Element = JSXTE.TagElement | JSXTE.TextNodeElement | AsyncElement;
 
     type LibraryManagedAttributes<T, PropsWithChildren> = PropsWithChildren;
 
