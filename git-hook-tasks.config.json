@@ -1,5 +1,6 @@
 {
   "packageManager": "yarn",
+  "parallel": true,
   "hooks": {
     "pre-push": [
       {
@@ -11,6 +12,7 @@
         "script": "test:lint"
       },
       {
+        "mustRunAlone": true,
         "name": "Jest",
         "script": "test:jest"
       }
