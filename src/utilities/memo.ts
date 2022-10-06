@@ -1,6 +1,16 @@
 import type { ContextMap } from "../context-map/context-map";
 import { renderToHtml, renderToHtmlAsync } from "../html-parser/render-to-html";
+import { jsx, Fragment } from "../jsx-runtime";
 import { Cache } from "./cache";
+
+const ReplaceMap = <P extends { context: ContextMap }>(
+  props: JSXTE.PropsWithChildren<P>,
+  context: ContextMap
+) => {
+  context.replace(props.context);
+  // @ts-ignore
+  return jsx(Fragment, {}, props.children);
+};
 
 /**
  * Creates an in-memory cache for the provided component and
@@ -41,7 +51,13 @@ export const memo = <P extends object & { children?: any }>(
       const cachedResult = cache.get(propsNoChildren);
       if (cachedResult) return cachedResult;
 
-      const result = await renderToHtmlAsync(Component(props, context));
+      const result = await renderToHtmlAsync(
+        jsx(
+          ReplaceMap,
+          { context },
+          jsx(Component, { ...propsNoChildren }, children)
+        )
+      );
       const textNode: JSXTE.TextNodeElement = {
         text: result,
         type: "textNode",
@@ -63,7 +79,13 @@ export const memo = <P extends object & { children?: any }>(
     const cachedResult = cache.get(propsNoChildren);
     if (cachedResult) return cachedResult;
 
-    const result = renderToHtml(Component(props, context));
+    const result = renderToHtml(
+      jsx(
+        ReplaceMap,
+        { context },
+        jsx(Component, { ...propsNoChildren }, children)
+      )
+    );
     const textNode: JSXTE.TextNodeElement = {
       text: result,
       type: "textNode",

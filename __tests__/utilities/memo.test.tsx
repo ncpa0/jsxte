@@ -94,6 +94,44 @@ describe("memo", () => {
     expect(render1).toMatchSnapshot();
   });
 
+  it("children of the memoized components should have access to the top level context", () => {
+    const Context = defineContext<{ foo: string }>();
+
+    const MemoChild = (_: {}, context: ContextMap) => {
+      return <h1>{context.get(Context).foo}</h1>;
+    };
+
+    const MemoizedComponent = memo((_: {}, context) => {
+      return (
+        <div>
+          <MemoChild />
+        </div>
+      );
+    });
+
+    const MemoParent = (_: {}, context: ContextMap) => {
+      return (
+        <div>
+          <MemoizedComponent />
+        </div>
+      );
+    };
+
+    const Root = (_: {}, context: ContextMap) => {
+      context.set(Context, { foo: "Hello" });
+
+      return (
+        <div id="root">
+          <MemoParent />
+        </div>
+      );
+    };
+
+    const render1 = renderToHtml(<Root />);
+
+    expect(render1).toMatchSnapshot();
+  });
+
   it("asynchronous memoized components should works as expected", async () => {
     let variable = "Hello World";
 

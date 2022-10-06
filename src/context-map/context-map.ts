@@ -7,7 +7,7 @@ export class ContextMap {
     return new ContextMap(new Map(original.map));
   }
 
-  private constructor(private readonly map: Map<symbol, unknown> = new Map()) {}
+  private constructor(private map: Map<symbol, unknown> = new Map()) {}
 
   /**
    * Retrieve the context data for the specified context. If the
@@ -78,6 +78,16 @@ export class ContextMap {
   /** Check if the context data for the specified context is set. */
   public has<T>(ref: ContextDefinition<T>): boolean {
     return this.map.has(ref.id);
+  }
+
+  /**
+   * Replaces this context entries with the entries of the
+   * context provided.
+   *
+   * @internal
+   */
+  public replace(context: ContextMap): void {
+    this.map = context.map;
   }
 }
 
