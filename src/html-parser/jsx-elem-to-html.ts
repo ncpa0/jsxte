@@ -4,19 +4,27 @@ import { mapAttributesToHtmlTagString } from "./attribute-to-html-tag-string";
 import { getHTMLStruct } from "./get-html-struct";
 
 const isSyncElem = (e: JSX.Element): e is JSXTE.SyncElement => true;
+const isTextNode = (e: JSX.Element): e is JSXTE.TextNodeElement =>
+  "type" in e && e.type === "textNode";
+
+type InternalOptions = {
+  indent?: number;
+  currentIndent?: number;
+  attributeMap?: Record<string, string>;
+};
 
 export const jsxElemToHtmlSync = (
   element: JSX.Element,
   contextMap: ContextMap = ContextMap.create(),
-  options?: { indent?: number; attributeMap?: Record<string, string> }
+  options?: InternalOptions
 ): string => {
-  const { attributeMap = {}, indent = 0 } = options ?? {};
+  const { attributeMap = {}, currentIndent = 0, indent = 2 } = options ?? {};
   contextMap = ContextMap.clone(contextMap);
 
   if (!isSyncElem(element)) throw new Error("");
 
   if (element.type === "textNode") {
-    const indentPadding = pad(indent);
+    const indentPadding = pad(currentIndent);
     return indentPadding + element.text;
   }
 
@@ -32,7 +40,11 @@ export const jsxElemToHtmlSync = (
       );
     }
 
-    return jsxElemToHtmlSync(subElem, contextMap, { indent, attributeMap });
+    return jsxElemToHtmlSync(subElem, contextMap, {
+      indent,
+      currentIndent: currentIndent,
+      attributeMap,
+    });
   } else {
     const htmlStruct = getHTMLStruct(element, attributeMap);
 
@@ -40,14 +52,15 @@ export const jsxElemToHtmlSync = (
       const results: string[] = [];
       for (const child of htmlStruct.children) {
         const renderedChild = jsxElemToHtmlSync(child, contextMap, {
-          indent: indent + 2,
+          indent,
+          currentIndent: currentIndent + indent,
           attributeMap,
         });
         if (renderedChild.length > 0) results.push(renderedChild);
       }
       return results.join("\n");
     } else {
-      const indentPadding = pad(indent);
+      const indentPadding = pad(currentIndent);
 
       const startTag =
         [
@@ -57,9 +70,12 @@ export const jsxElemToHtmlSync = (
       const endTag = `${indentPadding}</${htmlStruct.tag}>`;
       const children: string[] = [];
 
+      const isAllChildrenTextNodes = htmlStruct.children.every(isTextNode);
+
       for (const child of htmlStruct.children) {
         const renderedChild = jsxElemToHtmlSync(child, contextMap, {
-          indent: indent + 2,
+          indent: isAllChildrenTextNodes ? 0 : indent,
+          currentIndent: isAllChildrenTextNodes ? 0 : currentIndent + indent,
           attributeMap,
         });
 
@@ -74,15 +90,15 @@ export const jsxElemToHtmlSync = (
 export const jsxElemToHtmlAsync = async (
   element: JSX.Element,
   contextMap: ContextMap = ContextMap.create(),
-  options?: { indent?: number; attributeMap?: Record<string, string> }
+  options?: InternalOptions
 ): Promise<string> => {
-  const { attributeMap = {}, indent = 0 } = options ?? {};
+  const { attributeMap = {}, currentIndent = 0, indent = 2 } = options ?? {};
   contextMap = ContextMap.clone(contextMap);
 
   if (!isSyncElem(element)) throw new Error("");
 
   if (element.type === "textNode") {
-    const indentPadding = pad(indent);
+    const indentPadding = pad(currentIndent);
     return indentPadding + element.text;
   }
 
@@ -94,6 +110,7 @@ export const jsxElemToHtmlAsync = async (
 
     return await jsxElemToHtmlAsync(subElem, contextMap, {
       indent,
+      currentIndent: currentIndent,
       attributeMap,
     });
   } else {
@@ -103,14 +120,15 @@ export const jsxElemToHtmlAsync = async (
       const results: string[] = [];
       for (const child of htmlStruct.children) {
         const renderedChild = await jsxElemToHtmlAsync(child, contextMap, {
-          indent: indent + 2,
+          indent,
+          currentIndent: currentIndent + indent,
           attributeMap,
         });
         if (renderedChild.length > 0) results.push(renderedChild);
       }
       return results.join("\n");
     } else {
-      const indentPadding = pad(indent);
+      const indentPadding = pad(currentIndent);
 
       const startTag =
         [
@@ -120,9 +138,12 @@ export const jsxElemToHtmlAsync = async (
       const endTag = `${indentPadding}</${htmlStruct.tag}>`;
       const children: string[] = [];
 
+      const isAllChildrenTextNodes = htmlStruct.children.every(isTextNode);
+
       for (const child of htmlStruct.children) {
         const renderedChild = await jsxElemToHtmlAsync(child, contextMap, {
-          indent: indent + 2,
+          indent: isAllChildrenTextNodes ? 0 : indent,
+          currentIndent: isAllChildrenTextNodes ? 0 : currentIndent + indent,
           attributeMap,
         });
         if (renderedChild.length > 0) children.push(renderedChild);

@@ -8,7 +8,7 @@ exports[`renderToHTML should correctly generate html from component base jsx str
     <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\">
     </meta>
     <title>
-      Page Title
+Page Title
     </title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     </meta>
@@ -18,12 +18,12 @@ exports[`renderToHTML should correctly generate html from component base jsx str
   <body>
     <div class=\\"main-container\\">
         <h2>
-          Hello World!
+Hello World!
         </h2>
         <input value=\\"write here\\">
         </input>
         <button>
-          Submit
+Submit
         </button>
     </div>
   </body>
@@ -33,13 +33,13 @@ exports[`renderToHTML should correctly generate html from component base jsx str
 exports[`renderToHTML should correctly generate html from simple jsx 1`] = `
 "<div id=\\"container\\" class=\\"bordered active\\">
   <h1>
-    Hello World
+Hello World
   </h1>
   <h2>
-    Prop Title
+Prop Title
   </h2>
   <button onclick=\\"console.log(&quot;Hello World!&quot;)\\">
-    Click me!
+Click me!
   </button>
   <input autofocus draggable>
   </input>
@@ -54,7 +54,7 @@ exports[`renderToHTML should correctly parse async components 1`] = `
     <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\">
     </meta>
     <title>
-      Page Title
+Page Title
     </title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     </meta>
@@ -64,12 +64,12 @@ exports[`renderToHTML should correctly parse async components 1`] = `
   <body>
     <div class=\\"main-container\\">
         <h2>
-          Async title
+Async title
         </h2>
         <input value=\\"write here\\">
         </input>
         <button>
-          Submit
+Submit
         </button>
     </div>
   </body>
@@ -79,13 +79,13 @@ exports[`renderToHTML should correctly parse async components 1`] = `
 exports[`renderToHTML should correctly render jsx with arrays in between elements 1`] = `
 "<div>
   <h1>
-    Header
+Header
   </h1>
   <p>
-    0
+0
   </p>
   <p>
-    1
+1
   </p>
   <footer>
   </footer>
@@ -96,25 +96,25 @@ exports[`renderToHTML should properly handle context data close-by providers sho
 "<html>
   <body>
         <p>
-          bar
+bar
         </p>
         <p>
-          baz
+baz
         </p>
         <p>
-          qux
+qux
         </p>
         <p>
-          coorg
+coorg
         </p>
         <p>
-          fred
+fred
         </p>
         <p>
-          thud
+thud
         </p>
       <p>
-        foo
+foo
       </p>
   </body>
 </html>"
@@ -147,7 +147,7 @@ exports[`renderToHTML should properly handle context data should correctly drill
                   <div>
                     <div>
                       <p>
-                        foo
+foo
                       </p>
                     </div>
                   </div>
@@ -169,7 +169,7 @@ exports[`renderToHTML should properly handle context data should correctly handl
     <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\">
     </meta>
     <title>
-      Page Title
+Page Title
     </title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     </meta>
@@ -180,7 +180,7 @@ exports[`renderToHTML should properly handle context data should correctly handl
       <div class=\\"main-container\\">
         <div>
           <h1>
-            Provided title
+Provided title
           </h1>
         </div>
       </div>
@@ -196,7 +196,7 @@ exports[`renderToHTML should properly handle context data should correctly overr
     <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\">
     </meta>
     <title>
-      Page Title
+Page Title
     </title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     </meta>
@@ -205,7 +205,7 @@ exports[`renderToHTML should properly handle context data should correctly overr
   </head>
   <body>
       <h1>
-        This title was overridden
+This title was overridden
       </h1>
       <input placeholder=\\"write here\\">
       </input>
@@ -221,7 +221,7 @@ exports[`renderToHTML should properly handle context data should correctly rende
     <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\">
     </meta>
     <title>
-      Page Title
+Page Title
     </title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     </meta>
@@ -232,7 +232,7 @@ exports[`renderToHTML should properly handle context data should correctly rende
     <div class=\\"main-container\\">
       <div>
         <h1>
-          This title is set via the context
+This title is set via the context
         </h1>
       </div>
     </div>
@@ -248,7 +248,7 @@ exports[`renderToHTML should properly handle context data should correctly rende
     <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\">
     </meta>
     <title>
-      Page Title
+Page Title
     </title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     </meta>
@@ -258,13 +258,13 @@ exports[`renderToHTML should properly handle context data should correctly rende
   <body>
       <div>
         <h1>
-          This title is set via the context
+This title is set via the context
         </h1>
       </div>
       <input placeholder=\\"write here\\">
       </input>
       <button>
-        Submit
+Submit
       </button>
   </body>
 </html>"
@@ -278,7 +278,7 @@ exports[`renderToHTML should properly handle context data should correctly rende
     <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\">
     </meta>
     <title>
-      Page Title
+Page Title
     </title>
     <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
     </meta>
@@ -288,13 +288,13 @@ exports[`renderToHTML should properly handle context data should correctly rende
   <body>
       <div>
         <h1>
-          This title is set via the context
+This title is set via the context
         </h1>
       </div>
       <input placeholder=\\"write here\\">
       </input>
       <button>
-        Submit
+Submit
       </button>
   </body>
 </html>"
