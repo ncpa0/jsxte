@@ -64,7 +64,7 @@ describe("memo", () => {
 
     expect(render1).toEqual(render2);
 
-    await sleep(100);
+    await sleep(150);
 
     const render3 = renderToHtml(<Root />);
 

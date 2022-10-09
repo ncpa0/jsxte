@@ -7,6 +7,7 @@ export * from "./jsx/prop-types/index";
 export { defineContext } from "./context-map/context-map";
 export { renderToHtml, renderToHtmlAsync } from "./html-parser/render-to-html";
 export { renderToStringTemplateTag } from "./string-template-parser/render-to-string-template-tag";
+export { memo } from "./utilities/memo";
 
 export type { ContextDefinition, ContextMap } from "./context-map/context-map";
 export type { AttributeBool, HTMLProps } from "./jsx/base-html-tag-props";
