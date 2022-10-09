@@ -60,6 +60,9 @@ export const jsxElemToHtmlSync = (
       }
       return results.join("\n");
     } else {
+      const inlineTag =
+        htmlStruct.children.length === 0 ||
+        htmlStruct.children.every(isTextNode);
       const indentPadding = pad(currentIndent);
 
       const startTag =
@@ -67,19 +70,21 @@ export const jsxElemToHtmlSync = (
           `${indentPadding}<${htmlStruct.tag}`,
           ...mapAttributesToHtmlTagString(htmlStruct.attributes),
         ].join(" ") + ">";
-      const endTag = `${indentPadding}</${htmlStruct.tag}>`;
+      const endTag = `${inlineTag ? "" : indentPadding}</${htmlStruct.tag}>`;
       const children: string[] = [];
-
-      const isAllChildrenTextNodes = htmlStruct.children.every(isTextNode);
 
       for (const child of htmlStruct.children) {
         const renderedChild = jsxElemToHtmlSync(child, contextMap, {
-          indent: isAllChildrenTextNodes ? 0 : indent,
-          currentIndent: isAllChildrenTextNodes ? 0 : currentIndent + indent,
+          indent: inlineTag ? 0 : indent,
+          currentIndent: inlineTag ? 0 : currentIndent + indent,
           attributeMap,
         });
 
         if (renderedChild.length > 0) children.push(renderedChild);
+      }
+
+      if (inlineTag) {
+        return startTag + children.join("") + endTag;
       }
 
       return [startTag, ...children, endTag].join("\n");
@@ -128,6 +133,9 @@ export const jsxElemToHtmlAsync = async (
       }
       return results.join("\n");
     } else {
+      const inlineTag =
+        htmlStruct.children.length === 0 ||
+        htmlStruct.children.every(isTextNode);
       const indentPadding = pad(currentIndent);
 
       const startTag =
@@ -135,18 +143,20 @@ export const jsxElemToHtmlAsync = async (
           `${indentPadding}<${htmlStruct.tag}`,
           ...mapAttributesToHtmlTagString(htmlStruct.attributes),
         ].join(" ") + ">";
-      const endTag = `${indentPadding}</${htmlStruct.tag}>`;
+      const endTag = `${inlineTag ? "" : indentPadding}</${htmlStruct.tag}>`;
       const children: string[] = [];
-
-      const isAllChildrenTextNodes = htmlStruct.children.every(isTextNode);
 
       for (const child of htmlStruct.children) {
         const renderedChild = await jsxElemToHtmlAsync(child, contextMap, {
-          indent: isAllChildrenTextNodes ? 0 : indent,
-          currentIndent: isAllChildrenTextNodes ? 0 : currentIndent + indent,
+          indent: inlineTag ? 0 : indent,
+          currentIndent: inlineTag ? 0 : currentIndent + indent,
           attributeMap,
         });
         if (renderedChild.length > 0) children.push(renderedChild);
+      }
+
+      if (inlineTag) {
+        return startTag + children.join("") + endTag;
       }
 
       return [startTag, ...children, endTag].join("\n");

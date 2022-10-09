@@ -3,28 +3,17 @@
 exports[`renderToHTML should correctly generate html from component base jsx structure 1`] = `
 "<html>
   <head>
-    <meta charset=\\"utf-8\\">
-    </meta>
-    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\">
-    </meta>
-    <title>
-Page Title
-    </title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    </meta>
-    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\">
-    </link>
+    <meta charset=\\"utf-8\\"></meta>
+    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\"></meta>
+    <title>Page Title</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"></meta>
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\"></link>
   </head>
   <body>
     <div class=\\"main-container\\">
-        <h2>
-Hello World!
-        </h2>
-        <input value=\\"write here\\">
-        </input>
-        <button>
-Submit
-        </button>
+        <h2>Hello World!</h2>
+        <input value=\\"write here\\"></input>
+        <button>Submit</button>
     </div>
   </body>
 </html>"
@@ -32,45 +21,27 @@ Submit
 
 exports[`renderToHTML should correctly generate html from simple jsx 1`] = `
 "<div id=\\"container\\" class=\\"bordered active\\">
-  <h1>
-Hello World
-  </h1>
-  <h2>
-Prop Title
-  </h2>
-  <button onclick=\\"console.log(&quot;Hello World!&quot;)\\">
-Click me!
-  </button>
-  <input autofocus draggable>
-  </input>
+  <h1>Hello World</h1>
+  <h2>Prop Title</h2>
+  <button onclick=\\"console.log(&quot;Hello World!&quot;)\\">Click me!</button>
+  <input autofocus draggable></input>
 </div>"
 `;
 
 exports[`renderToHTML should correctly parse async components 1`] = `
 "<html>
   <head>
-    <meta charset=\\"utf-8\\">
-    </meta>
-    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\">
-    </meta>
-    <title>
-Page Title
-    </title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    </meta>
-    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\">
-    </link>
+    <meta charset=\\"utf-8\\"></meta>
+    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\"></meta>
+    <title>Page Title</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"></meta>
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\"></link>
   </head>
   <body>
     <div class=\\"main-container\\">
-        <h2>
-Async title
-        </h2>
-        <input value=\\"write here\\">
-        </input>
-        <button>
-Submit
-        </button>
+        <h2>Async title</h2>
+        <input value=\\"write here\\"></input>
+        <button>Submit</button>
     </div>
   </body>
 </html>"
@@ -78,44 +49,23 @@ Submit
 
 exports[`renderToHTML should correctly render jsx with arrays in between elements 1`] = `
 "<div>
-  <h1>
-Header
-  </h1>
-  <p>
-0
-  </p>
-  <p>
-1
-  </p>
-  <footer>
-  </footer>
+  <h1>Header</h1>
+  <p>0</p>
+  <p>1</p>
+  <footer></footer>
 </div>"
 `;
 
 exports[`renderToHTML should properly handle context data close-by providers should not interfere with each other 1`] = `
 "<html>
   <body>
-        <p>
-bar
-        </p>
-        <p>
-baz
-        </p>
-        <p>
-qux
-        </p>
-        <p>
-coorg
-        </p>
-        <p>
-fred
-        </p>
-        <p>
-thud
-        </p>
-      <p>
-foo
-      </p>
+        <p>bar</p>
+        <p>baz</p>
+        <p>qux</p>
+        <p>coorg</p>
+        <p>fred</p>
+        <p>thud</p>
+      <p>foo</p>
   </body>
 </html>"
 `;
@@ -126,8 +76,7 @@ exports[`renderToHTML should properly handle context data correctly handles enca
     <div id=\\"root\\">
         <div class=\\"template for-magic\\">
           <div>
-              <input type=\\"text\\" name=\\"repeating_magic_dwarf\\">
-              </input>
+              <input type=\\"text\\" name=\\"repeating_magic_dwarf\\"></input>
           </div>
         </div>
     </div>
@@ -146,9 +95,7 @@ exports[`renderToHTML should properly handle context data should correctly drill
                 <div>
                   <div>
                     <div>
-                      <p>
-foo
-                      </p>
+                      <p>foo</p>
                     </div>
                   </div>
                 </div>
@@ -164,24 +111,16 @@ foo
 exports[`renderToHTML should properly handle context data should correctly handle provider pattern 1`] = `
 "<html>
   <head>
-    <meta charset=\\"utf-8\\">
-    </meta>
-    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\">
-    </meta>
-    <title>
-Page Title
-    </title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    </meta>
-    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\">
-    </link>
+    <meta charset=\\"utf-8\\"></meta>
+    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\"></meta>
+    <title>Page Title</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"></meta>
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\"></link>
   </head>
     <body>
       <div class=\\"main-container\\">
         <div>
-          <h1>
-Provided title
-          </h1>
+          <h1>Provided title</h1>
         </div>
       </div>
     </body>
@@ -191,24 +130,15 @@ Provided title
 exports[`renderToHTML should properly handle context data should correctly override existing context data 1`] = `
 "<html>
   <head>
-    <meta charset=\\"utf-8\\">
-    </meta>
-    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\">
-    </meta>
-    <title>
-Page Title
-    </title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    </meta>
-    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\">
-    </link>
+    <meta charset=\\"utf-8\\"></meta>
+    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\"></meta>
+    <title>Page Title</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"></meta>
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\"></link>
   </head>
   <body>
-      <h1>
-This title was overridden
-      </h1>
-      <input placeholder=\\"write here\\">
-      </input>
+      <h1>This title was overridden</h1>
+      <input placeholder=\\"write here\\"></input>
   </body>
 </html>"
 `;
@@ -216,24 +146,16 @@ This title was overridden
 exports[`renderToHTML should properly handle context data should correctly render jsx with context data 1`] = `
 "<html>
   <head>
-    <meta charset=\\"utf-8\\">
-    </meta>
-    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\">
-    </meta>
-    <title>
-Page Title
-    </title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    </meta>
-    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\">
-    </link>
+    <meta charset=\\"utf-8\\"></meta>
+    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\"></meta>
+    <title>Page Title</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"></meta>
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\"></link>
   </head>
   <body>
     <div class=\\"main-container\\">
       <div>
-        <h1>
-This title is set via the context
-        </h1>
+        <h1>This title is set via the context</h1>
       </div>
     </div>
   </body>
@@ -243,29 +165,18 @@ This title is set via the context
 exports[`renderToHTML should properly handle context data should correctly render jsx with context data and arrays in between elements 1`] = `
 "<html>
   <head>
-    <meta charset=\\"utf-8\\">
-    </meta>
-    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\">
-    </meta>
-    <title>
-Page Title
-    </title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    </meta>
-    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\">
-    </link>
+    <meta charset=\\"utf-8\\"></meta>
+    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\"></meta>
+    <title>Page Title</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"></meta>
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\"></link>
   </head>
   <body>
       <div>
-        <h1>
-This title is set via the context
-        </h1>
+        <h1>This title is set via the context</h1>
       </div>
-      <input placeholder=\\"write here\\">
-      </input>
-      <button>
-Submit
-      </button>
+      <input placeholder=\\"write here\\"></input>
+      <button>Submit</button>
   </body>
 </html>"
 `;
@@ -273,29 +184,18 @@ Submit
 exports[`renderToHTML should properly handle context data should correctly render jsx with context data and async components 1`] = `
 "<html>
   <head>
-    <meta charset=\\"utf-8\\">
-    </meta>
-    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\">
-    </meta>
-    <title>
-Page Title
-    </title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-    </meta>
-    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\">
-    </link>
+    <meta charset=\\"utf-8\\"></meta>
+    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\"></meta>
+    <title>Page Title</title>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"></meta>
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\"></link>
   </head>
   <body>
       <div>
-        <h1>
-This title is set via the context
-        </h1>
+        <h1>This title is set via the context</h1>
       </div>
-      <input placeholder=\\"write here\\">
-      </input>
-      <button>
-Submit
-      </button>
+      <input placeholder=\\"write here\\"></input>
+      <button>Submit</button>
   </body>
 </html>"
 `;

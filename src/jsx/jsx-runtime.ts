@@ -37,20 +37,26 @@ export const createElement = (
         text: (props.children as number).toString(),
       };
     } else if (Array.isArray(props.children)) {
-      props.children = props.children.map((child): JSX.Element => {
-        if (
-          typeof child === "boolean" ||
-          child === null ||
-          child === undefined
-        ) {
-          return { type: "tag", tag: Fragment, props: {} };
-        } else if (typeof child === "string") {
-          return { type: "textNode", text: child };
-        } else if (typeof child === "number") {
-          return { type: "textNode", text: (child as number).toString() };
-        }
-        return child as JSX.Element;
-      });
+      props.children = props.children.reduce(
+        (cl: JSX.Element[], child): JSX.Element[] => {
+          if (
+            typeof child === "boolean" ||
+            child === null ||
+            child === undefined
+          ) {
+            return cl;
+          } else if (typeof child === "string") {
+            cl.push({ type: "textNode", text: child });
+            return cl;
+          } else if (typeof child === "number") {
+            cl.push({ type: "textNode", text: (child as number).toString() });
+            return cl;
+          }
+          cl.push(child as JSX.Element);
+          return cl;
+        },
+        []
+      );
     } else if (
       typeof props.children === "boolean" ||
       props.children === null ||
