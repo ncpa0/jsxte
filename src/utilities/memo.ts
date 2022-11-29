@@ -35,11 +35,17 @@ export const memo = <P extends object & { children?: any }>(
      * render this component. Default: `false`.
      */
     renderAsynchronously?: boolean;
+    /** Maximum number of cached entries to keep in memory. Default: 10. */
+    maxCacheEntries?: number;
   }
 ) => {
-  const { maxCacheAge, renderAsynchronously = false } = options ?? {};
+  const {
+    maxCacheAge,
+    maxCacheEntries,
+    renderAsynchronously = false,
+  } = options ?? {};
 
-  const cache = new Cache<JSXTE.TextNodeElement>(maxCacheAge);
+  const cache = new Cache<JSXTE.TextNodeElement>(maxCacheAge, maxCacheEntries);
 
   if (renderAsynchronously) {
     const MemoComponentAsync = async (

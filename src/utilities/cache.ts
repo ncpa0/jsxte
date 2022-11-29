@@ -1,13 +1,9 @@
 class CacheEntry<T> {
   createdAt: number = Date.now();
-  props: [string, any][];
+  props: Map<string, any>;
 
-  constructor(
-    props: object,
-    public value: T,
-    private maxAge: number = 15 * 60 * 1000
-  ) {
-    this.props = Array.from(Object.entries(props));
+  constructor(props: object, public value: T, private maxAge: number) {
+    this.props = new Map(Object.entries(props));
   }
 
   isExpired(now: number): boolean {
@@ -15,10 +11,11 @@ class CacheEntry<T> {
   }
 
   compareProps(propEntries: [string, any][]): boolean {
-    if (propEntries.length !== this.props.length) return false;
+    if (propEntries.length !== this.props.size) return false;
 
-    for (const [key, value] of propEntries) {
-      const cachedPropValue = this.props.find(([k]) => k === key);
+    for (let i = 0; i < propEntries.length; i++) {
+      const [key, value] = propEntries[i]!;
+      const cachedPropValue = this.props.get(key);
       if (cachedPropValue !== value) return false;
     }
 
@@ -32,9 +29,22 @@ export class Cache<T> {
 
   private entries: CacheEntry<T>[] = [];
 
-  constructor(private maxAge?: number) {}
+  constructor(
+    private readonly maxAge: number = 15 * 60 * 1000,
+    private readonly maxEntries: number = 10
+  ) {
+    if (maxEntries < 1) {
+      throw new Error("Cache maxEntries must be greater than 0");
+    }
+  }
 
-  invalidateExpired() {
+  private enforceEntryLimit() {
+    while (this.entries.length > this.maxEntries) {
+      this.entries.shift();
+    }
+  }
+
+  private invalidateExpired() {
     const now = Date.now();
     this.entries = this.entries.filter((entry) => !entry.isExpired(now));
   }
@@ -42,9 +52,7 @@ export class Cache<T> {
   get(props: object): T | undefined {
     if (Date.now() - this.lastInvalidate > this.invalidationInterval) {
       this.lastInvalidate = Date.now();
-      setTimeout(() => {
-        this.invalidateExpired();
-      }, 0);
+      setTimeout(() => this.invalidateExpired(), 0);
     }
 
     const propsEntries = Array.from(Object.entries(props));
@@ -61,5 +69,6 @@ export class Cache<T> {
 
   set(props: object, value: T) {
     this.entries.push(new CacheEntry(props, value, this.maxAge));
+    setTimeout(() => this.enforceEntryLimit(), 0);
   }
 }
