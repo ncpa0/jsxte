@@ -2641,9 +2641,9 @@ node-int64@^0.4.0:
   integrity sha1-h6kGXNs1XTGC2PlM4RGIuCXGijs=
 
 node-os-walk@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/node-os-walk/-/node-os-walk-1.0.0.tgz#fd9d3ef214f615060fa1b0439361359321e804a1"
-  integrity sha512-fnviFGVjwLVw3+4QK/iZwVXskwdsg8Bauw2NDyeHTn/g7FJh0XecBoVCZtDbuFB5ZYBs43UiX55MujFneu1giQ==
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/node-os-walk/-/node-os-walk-1.0.2.tgz#82011408577437856451398f14cfe7fd0982902f"
+  integrity sha512-aJOH1sKNP2vdYZwLyaSqPouM5Bg5YnNd0t/8cdLz2mjxDGxZyqFpa7vTsbhfjUdJM3ZBwiLPwu84kl2tET8T+Q==
 
 node-releases@^2.0.3:
   version "2.0.4"
