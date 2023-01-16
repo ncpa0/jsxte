@@ -1714,8 +1714,8 @@ get-stream@^6.0.0:
 
 git-hook-tasks@ncpa0cpl/git-hook-tasks:
   version "1.0.0"
-  uid "37e5f9723a3c6d38b555bbb81ad493cd08df68aa"
-  resolved "https://codeload.github.com/ncpa0cpl/git-hook-tasks/tar.gz/37e5f9723a3c6d38b555bbb81ad493cd08df68aa"
+  uid "475046a2550d299c6e807dad502a83dbbc25a0d6"
+  resolved "https://codeload.github.com/ncpa0cpl/git-hook-tasks/tar.gz/475046a2550d299c6e807dad502a83dbbc25a0d6"
   dependencies:
     async-await-queue "^1.2.1"
     chalk "^4.0.0"
