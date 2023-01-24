@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+set -o verbose
+set -o xtrace
+set -o errexit
+
 issemver=$(./scripts/check-semver.sh -t "$TAG_NAME")
 currenttag=$(npm pkg get version)
 
