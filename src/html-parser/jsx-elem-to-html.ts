@@ -1,4 +1,5 @@
 import { ContextMap } from "../context-map/context-map";
+import { ErrorBoundary } from "../error-boundary/error-boundary";
 import { pad } from "../utilities/pad";
 import { mapAttributesToHtmlTagString } from "./attribute-to-html-tag-string";
 import { getHTMLStruct } from "./get-html-struct";
@@ -29,6 +30,43 @@ export const jsxElemToHtmlSync = (
   }
 
   if (typeof element.tag !== "string") {
+    if (ErrorBoundary._isErrorBoundary(element.tag)) {
+      const boundary = new element.tag();
+
+      try {
+        const subElem = boundary.render(
+          element.props,
+          contextMap
+        ) as any as JSXTE.SyncElement;
+
+        if (subElem instanceof Promise) {
+          throw new Error(
+            `Encountered an async Component: [${element.tag.name}.render] Asynchronous Component's cannot be parsed by rendertoHTML. If you wante to use asynchronous components use renderToHtmlAsync instead.`
+          );
+        }
+
+        return jsxElemToHtmlSync(subElem, contextMap, {
+          indent,
+          currentIndent: currentIndent,
+          attributeMap,
+        });
+      } catch (e) {
+        const fallbackElem = boundary.onError(e, element.props, contextMap);
+
+        if (fallbackElem instanceof Promise) {
+          throw new Error(
+            `Encountered an async Component: [${element.tag.name}.onError] Asynchronous Component's cannot be parsed by rendertoHTML. If you wante to use asynchronous components use renderToHtmlAsync instead.`
+          );
+        }
+
+        return jsxElemToHtmlSync(fallbackElem, contextMap, {
+          indent,
+          currentIndent: currentIndent,
+          attributeMap,
+        });
+      }
+    }
+
     const subElem = element.tag(
       element.props,
       contextMap
@@ -108,6 +146,35 @@ export const jsxElemToHtmlAsync = async (
   }
 
   if (typeof element.tag !== "string") {
+    if (ErrorBoundary._isErrorBoundary(element.tag)) {
+      const boundary = new element.tag();
+
+      try {
+        const subElem = (await boundary.render(
+          element.props,
+          contextMap
+        )) as any as JSXTE.SyncElement;
+
+        return await jsxElemToHtmlAsync(subElem, contextMap, {
+          indent,
+          currentIndent: currentIndent,
+          attributeMap,
+        });
+      } catch (e) {
+        const fallbackElem = await boundary.onError(
+          e,
+          element.props,
+          contextMap
+        );
+
+        return await jsxElemToHtmlAsync(fallbackElem, contextMap, {
+          indent,
+          currentIndent: currentIndent,
+          attributeMap,
+        });
+      }
+    }
+
     const subElem = (await element.tag(
       element.props,
       contextMap

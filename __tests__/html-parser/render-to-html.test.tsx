@@ -10,6 +10,7 @@ import {
   ContextMap,
   defineContext,
 } from "../../src/context-map/context-map";
+import { ErrorBoundary } from "../../src/error-boundary/error-boundary";
 
 const sleep = (t: number) =>
   new Promise<void>((resolve) => setTimeout(() => resolve(), t));
@@ -235,6 +236,7 @@ describe("renderToHTML", () => {
     expect(renderedStandardDiv).toEqual(renderedDivWithFalse);
     expect(renderedStandardDiv).toEqual(renderedDivWithTrue);
   });
+
   describe("should properly handle context data", () => {
     it("should correctly render jsx with context data", () => {
       const context = defineContext<{ title: string }>();
@@ -793,6 +795,186 @@ describe("renderToHTML", () => {
       };
 
       const html = renderToHtml(<App />);
+
+      expect(html).toMatchSnapshot();
+    });
+  });
+
+  describe("ErrorBoundary", () => {
+    class FallbackBoundary extends ErrorBoundary {
+      render(props: JSXTE.ElementProps, contextMap: ContextMap) {
+        return <>{props.children}</>;
+      }
+
+      onError(
+        error: unknown,
+        originalProps: JSXTE.ElementProps,
+        contextMap: ContextMap
+      ): JSX.Element {
+        return <h1>Oops. Something went wrong.</h1>;
+      }
+    }
+
+    it("should correctly render the tree that's inside an ErrorBoundary", () => {
+      const Header = (props: { title: string }) => {
+        return <h2>{props.title}</h2>;
+      };
+
+      const Button = (props: { label: string; styles?: string }) => {
+        return <button style={props.styles}>{props.label}</button>;
+      };
+
+      const Template = ({ children }: JSXTE.ElementProps) => {
+        return (
+          <html>
+            <head>
+              <meta charset="utf-8" />
+              <meta http-equiv="x-ua-compatible" content="IE=edge" />
+              <title>Page Title</title>
+              <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1"
+              />
+              <link
+                rel="stylesheet"
+                type="text/css"
+                media="screen"
+                href="main.css"
+              />
+            </head>
+            <body>{children}</body>
+          </html>
+        );
+      };
+
+      const Content = () => {
+        return (
+          <>
+            <Header title="Hello World!" />
+            <input value="write here" />
+            <Button label="Submit" />
+          </>
+        );
+      };
+
+      const App = () => {
+        return (
+          <FallbackBoundary>
+            <Template>
+              <div class="main-container">
+                <Content />
+              </div>
+            </Template>
+          </FallbackBoundary>
+        );
+      };
+
+      const structure = <App />;
+
+      const html = renderToHtml(structure);
+
+      expect(html).toMatchSnapshot();
+    });
+
+    it("should render the fallback if the direct child throws an error", () => {
+      const FailingComponent = (): JSX.Element => {
+        throw new Error("I'm failing");
+      };
+
+      const App = () => {
+        return (
+          <html>
+            <body>
+              <FallbackBoundary>
+                <FailingComponent />
+              </FallbackBoundary>
+            </body>
+          </html>
+        );
+      };
+
+      const html = renderToHtml(<App />);
+
+      expect(html).toMatchSnapshot();
+    });
+
+    it("should render the fallback if a nested child throws an error", () => {
+      const FailingComponent = (): JSX.Element => {
+        throw new Error("I'm failing");
+      };
+
+      const Header = () => {
+        return (
+          <header>
+            <h1>Hello</h1>
+            <FailingComponent />
+          </header>
+        );
+      };
+
+      const Body = () => {
+        return (
+          <body>
+            <Header title="Hello World!" />
+          </body>
+        );
+      };
+
+      const App = () => {
+        return (
+          <html>
+            <FallbackBoundary>
+              <Body />
+            </FallbackBoundary>
+          </html>
+        );
+      };
+
+      const html = renderToHtml(<App />);
+
+      expect(html).toMatchSnapshot();
+    });
+
+    it("should render the fallback if a nested async child throws an error", async () => {
+      const FailingComponent = async (): JSX.AsyncElement => {
+        await sleep(10).then(() => {
+          throw new Error("I'm failing");
+        });
+
+        return <></>;
+      };
+
+      const Header = async (): JSX.AsyncElement => {
+        await sleep(10);
+        return (
+          <header>
+            <h1>Hello</h1>
+            <FailingComponent />
+          </header>
+        );
+      };
+
+      const Body = async () => {
+        await sleep(10);
+        return (
+          <body>
+            <Header title="Hello World!" />
+          </body>
+        );
+      };
+
+      const App = async () => {
+        return (
+          <html>
+            <span>Async test:</span>
+            <FallbackBoundary>
+              <Body />
+            </FallbackBoundary>
+          </html>
+        );
+      };
+
+      const html = await renderToHtmlAsync(<App />);
 
       expect(html).toMatchSnapshot();
     });

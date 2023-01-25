@@ -1,5 +1,45 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`renderToHTML ErrorBoundary should correctly render the tree that's inside an ErrorBoundary 1`] = `
+"  <html>
+    <head>
+      <meta charset=\\"utf-8\\"></meta>
+      <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\"></meta>
+      <title>Page Title</title>
+      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"></meta>
+      <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\"></link>
+    </head>
+    <body>
+      <div class=\\"main-container\\">
+          <h2>Hello World!</h2>
+          <input value=\\"write here\\"></input>
+          <button>Submit</button>
+      </div>
+    </body>
+  </html>"
+`;
+
+exports[`renderToHTML ErrorBoundary should render the fallback if a nested async child throws an error 1`] = `
+"<html>
+  <span>Async test:</span>
+  <h1>Oops. Something went wrong.</h1>
+</html>"
+`;
+
+exports[`renderToHTML ErrorBoundary should render the fallback if a nested child throws an error 1`] = `
+"<html>
+  <h1>Oops. Something went wrong.</h1>
+</html>"
+`;
+
+exports[`renderToHTML ErrorBoundary should render the fallback if the direct child throws an error 1`] = `
+"<html>
+  <body>
+    <h1>Oops. Something went wrong.</h1>
+  </body>
+</html>"
+`;
+
 exports[`renderToHTML should correctly generate html from component base jsx structure 1`] = `
 "<html>
   <head>

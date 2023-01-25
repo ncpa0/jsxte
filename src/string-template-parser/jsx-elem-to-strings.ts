@@ -1,4 +1,5 @@
 import { ContextMap } from "../context-map/context-map";
+import { ErrorBoundary } from "../error-boundary/error-boundary";
 import { mapAttributeName } from "./map-attribute-name";
 import { resolveElement } from "./resolve-element";
 
@@ -30,6 +31,39 @@ export const jsxElemToTagFuncArgsSync = (
   }
 
   if (typeof element.tag !== "string") {
+    if (ErrorBoundary._isErrorBoundary(element.tag)) {
+      const boundary = new element.tag();
+
+      try {
+        const subElem = boundary.render(
+          element.props,
+          contextMap
+        ) as any as JSXTE.SyncElement;
+
+        if (subElem instanceof Promise) {
+          throw new Error(
+            `Encountered an async Component: [${element.tag.name}.render] Asynchronous Component's cannot be parsed by rendertoHTML. If you wante to use asynchronous components use renderToHtmlAsync instead.`
+          );
+        }
+
+        return jsxElemToTagFuncArgsSync(subElem, attributeMap, contextMap);
+      } catch (e) {
+        const fallbackElem = boundary.onError(
+          e,
+          element.props,
+          contextMap
+        ) as any as JSXTE.SyncElement;
+
+        if (fallbackElem instanceof Promise) {
+          throw new Error(
+            `Encountered an async Component: [${element.tag.name}.onError] Asynchronous Component's cannot be parsed by rendertoHTML. If you wante to use asynchronous components use renderToHtmlAsync instead.`
+          );
+        }
+
+        return jsxElemToTagFuncArgsSync(fallbackElem, attributeMap, contextMap);
+      }
+    }
+
     const subElem = element.tag(
       element.props,
       contextMap

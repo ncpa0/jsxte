@@ -1,4 +1,5 @@
 import type { ContextMap } from "../context-map/context-map";
+import type { ErrorBoundaryElement } from "../error-boundary/error-boundary";
 import type { Rewrap } from "../html-parser/types";
 
 export type AttributeBool = true | false | "true" | "false";
@@ -28,7 +29,8 @@ declare global {
       tag:
         | string
         | ((props: ElementProps, contextMap: ContextMap) => Element)
-        | ((props: ElementProps, contextMap: ContextMap) => Promise<Element>);
+        | ((props: ElementProps, contextMap: ContextMap) => Promise<Element>)
+        | ErrorBoundaryElement;
       props: ElementProps;
     };
 

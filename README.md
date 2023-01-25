@@ -201,6 +201,49 @@ const App: JSXTE.Component = () => {
 };
 ```
 
+## Error Boundaries
+
+Error boundaries are components that catch errors thrown by their children and allow you to display a fallback UI instead of having the rendering outright fail.
+
+Error boundaries work with both synchronous and asynchronous components. But the `onError` handler should never return an asynchronous component.
+
+### Example
+
+```tsx
+import { ErrorBoundary } from "jsxte";
+
+class Boundary extends ErrorBoundary {
+  render(props: JSXTE.ElementProps, context: ContextMap) {
+    return <>{props.children}</>;
+  }
+
+  onError(
+    error: unknown,
+    originalProps: JSXTE.ElementProps,
+    context: ContextMap
+  ) {
+    return <h1>Something went wrong!</h1>;
+  }
+}
+
+const FailingComponent: JSXTE.Component = () => {
+  throw new Error("Something went wrong!");
+};
+
+const html = renderToHtml(
+  <div>
+    <Boundary>
+      <FailingComponent />
+    </Boundary>
+  </div>
+);
+
+// html:
+// <div>
+//   <h1>Something went wrong!</h1>
+// </div>
+```
+
 ## Extending the typings
 
 JSXTE should be able to parse any html attributes you put in, as well as custom web component tags, although you may see type errors if you use anything that is not defined in the library typings. If you wish to use them it is recommended you extend the typings to disable said errors.

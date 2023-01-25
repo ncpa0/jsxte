@@ -4,6 +4,7 @@ export * from "./express/index";
 export * from "./jsx/jsx.types";
 export * from "./jsx/prop-types/index";
 
+export { ErrorBoundary } from "./error-boundary/error-boundary";
 export { defineContext } from "./context-map/context-map";
 export { renderToHtml, renderToHtmlAsync } from "./html-parser/render-to-html";
 export { renderToStringTemplateTag } from "./string-template-parser/render-to-string-template-tag";
