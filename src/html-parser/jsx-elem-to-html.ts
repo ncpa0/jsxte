@@ -31,7 +31,7 @@ export const jsxElemToHtmlSync = (
 
   if (typeof element.tag !== "string") {
     if (ErrorBoundary._isErrorBoundary(element.tag)) {
-      const boundary = new element.tag();
+      const boundary = new element.tag(element.props);
 
       try {
         const subElem = boundary.render(
@@ -147,7 +147,7 @@ export const jsxElemToHtmlAsync = async (
 
   if (typeof element.tag !== "string") {
     if (ErrorBoundary._isErrorBoundary(element.tag)) {
-      const boundary = new element.tag();
+      const boundary = new element.tag(element.props);
 
       try {
         const subElem = (await boundary.render(

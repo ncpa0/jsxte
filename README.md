@@ -210,7 +210,7 @@ Error boundaries work with both synchronous and asynchronous components. But the
 ### Example
 
 ```tsx
-import { ErrorBoundary } from "jsxte";
+import { ErrorBoundary, renderToHtml } from "jsxte";
 
 class Boundary extends ErrorBoundary {
   render(props: JSXTE.ElementProps, context: ContextMap) {
@@ -227,7 +227,7 @@ class Boundary extends ErrorBoundary {
 }
 
 const FailingComponent: JSXTE.Component = () => {
-  throw new Error("Something went wrong!");
+  throw new Error("Unexpected failure!");
 };
 
 const html = renderToHtml(

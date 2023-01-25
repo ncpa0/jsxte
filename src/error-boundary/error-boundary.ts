@@ -1,11 +1,10 @@
 import type { ContextMap } from "../context-map/context-map";
 
-export type ErrorBoundaryElement = new () => Pick<
-  ErrorBoundary,
-  keyof ErrorBoundary
->;
+export type ErrorBoundaryElement<P extends object = {}> = new (
+  props: JSXTE.PropsWithChildren<P>
+) => Pick<ErrorBoundary<P>, keyof ErrorBoundary>;
 
-export abstract class ErrorBoundary {
+export abstract class ErrorBoundary<P extends object = {}> {
   /** @internal */
   static _isErrorBoundary(o: any): o is ErrorBoundaryElement {
     const canBeClass = typeof o === "function";
@@ -19,16 +18,16 @@ export abstract class ErrorBoundary {
 
   private static _baseName = "ErrorBoundary";
 
-  constructor() {}
+  constructor(props: JSXTE.PropsWithChildren<P>) {}
 
   abstract render(
-    props: JSXTE.ElementProps,
+    props: JSXTE.PropsWithChildren<P>,
     contextMap: ContextMap
   ): JSX.Element | Promise<JSX.Element>;
 
   abstract onError(
     error: unknown,
-    originalProps: JSXTE.ElementProps,
+    originalProps: JSXTE.PropsWithChildren<P>,
     contextMap: ContextMap
   ): JSX.Element;
 }
