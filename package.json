@@ -18,7 +18,7 @@
     "typescript": "^4.9.4"
   },
   "name": "jsxte",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "main": "./dist/legacy/index.js",
   "types": "./dist/types/index.d.ts",
   "exports": {
