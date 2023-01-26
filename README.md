@@ -4,6 +4,22 @@
 
 A JSX based html templating engine for browsers or Node environments.
 
+1. [Getting started](#getting-started)
+   1. [Installation](#installation)
+   2. [Building](#building)
+2. [Asynchronous Components](#asynchronous-components)
+3. [Context](#context)
+   1. [Example](#example)
+   2. [Provider/Consumer Pattern](#providerconsumer-pattern)
+4. [Error Boundaries](#error-boundaries)
+   1. [Example](#example-1)
+5. [Extending the typings](#extending-the-typings)
+   1. [Adding custom web component tags](#adding-custom-web-component-tags)
+   2. [Adding a global html attribute](#adding-a-global-html-attribute)
+6. [Express JS View Engine](#express-js-view-engine)
+7. [Rendering to a string tag template](#rendering-to-a-string-tag-template)
+   1. [Example](#example-2)
+
 ## Getting started
 
 ### Installation
