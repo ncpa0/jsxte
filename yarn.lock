@@ -677,9 +677,9 @@
     uuid "^9.0.0"
 
 "@ncpa0cpl/nodepack@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@ncpa0cpl/nodepack/-/nodepack-2.0.2.tgz#9087859fced825f2bee18190b4df0f2c6cad6707"
-  integrity sha512-kObbyaSMOHpTIMDllbT3V2wbx1YGrnnkKBUBMJ28ItUH95PmjfDjWCq+jUnOLs2H0fRWCzV3QiDMFntEGxmumw==
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@ncpa0cpl/nodepack/-/nodepack-2.0.3.tgz#33e183a95f97bf1ac990c20027502f129a623c32"
+  integrity sha512-G+czl8DphT6/gZhdYCwH9hrl45xCcq1nCzMUQidcq695v6k3iEwPAh7iVKnyVGLMARQAPQnS/Q/J6znCq7GglA==
   dependencies:
     "@ncpa0cpl/node-worker-bridge" "^0.0.3"
     "@ts-morph/bootstrap" "^0.18.0"
@@ -1444,12 +1444,7 @@ diff@^5.0.0:
   resolved "https://registry.yarnpkg.com/diff/-/diff-5.0.0.tgz#7ed6ad76d859d030787ec35855f5b1daf31d852b"
   integrity sha512-/VTCrvm5Z0JGty/BWHljh+BAiw3IK+2j87NGMu8Nwc/f48WoDAC395uomO9ZD117ZOBaHmkX1oyLvkVM/aIT3w==
 
-dilswer@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/dilswer/-/dilswer-1.2.0.tgz#5d6f2e1c9e2f68ae01f7236aaf3dea0d503da7e4"
-  integrity sha512-D3lczlJDSccxU3EZCP0xwQI8xM7TDIqQzkZ0oN74dbIPHL1JIQ6rHjpGgPbCzD6jyXVMKdCijRTompku1T63mg==
-
-dilswer@^1.5.0:
+dilswer@^1.2.0, dilswer@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/dilswer/-/dilswer-1.5.0.tgz#b95922da65ffef276624ad29f980b8920a78b5ce"
   integrity sha512-J53vAsWMg1Yh469v+pSIMYEyaAefzFTcqoos8MIA59l0qD9US0Qfw7egpt4NkScNJuD8vLogToluh942aRhHNg==
