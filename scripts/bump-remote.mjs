@@ -1,5 +1,5 @@
+import axios from "axios";
 import crypto from "crypto";
-import fetch from "node-fetch";
 
 const getRandomString = (length) => {
   return crypto.randomBytes(Math.ceil(length / 2)).toString("hex");
@@ -45,16 +45,16 @@ async function main() {
         authToken: accessToken,
         repositoryOwner: "ncpa0",
         repositoryName: "jsxte",
-        branchName: "master",
+        branch: "master",
+        version,
         irrelevantGibberish: getRandomString(
           Math.round(Math.random() * 28) + 4
         ),
       })
     );
 
-    await fetch(`${apiUrl}/bump-version`, {
-      method: "POST",
-      body: JSON.stringify(data),
+    await axios.post(`/bump-version`, data, {
+      baseURL: apiUrl,
     });
   } catch (err) {
     console.error(err);
