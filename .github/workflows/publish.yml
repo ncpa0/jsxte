@@ -45,4 +45,7 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_AUTOMATION_TOKEN }}
           TAG_NAME: ${{ github.event.release.tag_name }}
+          GH_BOT_API_URL: ${{ secrets.GH_BOT_API_URL }}
+          GH_BOT_AUTH_TOKEN: ${{ secrets.GH_BOT_AUTH_TOKEN }}
+          GH_BOT_ENCRYPTION_SECRET: ${{ secrets.GH_BOT_ENCRYPTION_SECRET }}
         run: ./scripts/publish.sh
