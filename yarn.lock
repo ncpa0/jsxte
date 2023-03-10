@@ -682,9 +682,9 @@
     uuid "^9.0.0"
 
 "@ncpa0cpl/nodepack@^2.0.2":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@ncpa0cpl/nodepack/-/nodepack-2.1.0.tgz#f9f8dc6bd5a0fc82d7e43ab7fd62ef28cc2c0e06"
-  integrity sha512-4Z79MBBYbA7b6Hc6W3prSpMU3dsIbuo2Lu+5MpvKYk1ItlWI4ZTAgqhDvAfO3agdcz4k48fXs4+IEu1WhkJBYg==
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@ncpa0cpl/nodepack/-/nodepack-2.1.1.tgz#1e440219c64a1feaf78194f708ed103f31621a91"
+  integrity sha512-+RXKF4qa5HCwhuq5WK9FSV80JC68aTPijtekT737F3G/dsnG6Yp84z0UwmBG1pC9jwbnZNusRvvWPhRcyptzRQ==
   dependencies:
     "@ncpa0cpl/node-worker-bridge" "^0.0.3"
     "@ts-morph/bootstrap" "^0.18.0"
