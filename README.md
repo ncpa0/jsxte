@@ -7,17 +7,18 @@ A JSX based html templating engine for browsers or Node environments.
 1. [Getting started](#getting-started)
    1. [Installation](#installation)
    2. [Building](#building)
-2. [Asynchronous Components](#asynchronous-components)
-3. [Context](#context)
+2. [Examples](#examples)
+3. [Asynchronous Components](#asynchronous-components)
+4. [Context](#context)
    1. [Example](#example)
    2. [Provider/Consumer Pattern](#providerconsumer-pattern)
-4. [Error Boundaries](#error-boundaries)
+5. [Error Boundaries](#error-boundaries)
    1. [Example](#example-1)
-5. [Extending the typings](#extending-the-typings)
+6. [Extending the typings](#extending-the-typings)
    1. [Adding custom web component tags](#adding-custom-web-component-tags)
    2. [Adding a global html attribute](#adding-a-global-html-attribute)
-6. [Express JS View Engine](#express-js-view-engine)
-7. [Rendering to a string tag template](#rendering-to-a-string-tag-template)
+7. [Express JS View Engine](#express-js-view-engine)
+8. [Rendering to a string tag template](#rendering-to-a-string-tag-template)
    1. [Example](#example-2)
 
 ## Getting started
@@ -79,6 +80,13 @@ const html = renderToHtml(<App label="Hello World!" />);
 // OR
 const html = renderToHtml(jsx(App, { label: "Hello World!" }));
 ```
+
+## Examples
+
+Check out these example repositories:
+
+- [(Express + TypeScript) TODO App](https://github.com/ncpa0/jsxte-with-typescript-example)
+- [(Express + Babel) TODO App](https://github.com/ncpa0/jsxte-with-babel-example)
 
 ## Asynchronous Components
 
