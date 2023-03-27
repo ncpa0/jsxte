@@ -694,13 +694,13 @@
     uuid "^9.0.0"
 
 "@ncpa0cpl/nodepack@^2.0.2":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@ncpa0cpl/nodepack/-/nodepack-2.1.1.tgz#1e440219c64a1feaf78194f708ed103f31621a91"
-  integrity sha512-+RXKF4qa5HCwhuq5WK9FSV80JC68aTPijtekT737F3G/dsnG6Yp84z0UwmBG1pC9jwbnZNusRvvWPhRcyptzRQ==
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@ncpa0cpl/nodepack/-/nodepack-2.1.2.tgz#09cb22e54102a5a21197abc7a743a0f27eab3627"
+  integrity sha512-Hhs4RfX/d1JkLwaSDkT6porJb32lYPxwH6CpXaxAlrpuXFNZkmfu4iZ2Q7VAMsdQSFbvY2aMHi7luazIYAJZSQ==
   dependencies:
     "@ncpa0cpl/node-worker-bridge" "^0.0.3"
     "@ts-morph/bootstrap" "^0.18.0"
-    dilswer "^1.5.0"
+    dilswer "2.0.2"
     node-os-walk ">=1.0.2"
     pretty-error "^4.0.0"
   optionalDependencies:
@@ -1493,7 +1493,14 @@ diff@^5.0.0:
   resolved "https://registry.yarnpkg.com/diff/-/diff-5.0.0.tgz#7ed6ad76d859d030787ec35855f5b1daf31d852b"
   integrity sha512-/VTCrvm5Z0JGty/BWHljh+BAiw3IK+2j87NGMu8Nwc/f48WoDAC395uomO9ZD117ZOBaHmkX1oyLvkVM/aIT3w==
 
-dilswer@^1.2.0, dilswer@^1.5.0:
+dilswer@2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/dilswer/-/dilswer-2.0.2.tgz#c9b22e1f3e11eb69cbc446510e91fc959b24934e"
+  integrity sha512-Sv4GdHhkvtwrND1Gc2VJMeBRqmSQea05XxRmJubOpKBk8E8V/8tRNCJSCsV4O6EVThovSjYivqYuD6cwhABktw==
+  dependencies:
+    "@types/json-schema" "^7.0.11"
+
+dilswer@^1.2.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/dilswer/-/dilswer-1.5.0.tgz#b95922da65ffef276624ad29f980b8920a78b5ce"
   integrity sha512-J53vAsWMg1Yh469v+pSIMYEyaAefzFTcqoos8MIA59l0qD9US0Qfw7egpt4NkScNJuD8vLogToluh942aRhHNg==
