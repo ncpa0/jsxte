@@ -694,12 +694,12 @@
     uuid "^9.0.0"
 
 "@ncpa0cpl/nodepack@^2.0.2":
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/@ncpa0cpl/nodepack/-/nodepack-2.1.2.tgz#09cb22e54102a5a21197abc7a743a0f27eab3627"
-  integrity sha512-Hhs4RfX/d1JkLwaSDkT6porJb32lYPxwH6CpXaxAlrpuXFNZkmfu4iZ2Q7VAMsdQSFbvY2aMHi7luazIYAJZSQ==
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/@ncpa0cpl/nodepack/-/nodepack-2.1.3.tgz#7e834545f3ed65a0a81791579991800e1f87081d"
+  integrity sha512-7daaoZWpPviVyS6k6iRKUNM9cJ6/Ybj34yFiEFlBtfAOLuE1Lp79Fu9S4MVhVp10ms9m8cUf4Q54FlAJVBqLdQ==
   dependencies:
     "@ncpa0cpl/node-worker-bridge" "^0.0.3"
-    "@ts-morph/bootstrap" "^0.18.0"
+    "@ts-morph/bootstrap" "^0.19.0"
     dilswer "2.0.2"
     node-os-walk ">=1.0.2"
     pretty-error "^4.0.0"
@@ -746,21 +746,21 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@ts-morph/bootstrap@^0.18.0":
-  version "0.18.0"
-  resolved "https://registry.yarnpkg.com/@ts-morph/bootstrap/-/bootstrap-0.18.0.tgz#23f886caa87575e48b07c9905ddbd56a33ee33f4"
-  integrity sha512-LmYkdorZT7UonhVuATqj8jFBVz/4ykuFdbrA5szk19OAVxEWaytg7TsngC2waUDLfdc93aJrCF9Gs8Extc1Pfg==
+"@ts-morph/bootstrap@^0.19.0":
+  version "0.19.0"
+  resolved "https://registry.yarnpkg.com/@ts-morph/bootstrap/-/bootstrap-0.19.0.tgz#08aaad018cf0605583b0793018c8e886ad7b76e5"
+  integrity sha512-RTdKpM/DCYpHeu71NAGe3T3x/0VTN+55MQi1wlVeAGwDuevY0i2ibrh46o4nQMJtEtnsyy0dAtec+uLhEbSwNw==
   dependencies:
-    "@ts-morph/common" "~0.18.0"
+    "@ts-morph/common" "~0.19.0"
 
-"@ts-morph/common@~0.18.0":
-  version "0.18.1"
-  resolved "https://registry.yarnpkg.com/@ts-morph/common/-/common-0.18.1.tgz#ca40c3a62c3f9e17142e0af42633ad63efbae0ec"
-  integrity sha512-RVE+zSRICWRsfrkAw5qCAK+4ZH9kwEFv5h0+/YeHTLieWP7F4wWq4JsKFuNWG+fYh/KF+8rAtgdj5zb2mm+DVA==
+"@ts-morph/common@~0.19.0":
+  version "0.19.0"
+  resolved "https://registry.yarnpkg.com/@ts-morph/common/-/common-0.19.0.tgz#927fcd81d1bbc09c89c4a310a84577fb55f3694e"
+  integrity sha512-Unz/WHmd4pGax91rdIKWi51wnVUW11QttMEPpBiBgIewnc9UQIX7UDLxr5vRlqeByXCwhkF6VabSsI0raWcyAQ==
   dependencies:
     fast-glob "^3.2.12"
-    minimatch "^5.1.0"
-    mkdirp "^1.0.4"
+    minimatch "^7.4.3"
+    mkdirp "^2.1.6"
     path-browserify "^1.0.1"
 
 "@types/babel__core@^7.1.14":
@@ -3208,17 +3208,17 @@ minimatch@^3.0.4, minimatch@^3.0.5, minimatch@^3.1.2:
   dependencies:
     brace-expansion "^1.1.7"
 
-minimatch@^5.1.0:
-  version "5.1.6"
-  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-5.1.6.tgz#1cfcb8cf5522ea69952cd2af95ae09477f122a96"
-  integrity sha512-lKwV/1brpG6mBUFHtb7NUmtABCb2WZZmm2wNiOA5hAb8VdCS4B3dtMWyvcoViccwAW/COERjXLt0zP1zXUN26g==
+minimatch@^7.4.3:
+  version "7.4.6"
+  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-7.4.6.tgz#845d6f254d8f4a5e4fd6baf44d5f10c8448365fb"
+  integrity sha512-sBz8G/YjVniEz6lKPNpKxXwazJe4c19fEfV2GDMX6AjFz+MX9uDWIZW8XreVhkFW3fkIdTv/gxWr/Kks5FFAVw==
   dependencies:
     brace-expansion "^2.0.1"
 
-mkdirp@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
-  integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
+mkdirp@^2.1.6:
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-2.1.6.tgz#964fbcb12b2d8c5d6fbc62a963ac95a273e2cc19"
+  integrity sha512-+hEnITedc8LAtIP9u3HJDFIdcLV2vXP33sqLLIzkv1Db1zO/1OxbvYf0Y1OC/S/Qo5dxHXepofhmxL02PsKe+A==
 
 mri@^1.1.0:
   version "1.2.0"
