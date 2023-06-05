@@ -694,13 +694,14 @@
     uuid "^9.0.0"
 
 "@ncpa0cpl/nodepack@^2.0.2":
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/@ncpa0cpl/nodepack/-/nodepack-2.1.3.tgz#7e834545f3ed65a0a81791579991800e1f87081d"
-  integrity sha512-7daaoZWpPviVyS6k6iRKUNM9cJ6/Ybj34yFiEFlBtfAOLuE1Lp79Fu9S4MVhVp10ms9m8cUf4Q54FlAJVBqLdQ==
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@ncpa0cpl/nodepack/-/nodepack-2.2.0.tgz#f8205f19837980eaab0fc9d8370757184e7bb9cf"
+  integrity sha512-1/G/TDVyLyNC74XAg6dxedw9pfmQJ/RsM6k+Mlhr4UHRUZhTRgZUEW/970OKKysWRyPmf4Np0BBSZ4NXXcaX1Q==
   dependencies:
     "@ncpa0cpl/node-worker-bridge" "^0.0.3"
     "@ts-morph/bootstrap" "^0.19.0"
-    dilswer "2.0.2"
+    dilswer "2.1.1"
+    lodash.mergewith "^4.6.2"
     node-os-walk ">=1.0.2"
     pretty-error "^4.0.0"
   optionalDependencies:
@@ -841,6 +842,11 @@
   version "7.0.11"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.11.tgz#d421b6c527a3037f7c84433fd2c4229e016863d3"
   integrity sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==
+
+"@types/json-schema@^7.0.12":
+  version "7.0.12"
+  resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.12.tgz#d70faba7039d5fca54c83c7dbab41051d2b6f6cb"
+  integrity sha512-Hr5Jfhc9eYOQNPYO5WLDq/n4jqijdHNlDXjuAQkkt+mWdQR+XJToOHrsD4cPaMXpn6KO7y2+wM8AZEs8VpBLVA==
 
 "@types/mdast@^3.0.0":
   version "3.0.10"
@@ -1493,12 +1499,12 @@ diff@^5.0.0:
   resolved "https://registry.yarnpkg.com/diff/-/diff-5.0.0.tgz#7ed6ad76d859d030787ec35855f5b1daf31d852b"
   integrity sha512-/VTCrvm5Z0JGty/BWHljh+BAiw3IK+2j87NGMu8Nwc/f48WoDAC395uomO9ZD117ZOBaHmkX1oyLvkVM/aIT3w==
 
-dilswer@2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/dilswer/-/dilswer-2.0.2.tgz#c9b22e1f3e11eb69cbc446510e91fc959b24934e"
-  integrity sha512-Sv4GdHhkvtwrND1Gc2VJMeBRqmSQea05XxRmJubOpKBk8E8V/8tRNCJSCsV4O6EVThovSjYivqYuD6cwhABktw==
+dilswer@2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/dilswer/-/dilswer-2.1.1.tgz#82a10b128c3f98b89961b1da04b23e4b91b57bd7"
+  integrity sha512-GTpSyWGniwk19hh1JKrVFsENqFqZv4Ga59JxJW5ZvGHMBLcvcGAj4YPzh2gyiz4CLDPBDXyYF9b+xxVW1Md4RA==
   dependencies:
-    "@types/json-schema" "^7.0.11"
+    "@types/json-schema" "^7.0.12"
 
 dilswer@^1.2.0:
   version "1.5.0"
@@ -2944,6 +2950,11 @@ lodash.merge@^4.6.2:
   version "4.6.2"
   resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.2.tgz#558aa53b43b661e1925a0afdfa36a9a1085fe57a"
   integrity sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
+
+lodash.mergewith@^4.6.2:
+  version "4.6.2"
+  resolved "https://registry.yarnpkg.com/lodash.mergewith/-/lodash.mergewith-4.6.2.tgz#617121f89ac55f59047c7aec1ccd6654c6590f55"
+  integrity sha512-GK3g5RPZWTRSeLSpgP8Xhra+pnjBC56q9FZYe1d5RN3TJ35dbkGy3YqBSMbyCrlbi+CM9Z3Jk5yTL7RCsqboyQ==
 
 lodash@^4.17.20, lodash@^4.17.21:
   version "4.17.21"
