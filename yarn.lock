@@ -699,12 +699,12 @@
     uuid "^9.0.0"
 
 "@ncpa0cpl/nodepack@^2.0.2":
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/@ncpa0cpl/nodepack/-/nodepack-2.2.1.tgz#fa529d3827fdb0b23e83e917f524443a79c1c10b"
-  integrity sha512-CiwI077krqaqPaDsp77R0hP9dGfW7U+iZgnOOdm1kA6rbNkZMDzX562f4FmKYhfiEBiS/oPtET6fMppQxT5Nog==
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/@ncpa0cpl/nodepack/-/nodepack-2.2.2.tgz#1e518023f1b8c967d4f8905bbe768402ebab804c"
+  integrity sha512-HGQyoksTzrSHBoiniJajNtTG84vOLInJw7YLTAyvx47phntEQ9oComq8K1j5OtFQsVfOG6EVkjN7OT5xUosYvw==
   dependencies:
     "@ncpa0cpl/node-worker-bridge" "^0.0.3"
-    "@ts-morph/bootstrap" "^0.19.0"
+    "@ts-morph/bootstrap" "^0.20.0"
     dilswer "2.1.1"
     lodash.mergewith "^4.6.2"
     node-os-walk ">=1.0.2"
@@ -752,17 +752,17 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@ts-morph/bootstrap@^0.19.0":
-  version "0.19.0"
-  resolved "https://registry.yarnpkg.com/@ts-morph/bootstrap/-/bootstrap-0.19.0.tgz#08aaad018cf0605583b0793018c8e886ad7b76e5"
-  integrity sha512-RTdKpM/DCYpHeu71NAGe3T3x/0VTN+55MQi1wlVeAGwDuevY0i2ibrh46o4nQMJtEtnsyy0dAtec+uLhEbSwNw==
+"@ts-morph/bootstrap@^0.20.0":
+  version "0.20.0"
+  resolved "https://registry.yarnpkg.com/@ts-morph/bootstrap/-/bootstrap-0.20.0.tgz#fcb0774be54bf8b02a15d3ca98a01f3acb1d8629"
+  integrity sha512-F7MfQ5Gt1dCVaGU+AbEzoLbG2sIXHVXPTRO5wzBfBw1loeSLJ0dWI0Ns97NTX2w7RTKHDRP2VrTvMjaQZsLA1g==
   dependencies:
-    "@ts-morph/common" "~0.19.0"
+    "@ts-morph/common" "~0.20.0"
 
-"@ts-morph/common@~0.19.0":
-  version "0.19.0"
-  resolved "https://registry.yarnpkg.com/@ts-morph/common/-/common-0.19.0.tgz#927fcd81d1bbc09c89c4a310a84577fb55f3694e"
-  integrity sha512-Unz/WHmd4pGax91rdIKWi51wnVUW11QttMEPpBiBgIewnc9UQIX7UDLxr5vRlqeByXCwhkF6VabSsI0raWcyAQ==
+"@ts-morph/common@~0.20.0":
+  version "0.20.0"
+  resolved "https://registry.yarnpkg.com/@ts-morph/common/-/common-0.20.0.tgz#3f161996b085ba4519731e4d24c35f6cba5b80af"
+  integrity sha512-7uKjByfbPpwuzkstL3L5MQyuXPSKdoNG93Fmi2JoDcTf3pEP731JdRFAduRVkOs8oqxPsXKA+ScrWkdQ8t/I+Q==
   dependencies:
     fast-glob "^3.2.12"
     minimatch "^7.4.3"
