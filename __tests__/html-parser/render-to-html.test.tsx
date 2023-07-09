@@ -798,6 +798,50 @@ describe("renderToHTML", () => {
 
       expect(html).toMatchSnapshot();
     });
+
+    it("Provider and Consumer", () => {
+      const MagicalContext = defineContext<string>();
+
+      const Foo: JSXTE.Component<{ id: string }> = (props, { ctx }) => {
+        const value = ctx.get(MagicalContext) ?? "no value";
+        return (
+          <div id={props.id} class="foo">
+            {value}
+          </div>
+        );
+      };
+
+      const App = () => {
+        return (
+          <html>
+            <body>
+              <div id="root">
+                <Foo id={"1"} />
+                <MagicalContext.Consumer
+                  render={(v) => <span id="span-1">{v ?? "no value"}</span>}
+                />
+                <MagicalContext.Provider value="FOO">
+                  <Foo id={"2"} />
+                  <MagicalContext.Consumer
+                    render={(v) => <span id="span-2">{v}</span>}
+                  />
+                  <MagicalContext.Provider value="BAR">
+                    <Foo id={"3"} />
+                    <MagicalContext.Consumer
+                      render={(v) => <span id="span-3">{v}</span>}
+                    />
+                  </MagicalContext.Provider>
+                </MagicalContext.Provider>
+              </div>
+            </body>
+          </html>
+        );
+      };
+
+      const html = renderToHtml(<App />);
+
+      expect(html).toMatchSnapshot();
+    });
   });
 
   describe("ErrorBoundary", () => {

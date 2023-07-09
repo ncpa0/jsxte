@@ -3,6 +3,7 @@ import {
   jsxElemToHtmlSync,
   type RendererInternalOptions,
 } from "../html-parser/jsx-elem-to-html";
+import { jsx } from "../jsx-runtime";
 
 export class ContextAccessor {
   public static clone(original: ContextAccessor): ContextAccessor {
@@ -146,6 +147,26 @@ export class ComponentApi {
 
 export class ContextDefinition<T> {
   id = Symbol();
+
+  Provider = (
+    props: JSXTE.PropsWithChildren<{
+      value: T;
+    }>,
+    componentApi: ComponentApi
+  ) => {
+    componentApi.ctx.set(this, props.value);
+    return jsx("", { children: props.children });
+  };
+
+  Consumer = (
+    props: JSXTE.PropsWithChildren<{
+      render: (value?: T) => JSX.Element;
+    }>,
+    componentApi: ComponentApi
+  ) => {
+    const value = componentApi.ctx.get(this);
+    return props.render(value);
+  };
 }
 
 export const defineContext = <T = unknown>() => new ContextDefinition<T>();
