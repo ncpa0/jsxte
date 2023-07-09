@@ -20,9 +20,11 @@ const concatToLastStringOrPush = (a: TagFunctionArgs, s?: string) => {
 export const jsxElemToTagFuncArgsSync = (
   element: JSX.Element,
   attributeMap: Record<string, string>,
-  contextMap: ComponentApi = ComponentApi.create()
+  _componentApi: ComponentApi = ComponentApi.create()
 ): TagFunctionArgs => {
-  contextMap = ComponentApi.clone(contextMap);
+  const componentApi = _componentApi
+    ? ComponentApi.clone(_componentApi)
+    : ComponentApi.create({ attributeMap });
 
   if (!isSyncElem(element)) throw new Error("");
 
@@ -37,7 +39,7 @@ export const jsxElemToTagFuncArgsSync = (
       try {
         const subElem = boundary.render(
           element.props,
-          contextMap
+          componentApi
         ) as any as JSXTE.SyncElement;
 
         if (subElem instanceof Promise) {
@@ -46,12 +48,12 @@ export const jsxElemToTagFuncArgsSync = (
           );
         }
 
-        return jsxElemToTagFuncArgsSync(subElem, attributeMap, contextMap);
+        return jsxElemToTagFuncArgsSync(subElem, attributeMap, componentApi);
       } catch (e) {
         const fallbackElem = boundary.onError(
           e,
           element.props,
-          contextMap
+          componentApi
         ) as any as JSXTE.SyncElement;
 
         if (fallbackElem instanceof Promise) {
@@ -60,13 +62,17 @@ export const jsxElemToTagFuncArgsSync = (
           );
         }
 
-        return jsxElemToTagFuncArgsSync(fallbackElem, attributeMap, contextMap);
+        return jsxElemToTagFuncArgsSync(
+          fallbackElem,
+          attributeMap,
+          componentApi
+        );
       }
     }
 
     const subElem = element.tag(
       element.props,
-      contextMap
+      componentApi
     ) as any as JSXTE.SyncElement;
 
     if (subElem instanceof Promise) {
@@ -75,7 +81,7 @@ export const jsxElemToTagFuncArgsSync = (
       );
     }
 
-    return jsxElemToTagFuncArgsSync(subElem, attributeMap, contextMap);
+    return jsxElemToTagFuncArgsSync(subElem, attributeMap, componentApi);
   } else {
     const { attributes, children } = resolveElement(element);
 
@@ -86,7 +92,7 @@ export const jsxElemToTagFuncArgsSync = (
         const [[first, ...strings], tagParams] = jsxElemToTagFuncArgsSync(
           child,
           attributeMap,
-          contextMap
+          componentApi
         );
 
         concatToLastStringOrPush(results, first);
@@ -125,7 +131,7 @@ export const jsxElemToTagFuncArgsSync = (
         const [[first, ...strings], tagParams] = jsxElemToTagFuncArgsSync(
           child,
           attributeMap,
-          contextMap
+          componentApi
         );
 
         concatToLastStringOrPush(results, first);

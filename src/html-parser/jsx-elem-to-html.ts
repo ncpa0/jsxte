@@ -16,12 +16,12 @@ export type RendererInternalOptions = {
 
 export const jsxElemToHtmlSync = (
   element: JSX.Element,
-  _contextMap?: ComponentApi,
+  _componentApi?: ComponentApi,
   options?: RendererInternalOptions
 ): string => {
   const { attributeMap = {}, currentIndent = 0, indent = 2 } = options ?? {};
-  const contextMap = _contextMap
-    ? ComponentApi.clone(_contextMap)
+  const componentApi = _componentApi
+    ? ComponentApi.clone(_componentApi)
     : ComponentApi.create(options);
 
   if (!isSyncElem(element)) throw new Error("");
@@ -38,7 +38,7 @@ export const jsxElemToHtmlSync = (
       try {
         const subElem = boundary.render(
           element.props,
-          contextMap
+          componentApi
         ) as any as JSXTE.SyncElement;
 
         if (subElem instanceof Promise) {
@@ -47,13 +47,13 @@ export const jsxElemToHtmlSync = (
           );
         }
 
-        return jsxElemToHtmlSync(subElem, contextMap, {
+        return jsxElemToHtmlSync(subElem, componentApi, {
           indent,
           currentIndent: currentIndent,
           attributeMap,
         });
       } catch (e) {
-        const fallbackElem = boundary.onError(e, element.props, contextMap);
+        const fallbackElem = boundary.onError(e, element.props, componentApi);
 
         if (fallbackElem instanceof Promise) {
           throw new Error(
@@ -61,7 +61,7 @@ export const jsxElemToHtmlSync = (
           );
         }
 
-        return jsxElemToHtmlSync(fallbackElem, contextMap, {
+        return jsxElemToHtmlSync(fallbackElem, componentApi, {
           indent,
           currentIndent: currentIndent,
           attributeMap,
@@ -71,7 +71,7 @@ export const jsxElemToHtmlSync = (
 
     const subElem = element.tag(
       element.props,
-      contextMap
+      componentApi
     ) as any as JSXTE.SyncElement;
 
     if (subElem instanceof Promise) {
@@ -80,7 +80,7 @@ export const jsxElemToHtmlSync = (
       );
     }
 
-    return jsxElemToHtmlSync(subElem, contextMap, {
+    return jsxElemToHtmlSync(subElem, componentApi, {
       indent,
       currentIndent: currentIndent,
       attributeMap,
@@ -91,7 +91,7 @@ export const jsxElemToHtmlSync = (
     if (htmlStruct.tag === "") {
       const results: string[] = [];
       for (const child of htmlStruct.children) {
-        const renderedChild = jsxElemToHtmlSync(child, contextMap, {
+        const renderedChild = jsxElemToHtmlSync(child, componentApi, {
           indent,
           currentIndent: currentIndent + indent,
           attributeMap,
@@ -114,7 +114,7 @@ export const jsxElemToHtmlSync = (
       const children: string[] = [];
 
       for (const child of htmlStruct.children) {
-        const renderedChild = jsxElemToHtmlSync(child, contextMap, {
+        const renderedChild = jsxElemToHtmlSync(child, componentApi, {
           indent: inlineTag ? 0 : indent,
           currentIndent: inlineTag ? 0 : currentIndent + indent,
           attributeMap,
@@ -134,12 +134,12 @@ export const jsxElemToHtmlSync = (
 
 export const jsxElemToHtmlAsync = async (
   element: JSX.Element,
-  _contextMap?: ComponentApi,
+  _componentApi?: ComponentApi,
   options?: RendererInternalOptions
 ): Promise<string> => {
   const { attributeMap = {}, currentIndent = 0, indent = 2 } = options ?? {};
-  const contextMap = _contextMap
-    ? ComponentApi.clone(_contextMap)
+  const componentApi = _componentApi
+    ? ComponentApi.clone(_componentApi)
     : ComponentApi.create(options);
 
   if (!isSyncElem(element)) throw new Error("");
@@ -156,10 +156,10 @@ export const jsxElemToHtmlAsync = async (
       try {
         const subElem = (await boundary.render(
           element.props,
-          contextMap
+          componentApi
         )) as any as JSXTE.SyncElement;
 
-        return await jsxElemToHtmlAsync(subElem, contextMap, {
+        return await jsxElemToHtmlAsync(subElem, componentApi, {
           indent,
           currentIndent: currentIndent,
           attributeMap,
@@ -168,10 +168,10 @@ export const jsxElemToHtmlAsync = async (
         const fallbackElem = await boundary.onError(
           e,
           element.props,
-          contextMap
+          componentApi
         );
 
-        return await jsxElemToHtmlAsync(fallbackElem, contextMap, {
+        return await jsxElemToHtmlAsync(fallbackElem, componentApi, {
           indent,
           currentIndent: currentIndent,
           attributeMap,
@@ -181,10 +181,10 @@ export const jsxElemToHtmlAsync = async (
 
     const subElem = (await element.tag(
       element.props,
-      contextMap
+      componentApi
     )) as any as JSXTE.SyncElement;
 
-    return await jsxElemToHtmlAsync(subElem, contextMap, {
+    return await jsxElemToHtmlAsync(subElem, componentApi, {
       indent,
       currentIndent: currentIndent,
       attributeMap,
@@ -195,7 +195,7 @@ export const jsxElemToHtmlAsync = async (
     if (htmlStruct.tag === "") {
       const results: string[] = [];
       for (const child of htmlStruct.children) {
-        const renderedChild = await jsxElemToHtmlAsync(child, contextMap, {
+        const renderedChild = await jsxElemToHtmlAsync(child, componentApi, {
           indent,
           currentIndent: currentIndent + indent,
           attributeMap,
@@ -218,7 +218,7 @@ export const jsxElemToHtmlAsync = async (
       const children: string[] = [];
 
       for (const child of htmlStruct.children) {
-        const renderedChild = await jsxElemToHtmlAsync(child, contextMap, {
+        const renderedChild = await jsxElemToHtmlAsync(child, componentApi, {
           indent: inlineTag ? 0 : indent,
           currentIndent: inlineTag ? 0 : currentIndent + indent,
           attributeMap,
