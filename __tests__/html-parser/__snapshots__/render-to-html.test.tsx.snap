@@ -112,6 +112,21 @@ exports[`renderToHTML should correctly render jsx with arrays in between element
 </div>"
 `;
 
+exports[`renderToHTML should properly handle context data Provider and Consumer 1`] = `
+"<html>
+  <body>
+    <div id=\\"root\\">
+      <div id=\\"1\\" class=\\"foo\\">no value</div>
+      <span id=\\"span-1\\">no value</span>
+        <div id=\\"2\\" class=\\"foo\\">FOO</div>
+        <span id=\\"span-2\\">FOO</span>
+          <div id=\\"3\\" class=\\"foo\\">BAR</div>
+          <span id=\\"span-3\\">BAR</span>
+    </div>
+  </body>
+</html>"
+`;
+
 exports[`renderToHTML should properly handle context data close-by providers should not interfere with each other 1`] = `
 "<html>
   <body>
