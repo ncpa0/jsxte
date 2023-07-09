@@ -154,20 +154,20 @@ import { defineContext } from "jsxte";
 
 const myContext = defineContext<{ label: string }>();
 
-const App: JSXTE.Component = (props, contextMap) => {
+const App: JSXTE.Component = (props, componentApi) => {
   // Set the context to a new value, all descendants of this component will have access to it
-  contextMap.set(myContext, { label: "Hello" });
+  componentApi.ctx.set(myContext, { label: "Hello" });
 
   return <Foo />;
 };
 
-const Foo: JSXTE.Component = (props, contextMap) => {
+const Foo: JSXTE.Component = (props, componentApi) => {
   let label = "";
 
   // Check if `myContext` is being provided by any of the ancestors
-  if (contextMap.has(myContext)) {
+  if (componentApi.ctx.has(myContext)) {
     // Retrieve the context data
-    label = contextMap.get(myContext).label;
+    label = componentApi.ctx.getOrFail(myContext).label;
   }
 
   return <p>{label}</p>;
@@ -184,17 +184,16 @@ const makeContextWithProvider = <T,>() => {
 
   const Provider: JSXTE.Component<{
     value: T;
-  }> = (props, contextMap) => {
-    contextMap.set(ctx, props.value);
+  }> = (props, componentApi) => {
+    componentApi.ctx.set(ctx, props.value);
     return <>{props.children}</>;
   };
 
-  const Consumer = (
-    props: { render: (value?: T) => JSX.Element },
-    contextMap: ContextMap
-  ) => {
-    if (contextMap.has(ctx)) {
-      const value = contextMap.get(ctx);
+  const Consumer: JSXTE.Component<{
+    render: (value?: T) => JSX.Element;
+  }> = (props, componentApi) => {
+    if (componentApi.ctx.has(ctx)) {
+      const value = componentApi.ctx.getOrFail(ctx);
       return <>{props.render(value)}</>;
     } else {
       return <>{props.render()}</>;
@@ -237,14 +236,14 @@ Error boundaries work with both synchronous and asynchronous components. But the
 import { ErrorBoundary, renderToHtml } from "jsxte";
 
 class Boundary extends ErrorBoundary {
-  render(props: JSXTE.ElementProps, context: ContextMap) {
+  render(props: JSXTE.ElementProps, componentApi: ComponentApi) {
     return <>{props.children}</>;
   }
 
   onError(
     error: unknown,
     originalProps: JSXTE.ElementProps,
-    context: ContextMap
+    componentApi: ComponentApi
   ) {
     return <h1>Something went wrong!</h1>;
   }
