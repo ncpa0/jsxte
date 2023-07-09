@@ -1,4 +1,4 @@
-import type { ContextMap } from "../context-map/context-map";
+import type { ComponentApi } from "../component-api/component-api";
 
 export type ErrorBoundaryElement<P extends object = {}> = new (
   props: JSXTE.PropsWithChildren<P>
@@ -22,12 +22,12 @@ export abstract class ErrorBoundary<P extends object = {}> {
 
   abstract render(
     props: JSXTE.PropsWithChildren<P>,
-    contextMap: ContextMap
+    contextMap: ComponentApi
   ): JSX.Element | Promise<JSX.Element>;
 
   abstract onError(
     error: unknown,
     originalProps: JSXTE.PropsWithChildren<P>,
-    contextMap: ContextMap
+    contextMap: ComponentApi
   ): JSX.Element;
 }

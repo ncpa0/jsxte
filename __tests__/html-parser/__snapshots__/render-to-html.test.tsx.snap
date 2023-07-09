@@ -87,6 +87,22 @@ exports[`renderToHTML should correctly parse async components 1`] = `
 </html>"
 `;
 
+exports[`renderToHTML should correctly perform sub renders async render rendered computer can access the context defined on the parent 1`] = `
+"<div class=\\"main\\">
+  <div><div>async foo</div><div>async foo</div><div>async bar</div></div>
+</div>"
+`;
+
+exports[`renderToHTML should correctly perform sub renders async render renders a simple component 1`] = `"<div><div>Hello World!</div></div>"`;
+
+exports[`renderToHTML should correctly perform sub renders sync render rendered computer can access the context defined on the parent 1`] = `
+"<div class=\\"main\\">
+  <div><div>foo</div><div>foo</div><div>bar</div></div>
+</div>"
+`;
+
+exports[`renderToHTML should correctly perform sub renders sync render renders a simple component 1`] = `"<div><div>Hello World!</div></div>"`;
+
 exports[`renderToHTML should correctly render jsx with arrays in between elements 1`] = `
 "<div>
   <h1>Header</h1>

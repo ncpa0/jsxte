@@ -1,4 +1,4 @@
-import { ContextMap } from "../context-map/context-map";
+import { ComponentApi } from "../component-api/component-api";
 import { ErrorBoundary } from "../error-boundary/error-boundary";
 import { pad } from "../utilities/pad";
 import { mapAttributesToHtmlTagString } from "./attribute-to-html-tag-string";
@@ -8,7 +8,7 @@ const isSyncElem = (e: JSX.Element): e is JSXTE.SyncElement => true;
 const isTextNode = (e: JSX.Element): e is JSXTE.TextNodeElement =>
   "type" in e && e.type === "textNode";
 
-type InternalOptions = {
+export type RendererInternalOptions = {
   indent?: number;
   currentIndent?: number;
   attributeMap?: Record<string, string>;
@@ -16,11 +16,13 @@ type InternalOptions = {
 
 export const jsxElemToHtmlSync = (
   element: JSX.Element,
-  contextMap: ContextMap = ContextMap.create(),
-  options?: InternalOptions
+  _contextMap?: ComponentApi,
+  options?: RendererInternalOptions
 ): string => {
   const { attributeMap = {}, currentIndent = 0, indent = 2 } = options ?? {};
-  contextMap = ContextMap.clone(contextMap);
+  const contextMap = _contextMap
+    ? ComponentApi.clone(_contextMap)
+    : ComponentApi.create(options);
 
   if (!isSyncElem(element)) throw new Error("");
 
@@ -132,11 +134,13 @@ export const jsxElemToHtmlSync = (
 
 export const jsxElemToHtmlAsync = async (
   element: JSX.Element,
-  contextMap: ContextMap = ContextMap.create(),
-  options?: InternalOptions
+  _contextMap?: ComponentApi,
+  options?: RendererInternalOptions
 ): Promise<string> => {
   const { attributeMap = {}, currentIndent = 0, indent = 2 } = options ?? {};
-  contextMap = ContextMap.clone(contextMap);
+  const contextMap = _contextMap
+    ? ComponentApi.clone(_contextMap)
+    : ComponentApi.create(options);
 
   if (!isSyncElem(element)) throw new Error("");
 

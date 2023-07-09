@@ -1,13 +1,13 @@
-import type { ContextMap } from "../context-map/context-map";
+import type { ComponentApi } from "../component-api/component-api";
 import { renderToHtml, renderToHtmlAsync } from "../html-parser/render-to-html";
 import { jsx, Fragment } from "../jsx-runtime";
 import { Cache } from "./cache";
 
-const ReplaceMap = <P extends { context: ContextMap }>(
+const ReplaceMap = <P extends { context: ComponentApi }>(
   props: JSXTE.PropsWithChildren<P>,
-  context: ContextMap
+  context: ComponentApi
 ) => {
-  context.replace(props.context);
+  context.ctx.replace(props.context.ctx);
   // @ts-ignore
   return jsx(Fragment, {}, props.children);
 };
@@ -26,7 +26,7 @@ const ReplaceMap = <P extends { context: ContextMap }>(
  * reflect those changes.
  */
 export const memo = <P extends object & { children?: any }>(
-  Component: (props: P, context: ContextMap) => JSX.Element,
+  Component: (props: P, context: ComponentApi) => JSX.Element,
   options?: {
     /** Time in milliseconds. Default: 15 minutes. */
     maxCacheAge?: number;
@@ -35,7 +35,10 @@ export const memo = <P extends object & { children?: any }>(
      * render this component. Default: `false`.
      */
     renderAsynchronously?: boolean;
-    /** Maximum number of cached entries to keep in memory. Default: 10. */
+    /**
+     * Maximum number of cached entries to keep in memory.
+     * Default: 10.
+     */
     maxCacheEntries?: number;
   }
 ) => {
@@ -50,7 +53,7 @@ export const memo = <P extends object & { children?: any }>(
   if (renderAsynchronously) {
     const MemoComponentAsync = async (
       props: P,
-      context: ContextMap
+      context: ComponentApi
     ): Promise<JSXTE.TextNodeElement> => {
       const { children, ...propsNoChildren } = props;
 
@@ -78,7 +81,7 @@ export const memo = <P extends object & { children?: any }>(
 
   const MemoComponent = (
     props: P,
-    context: ContextMap
+    context: ComponentApi
   ): JSXTE.TextNodeElement => {
     const { children, ...propsNoChildren } = props;
 

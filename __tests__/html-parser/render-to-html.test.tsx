@@ -7,9 +7,9 @@ import {
 import { jsx, Fragment } from "../../src/jsx/jsx-runtime";
 import {
   ContextDefinition,
-  ContextMap,
+  ComponentApi,
   defineContext,
-} from "../../src/context-map/context-map";
+} from "../../src/component-api/component-api";
 import { ErrorBoundary } from "../../src/error-boundary/error-boundary";
 
 const sleep = (t: number) =>
@@ -241,9 +241,9 @@ describe("renderToHTML", () => {
     it("should correctly render jsx with context data", () => {
       const context = defineContext<{ title: string }>();
 
-      const Header: JSXTE.Component = (_, contextMap) => {
-        expect(contextMap.has(context)).toBe(true);
-        const { title } = contextMap.get(context);
+      const Header: JSXTE.Component = (_, { ctx }) => {
+        expect(ctx.has(context)).toBe(true);
+        const { title } = ctx.getOrFail(context);
         expect(title).toBe("This title is set via the context");
         return (
           <div>
@@ -260,8 +260,8 @@ describe("renderToHTML", () => {
         );
       };
 
-      const App: JSXTE.Component = (_, contextMap) => {
-        contextMap.set(context, { title: "This title is set via the context" });
+      const App: JSXTE.Component = (_, { ctx }) => {
+        ctx.set(context, { title: "This title is set via the context" });
 
         return (
           <html>
@@ -299,11 +299,11 @@ describe("renderToHTML", () => {
         buttonLabel: string;
       }>();
 
-      const Header: JSXTE.Component = (_, contextMap) => {
-        expect(contextMap.has(context)).toBe(true);
-        const { title } = contextMap.get(context);
+      const Header: JSXTE.Component = (_, { ctx }) => {
+        expect(ctx.has(context)).toBe(true);
+        const { title } = ctx.getOrFail(context);
 
-        contextMap.set(context, {
+        ctx.set(context, {
           title,
           inputPlaceholder:
             "This should not affect the rendered content, since this component has no children that consume this context.",
@@ -318,16 +318,16 @@ describe("renderToHTML", () => {
         );
       };
 
-      const Input: JSXTE.Component = (_, contextMap) => {
-        expect(contextMap.has(context)).toBe(true);
-        const { inputPlaceholder } = contextMap.get(context);
+      const Input: JSXTE.Component = (_, { ctx }) => {
+        expect(ctx.has(context)).toBe(true);
+        const { inputPlaceholder } = ctx.getOrFail(context);
         expect(inputPlaceholder).toBe("write here");
         return <input placeholder={inputPlaceholder} />;
       };
 
-      const Button: JSXTE.Component = (_, contextMap) => {
-        expect(contextMap.has(context)).toBe(true);
-        const { buttonLabel } = contextMap.get(context);
+      const Button: JSXTE.Component = (_, { ctx }) => {
+        expect(ctx.has(context)).toBe(true);
+        const { buttonLabel } = ctx.getOrFail(context);
         expect(buttonLabel).toBe("Submit");
         return <button>{buttonLabel}</button>;
       };
@@ -336,8 +336,8 @@ describe("renderToHTML", () => {
         return <>{[<Header />, <Input />, <Button />]}</>;
       };
 
-      const App: JSXTE.Component = (_, contextMap) => {
-        contextMap.set(context, {
+      const App: JSXTE.Component = (_, { ctx }) => {
+        ctx.set(context, {
           title: "This title is set via the context",
           buttonLabel: "Submit",
           inputPlaceholder: "write here",
@@ -379,11 +379,11 @@ describe("renderToHTML", () => {
         buttonLabel: string;
       }>();
 
-      const Header: JSXTE.Component = async (_, contextMap) => {
-        expect(contextMap.has(context)).toBe(true);
-        const { title } = contextMap.get(context);
+      const Header: JSXTE.Component = async (_, { ctx }) => {
+        expect(ctx.has(context)).toBe(true);
+        const { title } = ctx.getOrFail(context);
 
-        contextMap.set(context, {
+        ctx.set(context, {
           title,
           inputPlaceholder:
             "This should not affect the rendered content, since this component has no children that consume this context.",
@@ -399,17 +399,17 @@ describe("renderToHTML", () => {
         );
       };
 
-      const Input: JSXTE.Component = async (_, contextMap) => {
-        expect(contextMap.has(context)).toBe(true);
-        const { inputPlaceholder } = contextMap.get(context);
+      const Input: JSXTE.Component = async (_, { ctx }) => {
+        expect(ctx.has(context)).toBe(true);
+        const { inputPlaceholder } = ctx.getOrFail(context);
         expect(inputPlaceholder).toBe("write here");
         await sleep(50);
         return <input placeholder={inputPlaceholder} />;
       };
 
-      const Button: JSXTE.Component = async (_, contextMap) => {
-        expect(contextMap.has(context)).toBe(true);
-        const { buttonLabel } = contextMap.get(context);
+      const Button: JSXTE.Component = async (_, { ctx }) => {
+        expect(ctx.has(context)).toBe(true);
+        const { buttonLabel } = ctx.getOrFail(context);
         expect(buttonLabel).toBe("Submit");
         await sleep(50);
         return <button>{buttonLabel}</button>;
@@ -419,8 +419,8 @@ describe("renderToHTML", () => {
         return <>{[<Header />, <Input />, <Button />]}</>;
       };
 
-      const App: JSXTE.Component = async (_, contextMap) => {
-        contextMap.set(context, {
+      const App: JSXTE.Component = async (_, { ctx }) => {
+        ctx.set(context, {
           title: "This title is set via the context",
           buttonLabel: "Submit",
           inputPlaceholder: "write here",
@@ -461,27 +461,27 @@ describe("renderToHTML", () => {
         inputPlaceholder: string;
       }>();
 
-      const Header: JSXTE.Component = async (_, contextMap) => {
-        expect(contextMap.has(context)).toBe(true);
-        const { title } = contextMap.get(context);
+      const Header: JSXTE.Component = async (_, { ctx }) => {
+        expect(ctx.has(context)).toBe(true);
+        const { title } = ctx.getOrFail(context);
         expect(title).toBe("This title was overridden");
         return <h1>{title}</h1>;
       };
 
-      const Input: JSXTE.Component = async (_, contextMap) => {
-        expect(contextMap.has(context)).toBe(true);
-        const { inputPlaceholder } = contextMap.get(context);
+      const Input: JSXTE.Component = async (_, { ctx }) => {
+        expect(ctx.has(context)).toBe(true);
+        const { inputPlaceholder } = ctx.getOrFail(context);
         expect(inputPlaceholder).toBe("write here");
         await sleep(50);
         return <input placeholder={inputPlaceholder} />;
       };
 
-      const Content: JSXTE.Component = (_, contextMap) => {
-        expect(contextMap.has(context)).toBe(true);
-        const { title } = contextMap.get(context);
+      const Content: JSXTE.Component = (_, { ctx }) => {
+        expect(ctx.has(context)).toBe(true);
+        const { title } = ctx.getOrFail(context);
         expect(title).toBe("This title was set in the app component");
 
-        contextMap.update(context, {
+        ctx.update(context, {
           title: "This title was overridden",
         });
 
@@ -493,8 +493,8 @@ describe("renderToHTML", () => {
         );
       };
 
-      const App: JSXTE.Component = async (_, contextMap) => {
-        contextMap.set(context, {
+      const App: JSXTE.Component = async (_, { ctx }) => {
+        ctx.set(context, {
           title: "This title was set in the app component",
           inputPlaceholder: "write here",
         });
@@ -539,15 +539,15 @@ describe("renderToHTML", () => {
           context: ContextDefinition<T>;
           value: T;
         },
-        contextMap: ContextMap
+        { ctx }: ComponentApi
       ) => {
-        contextMap.set(props.context, props.value);
+        ctx.set(props.context, props.value);
         return <>{props.children}</>;
       };
 
-      const Header: JSXTE.Component = (_, contextMap) => {
-        expect(contextMap.has(myContext)).toBe(true);
-        const { title } = contextMap.get(myContext);
+      const Header: JSXTE.Component = (_, { ctx }) => {
+        expect(ctx.has(myContext)).toBe(true);
+        const { title } = ctx.getOrFail(myContext);
         expect(title).toBe("Provided title");
         return (
           <div>
@@ -599,8 +599,8 @@ describe("renderToHTML", () => {
     it("should correctly drill the prop data through multiple components", async () => {
       const store = defineContext<string>();
 
-      const Title: JSXTE.Component = (_, contextMap) => {
-        const title = contextMap.get(store);
+      const Title: JSXTE.Component = (_, { ctx }) => {
+        const title = ctx.get(store);
         return <p>{title}</p>;
       };
 
@@ -610,10 +610,10 @@ describe("renderToHTML", () => {
           value: T;
           sleep?: boolean;
         }>,
-        contextMap: ContextMap
+        { ctx }: ComponentApi
       ) => {
         if (props.sleep) await sleep(Math.random() * 1000);
-        contextMap.set(props.context, props.value);
+        ctx.set(props.context, props.value);
         return <>{props.children}</>;
       };
 
@@ -667,8 +667,8 @@ describe("renderToHTML", () => {
     it("close-by providers should not interfere with each other", async () => {
       const store = defineContext<string>();
 
-      const Title: JSXTE.Component = (_, contextMap) => {
-        const title = contextMap.get(store);
+      const Title: JSXTE.Component = (_, { ctx }) => {
+        const title = ctx.getOrFail(store);
         return <p>{title}</p>;
       };
 
@@ -678,10 +678,10 @@ describe("renderToHTML", () => {
           value: T;
           sleep?: number;
         }>,
-        contextMap: ContextMap
+        { ctx }: ComponentApi
       ) => {
         if (props.sleep) await sleep(props.sleep);
-        contextMap.set(props.context, props.value);
+        ctx.set(props.context, props.value);
         return <>{props.children}</>;
       };
 
@@ -720,25 +720,25 @@ describe("renderToHTML", () => {
 
     it("correctly handles encapsulated providers", () => {
       const makeContextWithProvider = <T,>() => {
-        const ctx = defineContext<T>();
+        const dctx = defineContext<T>();
 
         return {
-          context: ctx,
+          context: dctx,
           Provider: (
             props: JSXTE.PropsWithChildren<{
               value: T;
             }>,
-            contextMap: ContextMap
+            { ctx }: ComponentApi
           ) => {
-            contextMap.set(ctx, props.value);
+            ctx.set(dctx, props.value);
             return <>{props.children}</>;
           },
           Consumer: (
             props: { render: (value?: T) => JSX.Element },
-            contextMap: ContextMap
+            { ctx }: ComponentApi
           ) => {
-            if (contextMap.has(ctx)) {
-              const value = contextMap.get(ctx);
+            if (ctx.has(dctx)) {
+              const value = ctx.get(dctx);
               return <>{props.render(value)}</>;
             } else {
               return <>{props.render()}</>;
@@ -802,14 +802,14 @@ describe("renderToHTML", () => {
 
   describe("ErrorBoundary", () => {
     class FallbackBoundary extends ErrorBoundary {
-      render(props: JSXTE.ElementProps, contextMap: ContextMap) {
+      render(props: JSXTE.ElementProps, contextMap: ComponentApi) {
         return <>{props.children}</>;
       }
 
       onError(
         error: unknown,
         originalProps: JSXTE.ElementProps,
-        contextMap: ContextMap
+        contextMap: ComponentApi
       ): JSX.Element {
         return <h1>Oops. Something went wrong.</h1>;
       }
@@ -977,6 +977,118 @@ describe("renderToHTML", () => {
       const html = await renderToHtmlAsync(<App />);
 
       expect(html).toMatchSnapshot();
+    });
+  });
+
+  describe("should correctly perform sub renders", () => {
+    describe("sync render", () => {
+      it("renders a simple component", () => {
+        const App = (_: {}, componentApi: ComponentApi) => {
+          const content = componentApi.render(<div>Hello World!</div>);
+          return <div>{content}</div>;
+        };
+
+        const html = renderToHtml(<App />);
+
+        expect(html).toMatchSnapshot();
+      });
+
+      it("rendered computer can access the context defined on the parent", () => {
+        const myCtx = defineContext<{ foo: string }>();
+
+        const PrintFoo = (_: {}, componentApi: ComponentApi) => {
+          const foo = componentApi.ctx.getOrFail(myCtx).foo;
+          return <div>{foo}</div>;
+        };
+
+        const Foos = (_: {}, componentApi: ComponentApi) => {
+          const foo1 = componentApi.render(<PrintFoo />);
+          const foo2 = componentApi.render(<PrintFoo />);
+
+          componentApi.ctx.set(myCtx, { foo: "bar" });
+
+          const foo3 = componentApi.render(<PrintFoo />);
+
+          return (
+            <div>
+              {foo1}
+              {foo2}
+              {foo3}
+            </div>
+          );
+        };
+
+        const App = (_: {}, componentApi: ComponentApi) => {
+          componentApi.ctx.set(myCtx, { foo: "foo" });
+          return (
+            <div class="main">
+              <Foos />
+            </div>
+          );
+        };
+
+        const html = renderToHtml(<App />);
+
+        expect(html).toMatchSnapshot();
+      });
+    });
+
+    describe("async render", () => {
+      it("renders a simple component", async () => {
+        const HelloWorld = async () => {
+          await sleep(10);
+          return <div>Hello World!</div>;
+        };
+
+        const App = async (_: {}, componentApi: ComponentApi) => {
+          const content = await componentApi.renderAsync(<HelloWorld />);
+          return <div>{content}</div>;
+        };
+
+        const html = await renderToHtmlAsync(<App />);
+
+        expect(html).toMatchSnapshot();
+      });
+
+      it("rendered computer can access the context defined on the parent", async () => {
+        const myCtx = defineContext<{ foo: string }>();
+
+        const PrintFoo = async (_: {}, componentApi: ComponentApi) => {
+          await sleep(10);
+          const foo = componentApi.ctx.getOrFail(myCtx).foo;
+          return <div>{foo}</div>;
+        };
+
+        const Foos = async (_: {}, componentApi: ComponentApi) => {
+          const foo1 = await componentApi.renderAsync(<PrintFoo />);
+          const foo2 = await componentApi.renderAsync(<PrintFoo />);
+
+          componentApi.ctx.set(myCtx, { foo: "async bar" });
+
+          const foo3 = await componentApi.renderAsync(<PrintFoo />);
+
+          return (
+            <div>
+              {foo1}
+              {foo2}
+              {foo3}
+            </div>
+          );
+        };
+
+        const App = (_: {}, componentApi: ComponentApi) => {
+          componentApi.ctx.set(myCtx, { foo: "async foo" });
+          return (
+            <div class="main">
+              <Foos />
+            </div>
+          );
+        };
+
+        const html = await renderToHtmlAsync(<App />);
+
+        expect(html).toMatchSnapshot();
+      });
     });
   });
 });
