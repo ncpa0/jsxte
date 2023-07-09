@@ -1,4 +1,4 @@
-import type { ContextMap } from "../context-map/context-map";
+import type { ComponentApi } from "../component-api/component-api";
 
 type CreateElementProps = {
   [k: string]: any;
@@ -8,8 +8,8 @@ type CreateElementProps = {
 export const createElement = (
   tag:
     | string
-    | ((props: any, contextMap: ContextMap) => JSX.Element)
-    | ((props: any, contextMap: ContextMap) => Promise<JSX.Element>),
+    | ((props: any, contextMap: ComponentApi) => JSX.Element)
+    | ((props: any, contextMap: ComponentApi) => Promise<JSX.Element>),
   props?: CreateElementProps,
   ...children: Array<
     JSX.Element | string | number | Array<JSX.Element | string | number>

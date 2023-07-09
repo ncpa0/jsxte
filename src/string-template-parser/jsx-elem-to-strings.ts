@@ -1,4 +1,4 @@
-import { ContextMap } from "../context-map/context-map";
+import { ComponentApi } from "../component-api/component-api";
 import { ErrorBoundary } from "../error-boundary/error-boundary";
 import { mapAttributeName } from "./map-attribute-name";
 import { resolveElement } from "./resolve-element";
@@ -20,9 +20,9 @@ const concatToLastStringOrPush = (a: TagFunctionArgs, s?: string) => {
 export const jsxElemToTagFuncArgsSync = (
   element: JSX.Element,
   attributeMap: Record<string, string>,
-  contextMap: ContextMap = ContextMap.create()
+  contextMap: ComponentApi = ComponentApi.create()
 ): TagFunctionArgs => {
-  contextMap = ContextMap.clone(contextMap);
+  contextMap = ComponentApi.clone(contextMap);
 
   if (!isSyncElem(element)) throw new Error("");
 

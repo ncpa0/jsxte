@@ -1,4 +1,4 @@
-import type { ContextMap } from "../context-map/context-map";
+import type { ComponentApi } from "../component-api/component-api";
 import type { ErrorBoundaryElement } from "../error-boundary/error-boundary";
 import type { Rewrap } from "../html-parser/types";
 
@@ -28,8 +28,8 @@ declare global {
       type: "tag";
       tag:
         | string
-        | ((props: ElementProps, contextMap: ContextMap) => Element)
-        | ((props: ElementProps, contextMap: ContextMap) => Promise<Element>)
+        | ((props: ElementProps, contextMap: ComponentApi) => Element)
+        | ((props: ElementProps, contextMap: ComponentApi) => Promise<Element>)
         | ErrorBoundaryElement;
       props: ElementProps;
     };
@@ -60,12 +60,12 @@ declare global {
 
     type Component<P extends object = {}> = (
       props: PropsWithChildren<P>,
-      contextMap: ContextMap
+      contextMap: ComponentApi
     ) => JSX.Element;
 
     type AsyncComponent<P extends object = {}> = (
       props: PropsWithChildren<P>,
-      contextMap: ContextMap
+      contextMap: ComponentApi
     ) => Promise<JSX.Element>;
 
     interface BaseHTMLTagProps {

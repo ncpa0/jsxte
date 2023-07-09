@@ -1,20 +1,22 @@
-export class ContextMap {
-  public static create(): ContextMap {
-    return new ContextMap();
+import {
+  jsxElemToHtmlAsync,
+  jsxElemToHtmlSync,
+  type RendererInternalOptions,
+} from "../html-parser/jsx-elem-to-html";
+
+export class ContextAccessor {
+  public static clone(original: ContextAccessor): ContextAccessor {
+    return new ContextAccessor(new Map(original.map));
   }
 
-  public static clone(original: ContextMap): ContextMap {
-    return new ContextMap(new Map(original.map));
-  }
-
-  private constructor(private map: Map<symbol, unknown> = new Map()) {}
+  constructor(private map: Map<symbol, unknown> = new Map()) {}
 
   /**
    * Retrieve the context data for the specified context. If the
    * context has never been set by any of this component
    * ancestors an error will be thrown.
    */
-  public get<T>(ref: ContextDefinition<T>): T {
+  public getOrFail<T>(ref: ContextDefinition<T>): T {
     const value = this.map.get(ref.id);
 
     if (value === undefined) {
@@ -24,6 +26,12 @@ export class ContextMap {
     }
 
     return value as T;
+  }
+
+  /** Retrieve the context data for the specified context. */
+  public get<T>(ref: ContextDefinition<T>): T | undefined {
+    const value = this.map.get(ref.id);
+    return value as any;
   }
 
   /**
@@ -86,8 +94,53 @@ export class ContextMap {
    *
    * @internal
    */
-  public replace(context: ContextMap): void {
+  public replace(context: ContextAccessor): void {
     this.map = context.map;
+  }
+}
+
+export class ComponentApi {
+  public static create(options?: RendererInternalOptions): ComponentApi {
+    return new ComponentApi(options?.attributeMap);
+  }
+
+  public static clone(original: ComponentApi): ComponentApi {
+    return new ComponentApi(
+      original.attributeMap,
+      ContextAccessor.clone(original.ctx)
+    );
+  }
+
+  /** Access to the current context data. */
+  public ctx;
+
+  private constructor(
+    private attributeMap?: Record<string, string>,
+    accessor?: ContextAccessor
+  ) {
+    this.ctx = accessor ?? new ContextAccessor();
+  }
+
+  /**
+   * Renders the given JSX component to pure html as if it was a
+   * child of this component. All context available to this
+   * component will be available to the given component as well.
+   */
+  public render(component: JSX.Element): string {
+    return jsxElemToHtmlSync(component, this, {
+      attributeMap: this.attributeMap,
+    });
+  }
+
+  public async renderAsync(
+    component: JSX.Element | Promise<JSX.Element>
+  ): Promise<string> {
+    const thisCopy = ComponentApi.clone(this);
+    return Promise.resolve(component).then((c) =>
+      jsxElemToHtmlAsync(c, thisCopy, {
+        attributeMap: thisCopy.attributeMap,
+      })
+    );
   }
 }
 

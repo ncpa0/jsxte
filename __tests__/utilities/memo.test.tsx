@@ -1,7 +1,7 @@
 import {
   defineContext,
-  type ContextMap,
-} from "../../src/context-map/context-map";
+  type ComponentApi,
+} from "../../src/component-api/component-api";
 import {
   renderToHtml,
   renderToHtmlAsync,
@@ -75,12 +75,12 @@ describe("memo", () => {
   it("memoized components should have access to the context of it's parent", () => {
     const Context = defineContext<{ foo: string }>();
 
-    const MemoizedComponent = memo((_: {}, context) => {
-      return <h1>{context.get(Context).foo}</h1>;
+    const MemoizedComponent = memo((_: {}, { ctx }) => {
+      return <h1>{ctx.getOrFail(Context).foo}</h1>;
     });
 
-    const Root = (_: {}, context: ContextMap) => {
-      context.set(Context, { foo: "Hello" });
+    const Root = (_: {}, { ctx }: ComponentApi) => {
+      ctx.set(Context, { foo: "Hello" });
 
       return (
         <div id="root">
@@ -97,8 +97,8 @@ describe("memo", () => {
   it("children of the memoized components should have access to the top level context", () => {
     const Context = defineContext<{ foo: string }>();
 
-    const MemoChild = (_: {}, context: ContextMap) => {
-      return <h1>{context.get(Context).foo}</h1>;
+    const MemoChild = (_: {}, { ctx }: ComponentApi) => {
+      return <h1>{ctx.getOrFail(Context).foo}</h1>;
     };
 
     const MemoizedComponent = memo((_: {}, context) => {
@@ -109,7 +109,7 @@ describe("memo", () => {
       );
     });
 
-    const MemoParent = (_: {}, context: ContextMap) => {
+    const MemoParent = (_: {}, context: ComponentApi) => {
       return (
         <div>
           <MemoizedComponent />
@@ -117,8 +117,8 @@ describe("memo", () => {
       );
     };
 
-    const Root = (_: {}, context: ContextMap) => {
-      context.set(Context, { foo: "Hello" });
+    const Root = (_: {}, { ctx }: ComponentApi) => {
+      ctx.set(Context, { foo: "Hello" });
 
       return (
         <div id="root">
