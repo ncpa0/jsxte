@@ -8,7 +8,7 @@
     "crypto": "^1.0.1",
     "esbuild": "^0.18.1",
     "eslint": "^8.15.0",
-    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "git-hook-tasks": "ncpa0cpl/git-hook-tasks",
     "husky": "^8.0.1",
