@@ -38,7 +38,7 @@
     "email": "szymonb21@gmail.com"
   },
   "repository": {
-    "url": "https://github.com/ncpa0cpl/jsxte"
+    "url": "https://github.com/ncpa0/jsxte"
   },
   "devDependencies": {
     "@ncpa0cpl/nodepack": "^2.0.2",

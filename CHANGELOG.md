@@ -1,3 +1,11 @@
+## 3.0.1 (August 19, 2023)
+
+### Features
+
+- #### chore: added a sideEffect property to package.json ([#181](https://github.com/ncpa0/jsxte/pull/181))
+
+  Added a sideEffect property to package.json to allow for tree-shaking.
+
 ## 3.0.0 (July 9, 2023)
 
 ### Features
