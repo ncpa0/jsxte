@@ -1,7 +1,17 @@
 import { ComponentApi } from "../component-api/component-api";
 import { ErrorBoundary } from "../error-boundary/error-boundary";
+import { createElement } from "../jsx-runtime";
+import { Interpolate, InterpolateTag } from "./interpolate";
 import { mapAttributeName } from "./map-attribute-name";
+import type { StringTemplateParserOptions } from "./render-to-string-template-tag";
 import { resolveElement } from "./resolve-element";
+import type { StringTemplateTag } from "./string-template-tag-type";
+import { toTemplateStringArray } from "./to-template-string-array";
+
+export type StringTemplateParserInternalOptions =
+  StringTemplateParserOptions & {
+    tag: StringTemplateTag<any>;
+  };
 
 const isSyncElem = (e: JSX.Element): e is JSXTE.SyncElement => true;
 
@@ -19,9 +29,11 @@ const concatToLastStringOrPush = (a: TagFunctionArgs, s?: string) => {
 
 export const jsxElemToTagFuncArgsSync = (
   element: JSX.Element,
-  attributeMap: Record<string, string>,
-  _componentApi: ComponentApi = ComponentApi.create()
+  options: StringTemplateParserInternalOptions,
+  _componentApi: ComponentApi = ComponentApi.create(),
 ): TagFunctionArgs => {
+  const { attributeMap = {} } = options;
+
   const componentApi = _componentApi
     ? ComponentApi.clone(_componentApi)
     : ComponentApi.create({ attributeMap });
@@ -39,49 +51,77 @@ export const jsxElemToTagFuncArgsSync = (
       try {
         const subElem = boundary.render(
           element.props,
-          componentApi
+          componentApi,
         ) as any as JSXTE.SyncElement;
 
         if (subElem instanceof Promise) {
           throw new Error(
-            `Encountered an async Component: [${element.tag.name}.render] Asynchronous Component's cannot be parsed by rendertoHTML. If you wante to use asynchronous components use renderToHtmlAsync instead.`
+            `Encountered an async Component: [${element.tag.name}.render] Asynchronous Component's cannot be parsed by rendertoHTML. If you wante to use asynchronous components use renderToHtmlAsync instead.`,
           );
         }
 
-        return jsxElemToTagFuncArgsSync(subElem, attributeMap, componentApi);
+        return jsxElemToTagFuncArgsSync(
+          subElem,
+          options,
+          componentApi,
+        );
       } catch (e) {
         const fallbackElem = boundary.onError(
           e,
           element.props,
-          componentApi
+          componentApi,
         ) as any as JSXTE.SyncElement;
 
         if (fallbackElem instanceof Promise) {
           throw new Error(
-            `Encountered an async Component: [${element.tag.name}.onError] Asynchronous Component's cannot be parsed by rendertoHTML. If you wante to use asynchronous components use renderToHtmlAsync instead.`
+            `Encountered an async Component: [${element.tag.name}.onError] Asynchronous Component's cannot be parsed by rendertoHTML. If you wante to use asynchronous components use renderToHtmlAsync instead.`,
           );
         }
 
         return jsxElemToTagFuncArgsSync(
           fallbackElem,
-          attributeMap,
-          componentApi
+          options,
+          componentApi,
         );
       }
     }
 
+    if (Interpolate._isInterpolate(element.tag)) {
+      const results: TagFunctionArgs = [[], []];
+
+      results[0].push("", "");
+      results[1].push(element.props.children);
+
+      return results;
+    }
+
+    if (InterpolateTag._isInterpolateRender(element.tag)) {
+      const results: TagFunctionArgs = [[], []];
+
+      const [tmpTsa, params] = jsxElemToTagFuncArgsSync(
+        createElement("", element.props),
+        options,
+      );
+      const templateStringArray = toTemplateStringArray(tmpTsa);
+
+      results[0].push("", "");
+      results[1].push(options.tag(templateStringArray, ...params));
+
+      return results;
+    }
+
     const subElem = element.tag(
       element.props,
-      componentApi
+      componentApi,
     ) as any as JSXTE.SyncElement;
 
     if (subElem instanceof Promise) {
       throw new Error(
-        `Encountered an async Component: [${element.tag.name}] Asynchronous Component's cannot be parsed by rendertoHTML. If you wante to use asynchronous components use renderToHtmlAsync instead.`
+        `Encountered an async Component: [${element.tag.name}] Asynchronous Component's cannot be parsed by rendertoHTML. If you wante to use asynchronous components use renderToHtmlAsync instead.`,
       );
     }
 
-    return jsxElemToTagFuncArgsSync(subElem, attributeMap, componentApi);
+    return jsxElemToTagFuncArgsSync(subElem, options, componentApi);
   } else {
     const { attributes, children } = resolveElement(element);
 
@@ -89,16 +129,13 @@ export const jsxElemToTagFuncArgsSync = (
       const results: TagFunctionArgs = [[], []];
 
       for (const child of children) {
-        const [[first, ...strings], tagParams] = jsxElemToTagFuncArgsSync(
-          child,
-          attributeMap,
-          componentApi
-        );
+        const [[first, ...strings], tagParams] =
+          jsxElemToTagFuncArgsSync(child, options, componentApi);
 
         concatToLastStringOrPush(results, first);
 
-        results[0].push(...strings);
-        results[1].push(...tagParams);
+        results[0] = results[0].concat(strings);
+        results[1] = results[1].concat(tagParams);
       }
 
       return results;
@@ -115,29 +152,33 @@ export const jsxElemToTagFuncArgsSync = (
       for (const index in attrList) {
         const [attrName, value] = attrList[index]!;
 
+        if (
+          value === false ||
+          value === null ||
+          value === undefined
+        ) {
+          continue;
+        }
+
         concatToLastStringOrPush(
           results,
-          ` ${mapAttributeName(attrName, attributeMap)}="`
+          ` ${mapAttributeName(attrName, attributeMap)}="`,
         );
 
-        results[1].push(value);
-
+        results[1].push(value === true ? attrName : value);
         results[0].push('"');
       }
 
       concatToLastStringOrPush(results, part2);
 
       for (const child of children) {
-        const [[first, ...strings], tagParams] = jsxElemToTagFuncArgsSync(
-          child,
-          attributeMap,
-          componentApi
-        );
+        const [[first, ...strings], tagParams] =
+          jsxElemToTagFuncArgsSync(child, options, componentApi);
 
         concatToLastStringOrPush(results, first);
 
-        results[0].push(...strings);
-        results[1].push(...tagParams);
+        results[0] = results[0].concat(strings);
+        results[1] = results[1].concat(tagParams);
       }
 
       concatToLastStringOrPush(results, part3);
