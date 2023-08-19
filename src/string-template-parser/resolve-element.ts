@@ -7,7 +7,7 @@ type AsArray<T> = [GetArrayFromUnion<T>] extends [never]
   ? GetNonArraysFromUnion<T>[]
   : Array<ArrayType<GetArrayFromUnion<T>> | GetNonArraysFromUnion<T>>;
 
-function asArray<T>(v: T): AsArray<T> {
+export function asArray<T>(v: T): AsArray<T> {
   if (Array.isArray(v)) {
     return v;
   } else {
