@@ -1,4 +1,45 @@
 {
+  "name": "jsxte",
+  "version": "3.0.0",
+  "description": "JSX-based html templating engine for browsers or Node environments.",
+  "license": "MIT",
+  "main": "./dist/legacy/index.js",
+  "types": "./dist/types/index.d.ts",
+  "keywords": [
+    "jsx",
+    "template",
+    "engine",
+    "express",
+    "node",
+    "browser",
+    "html"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/esm/index.mjs",
+      "require": "./dist/cjs/index.cjs"
+    },
+    "./jsx-runtime": {
+      "types": "./dist/types/jsx-runtime.d.ts",
+      "import": "./dist/esm/jsx-runtime.mjs",
+      "require": "./dist/cjs/jsx-runtime.cjs"
+    }
+  },
+  "scripts": {
+    "build": "node ./scripts/build.mjs",
+    "build:types": "tsc -p tsconfig.build.json --emitDeclarationOnly --outDir ./dist/types",
+    "test:lint": "eslint .",
+    "test:tsc": "tsc --noEmit",
+    "test:jest": "jest --coverage"
+  },
+  "author": {
+    "name": "Szymon Bretner (ncpa0cpl)",
+    "email": "szymonb21@gmail.com"
+  },
+  "repository": {
+    "url": "https://github.com/ncpa0cpl/jsxte"
+  },
   "devDependencies": {
     "@ncpa0cpl/nodepack": "^2.0.2",
     "@types/jest": "^27.5.1",
@@ -20,46 +61,6 @@
     "ts-jest": "^28.0.2",
     "typescript": "^5.0.2"
   },
-  "name": "jsxte",
-  "version": "3.0.0",
-  "main": "./dist/legacy/index.js",
-  "types": "./dist/types/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/types/index.d.ts",
-      "import": "./dist/esm/index.mjs",
-      "require": "./dist/cjs/index.cjs"
-    },
-    "./jsx-runtime": {
-      "types": "./dist/types/jsx-runtime.d.ts",
-      "import": "./dist/esm/jsx-runtime.mjs",
-      "require": "./dist/cjs/jsx-runtime.cjs"
-    }
-  },
-  "scripts": {
-    "build": "node ./scripts/build.mjs",
-    "build:types": "tsc -p tsconfig.build.json --emitDeclarationOnly --outDir ./dist/types",
-    "test:lint": "eslint .",
-    "test:tsc": "tsc --noEmit",
-    "test:jest": "jest --coverage"
-  },
-  "keywords": [
-    "jsx",
-    "template",
-    "engine",
-    "express",
-    "node",
-    "browser",
-    "html"
-  ],
-  "repository": {
-    "url": "https://github.com/ncpa0cpl/jsxte"
-  },
-  "description": "JSX-based html templating engine for browsers or Node environments.",
-  "license": "MIT",
-  "author": {
-    "name": "Szymon Bretner (ncpa0cpl)",
-    "email": "szymonb21@gmail.com"
-  },
-  "packageManager": "yarn@1.22.19"
+  "packageManager": "yarn@1.22.19",
+  "sideEffects": false
 }
