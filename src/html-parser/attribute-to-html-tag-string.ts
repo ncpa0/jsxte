@@ -2,7 +2,7 @@ import type { RendererHTMLAttributes } from "./types";
 
 export const attributeToHtmlTagString = ([key, value]: [
   string,
-  string | boolean | number | undefined
+  string | boolean | number | undefined,
 ]): string => {
   if (value === true) {
     return `${key}`;
@@ -14,7 +14,15 @@ export const attributeToHtmlTagString = ([key, value]: [
 };
 
 export const mapAttributesToHtmlTagString = (
-  attributes: RendererHTMLAttributes
+  attributes: RendererHTMLAttributes,
 ): string[] => {
-  return attributes.map(attributeToHtmlTagString).filter((e) => e);
+  const results: string[] = [];
+
+  for (let i = 0; i < attributes.length; i++) {
+    const attribute = attributes[i]!;
+    const html = attributeToHtmlTagString(attribute);
+    if (html.length > 0) results.push(html);
+  }
+
+  return results;
 };

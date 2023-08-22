@@ -10,8 +10,9 @@ export class HTMLElementResolver {
 
   resolveAttributes(element: JSXTE.TagElement): RendererHTMLAttributes {
     const attributes: HTMLElementStruct["attributes"] = [];
-
-    for (const [key, prop] of Object.entries(element.props)) {
+    const entries = Object.entries(element.props);
+    for (let i = 0; i < entries.length; i++) {
+      const [key, prop] = entries[i]!;
       if (key !== "children") {
         attributes.push([mapAttributeName(key, this.attributeMap), prop]);
       }

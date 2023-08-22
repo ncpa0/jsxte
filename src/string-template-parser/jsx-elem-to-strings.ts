@@ -60,11 +60,7 @@ export const jsxElemToTagFuncArgsSync = (
           );
         }
 
-        return jsxElemToTagFuncArgsSync(
-          subElem,
-          options,
-          componentApi,
-        );
+        return jsxElemToTagFuncArgsSync(subElem, options, componentApi);
       } catch (e) {
         const fallbackElem = boundary.onError(
           e,
@@ -78,11 +74,7 @@ export const jsxElemToTagFuncArgsSync = (
           );
         }
 
-        return jsxElemToTagFuncArgsSync(
-          fallbackElem,
-          options,
-          componentApi,
-        );
+        return jsxElemToTagFuncArgsSync(fallbackElem, options, componentApi);
       }
     }
 
@@ -128,9 +120,13 @@ export const jsxElemToTagFuncArgsSync = (
     if (element.tag === "") {
       const results: TagFunctionArgs = [[], []];
 
-      for (const child of children) {
-        const [[first, ...strings], tagParams] =
-          jsxElemToTagFuncArgsSync(child, options, componentApi);
+      for (let i = 0; i < children.length; i++) {
+        const child = children[i]!;
+        const [[first, ...strings], tagParams] = jsxElemToTagFuncArgsSync(
+          child,
+          options,
+          componentApi,
+        );
 
         concatToLastStringOrPush(results, first);
 
@@ -149,14 +145,10 @@ export const jsxElemToTagFuncArgsSync = (
       results[0].push(part1);
 
       const attrList = Object.entries(attributes);
-      for (const index in attrList) {
+      for (let index = 0; index < attrList.length; index++) {
         const [attrName, value] = attrList[index]!;
 
-        if (
-          value === false ||
-          value === null ||
-          value === undefined
-        ) {
+        if (value === false || value === null || value === undefined) {
           continue;
         }
 
@@ -171,9 +163,13 @@ export const jsxElemToTagFuncArgsSync = (
 
       concatToLastStringOrPush(results, part2);
 
-      for (const child of children) {
-        const [[first, ...strings], tagParams] =
-          jsxElemToTagFuncArgsSync(child, options, componentApi);
+      for (let i = 0; i < children.length; i++) {
+        const child = children[i]!;
+        const [[first, ...strings], tagParams] = jsxElemToTagFuncArgsSync(
+          child,
+          options,
+          componentApi,
+        );
 
         concatToLastStringOrPush(results, first);
 
