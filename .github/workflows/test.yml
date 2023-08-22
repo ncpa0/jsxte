@@ -1,0 +1,45 @@
+name: Test
+
+permissions:
+  repository-projects: write
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+
+env:
+  NPM_TOKEN: ""
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Node Environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: yarn
+      - name: Install dependencies
+        uses: Borales/actions-yarn@v3.0.0
+        with:
+          cmd: install
+      - name: Test TS
+        uses: Borales/actions-yarn@v3.0.0
+        with:
+          cmd: test:tsc
+      - name: Test Lint
+        uses: Borales/actions-yarn@v3.0.0
+        with:
+          cmd: test:lint
+      - name: Test Unit
+        uses: Borales/actions-yarn@v3.0.0
+        with:
+          cmd: test:jest
+      - name: Build
+        uses: Borales/actions-yarn@v3.0.0
+        with:
+          cmd: build
