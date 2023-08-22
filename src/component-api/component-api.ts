@@ -3,6 +3,11 @@ import {
   jsxElemToHtmlSync,
   type RendererInternalOptions,
 } from "../html-parser/jsx-elem-to-html";
+import {
+  jsxElemToJsonAsync,
+  jsxElemToJsonSync,
+  type JsxteJson,
+} from "../json-renderer/jsx-elem-to-json";
 import { jsx } from "../jsx-runtime";
 
 export class ContextAccessor {
@@ -144,6 +149,23 @@ export class ComponentApi {
     const thisCopy = ComponentApi.clone(this);
     return Promise.resolve(component).then((c) =>
       jsxElemToHtmlAsync(c, thisCopy, {
+        attributeMap: thisCopy.attributeMap,
+      }),
+    );
+  }
+
+  public renderToJson(component: JSX.Element): JsxteJson | string {
+    return jsxElemToJsonSync(component, this, {
+      attributeMap: this.attributeMap,
+    });
+  }
+
+  public async renderToJsonAsync(
+    component: JSX.Element | Promise<JSX.Element>,
+  ): Promise<JsxteJson | string> {
+    const thisCopy = ComponentApi.clone(this);
+    return Promise.resolve(component).then((c) =>
+      jsxElemToJsonAsync(c, thisCopy, {
         attributeMap: thisCopy.attributeMap,
       }),
     );
