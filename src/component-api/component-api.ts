@@ -13,39 +13,39 @@ export class ContextAccessor {
   constructor(private map: Map<symbol, unknown> = new Map()) {}
 
   /**
-   * Retrieve the context data for the specified context. If the
-   * context has never been set by any of this component
-   * ancestors an error will be thrown.
+   * Retrieve the context data for the specified context. If the context has
+   * never been set by any of this component ancestors an error will be thrown.
    */
   public getOrFail<T>(ref: ContextDefinition<T>): T {
     const value = this.map.get(ref.id);
 
     if (value === undefined) {
       throw new Error(
-        "Context not defined! Make sure the context is set before accessing it."
+        "Context not defined! Make sure the context is set before accessing it.",
       );
     }
 
     return value as T;
   }
 
-  /** Retrieve the context data for the specified context. */
+  /**
+   * Retrieve the context data for the specified context.
+   */
   public get<T>(ref: ContextDefinition<T>): T | undefined {
     const value = this.map.get(ref.id);
     return value as any;
   }
 
   /**
-   * Partially update the state of the context data. Works only
-   * for objects and can only be used if some context data is
-   * already set beforehand.
+   * Partially update the state of the context data. Works only for objects and
+   * can only be used if some context data is already set beforehand.
    *
-   * Updates to the context made with this method are only
-   * visible to this component and it's descendants.
+   * Updates to the context made with this method are only visible to this
+   * component and it's descendants.
    */
   public update<T extends object>(
     ref: ContextDefinition<T>,
-    updateData: Partial<T>
+    updateData: Partial<T>,
   ): void {
     const data = this.get(ref);
 
@@ -58,7 +58,9 @@ export class ContextAccessor {
       if (Array.isArray(data)) {
         const arr = Array.from(data);
 
-        for (const [key, value] of Object.entries(updateData)) {
+        const entries = Object.entries(updateData);
+        for (let i = 0; i < entries.length; i++) {
+          const [key, value] = entries[i]!;
           const index = Number(key);
           if (!isNaN(index)) arr[index] = value;
         }
@@ -69,7 +71,7 @@ export class ContextAccessor {
       }
     } else {
       throw new Error(
-        "Context data is not an object!. Partial updates are only possible for objects."
+        "Context data is not an object!. Partial updates are only possible for objects.",
       );
     }
   }
@@ -77,21 +79,22 @@ export class ContextAccessor {
   /**
    * Sets the context data for the specified context.
    *
-   * Changes to the context made with this method are only
-   * visible to this component and it's descendants.
+   * Changes to the context made with this method are only visible to this
+   * component and it's descendants.
    */
   public set<T>(ref: ContextDefinition<T>, data: T): void {
     this.map.set(ref.id, data);
   }
 
-  /** Check if the context data for the specified context is set. */
+  /**
+   * Check if the context data for the specified context is set.
+   */
   public has<T>(ref: ContextDefinition<T>): boolean {
     return this.map.has(ref.id);
   }
 
   /**
-   * Replaces this context entries with the entries of the
-   * context provided.
+   * Replaces this context entries with the entries of the context provided.
    *
    * @internal
    */
@@ -108,24 +111,26 @@ export class ComponentApi {
   public static clone(original: ComponentApi): ComponentApi {
     return new ComponentApi(
       original.attributeMap,
-      ContextAccessor.clone(original.ctx)
+      ContextAccessor.clone(original.ctx),
     );
   }
 
-  /** Access to the current context data. */
+  /**
+   * Access to the current context data.
+   */
   public ctx;
 
   private constructor(
     private attributeMap?: Record<string, string>,
-    accessor?: ContextAccessor
+    accessor?: ContextAccessor,
   ) {
     this.ctx = accessor ?? new ContextAccessor();
   }
 
   /**
-   * Renders the given JSX component to pure html as if it was a
-   * child of this component. All context available to this
-   * component will be available to the given component as well.
+   * Renders the given JSX component to pure html as if it was a child of this
+   * component. All context available to this component will be available to the
+   * given component as well.
    */
   public render(component: JSX.Element): string {
     return jsxElemToHtmlSync(component, this, {
@@ -134,13 +139,13 @@ export class ComponentApi {
   }
 
   public async renderAsync(
-    component: JSX.Element | Promise<JSX.Element>
+    component: JSX.Element | Promise<JSX.Element>,
   ): Promise<string> {
     const thisCopy = ComponentApi.clone(this);
     return Promise.resolve(component).then((c) =>
       jsxElemToHtmlAsync(c, thisCopy, {
         attributeMap: thisCopy.attributeMap,
-      })
+      }),
     );
   }
 }
@@ -152,7 +157,7 @@ export class ContextDefinition<T> {
     props: JSXTE.PropsWithChildren<{
       value: T;
     }>,
-    componentApi: ComponentApi
+    componentApi: ComponentApi,
   ) => {
     componentApi.ctx.set(this, props.value);
     return jsx("", { children: props.children });
@@ -162,7 +167,7 @@ export class ContextDefinition<T> {
     props: JSXTE.PropsWithChildren<{
       render: (value?: T) => JSX.Element;
     }>,
-    componentApi: ComponentApi
+    componentApi: ComponentApi,
   ) => {
     const value = componentApi.ctx.get(this);
     return props.render(value);

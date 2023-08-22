@@ -1,6 +1,6 @@
 import { ComponentApi } from "../component-api/component-api";
 import { ErrorBoundary } from "../error-boundary/error-boundary";
-import { pad } from "../utilities/pad";
+import { join } from "../utilities/join";
 import { mapAttributesToHtmlTagString } from "./attribute-to-html-tag-string";
 import { getHTMLStruct } from "./get-html-struct";
 
@@ -17,9 +17,12 @@ export type RendererInternalOptions = {
 export const jsxElemToHtmlSync = (
   element: JSX.Element,
   _componentApi?: ComponentApi,
-  options?: RendererInternalOptions
+  options?: RendererInternalOptions,
 ): string => {
-  const { attributeMap = {}, currentIndent = 0, indent = 2 } = options ?? {};
+  const attributeMap = options?.attributeMap ?? {};
+  const currentIndent = options?.currentIndent ?? 0;
+  const indent = options?.indent ?? 2;
+
   const componentApi = _componentApi
     ? ComponentApi.clone(_componentApi)
     : ComponentApi.create(options);
@@ -27,7 +30,7 @@ export const jsxElemToHtmlSync = (
   if (!isSyncElem(element)) throw new Error("");
 
   if (element.type === "textNode") {
-    const indentPadding = pad(currentIndent);
+    const indentPadding = " ".repeat(currentIndent);
     return indentPadding + element.text;
   }
 
@@ -38,12 +41,12 @@ export const jsxElemToHtmlSync = (
       try {
         const subElem = boundary.render(
           element.props,
-          componentApi
+          componentApi,
         ) as any as JSXTE.SyncElement;
 
         if (subElem instanceof Promise) {
           throw new Error(
-            `Encountered an async Component: [${element.tag.name}.render] Asynchronous Component's cannot be parsed by rendertoHTML. If you wante to use asynchronous components use renderToHtmlAsync instead.`
+            `Encountered an async Component: [${element.tag.name}.render] Asynchronous Component's cannot be parsed by rendertoHTML. If you wante to use asynchronous components use renderToHtmlAsync instead.`,
           );
         }
 
@@ -57,7 +60,7 @@ export const jsxElemToHtmlSync = (
 
         if (fallbackElem instanceof Promise) {
           throw new Error(
-            `Encountered an async Component: [${element.tag.name}.onError] Asynchronous Component's cannot be parsed by rendertoHTML. If you wante to use asynchronous components use renderToHtmlAsync instead.`
+            `Encountered an async Component: [${element.tag.name}.onError] Asynchronous Component's cannot be parsed by rendertoHTML. If you wante to use asynchronous components use renderToHtmlAsync instead.`,
           );
         }
 
@@ -71,12 +74,12 @@ export const jsxElemToHtmlSync = (
 
     const subElem = element.tag(
       element.props,
-      componentApi
+      componentApi,
     ) as any as JSXTE.SyncElement;
 
     if (subElem instanceof Promise) {
       throw new Error(
-        `Encountered an async Component: [${element.tag.name}] Asynchronous Component's cannot be parsed by rendertoHTML. If you wante to use asynchronous components use renderToHtmlAsync instead.`
+        `Encountered an async Component: [${element.tag.name}] Asynchronous Component's cannot be parsed by rendertoHTML. If you wante to use asynchronous components use renderToHtmlAsync instead.`,
       );
     }
 
@@ -90,7 +93,8 @@ export const jsxElemToHtmlSync = (
 
     if (htmlStruct.tag === "") {
       const results: string[] = [];
-      for (const child of htmlStruct.children) {
+      for (let i = 0; i < htmlStruct.children.length; i++) {
+        const child = htmlStruct.children[i]!;
         const renderedChild = jsxElemToHtmlSync(child, componentApi, {
           indent,
           currentIndent: currentIndent + indent,
@@ -98,22 +102,27 @@ export const jsxElemToHtmlSync = (
         });
         if (renderedChild.length > 0) results.push(renderedChild);
       }
-      return results.join("\n");
+      return join(results);
     } else {
       const inlineTag =
         htmlStruct.children.length === 0 ||
         htmlStruct.children.every(isTextNode);
-      const indentPadding = pad(currentIndent);
+      const indentPadding = " ".repeat(currentIndent);
 
+      const attrString = join(
+        mapAttributesToHtmlTagString(htmlStruct.attributes),
+        " ",
+      );
       const startTag =
-        [
-          `${indentPadding}<${htmlStruct.tag}`,
-          ...mapAttributesToHtmlTagString(htmlStruct.attributes),
-        ].join(" ") + ">";
+        `${indentPadding}<${htmlStruct.tag}` +
+        (attrString.length ? " " : "") +
+        join(mapAttributesToHtmlTagString(htmlStruct.attributes), " ") +
+        ">";
       const endTag = `${inlineTag ? "" : indentPadding}</${htmlStruct.tag}>`;
       const children: string[] = [];
 
-      for (const child of htmlStruct.children) {
+      for (let i = 0; i < htmlStruct.children.length; i++) {
+        const child = htmlStruct.children[i]!;
         const renderedChild = jsxElemToHtmlSync(child, componentApi, {
           indent: inlineTag ? 0 : indent,
           currentIndent: inlineTag ? 0 : currentIndent + indent,
@@ -124,10 +133,10 @@ export const jsxElemToHtmlSync = (
       }
 
       if (inlineTag) {
-        return startTag + children.join("") + endTag;
+        return startTag + join(children, "") + endTag;
       }
 
-      return [startTag, ...children, endTag].join("\n");
+      return join([startTag, ...children, endTag]);
     }
   }
 };
@@ -135,7 +144,7 @@ export const jsxElemToHtmlSync = (
 export const jsxElemToHtmlAsync = async (
   element: JSX.Element,
   _componentApi?: ComponentApi,
-  options?: RendererInternalOptions
+  options?: RendererInternalOptions,
 ): Promise<string> => {
   const { attributeMap = {}, currentIndent = 0, indent = 2 } = options ?? {};
   const componentApi = _componentApi
@@ -145,7 +154,7 @@ export const jsxElemToHtmlAsync = async (
   if (!isSyncElem(element)) throw new Error("");
 
   if (element.type === "textNode") {
-    const indentPadding = pad(currentIndent);
+    const indentPadding = " ".repeat(currentIndent);
     return indentPadding + element.text;
   }
 
@@ -156,7 +165,7 @@ export const jsxElemToHtmlAsync = async (
       try {
         const subElem = (await boundary.render(
           element.props,
-          componentApi
+          componentApi,
         )) as any as JSXTE.SyncElement;
 
         return await jsxElemToHtmlAsync(subElem, componentApi, {
@@ -168,7 +177,7 @@ export const jsxElemToHtmlAsync = async (
         const fallbackElem = await boundary.onError(
           e,
           element.props,
-          componentApi
+          componentApi,
         );
 
         return await jsxElemToHtmlAsync(fallbackElem, componentApi, {
@@ -181,7 +190,7 @@ export const jsxElemToHtmlAsync = async (
 
     const subElem = (await element.tag(
       element.props,
-      componentApi
+      componentApi,
     )) as any as JSXTE.SyncElement;
 
     return await jsxElemToHtmlAsync(subElem, componentApi, {
@@ -194,7 +203,8 @@ export const jsxElemToHtmlAsync = async (
 
     if (htmlStruct.tag === "") {
       const results: string[] = [];
-      for (const child of htmlStruct.children) {
+      for (let i = 0; i < htmlStruct.children.length; i++) {
+        const child = htmlStruct.children[i]!;
         const renderedChild = await jsxElemToHtmlAsync(child, componentApi, {
           indent,
           currentIndent: currentIndent + indent,
@@ -202,22 +212,27 @@ export const jsxElemToHtmlAsync = async (
         });
         if (renderedChild.length > 0) results.push(renderedChild);
       }
-      return results.join("\n");
+      return join(results);
     } else {
       const inlineTag =
         htmlStruct.children.length === 0 ||
         htmlStruct.children.every(isTextNode);
-      const indentPadding = pad(currentIndent);
+      const indentPadding = " ".repeat(currentIndent);
 
+      const attrString = join(
+        mapAttributesToHtmlTagString(htmlStruct.attributes),
+        " ",
+      );
       const startTag =
-        [
-          `${indentPadding}<${htmlStruct.tag}`,
-          ...mapAttributesToHtmlTagString(htmlStruct.attributes),
-        ].join(" ") + ">";
+        `${indentPadding}<${htmlStruct.tag}` +
+        (attrString.length ? " " : "") +
+        attrString +
+        ">";
       const endTag = `${inlineTag ? "" : indentPadding}</${htmlStruct.tag}>`;
       const children: string[] = [];
 
-      for (const child of htmlStruct.children) {
+      for (let i = 0; i < htmlStruct.children.length; i++) {
+        const child = htmlStruct.children[i]!;
         const renderedChild = await jsxElemToHtmlAsync(child, componentApi, {
           indent: inlineTag ? 0 : indent,
           currentIndent: inlineTag ? 0 : currentIndent + indent,
@@ -227,10 +242,10 @@ export const jsxElemToHtmlAsync = async (
       }
 
       if (inlineTag) {
-        return startTag + children.join("") + endTag;
+        return startTag + join(children, "") + endTag;
       }
 
-      return [startTag, ...children, endTag].join("\n");
+      return join([startTag, ...children, endTag]);
     }
   }
 };

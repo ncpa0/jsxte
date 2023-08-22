@@ -5,6 +5,33 @@ type CreateElementProps = {
   children?: JSXTE.ElementChildren;
 };
 
+const mapChildren = (
+  children: JSXTE.ElementChildren,
+  accumulator: JSX.Element[],
+) => {
+  // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
+  switch (typeof children) {
+    case "string":
+      accumulator.push({ type: "textNode", text: children });
+      break;
+    case "number":
+      accumulator.push({ type: "textNode", text: children.toString() });
+      break;
+    case "object":
+      if (Array.isArray(children)) {
+        for (let i = 0; i < children.length; i++) {
+          const child = children[i]!;
+          mapChildren(child, accumulator);
+        }
+      } else if (children != null) {
+        accumulator.push(children);
+      }
+      break;
+  }
+
+  return accumulator;
+};
+
 export const createElement = (
   tag:
     | string
@@ -17,54 +44,20 @@ export const createElement = (
 ): JSX.Element => {
   props ??= {};
 
-  if (children) {
-    props.children = [
-      ...(props.children
-        ? Array.isArray(props.children)
-          ? props.children.flat(2)
-          : [props.children]
-        : []),
-      ...children.flat(2),
-    ];
+  const finalChildren: JSX.Element[] = [];
+
+  for (let i = 0; i < children.length; i++) {
+    mapChildren(children[i]!, finalChildren);
   }
 
   if (props?.children) {
-    if (typeof props.children === "string") {
-      props.children = { type: "textNode", text: props.children };
-    } else if (typeof props.children === "number") {
-      props.children = {
-        type: "textNode",
-        text: (props.children as number).toString(),
-      };
-    } else if (Array.isArray(props.children)) {
-      props.children = props.children.reduce(
-        (cl: JSX.Element[], child): JSX.Element[] => {
-          if (
-            typeof child === "boolean" ||
-            child === null ||
-            child === undefined
-          ) {
-            return cl;
-          } else if (typeof child === "string") {
-            cl.push({ type: "textNode", text: child });
-            return cl;
-          } else if (typeof child === "number") {
-            cl.push({ type: "textNode", text: (child as number).toString() });
-            return cl;
-          }
-          cl.push(child as JSX.Element);
-          return cl;
-        },
-        []
-      );
-    } else if (
-      typeof props.children === "boolean" ||
-      props.children === null ||
-      props.children === undefined
-    ) {
-      props.children = [];
-    }
+    mapChildren(props.children, finalChildren);
   }
+
+  props.children = finalChildren;
+
+  Object.freeze(finalChildren);
+  Object.freeze(props);
 
   return {
     type: "tag",
