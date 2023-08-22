@@ -11,13 +11,13 @@ jobs:
   publish-canary:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Setup Node Environment
         uses: actions/setup-node@v3
         with:
           node-version: 18
           cache: yarn
-      - name: Checkout
-        uses: actions/checkout@v3
       - name: Install dependencies
         uses: Borales/actions-yarn@v3.0.0
         with:
