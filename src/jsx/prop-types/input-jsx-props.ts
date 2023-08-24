@@ -55,8 +55,8 @@ export interface InputTagProps {
   required?: AttributeBool;
   size?: string | number;
   src?: string;
-  step?: string;
+  step?: string | number;
   type?: InputType;
-  value?: string;
+  value?: string | number;
   width?: string | number;
 }
