@@ -60,18 +60,17 @@ declare global {
 
     type Component<P extends object = {}> = (
       props: PropsWithChildren<P>,
-      contextMap: ComponentApi
+      contextMap: ComponentApi,
     ) => JSX.Element;
 
     type AsyncComponent<P extends object = {}> = (
       props: PropsWithChildren<P>,
-      contextMap: ComponentApi
+      contextMap: ComponentApi,
     ) => Promise<JSX.Element>;
 
     interface BaseHTMLTagProps {
       children?: ElementChildren;
 
-      is?: string;
       accesskey?: string;
       class?: string;
       contenteditable?: AttributeBool;
@@ -80,9 +79,13 @@ declare global {
       hidden?: AttributeBool;
       id?: string;
       inert?: AttributeBool;
+      is?: string;
       lang?: string;
       onabort?: string;
       onafterprint?: string;
+      onanimationend?: string;
+      onanimationiteration?: string;
+      onanimationstart?: string;
       onbeforeprint?: string;
       onbeforeunload?: string;
       onblur?: string;
@@ -107,6 +110,11 @@ declare global {
       onended?: string;
       onerror?: string;
       onfocus?: string;
+      onfocusin?: string;
+      onfocusout?: string;
+      onfullscreenchange?: string;
+      onfullscreenerror?: string;
+      ongotpointercapture?: string;
       onhashchange?: string;
       oninput?: string;
       oninvalid?: string;
@@ -117,7 +125,11 @@ declare global {
       onloadeddata?: string;
       onloadedmetadata?: string;
       onloadstart?: string;
+      onlostpointercapture?: string;
+      onmessage?: string;
       onmousedown?: string;
+      onmouseenter?: string;
+      onmouseleave?: string;
       onmousemove?: string;
       onmouseout?: string;
       onmouseover?: string;
@@ -125,12 +137,21 @@ declare global {
       onmousewheel?: string;
       onoffline?: string;
       ononline?: string;
+      onopen?: string;
       onpagehide?: string;
       onpageshow?: string;
       onpaste?: string;
       onpause?: string;
       onplay?: string;
       onplaying?: string;
+      onpointercancel?: string;
+      onpointerdown?: string;
+      onpointerenter?: string;
+      onpointerleave?: string;
+      onpointermove?: string;
+      onpointerout?: string;
+      onpointerover?: string;
+      onpointerup?: string;
       onpopstate?: string;
       onprogress?: string;
       onratechange?: string;
@@ -141,12 +162,18 @@ declare global {
       onseeked?: string;
       onseeking?: string;
       onselect?: string;
+      onshow?: string;
       onstalled?: string;
       onstorage?: string;
       onsubmit?: string;
       onsuspend?: string;
       ontimeupdate?: string;
       ontoggle?: string;
+      ontouchcancel?: string;
+      ontouchend?: string;
+      ontouchmove?: string;
+      ontouchstart?: string;
+      ontransitionend?: string;
       onunload?: string;
       onvolumechange?: string;
       onwaiting?: string;
