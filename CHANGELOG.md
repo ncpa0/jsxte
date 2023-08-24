@@ -1,3 +1,15 @@
+## 3.1.1 (August 24, 2023)
+
+### Bug Fixes
+
+- #### fix: added `number` as a possible type for input attributes `step` and `value` ([#187](https://github.com/ncpa0/jsxte/pull/187))
+
+  Added `number` as a possible type for input attributes `step` and `value`.
+
+- #### fix: added a few event handler property types that were missing ([#186](https://github.com/ncpa0/jsxte/pull/186))
+
+  Typing for the JSX html elements were missing some of the event handlers attributes (`onpointer` events, `onfocusin` etc.). This is fixed now.
+
 ## 3.1.0 (August 22, 2023)
 
 ### Features
