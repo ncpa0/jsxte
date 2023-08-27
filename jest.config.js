@@ -1,4 +1,6 @@
-/** @type {import("ts-jest/dist/types").InitialOptionsTsJest} */
+/**
+ * @type {import("jest").Config}
+ */
 module.exports = {
   preset: "ts-jest",
   testRegex: ".*__tests__/.+(.test.(ts|js|tsx|jsx))$",
@@ -12,6 +14,10 @@ module.exports = {
   modulePaths: ["<rootDir>"],
   moduleNameMapper: {
     "^@jsx/(.*)$": "<rootDir>/src/jsx/$1",
+  },
+  snapshotFormat: {
+    printBasicPrototype: true,
+    escapeString: true,
   },
   coveragePathIgnorePatterns: [
     "/node_modules/",
