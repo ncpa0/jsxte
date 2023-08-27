@@ -1,11 +1,13 @@
 import type { ComponentApi } from "../component-api/component-api";
 
 export type ErrorBoundaryElement<P extends object = {}> = new (
-  props: JSXTE.PropsWithChildren<P>
+  props: JSXTE.PropsWithChildren<P>,
 ) => Pick<ErrorBoundary<P>, keyof ErrorBoundary>;
 
 export abstract class ErrorBoundary<P extends object = {}> {
-  /** @internal */
+  /**
+   * @internal
+   */
   static _isErrorBoundary(o: any): o is ErrorBoundaryElement {
     const canBeClass = typeof o === "function";
     const isNotNull = o !== null;
@@ -18,16 +20,16 @@ export abstract class ErrorBoundary<P extends object = {}> {
 
   private static _baseName = "ErrorBoundary";
 
-  constructor(props: JSXTE.PropsWithChildren<P>) {}
+  constructor(_: JSXTE.PropsWithChildren<P>) {}
 
   abstract render(
     props: JSXTE.PropsWithChildren<P>,
-    contextMap: ComponentApi
+    contextMap: ComponentApi,
   ): JSX.Element | Promise<JSX.Element>;
 
   abstract onError(
     error: unknown,
     originalProps: JSXTE.PropsWithChildren<P>,
-    contextMap: ComponentApi
+    contextMap: ComponentApi,
   ): JSX.Element;
 }
