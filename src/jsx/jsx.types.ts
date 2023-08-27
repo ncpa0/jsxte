@@ -53,8 +53,6 @@ declare global {
 
     type Element = SyncElement | AsyncElement;
 
-    type LibraryManagedAttributes<T, PropsWithChildren> = PropsWithChildren;
-
     interface IntrinsicElements {
       a: HTMLProps<AnchorTagProps>;
       abbr: HTMLProps;

@@ -1,8 +1,8 @@
 /**
  * Only fo use with the `renderToStringTemplateTag` render function.
  *
- * Whatever is passed to this component as children will be
- * interpolated into the template string.
+ * Whatever is passed to this component as children will be interpolated into
+ * the template string.
  *
  * Example
  *
@@ -43,14 +43,14 @@ export class Interpolate {
 
   private static _baseName = "Interpolate";
 
-  constructor(props: { children?: any }) {}
+  constructor(_: { children?: any }) {}
 }
 
 /**
  * Only fo use with the `renderToStringTemplateTag` render function.
  *
- * Whatever is passed to this component as children will be rendered
- * using the tag function and interpolated into the template string.
+ * Whatever is passed to this component as children will be rendered using the
+ * tag function and interpolated into the template string.
  *
  * Example
  *
@@ -89,5 +89,5 @@ export class InterpolateTag {
 
   private static _baseName = "InterpolateTag";
 
-  constructor(props: { children?: any }) {}
+  constructor(_: { children?: any }) {}
 }
