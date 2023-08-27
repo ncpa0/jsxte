@@ -1,3 +1,11 @@
+## 3.1.2 (August 27, 2023)
+
+### Bug Fixes
+
+- #### fix: export the InputType type ([#189](https://github.com/ncpa0/jsxte/pull/189))
+
+- #### fix: Add "email" to InputTypes ([#188](https://github.com/ncpa0/jsxte/pull/188))
+
 ## 3.1.1 (August 24, 2023)
 
 ### Bug Fixes
