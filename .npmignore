@@ -19,3 +19,4 @@ tsconfig.build.json
 tsconfig.json
 tsconfig.test.json
 yarn-error.log
+.prettierrc.mjs
