@@ -29,3 +29,4 @@ export type { Crossorigin } from "./jsx/prop-types/shared/crossorigin";
 export type { RefererPolicy } from "./jsx/prop-types/shared/referer-policy";
 export type { Target } from "./jsx/prop-types/shared/target";
 export type { JsxteJson } from "./json-renderer/jsx-elem-to-json";
+export type { InputType } from "./jsx/prop-types/input-jsx-props";
