@@ -7,6 +7,7 @@ export type InputType =
   | "date"
   | "datetime-local"
   | "datetime-local"
+  | "email"
   | "file"
   | "hidden"
   | "image"
