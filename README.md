@@ -66,8 +66,14 @@ const App: JSXTE.Component = (props: { label: string }) => {
     <html>
       <head>
         <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          http-equiv="X-UA-Compatible"
+          content="IE=edge"
+        />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1"
+        />
       </head>
       <body>
         <Header label={props.label} />
@@ -127,8 +133,14 @@ const App: JSXTE.Component = () => {
     <html>
       <head>
         <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          http-equiv="X-UA-Compatible"
+          content="IE=edge"
+        />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1"
+        />
       </head>
       <body>
         <Header />
@@ -243,7 +255,7 @@ class Boundary extends ErrorBoundary {
   onError(
     error: unknown,
     originalProps: JSXTE.ElementProps,
-    componentApi: ComponentApi
+    componentApi: ComponentApi,
   ) {
     return <h1>Something went wrong!</h1>;
   }
@@ -258,7 +270,7 @@ const html = renderToHtml(
     <Boundary>
       <FailingComponent />
     </Boundary>
-  </div>
+  </div>,
 );
 
 // html:
@@ -361,7 +373,7 @@ const result = renderToStringTemplateTag(
   html,
   <div class={props.className}>
     <h1>{props.header}</h1>
-  </div>
+  </div>,
 );
 ```
 
@@ -371,7 +383,10 @@ If the string tag template function uses non standard html attribute names (ex. 
 const result = renderToStringTemplateTag(
   html,
   <div>
-    <button class="my-class" onclick={handler}>
+    <button
+      class="my-class"
+      onclick={handler}
+    >
       Click Me
     </button>
   </div>,
@@ -380,6 +395,10 @@ const result = renderToStringTemplateTag(
       onclick: "@click",
       class: "className",
     },
-  }
+  },
 );
 ```
+
+## Contributing
+
+If you want to contribute please See [CONTRIBUTING.md](./CONTRIBUTING.md)
