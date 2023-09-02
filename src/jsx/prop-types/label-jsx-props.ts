@@ -1,4 +1,10 @@
-export interface LabelTagProps {
-  for?: string;
-  form?: string;
+declare global {
+  namespace JSXTE {
+    interface LabelTagProps {
+      for?: string;
+      form?: string;
+    }
+  }
 }
+
+export {};

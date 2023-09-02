@@ -1,3 +1,9 @@
-export interface LiTagProps {
-  value?: string;
+declare global {
+  namespace JSXTE {
+    interface LiTagProps {
+      value?: string;
+    }
+  }
 }
+
+export {};

@@ -1,3 +1,9 @@
-export interface MapTagProps {
-  name?: string;
+declare global {
+  namespace JSXTE {
+    interface MapTagProps {
+      name?: string;
+    }
+  }
 }
+
+export {};

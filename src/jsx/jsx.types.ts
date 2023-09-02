@@ -1,50 +1,4 @@
 import type { HTMLProps } from "./base-html-tag-props";
-import type { AnchorTagProps } from "./prop-types/a-jsx-props";
-import type { AreaTagProps } from "./prop-types/area-jsx-props";
-import type { AudioTagProps } from "./prop-types/audio-jsx-props";
-import type { BaseTagProps } from "./prop-types/base-jsx-props";
-import type { BdoTagProps } from "./prop-types/bdo-jsx-props";
-import type { BlockquoteTagProps } from "./prop-types/blockquote-jsx-props";
-import type { ButtonTagProps } from "./prop-types/button-jsx-props";
-import type { CanvasTagProps } from "./prop-types/canvas-jsx-props";
-import type { ColTagProps } from "./prop-types/col-jsx-props";
-import type { ColgroupTagProps } from "./prop-types/colgroup-jsx-props";
-import type { DataTagProps } from "./prop-types/data-jsx-props";
-import type { DelTagProps } from "./prop-types/del-jsx-props";
-import type { DetailsTagProps } from "./prop-types/details-jsx-props";
-import type { DialogTagProps } from "./prop-types/dialog-jsx-props";
-import type { EmbedTagProps } from "./prop-types/embed-jsx-props";
-import type { FieldsetTagProps } from "./prop-types/fieldset-jsx-prop";
-import type { FormTagProps } from "./prop-types/form-jsx-props";
-import type { HtmlTagProps } from "./prop-types/html-jsx-props";
-import type { IframeTagProps } from "./prop-types/iframe-jsx-props";
-import type { ImgTagProps } from "./prop-types/img-jsx-props";
-import type { InputTagProps } from "./prop-types/input-jsx-props";
-import type { InsTagProps } from "./prop-types/ins-jsx-props";
-import type { LabelTagProps } from "./prop-types/label-jsx-props";
-import type { LiTagProps } from "./prop-types/li-jsx.props";
-import type { LinkTagProps } from "./prop-types/link-jsx-props";
-import type { MapTagProps } from "./prop-types/map-jsx-props";
-import type { MetaTagProps } from "./prop-types/meta-jsx-props";
-import type { MeterTagProps } from "./prop-types/meter-jsx-props";
-import type { ObjectTagProps } from "./prop-types/object-jsx-props";
-import type { OlTagProps } from "./prop-types/ol-jsx-props";
-import type { OptgroupTagProps } from "./prop-types/optgroup-jsx-props";
-import type { OptionTagProps } from "./prop-types/option-jsx-props";
-import type { OutputTagProps } from "./prop-types/output-jsx-props";
-import type { ParamTagProps } from "./prop-types/param-jsx-props";
-import type { ProgressTagProps } from "./prop-types/progress-jsx-props";
-import type { QTagProps } from "./prop-types/q-jsx-props";
-import type { ScriptTagProps } from "./prop-types/script-jsx-props";
-import type { SelectTagProps } from "./prop-types/select-jsx-props";
-import type { SourceTagProps } from "./prop-types/source-jsx-props";
-import type { StyleTagProps } from "./prop-types/style-jsx-props";
-import type { TdTagProps } from "./prop-types/td-jsx-props";
-import type { TextareaTagProps } from "./prop-types/textarea-jsx-props";
-import type { ThTagProps } from "./prop-types/th-jsx-props";
-import type { TimeTagProps } from "./prop-types/time-jsx-props";
-import type { TrackTagProps } from "./prop-types/track-jsx-props";
-import type { VideoTagProps } from "./prop-types/video-jsx-props";
 
 declare global {
   namespace JSX {
@@ -54,128 +8,204 @@ declare global {
     type Element = SyncElement | AsyncElement;
 
     interface IntrinsicElements {
-      a: HTMLProps<AnchorTagProps>;
-      abbr: HTMLProps;
-      address: HTMLProps;
-      area: HTMLProps<AreaTagProps>;
-      article: HTMLProps;
-      aside: HTMLProps;
-      audio: HTMLProps<AudioTagProps>;
-      b: HTMLProps;
-      base: HTMLProps<BaseTagProps>;
-      bdi: HTMLProps;
-      bdo: HTMLProps<BdoTagProps>;
-      big: HTMLProps;
-      blockquote: HTMLProps<BlockquoteTagProps>;
-      body: HTMLProps;
-      br: HTMLProps;
-      button: HTMLProps<ButtonTagProps>;
-      canvas: HTMLProps<CanvasTagProps>;
-      caption: HTMLProps;
-      cite: HTMLProps;
-      code: HTMLProps;
-      col: HTMLProps<ColTagProps>;
-      colgroup: HTMLProps<ColgroupTagProps>;
-      data: HTMLProps<DataTagProps>;
-      datalist: HTMLProps;
-      dd: HTMLProps;
-      del: HTMLProps<DelTagProps>;
-      details: HTMLProps<DetailsTagProps>;
-      dfn: HTMLProps;
-      dialog: HTMLProps<DialogTagProps>;
-      div: HTMLProps;
-      dl: HTMLProps;
-      dt: HTMLProps;
-      em: HTMLProps;
-      embed: HTMLProps<EmbedTagProps>;
-      fieldset: HTMLProps<FieldsetTagProps>;
-      figcaption: HTMLProps;
-      figure: HTMLProps;
-      footer: HTMLProps;
-      form: HTMLProps<FormTagProps>;
-      h1: HTMLProps;
-      h2: HTMLProps;
-      h3: HTMLProps;
-      h4: HTMLProps;
-      h5: HTMLProps;
-      h6: HTMLProps;
-      head: HTMLProps;
-      header: HTMLProps;
-      hgroup: HTMLProps;
-      hr: HTMLProps;
-      html: HTMLProps<HtmlTagProps>;
-      i: HTMLProps;
-      iframe: HTMLProps<IframeTagProps>;
-      img: HTMLProps<ImgTagProps>;
-      input: HTMLProps<InputTagProps>;
-      ins: HTMLProps<InsTagProps>;
-      kbd: HTMLProps;
-      keygen: HTMLProps;
-      label: HTMLProps<LabelTagProps>;
-      legend: HTMLProps;
-      li: HTMLProps<LiTagProps>;
-      link: HTMLProps<LinkTagProps>;
-      main: HTMLProps;
-      map: HTMLProps<MapTagProps>;
-      mark: HTMLProps;
-      menu: HTMLProps;
-      menuitem: HTMLProps;
-      meta: HTMLProps<MetaTagProps>;
-      meter: HTMLProps<MeterTagProps>;
-      nav: HTMLProps;
-      noindex: HTMLProps;
-      noscript: HTMLProps;
-      object: HTMLProps<ObjectTagProps>;
-      ol: HTMLProps<OlTagProps>;
-      optgroup: HTMLProps<OptgroupTagProps>;
-      option: HTMLProps<OptionTagProps>;
-      output: HTMLProps<OutputTagProps>;
-      p: HTMLProps;
-      param: HTMLProps<ParamTagProps>;
-      picture: HTMLProps;
-      pre: HTMLProps;
-      progress: HTMLProps<ProgressTagProps>;
-      q: HTMLProps<QTagProps>;
-      rp: HTMLProps;
-      rt: HTMLProps;
-      ruby: HTMLProps;
-      s: HTMLProps;
-      samp: HTMLProps;
-      slot: HTMLProps;
-      script: HTMLProps<ScriptTagProps>;
-      section: HTMLProps;
-      select: HTMLProps<SelectTagProps>;
-      small: HTMLProps;
-      source: HTMLProps<SourceTagProps>;
-      span: HTMLProps;
-      strong: HTMLProps;
-      style: HTMLProps<StyleTagProps>;
-      sub: HTMLProps;
-      summary: HTMLProps;
-      sup: HTMLProps;
-      table: HTMLProps;
-      template: HTMLProps;
-      tbody: HTMLProps;
-      td: HTMLProps<TdTagProps>;
-      textarea: HTMLProps<TextareaTagProps>;
-      tfoot: HTMLProps;
-      th: HTMLProps<ThTagProps>;
-      thead: HTMLProps;
-      time: HTMLProps<TimeTagProps>;
-      title: HTMLProps;
-      tr: HTMLProps;
-      track: HTMLProps<TrackTagProps>;
-      u: HTMLProps;
-      ul: HTMLProps;
-      var: HTMLProps;
-      video: HTMLProps<VideoTagProps>;
-      wbr: HTMLProps;
-      webview: HTMLProps;
+      a: HTMLProps<JSXTE.AnchorTagProps>;
+      abbr: HTMLProps<JSXTE.AbbrTagProps>;
+      address: HTMLProps<JSXTE.AddressTagProps>;
+      area: HTMLProps<JSXTE.AreaTagProps>;
+      article: HTMLProps<JSXTE.ArticleTagProps>;
+      aside: HTMLProps<JSXTE.AsideTagProps>;
+      audio: HTMLProps<JSXTE.AudioTagProps>;
+      b: HTMLProps<JSXTE.BTagProps>;
+      base: HTMLProps<JSXTE.BaseTagProps>;
+      bdi: HTMLProps<JSXTE.BdiTagProps>;
+      bdo: HTMLProps<JSXTE.BdoTagProps>;
+      big: HTMLProps<JSXTE.BigTagProps>;
+      blockquote: HTMLProps<JSXTE.BlockquoteTagProps>;
+      body: HTMLProps<JSXTE.BodyTagProps>;
+      br: HTMLProps<JSXTE.BrTagProps>;
+      button: HTMLProps<JSXTE.ButtonTagProps>;
+      canvas: HTMLProps<JSXTE.CanvasTagProps>;
+      caption: HTMLProps<JSXTE.CaptionTagProps>;
+      cite: HTMLProps<JSXTE.CiteTagProps>;
+      code: HTMLProps<JSXTE.CodeTagProps>;
+      col: HTMLProps<JSXTE.ColTagProps>;
+      colgroup: HTMLProps<JSXTE.ColgroupTagProps>;
+      data: HTMLProps<JSXTE.DataTagProps>;
+      datalist: HTMLProps<JSXTE.DatalistTagProps>;
+      dd: HTMLProps<JSXTE.DdTagProps>;
+      del: HTMLProps<JSXTE.DelTagProps>;
+      details: HTMLProps<JSXTE.DetailsTagProps>;
+      dfn: HTMLProps<JSXTE.DfnTagProps>;
+      dialog: HTMLProps<JSXTE.DialogTagProps>;
+      div: HTMLProps<JSXTE.DivTagProps>;
+      dl: HTMLProps<JSXTE.DlTagProps>;
+      dt: HTMLProps<JSXTE.DtTagProps>;
+      em: HTMLProps<JSXTE.EmTagProps>;
+      embed: HTMLProps<JSXTE.EmbedTagProps>;
+      fieldset: HTMLProps<JSXTE.FieldsetTagProps>;
+      figcaption: HTMLProps<JSXTE.FigcaptionTagProps>;
+      figure: HTMLProps<JSXTE.FigureTagProps>;
+      footer: HTMLProps<JSXTE.FooterTagProps>;
+      form: HTMLProps<JSXTE.FormTagProps>;
+      h1: HTMLProps<JSXTE.H1TagProps>;
+      h2: HTMLProps<JSXTE.H2TagProps>;
+      h3: HTMLProps<JSXTE.H3TagProps>;
+      h4: HTMLProps<JSXTE.H4TagProps>;
+      h5: HTMLProps<JSXTE.H5TagProps>;
+      h6: HTMLProps<JSXTE.H6TagProps>;
+      head: HTMLProps<JSXTE.HeadTagProps>;
+      header: HTMLProps<JSXTE.HeaderTagProps>;
+      hgroup: HTMLProps<JSXTE.HgroupTagProps>;
+      hr: HTMLProps<JSXTE.HrTagProps>;
+      html: HTMLProps<JSXTE.HtmlTagProps>;
+      i: HTMLProps<JSXTE.ITagProps>;
+      iframe: HTMLProps<JSXTE.IframeTagProps>;
+      img: HTMLProps<JSXTE.ImgTagProps>;
+      input: HTMLProps<JSXTE.InputTagProps>;
+      ins: HTMLProps<JSXTE.InsTagProps>;
+      kbd: HTMLProps<JSXTE.KbdTagProps>;
+      keygen: HTMLProps<JSXTE.KeygenTagProps>;
+      label: HTMLProps<JSXTE.LabelTagProps>;
+      legend: HTMLProps<JSXTE.LegendTagProps>;
+      li: HTMLProps<JSXTE.LiTagProps>;
+      link: HTMLProps<JSXTE.LinkTagProps>;
+      main: HTMLProps<JSXTE.MainTagProps>;
+      map: HTMLProps<JSXTE.MapTagProps>;
+      mark: HTMLProps<JSXTE.MarkTagProps>;
+      menu: HTMLProps<JSXTE.MenuTagProps>;
+      menuitem: HTMLProps<JSXTE.MenuitemTagProps>;
+      meta: HTMLProps<JSXTE.MetaTagProps>;
+      meter: HTMLProps<JSXTE.MeterTagProps>;
+      nav: HTMLProps<JSXTE.NavTagProps>;
+      noindex: HTMLProps<JSXTE.NoindexTagProps>;
+      noscript: HTMLProps<JSXTE.NoscriptTagProps>;
+      object: HTMLProps<JSXTE.ObjectTagProps>;
+      ol: HTMLProps<JSXTE.OlTagProps>;
+      optgroup: HTMLProps<JSXTE.OptgroupTagProps>;
+      option: HTMLProps<JSXTE.OptionTagProps>;
+      output: HTMLProps<JSXTE.OutputTagProps>;
+      p: HTMLProps<JSXTE.ParagraphTagProps>;
+      param: HTMLProps<JSXTE.ParamTagProps>;
+      picture: HTMLProps<JSXTE.PictureTagProps>;
+      pre: HTMLProps<JSXTE.PreTagProps>;
+      progress: HTMLProps<JSXTE.ProgressTagProps>;
+      q: HTMLProps<JSXTE.QTagProps>;
+      rp: HTMLProps<JSXTE.RpTagProps>;
+      rt: HTMLProps<JSXTE.RtTagProps>;
+      ruby: HTMLProps<JSXTE.RubyTagProps>;
+      s: HTMLProps<JSXTE.STagProps>;
+      samp: HTMLProps<JSXTE.SampTagProps>;
+      slot: HTMLProps<JSXTE.SlotTagProps>;
+      script: HTMLProps<JSXTE.ScriptTagProps>;
+      section: HTMLProps<JSXTE.SectionTagProps>;
+      select: HTMLProps<JSXTE.SelectTagProps>;
+      small: HTMLProps<JSXTE.SmallTagProps>;
+      source: HTMLProps<JSXTE.SourceTagProps>;
+      span: HTMLProps<JSXTE.SpanTagProps>;
+      strong: HTMLProps<JSXTE.StrongTagProps>;
+      style: HTMLProps<JSXTE.StyleTagProps>;
+      sub: HTMLProps<JSXTE.SubTagProps>;
+      summary: HTMLProps<JSXTE.SummaryTagProps>;
+      sup: HTMLProps<JSXTE.SupTagProps>;
+      table: HTMLProps<JSXTE.TableTagProps>;
+      template: HTMLProps<JSXTE.TemplateTagProps>;
+      tbody: HTMLProps<JSXTE.TbodyTagProps>;
+      td: HTMLProps<JSXTE.TdTagProps>;
+      textarea: HTMLProps<JSXTE.TextareaTagProps>;
+      tfoot: HTMLProps<JSXTE.TfootTagProps>;
+      th: HTMLProps<JSXTE.ThTagProps>;
+      thead: HTMLProps<JSXTE.TheadTagProps>;
+      time: HTMLProps<JSXTE.TimeTagProps>;
+      title: HTMLProps<JSXTE.TitleTagProps>;
+      tr: HTMLProps<JSXTE.TrTagProps>;
+      track: HTMLProps<JSXTE.TrackTagProps>;
+      u: HTMLProps<JSXTE.UTagProps>;
+      ul: HTMLProps<JSXTE.UlTagProps>;
+      var: HTMLProps<JSXTE.VarTagProps>;
+      video: HTMLProps<JSXTE.VideoTagProps>;
+      wbr: HTMLProps<JSXTE.WbrTagProps>;
+      webview: HTMLProps<JSXTE.WebviewTagProps>;
 
       // SVG
-      svg: HTMLProps;
+      svg: HTMLProps<JSXTE.SvgTagProps>;
 
       // web components
     }
+  }
+
+  // Interfaces for HTML tags that do not have any additional attributes defined
+  namespace JSXTE {
+    interface AbbrTagProps {}
+    interface AddressTagProps {}
+    interface ArticleTagProps {}
+    interface AsideTagProps {}
+    interface BTagProps {}
+    interface BdiTagProps {}
+    interface BigTagProps {}
+    interface BodyTagProps {}
+    interface BrTagProps {}
+    interface CaptionTagProps {}
+    interface CiteTagProps {}
+    interface CodeTagProps {}
+    interface DatalistTagProps {}
+    interface DdTagProps {}
+    interface DfnTagProps {}
+    interface DivTagProps {}
+    interface DlTagProps {}
+    interface DtTagProps {}
+    interface EmTagProps {}
+    interface FigcaptionTagProps {}
+    interface FigureTagProps {}
+    interface FooterTagProps {}
+    interface H1TagProps {}
+    interface H2TagProps {}
+    interface H3TagProps {}
+    interface H4TagProps {}
+    interface H5TagProps {}
+    interface H6TagProps {}
+    interface HeadTagProps {}
+    interface HeaderTagProps {}
+    interface HgroupTagProps {}
+    interface HrTagProps {}
+    interface ITagProps {}
+    interface KbdTagProps {}
+    interface KeygenTagProps {}
+    interface LegendTagProps {}
+    interface MainTagProps {}
+    interface MarkTagProps {}
+    interface MenuTagProps {}
+    interface MenuitemTagProps {}
+    interface NavTagProps {}
+    interface NoindexTagProps {}
+    interface NoscriptTagProps {}
+    interface ParagraphTagProps {}
+    interface PictureTagProps {}
+    interface PreTagProps {}
+    interface RpTagProps {}
+    interface RtTagProps {}
+    interface RubyTagProps {}
+    interface STagProps {}
+    interface SampTagProps {}
+    interface SlotTagProps {}
+    interface SectionTagProps {}
+    interface SmallTagProps {}
+    interface SpanTagProps {}
+    interface StrongTagProps {}
+    interface SubTagProps {}
+    interface SummaryTagProps {}
+    interface SupTagProps {}
+    interface TableTagProps {}
+    interface TemplateTagProps {}
+    interface TbodyTagProps {}
+    interface TfootTagProps {}
+    interface TheadTagProps {}
+    interface TitleTagProps {}
+    interface TrTagProps {}
+    interface UTagProps {}
+    interface UlTagProps {}
+    interface VarTagProps {}
+    interface WbrTagProps {}
+    interface WebviewTagProps {}
+    interface SvgTagProps {}
   }
 }

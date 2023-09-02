@@ -1,3 +1,9 @@
-export interface TimeTagProps {
-  datetime?: string;
+declare global {
+  namespace JSXTE {
+    interface TimeTagProps {
+      datetime?: string;
+    }
+  }
 }
+
+export {};

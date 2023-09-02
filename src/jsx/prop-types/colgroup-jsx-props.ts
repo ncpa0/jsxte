@@ -1,3 +1,9 @@
-export interface ColgroupTagProps {
-  span?: string | number;
+declare global {
+  namespace JSXTE {
+    interface ColgroupTagProps {
+      span?: string | number;
+    }
+  }
 }
+
+export {};
