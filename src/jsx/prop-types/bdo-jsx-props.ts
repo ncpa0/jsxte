@@ -1,3 +1,9 @@
-export interface BdoTagProps {
-  dir?: "ltr" | "rtl";
+declare global {
+  namespace JSXTE {
+    interface BdoTagProps {
+      dir?: "ltr" | "rtl";
+    }
+  }
 }
+
+export {};

@@ -20,6 +20,8 @@ A JSX based html templating engine for browsers or Node environments.
 7. [Express JS View Engine](#express-js-view-engine)
 8. [Rendering to a string tag template](#rendering-to-a-string-tag-template)
    1. [Example](#example-2)
+9. [Monkey-Patching type definitions](#monkey-patching-type-definitions)
+10. [Contributing](#contributing)
 
 ## Getting started
 
@@ -397,6 +399,52 @@ const result = renderToStringTemplateTag(
     },
   },
 );
+```
+
+## Monkey-Patching type definitions
+
+It is possible to monkey-patch type definition of all HTML tags and add new attributes to them.
+
+#### Extend prop types of a specific tag
+
+The following adds a new attribute to the `<div />` tag - `data-my-attr`:
+
+```tsx
+declare global {
+  namespace JSXTE {
+    interface DivTagProps {
+      "data-my-attr"?: string;
+    }
+  }
+}
+```
+
+#### Extends prop of all html tags
+
+The following adds a new attribute to all html tags - `hx-post`:
+
+```tsx
+declare global {
+  namespace JSXTE {
+    interface BaseHTMLTagProps {
+      "hx-post"?: string;
+    }
+  }
+}
+```
+
+#### Change the accepted type for a specific attribute
+
+The following adds a `Function` type to the `onclick` attribute of all html tags:
+
+```tsx
+declare global {
+  namespace JSXTE {
+    interface AttributeAcceptedTypes {
+      onclick?: Function;
+    }
+  }
+}
 ```
 
 ## Contributing

@@ -1,3 +1,9 @@
-export interface DataTagProps {
-  value?: string;
+declare global {
+  namespace JSXTE {
+    interface DataTagProps {
+      value?: string;
+    }
+  }
 }
+
+export {};

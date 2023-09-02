@@ -1,4 +1,10 @@
-export interface DelTagProps {
-  cite?: string;
-  datetime?: string;
+declare global {
+  namespace JSXTE {
+    interface DelTagProps {
+      cite?: string;
+      datetime?: string;
+    }
+  }
 }
+
+export {};

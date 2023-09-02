@@ -1,5 +1,9 @@
 import type { AttributeBool } from "../base-html-tag-props";
 
-export interface DetailsTagProps {
-  open?: AttributeBool;
+declare global {
+  namespace JSXTE {
+    interface DetailsTagProps {
+      open?: AttributeBool;
+    }
+  }
 }

@@ -1,6 +1,10 @@
 import type { Target } from "./shared/target";
 
-export interface BaseTagProps {
-  href?: string;
-  target?: Target;
+declare global {
+  namespace JSXTE {
+    interface BaseTagProps {
+      href?: string;
+      target?: Target;
+    }
+  }
 }

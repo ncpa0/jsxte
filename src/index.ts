@@ -2,7 +2,6 @@ import "./utilities/array-flat-polyfill";
 
 export * from "./express/index";
 export * from "./jsx/jsx.types";
-export * from "./jsx/prop-types/index";
 
 export {
   Interpolate,
