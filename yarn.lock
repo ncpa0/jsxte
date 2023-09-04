@@ -1498,8 +1498,9 @@ clify.js@ncpa0cpl/clify.js:
   dependencies:
     chalk "^4.1.2"
 
-"clify@github:ncpa0cpl/clify.js#0.0.4":
+clify@ncpa0cpl/clify.js#0.0.4:
   version "1.0.3"
+  uid fe91dede1322b302fbc7ca8f5695ce37ccfb8bf4
   resolved "https://codeload.github.com/ncpa0cpl/clify.js/tar.gz/fe91dede1322b302fbc7ca8f5695ce37ccfb8bf4"
   dependencies:
     chalk "^4.1.2"
@@ -3857,9 +3858,9 @@ prettier-plugin-jsdoc@~1.0.1:
     mdast-util-from-markdown "^1.2.0"
 
 prettier@~3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.0.2.tgz#78fcecd6d870551aa5547437cdae39d4701dca5b"
-  integrity sha512-o2YR9qtniXvwEZlOKbveKfDQVyqxbEIWn48Z8m3ZJjBjcCmUy3xZGIv+7AkaeuaTr6yPXJjwv07ZWlsWbEy1rQ==
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.0.3.tgz#432a51f7ba422d1469096c0fdc28e235db8f9643"
+  integrity sha512-L/4pUDMxcNa8R/EthV08Zt42WBO4h1rarVtK0K+QJG0X187OLo7l699jWw0GKuwzkPQ//jMFA/8Xm6Fh3J/DAg==
 
 pretty-error@^4.0.0:
   version "4.0.0"
