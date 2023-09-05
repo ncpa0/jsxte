@@ -1,3 +1,17 @@
+## 3.1.3 (September 5, 2023)
+
+### BREAKING CHANGES
+
+- #### fix: removed prop types exports ([#193](https://github.com/ncpa0/jsxte/pull/193))
+
+  Exports of all tags prop types were removed, instead those are available via the `JSXTE` global namespace.
+
+### Bug Fixes
+
+- #### fix: as attribute typing for link tag ([#193](https://github.com/ncpa0/jsxte/pull/193))
+
+  Added missing property from the `<link>` tag's prop type, the `as` attribute.
+
 ## 3.1.2 (August 27, 2023)
 
 ### Bug Fixes
@@ -29,7 +43,7 @@
 - #### feat: optimized the code (for..let loops over for..of, faster string join algo, etc.) ([#184](https://github.com/ncpa0/jsxte/pull/184))
 
   Added code optimizations:
-  
+
   1. Instead of `for..of` loops that rely on iterators used the good ol' `for..let i = 0;` loops which are much faster
   2. Replaced all usages of `String.join()` with a much faster custom implementation
   3. Reduced the amount of needless object instantiations, (there were some places where a new object or array was created for convenience reasons, but was not really necessary) - this should slightly reduce the required GC time for cases where a lot of JSX is being processed.
@@ -38,7 +52,7 @@
 - #### feat: improvements to the `renderToStringTemplateTag` ([#183](https://github.com/ncpa0/jsxte/pull/183))
 
   Multiple improvements to the render function for string template tags:
-  
+
   - New `<Interpolate>` and `<InterpolateTag>` components. Contents of those will be interpolated into the string template as is for Interpolate, and as a rendered tag for InterpolateTag (see JSDoc comments on those for more details.
   - Falsy values passed to the attributes will prevent those attributes from being added at all, while truthy values will cause those attributes to be added with their names as values.
   - Caching mechanism to allow for the same input to provide the exact same TemplateStringArray reference to the tag on every call.
