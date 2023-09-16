@@ -1,6 +1,7 @@
 import { ComponentApi } from "../component-api/component-api";
 import { ErrorBoundary } from "../error-boundary/error-boundary";
 import { createElement } from "../jsx-runtime";
+import { SELF_CLOSING_TAG_LIST } from "../utilities/self-closing-tag-list";
 import { Interpolate, InterpolateTag } from "./interpolate";
 import { mapAttributeName } from "./map-attribute-name";
 import type { StringTemplateParserOptions } from "./render-to-string-template-tag";
@@ -136,13 +137,12 @@ export const jsxElemToTagFuncArgsSync = (
 
       return results;
     } else {
+      const isSelfClosingTag =
+        children.length === 0 && SELF_CLOSING_TAG_LIST.includes(element.tag);
+
       const results: TagFunctionArgs = [[], []];
 
-      const part1 = `<${element.tag}`;
-      const part2 = ">";
-      const part3 = `</${element.tag}>`;
-
-      results[0].push(part1);
+      results[0].push(`<${element.tag}`);
 
       const attrList = Object.entries(attributes);
       for (let index = 0; index < attrList.length; index++) {
@@ -161,23 +161,27 @@ export const jsxElemToTagFuncArgsSync = (
         results[0].push('"');
       }
 
-      concatToLastStringOrPush(results, part2);
+      if (isSelfClosingTag) {
+        concatToLastStringOrPush(results, "/>");
+      } else {
+        concatToLastStringOrPush(results, ">");
 
-      for (let i = 0; i < children.length; i++) {
-        const child = children[i]!;
-        const [[first, ...strings], tagParams] = jsxElemToTagFuncArgsSync(
-          child,
-          options,
-          componentApi,
-        );
+        for (let i = 0; i < children.length; i++) {
+          const child = children[i]!;
+          const [[first, ...strings], tagParams] = jsxElemToTagFuncArgsSync(
+            child,
+            options,
+            componentApi,
+          );
 
-        concatToLastStringOrPush(results, first);
+          concatToLastStringOrPush(results, first);
 
-        results[0] = results[0].concat(strings);
-        results[1] = results[1].concat(tagParams);
+          results[0] = results[0].concat(strings);
+          results[1] = results[1].concat(tagParams);
+        }
+
+        concatToLastStringOrPush(results, `</${element.tag}>`);
       }
-
-      concatToLastStringOrPush(results, part3);
 
       return results;
     }
