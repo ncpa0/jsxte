@@ -1,3 +1,11 @@
+## 3.1.4 (September 16, 2023)
+
+### Bug Fixes
+
+- #### fix: self closing tags ([#203](https://github.com/ncpa0/jsxte/pull/203))
+
+  Fixed the issue with the html renderer always producing a separate closing tag, even in cases where the tag could be self closing.
+
 ## 3.1.3 (September 5, 2023)
 
 ### BREAKING CHANGES
