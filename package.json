@@ -1,6 +1,6 @@
 {
   "name": "jsxte",
-  "version": "3.1.3",
+  "version": "3.1.4",
   "description": "JSX-based html templating engine for browsers or Node environments.",
   "license": "MIT",
   "main": "./dist/legacy/index.js",
