@@ -47,7 +47,7 @@
     "@typescript-eslint/parser": "~6.6.0",
     "axios": "~1.5.0",
     "esbuild": "~0.19.2",
-    "eslint": "~8.49.0",
+    "eslint": "~8.50.0",
     "eslint-config-prettier": "~9.0.0",
     "eslint-plugin-prettier": "~5.0.0",
     "git-hook-tasks": "ncpa0cpl/git-hook-tasks",
