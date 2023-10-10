@@ -3,16 +3,16 @@
 exports[`renderToHTML ErrorBoundary should correctly render the tree that's inside an ErrorBoundary 1`] = `
 "  <html>
     <head>
-      <meta charset=\\"utf-8\\"></meta>
-      <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\"></meta>
+      <meta charset=\\"utf-8\\" />
+      <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\" />
       <title>Page Title</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"></meta>
-      <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\"></link>
+      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\" />
+      <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\" />
     </head>
     <body>
       <div class=\\"main-container\\">
           <h2>Hello World!</h2>
-          <input value=\\"write here\\"></input>
+          <input value=\\"write here\\" />
           <button>Submit</button>
       </div>
     </body>
@@ -43,16 +43,16 @@ exports[`renderToHTML ErrorBoundary should render the fallback if the direct chi
 exports[`renderToHTML should correctly generate html from component base jsx structure 1`] = `
 "<html>
   <head>
-    <meta charset=\\"utf-8\\"></meta>
-    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\"></meta>
+    <meta charset=\\"utf-8\\" />
+    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\" />
     <title>Page Title</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"></meta>
-    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\"></link>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\" />
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\" />
   </head>
   <body>
     <div class=\\"main-container\\">
         <h2>Hello World!</h2>
-        <input value=\\"write here\\"></input>
+        <input value=\\"write here\\" />
         <button>Submit</button>
     </div>
   </body>
@@ -64,23 +64,23 @@ exports[`renderToHTML should correctly generate html from simple jsx 1`] = `
   <h1>Hello World</h1>
   <h2>Prop Title</h2>
   <button onclick=\\"console.log(&quot;Hello World!&quot;)\\">Click me!</button>
-  <input autofocus draggable></input>
+  <input autofocus draggable />
 </div>"
 `;
 
 exports[`renderToHTML should correctly parse async components 1`] = `
 "<html>
   <head>
-    <meta charset=\\"utf-8\\"></meta>
-    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\"></meta>
+    <meta charset=\\"utf-8\\" />
+    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\" />
     <title>Page Title</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"></meta>
-    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\"></link>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\" />
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\" />
   </head>
   <body>
     <div class=\\"main-container\\">
         <h2>Async title</h2>
-        <input value=\\"write here\\"></input>
+        <input value=\\"write here\\" />
         <button>Submit</button>
     </div>
   </body>
@@ -147,7 +147,7 @@ exports[`renderToHTML should properly handle context data correctly handles enca
     <div id=\\"root\\">
         <div class=\\"template for-magic\\">
           <div>
-              <input type=\\"text\\" name=\\"repeating_magic_dwarf\\"></input>
+              <input type=\\"text\\" name=\\"repeating_magic_dwarf\\" />
           </div>
         </div>
     </div>
@@ -182,11 +182,11 @@ exports[`renderToHTML should properly handle context data should correctly drill
 exports[`renderToHTML should properly handle context data should correctly handle provider pattern 1`] = `
 "<html>
   <head>
-    <meta charset=\\"utf-8\\"></meta>
-    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\"></meta>
+    <meta charset=\\"utf-8\\" />
+    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\" />
     <title>Page Title</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"></meta>
-    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\"></link>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\" />
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\" />
   </head>
     <body>
       <div class=\\"main-container\\">
@@ -201,15 +201,15 @@ exports[`renderToHTML should properly handle context data should correctly handl
 exports[`renderToHTML should properly handle context data should correctly override existing context data 1`] = `
 "<html>
   <head>
-    <meta charset=\\"utf-8\\"></meta>
-    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\"></meta>
+    <meta charset=\\"utf-8\\" />
+    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\" />
     <title>Page Title</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"></meta>
-    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\"></link>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\" />
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\" />
   </head>
   <body>
       <h1>This title was overridden</h1>
-      <input placeholder=\\"write here\\"></input>
+      <input placeholder=\\"write here\\" />
   </body>
 </html>"
 `;
@@ -217,11 +217,11 @@ exports[`renderToHTML should properly handle context data should correctly overr
 exports[`renderToHTML should properly handle context data should correctly render jsx with context data 1`] = `
 "<html>
   <head>
-    <meta charset=\\"utf-8\\"></meta>
-    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\"></meta>
+    <meta charset=\\"utf-8\\" />
+    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\" />
     <title>Page Title</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"></meta>
-    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\"></link>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\" />
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\" />
   </head>
   <body>
     <div class=\\"main-container\\">
@@ -236,17 +236,17 @@ exports[`renderToHTML should properly handle context data should correctly rende
 exports[`renderToHTML should properly handle context data should correctly render jsx with context data and arrays in between elements 1`] = `
 "<html>
   <head>
-    <meta charset=\\"utf-8\\"></meta>
-    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\"></meta>
+    <meta charset=\\"utf-8\\" />
+    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\" />
     <title>Page Title</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"></meta>
-    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\"></link>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\" />
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\" />
   </head>
   <body>
       <div>
         <h1>This title is set via the context</h1>
       </div>
-      <input placeholder=\\"write here\\"></input>
+      <input placeholder=\\"write here\\" />
       <button>Submit</button>
   </body>
 </html>"
@@ -255,17 +255,17 @@ exports[`renderToHTML should properly handle context data should correctly rende
 exports[`renderToHTML should properly handle context data should correctly render jsx with context data and async components 1`] = `
 "<html>
   <head>
-    <meta charset=\\"utf-8\\"></meta>
-    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\"></meta>
+    <meta charset=\\"utf-8\\" />
+    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\" />
     <title>Page Title</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"></meta>
-    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\"></link>
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\" />
+    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\" />
   </head>
   <body>
       <div>
         <h1>This title is set via the context</h1>
       </div>
-      <input placeholder=\\"write here\\"></input>
+      <input placeholder=\\"write here\\" />
       <button>Submit</button>
   </body>
 </html>"

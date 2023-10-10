@@ -190,40 +190,10 @@ const Foo: JSXTE.Component = (props, componentApi) => {
 
 ### Provider/Consumer Pattern
 
-It is possible to incorporate a Provider/Consumer pattern with the ContextMap API.
+Context also provides a Provider and a Consumer components.
 
 ```tsx
-const makeContextWithProvider = <T,>() => {
-  const ctx = defineContext<T>();
-
-  const Provider: JSXTE.Component<{
-    value: T;
-  }> = (props, componentApi) => {
-    componentApi.ctx.set(ctx, props.value);
-    return <>{props.children}</>;
-  };
-
-  const Consumer: JSXTE.Component<{
-    render: (value?: T) => JSX.Element;
-  }> = (props, componentApi) => {
-    if (componentApi.ctx.has(ctx)) {
-      const value = componentApi.ctx.getOrFail(ctx);
-      return <>{props.render(value)}</>;
-    } else {
-      return <>{props.render()}</>;
-    }
-  };
-
-  return {
-    context: ctx,
-    Provider,
-    Consumer,
-  };
-};
-
-// Use it
-
-const MyContext = makeContextWithProvider<string>();
+const MyContext = defineContext<string>();
 
 const App: JSXTE.Component = () => {
   return (

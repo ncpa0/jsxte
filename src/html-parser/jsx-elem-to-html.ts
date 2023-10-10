@@ -1,6 +1,7 @@
 import { ComponentApi } from "../component-api/component-api";
 import { ErrorBoundary } from "../error-boundary/error-boundary";
 import { join } from "../utilities/join";
+import { SELF_CLOSING_TAG_LIST } from "../utilities/self-closing-tag-list";
 import { mapAttributesToHtmlTagString } from "./attribute-to-html-tag-string";
 import { getHTMLStruct } from "./get-html-struct";
 
@@ -104,6 +105,9 @@ export const jsxElemToHtmlSync = (
       }
       return join(results);
     } else {
+      const isSelfClosingTag =
+        htmlStruct.children.length === 0 &&
+        SELF_CLOSING_TAG_LIST.includes(htmlStruct.tag);
       const inlineTag =
         htmlStruct.children.length === 0 ||
         htmlStruct.children.every(isTextNode);
@@ -113,9 +117,22 @@ export const jsxElemToHtmlSync = (
         mapAttributesToHtmlTagString(htmlStruct.attributes),
         " ",
       );
+
+      const separator = attrString.length ? " " : "";
+
+      if (isSelfClosingTag) {
+        return (
+          `${indentPadding}<${htmlStruct.tag}` +
+          separator +
+          join(mapAttributesToHtmlTagString(htmlStruct.attributes), " ") +
+          separator +
+          "/>"
+        );
+      }
+
       const startTag =
         `${indentPadding}<${htmlStruct.tag}` +
-        (attrString.length ? " " : "") +
+        separator +
         join(mapAttributesToHtmlTagString(htmlStruct.attributes), " ") +
         ">";
       const endTag = `${inlineTag ? "" : indentPadding}</${htmlStruct.tag}>`;
@@ -214,6 +231,9 @@ export const jsxElemToHtmlAsync = async (
       }
       return join(results);
     } else {
+      const isSelfClosingTag =
+        htmlStruct.children.length === 0 &&
+        SELF_CLOSING_TAG_LIST.includes(htmlStruct.tag);
       const inlineTag =
         htmlStruct.children.length === 0 ||
         htmlStruct.children.every(isTextNode);
@@ -223,11 +243,21 @@ export const jsxElemToHtmlAsync = async (
         mapAttributesToHtmlTagString(htmlStruct.attributes),
         " ",
       );
+
+      const separator = attrString.length ? " " : "";
+
+      if (isSelfClosingTag) {
+        return (
+          `${indentPadding}<${htmlStruct.tag}` +
+          separator +
+          join(mapAttributesToHtmlTagString(htmlStruct.attributes), " ") +
+          separator +
+          "/>"
+        );
+      }
+
       const startTag =
-        `${indentPadding}<${htmlStruct.tag}` +
-        (attrString.length ? " " : "") +
-        attrString +
-        ">";
+        `${indentPadding}<${htmlStruct.tag}` + separator + attrString + ">";
       const endTag = `${inlineTag ? "" : indentPadding}</${htmlStruct.tag}>`;
       const children: string[] = [];
 
