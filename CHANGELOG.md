@@ -1,3 +1,11 @@
+## 3.1.5 (October 10, 2023)
+
+### Bug Fixes
+
+- #### fix: types for specific elements were missing ([#218](https://github.com/ncpa0/jsxte/pull/218))
+
+  Types for many elements were missing, this was because types for them were defined as a namespace interfaces in standalone files that were never imported and therefore TypeScript would never load them.
+
 ## 3.1.4 (September 16, 2023)
 
 ### Bug Fixes
