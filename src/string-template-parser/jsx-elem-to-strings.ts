@@ -14,7 +14,9 @@ export type StringTemplateParserInternalOptions =
     tag: StringTemplateTag<any>;
   };
 
-const isSyncElem = (e: JSX.Element): e is JSXTE.SyncElement => true;
+function assertSyncElem(
+  e: JSXTE.TagElement | JSXTE.TextNodeElement | JSX.AsyncElement,
+): asserts e is JSXTE.SyncElement {}
 
 type TagFunctionArgs = [string[], any[]];
 
@@ -33,13 +35,29 @@ export const jsxElemToTagFuncArgsSync = (
   options: StringTemplateParserInternalOptions,
   _componentApi: ComponentApi = ComponentApi.create(),
 ): TagFunctionArgs => {
+  // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
+  switch (typeof element) {
+    case "string":
+      return [["", ""], [element]];
+    case "bigint":
+    case "number":
+      return [["", ""], [String(element)]];
+    case "boolean":
+    case "function":
+    case "symbol":
+    case "undefined":
+      return [["", ""], [""]];
+  }
+
+  if (element === null) return [["", ""], [""]];
+
   const { attributeMap = {} } = options;
 
   const componentApi = _componentApi
     ? ComponentApi.clone(_componentApi)
     : ComponentApi.create({ attributeMap });
 
-  if (!isSyncElem(element)) throw new Error("");
+  assertSyncElem(element);
 
   if (element.type === "textNode") {
     return [["", ""], [element.text]];

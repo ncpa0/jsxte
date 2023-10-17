@@ -2,7 +2,9 @@ import { ComponentApi } from "../component-api/component-api";
 import { ErrorBoundary } from "../error-boundary/error-boundary";
 import { getHTMLStruct } from "../html-parser/get-html-struct";
 
-const isSyncElem = (e: JSX.Element): e is JSXTE.SyncElement => true;
+function assertSyncElem(
+  e: JSXTE.TagElement | JSXTE.TextNodeElement | JSX.AsyncElement,
+): asserts e is JSXTE.SyncElement {}
 
 export type JsonRendererInternalOptions = {
   attributeMap?: Record<string, string>;
@@ -19,13 +21,29 @@ export const jsxElemToJsonSync = (
   _componentApi?: ComponentApi,
   options?: JsonRendererInternalOptions,
 ): JsxteJson | string => {
+  // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
+  switch (typeof element) {
+    case "string":
+      return element;
+    case "bigint":
+    case "number":
+      return String(element);
+    case "boolean":
+    case "function":
+    case "symbol":
+    case "undefined":
+      return "";
+  }
+
+  if (element === null) return "";
+
   const attributeMap = options?.attributeMap ?? {};
 
   const componentApi = _componentApi
     ? ComponentApi.clone(_componentApi)
     : ComponentApi.create(options);
 
-  if (!isSyncElem(element)) throw new Error("");
+  assertSyncElem(element);
 
   if (element.type === "textNode") {
     return element.text;
@@ -107,13 +125,29 @@ export const jsxElemToJsonAsync = async (
   _componentApi?: ComponentApi,
   options?: JsonRendererInternalOptions,
 ): Promise<JsxteJson | string> => {
+  // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
+  switch (typeof element) {
+    case "string":
+      return element;
+    case "bigint":
+    case "number":
+      return String(element);
+    case "boolean":
+    case "function":
+    case "symbol":
+    case "undefined":
+      return "";
+  }
+
+  if (element === null) return "";
+
   const attributeMap = options?.attributeMap ?? {};
 
   const componentApi = _componentApi
     ? ComponentApi.clone(_componentApi)
     : ComponentApi.create(options);
 
-  if (!isSyncElem(element)) throw new Error("");
+  assertSyncElem(element);
 
   if (element.type === "textNode") {
     return element.text;

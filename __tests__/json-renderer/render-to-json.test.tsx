@@ -1202,4 +1202,86 @@ describe("renderToJson", () => {
       });
     });
   });
+
+  it("should correctly handle components returning nulls, undefined and other types", () => {
+    const RetUndef = () => undefined;
+    const RetNull = () => null;
+    const RetTrue = () => true;
+    const RetFalse = () => false;
+    const RetStr = () => "Hello World";
+    const RetNum = () => 1234;
+
+    const Main = () => {
+      return (
+        <div>
+          <div>
+            Undef: <RetUndef />
+          </div>
+          <div>
+            Null: <RetNull />
+          </div>
+          <div>
+            True: <RetTrue />
+          </div>
+          <div>
+            False: <RetFalse />
+          </div>
+          <div>
+            Str: <RetStr />
+          </div>
+          <div>
+            Num: <RetNum />
+          </div>
+        </div>
+      );
+    };
+
+    const html = renderToJson(<Main />);
+
+    expect(html).toMatchSnapshot();
+  });
+
+  it("should correctly handle component children of type nulls, undefined and other", () => {
+    const RetUndef = () => <span>{undefined}</span>;
+    const RetNull = () => <span>{null}</span>;
+    const RetTrue = () => <span>{true}</span>;
+    const RetFalse = () => <span>{false}</span>;
+    const RetStr = () => <span>{"Hello World"}</span>;
+    const RetNum = () => <span>{1234}</span>;
+    const RetArr = () => (
+      <span>{[undefined, null, true, false, "hi", 423]}</span>
+    );
+
+    const Main = () => {
+      return (
+        <div>
+          <div>
+            Undef: <RetUndef />
+          </div>
+          <div>
+            Null: <RetNull />
+          </div>
+          <div>
+            True: <RetTrue />
+          </div>
+          <div>
+            False: <RetFalse />
+          </div>
+          <div>
+            Str: <RetStr />
+          </div>
+          <div>
+            Num: <RetNum />
+          </div>
+          <div>
+            Arr: <RetArr />
+          </div>
+        </div>
+      );
+    };
+
+    const html = renderToJson(<Main />);
+
+    expect(html).toMatchSnapshot();
+  });
 });

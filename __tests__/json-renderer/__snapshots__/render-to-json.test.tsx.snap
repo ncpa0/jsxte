@@ -397,6 +397,163 @@ Object {
 }
 `;
 
+exports[`renderToJson should correctly handle component children of type nulls, undefined and other 1`] = `
+Object {
+  "attributes": Array [],
+  "children": Array [
+    Object {
+      "attributes": Array [],
+      "children": Array [
+        "Undef: ",
+        Object {
+          "attributes": Array [],
+          "children": Array [],
+          "element": "span",
+        },
+      ],
+      "element": "div",
+    },
+    Object {
+      "attributes": Array [],
+      "children": Array [
+        "Null: ",
+        Object {
+          "attributes": Array [],
+          "children": Array [],
+          "element": "span",
+        },
+      ],
+      "element": "div",
+    },
+    Object {
+      "attributes": Array [],
+      "children": Array [
+        "True: ",
+        Object {
+          "attributes": Array [],
+          "children": Array [],
+          "element": "span",
+        },
+      ],
+      "element": "div",
+    },
+    Object {
+      "attributes": Array [],
+      "children": Array [
+        "False: ",
+        Object {
+          "attributes": Array [],
+          "children": Array [],
+          "element": "span",
+        },
+      ],
+      "element": "div",
+    },
+    Object {
+      "attributes": Array [],
+      "children": Array [
+        "Str: ",
+        Object {
+          "attributes": Array [],
+          "children": Array [
+            "Hello World",
+          ],
+          "element": "span",
+        },
+      ],
+      "element": "div",
+    },
+    Object {
+      "attributes": Array [],
+      "children": Array [
+        "Num: ",
+        Object {
+          "attributes": Array [],
+          "children": Array [
+            "1234",
+          ],
+          "element": "span",
+        },
+      ],
+      "element": "div",
+    },
+    Object {
+      "attributes": Array [],
+      "children": Array [
+        "Arr: ",
+        Object {
+          "attributes": Array [],
+          "children": Array [
+            "hi",
+            "423",
+          ],
+          "element": "span",
+        },
+      ],
+      "element": "div",
+    },
+  ],
+  "element": "div",
+}
+`;
+
+exports[`renderToJson should correctly handle components returning nulls, undefined and other types 1`] = `
+Object {
+  "attributes": Array [],
+  "children": Array [
+    Object {
+      "attributes": Array [],
+      "children": Array [
+        "Undef: ",
+        "",
+      ],
+      "element": "div",
+    },
+    Object {
+      "attributes": Array [],
+      "children": Array [
+        "Null: ",
+        "",
+      ],
+      "element": "div",
+    },
+    Object {
+      "attributes": Array [],
+      "children": Array [
+        "True: ",
+        "",
+      ],
+      "element": "div",
+    },
+    Object {
+      "attributes": Array [],
+      "children": Array [
+        "False: ",
+        "",
+      ],
+      "element": "div",
+    },
+    Object {
+      "attributes": Array [],
+      "children": Array [
+        "Str: ",
+        "Hello World",
+      ],
+      "element": "div",
+    },
+    Object {
+      "attributes": Array [],
+      "children": Array [
+        "Num: ",
+        "1234",
+      ],
+      "element": "div",
+    },
+  ],
+  "element": "div",
+}
+`;
+
 exports[`renderToJson should correctly parse async components 1`] = `
 Object {
   "attributes": Array [],
