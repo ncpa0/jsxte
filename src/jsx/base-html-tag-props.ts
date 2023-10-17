@@ -27,9 +27,7 @@ declare global {
     type TagElement = {
       type: "tag";
       tag:
-        | string
-        | ((props: ElementProps, contextMap: ComponentApi) => Element)
-        | ((props: ElementProps, contextMap: ComponentApi) => Promise<Element>)
+        | ((props: ElementProps, contextMap: ComponentApi) => JSX.Element)
         | ErrorBoundaryElement;
       props: ElementProps;
     };

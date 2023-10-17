@@ -19,11 +19,18 @@ describe("renderToHTML", () => {
   it("should correctly generate html from simple jsx", () => {
     const Component = (props: { title: string }) => {
       return (
-        <div id="container" class={"bordered active"}>
+        <div
+          id="container"
+          class={"bordered active"}
+        >
           <h1>Hello World</h1>
           <h2>{props.title}</h2>
           <button onclick={'console.log("Hello World!")'}>Click me!</button>
-          <input autofocus={true} disabled={false} draggable />
+          <input
+            autofocus={true}
+            disabled={false}
+            draggable
+          />
         </div>
       );
     };
@@ -47,7 +54,10 @@ describe("renderToHTML", () => {
         <html>
           <head>
             <meta charset="utf-8" />
-            <meta http-equiv="x-ua-compatible" content="IE=edge" />
+            <meta
+              http-equiv="x-ua-compatible"
+              content="IE=edge"
+            />
             <title>Page Title</title>
             <meta
               name="viewport"
@@ -126,7 +136,10 @@ describe("renderToHTML", () => {
         <html>
           <head>
             <meta charset="utf-8" />
-            <meta http-equiv="x-ua-compatible" content="IE=edge" />
+            <meta
+              http-equiv="x-ua-compatible"
+              content="IE=edge"
+            />
             <title>Page Title</title>
             <meta
               name="viewport"
@@ -267,7 +280,10 @@ describe("renderToHTML", () => {
           <html>
             <head>
               <meta charset="utf-8" />
-              <meta http-equiv="x-ua-compatible" content="IE=edge" />
+              <meta
+                http-equiv="x-ua-compatible"
+                content="IE=edge"
+              />
               <title>Page Title</title>
               <meta
                 name="viewport"
@@ -347,7 +363,10 @@ describe("renderToHTML", () => {
           <html>
             <head>
               <meta charset="utf-8" />
-              <meta http-equiv="x-ua-compatible" content="IE=edge" />
+              <meta
+                http-equiv="x-ua-compatible"
+                content="IE=edge"
+              />
               <title>Page Title</title>
               <meta
                 name="viewport"
@@ -430,7 +449,10 @@ describe("renderToHTML", () => {
           <html>
             <head>
               <meta charset="utf-8" />
-              <meta http-equiv="x-ua-compatible" content="IE=edge" />
+              <meta
+                http-equiv="x-ua-compatible"
+                content="IE=edge"
+              />
               <title>Page Title</title>
               <meta
                 name="viewport"
@@ -503,7 +525,10 @@ describe("renderToHTML", () => {
           <html>
             <head>
               <meta charset="utf-8" />
-              <meta http-equiv="x-ua-compatible" content="IE=edge" />
+              <meta
+                http-equiv="x-ua-compatible"
+                content="IE=edge"
+              />
               <title>Page Title</title>
               <meta
                 name="viewport"
@@ -539,7 +564,7 @@ describe("renderToHTML", () => {
           context: ContextDefinition<T>;
           value: T;
         },
-        { ctx }: ComponentApi
+        { ctx }: ComponentApi,
       ) => {
         ctx.set(props.context, props.value);
         return <>{props.children}</>;
@@ -569,7 +594,10 @@ describe("renderToHTML", () => {
           <html>
             <head>
               <meta charset="utf-8" />
-              <meta http-equiv="x-ua-compatible" content="IE=edge" />
+              <meta
+                http-equiv="x-ua-compatible"
+                content="IE=edge"
+              />
               <title>Page Title</title>
               <meta
                 name="viewport"
@@ -582,7 +610,10 @@ describe("renderToHTML", () => {
                 href="main.css"
               />
             </head>
-            <Provider context={myContext} value={{ title: "Provided title" }}>
+            <Provider
+              context={myContext}
+              value={{ title: "Provided title" }}
+            >
               <body>
                 <Content />
               </body>
@@ -610,7 +641,7 @@ describe("renderToHTML", () => {
           value: T;
           sleep?: boolean;
         }>,
-        { ctx }: ComponentApi
+        { ctx }: ComponentApi,
       ) => {
         if (props.sleep) await sleep(Math.random() * 1000);
         ctx.set(props.context, props.value);
@@ -650,7 +681,10 @@ describe("renderToHTML", () => {
       const html = await renderToHtmlAsync(
         <html>
           <body>
-            <Provider context={store} value={"foo"}>
+            <Provider
+              context={store}
+              value={"foo"}
+            >
               <div>
                 <div>
                   <W1 />
@@ -658,7 +692,7 @@ describe("renderToHTML", () => {
               </div>
             </Provider>
           </body>
-        </html>
+        </html>,
       );
 
       expect(html).toMatchSnapshot();
@@ -678,7 +712,7 @@ describe("renderToHTML", () => {
           value: T;
           sleep?: number;
         }>,
-        { ctx }: ComponentApi
+        { ctx }: ComponentApi,
       ) => {
         if (props.sleep) await sleep(props.sleep);
         ctx.set(props.context, props.value);
@@ -688,31 +722,56 @@ describe("renderToHTML", () => {
       const html = await renderToHtmlAsync(
         <html>
           <body>
-            <Provider context={store} value={"foo"}>
-              <Provider sleep={30} context={store} value={"bar"}>
+            <Provider
+              context={store}
+              value={"foo"}
+            >
+              <Provider
+                sleep={30}
+                context={store}
+                value={"bar"}
+              >
                 <Title />
               </Provider>
               {[
-                <Provider context={store} value={"baz"}>
+                <Provider
+                  context={store}
+                  value={"baz"}
+                >
                   <Title />
                 </Provider>,
-                <Provider sleep={50} context={store} value={"qux"}>
+                <Provider
+                  sleep={50}
+                  context={store}
+                  value={"qux"}
+                >
                   <Title />
                 </Provider>,
-                <Provider sleep={10} context={store} value={"coorg"}>
+                <Provider
+                  sleep={10}
+                  context={store}
+                  value={"coorg"}
+                >
                   <Title />
                 </Provider>,
               ]}
-              <Provider sleep={30} context={store} value={"fred"}>
+              <Provider
+                sleep={30}
+                context={store}
+                value={"fred"}
+              >
                 <Title />
               </Provider>
-              <Provider context={store} value={"thud"}>
+              <Provider
+                context={store}
+                value={"thud"}
+              >
                 <Title />
               </Provider>
               <Title />
             </Provider>
           </body>
-        </html>
+        </html>,
       );
 
       expect(html).toMatchSnapshot();
@@ -728,14 +787,14 @@ describe("renderToHTML", () => {
             props: JSXTE.PropsWithChildren<{
               value: T;
             }>,
-            { ctx }: ComponentApi
+            { ctx }: ComponentApi,
           ) => {
             ctx.set(dctx, props.value);
             return <>{props.children}</>;
           },
           Consumer: (
             props: { render: (value?: T) => JSX.Element },
-            { ctx }: ComponentApi
+            { ctx }: ComponentApi,
           ) => {
             if (ctx.has(dctx)) {
               const value = ctx.get(dctx);
@@ -772,7 +831,12 @@ describe("renderToHTML", () => {
           <MagicalContext.Consumer
             render={(ctxName) => {
               const fullName = `${ctxName ?? ""}${name}`;
-              return <input type="text" name={fullName} />;
+              return (
+                <input
+                  type="text"
+                  name={fullName}
+                />
+              );
             }}
           />
         );
@@ -805,7 +869,10 @@ describe("renderToHTML", () => {
       const Foo: JSXTE.Component<{ id: string }> = (props, { ctx }) => {
         const value = ctx.get(MagicalContext) ?? "no value";
         return (
-          <div id={props.id} class="foo">
+          <div
+            id={props.id}
+            class="foo"
+          >
             {value}
           </div>
         );
@@ -853,7 +920,7 @@ describe("renderToHTML", () => {
       onError(
         error: unknown,
         originalProps: JSXTE.ElementProps,
-        contextMap: ComponentApi
+        contextMap: ComponentApi,
       ): JSX.Element {
         return <h1>Oops. Something went wrong.</h1>;
       }
@@ -873,7 +940,10 @@ describe("renderToHTML", () => {
           <html>
             <head>
               <meta charset="utf-8" />
-              <meta http-equiv="x-ua-compatible" content="IE=edge" />
+              <meta
+                http-equiv="x-ua-compatible"
+                content="IE=edge"
+              />
               <title>Page Title</title>
               <meta
                 name="viewport"
@@ -1134,5 +1204,87 @@ describe("renderToHTML", () => {
         expect(html).toMatchSnapshot();
       });
     });
+  });
+
+  it("should correctly handle components returning nulls, undefined and other types", () => {
+    const RetUndef = () => undefined;
+    const RetNull = () => null;
+    const RetTrue = () => true;
+    const RetFalse = () => false;
+    const RetStr = () => "Hello World";
+    const RetNum = () => 1234;
+
+    const Main = () => {
+      return (
+        <div>
+          <div>
+            Undef: <RetUndef />
+          </div>
+          <div>
+            Null: <RetNull />
+          </div>
+          <div>
+            True: <RetTrue />
+          </div>
+          <div>
+            False: <RetFalse />
+          </div>
+          <div>
+            Str: <RetStr />
+          </div>
+          <div>
+            Num: <RetNum />
+          </div>
+        </div>
+      );
+    };
+
+    const html = renderToHtml(<Main />);
+
+    expect(html).toMatchSnapshot();
+  });
+
+  it("should correctly handle component children of type nulls, undefined and other", () => {
+    const RetUndef = () => <span>{undefined}</span>;
+    const RetNull = () => <span>{null}</span>;
+    const RetTrue = () => <span>{true}</span>;
+    const RetFalse = () => <span>{false}</span>;
+    const RetStr = () => <span>{"Hello World"}</span>;
+    const RetNum = () => <span>{1234}</span>;
+    const RetArr = () => (
+      <span>{[undefined, null, true, false, "hi", 423]}</span>
+    );
+
+    const Main = () => {
+      return (
+        <div>
+          <div>
+            Undef: <RetUndef />
+          </div>
+          <div>
+            Null: <RetNull />
+          </div>
+          <div>
+            True: <RetTrue />
+          </div>
+          <div>
+            False: <RetFalse />
+          </div>
+          <div>
+            Str: <RetStr />
+          </div>
+          <div>
+            Num: <RetNum />
+          </div>
+          <div>
+            Arr: <RetArr />
+          </div>
+        </div>
+      );
+    };
+
+    const html = renderToHtml(<Main />);
+
+    expect(html).toMatchSnapshot();
   });
 });

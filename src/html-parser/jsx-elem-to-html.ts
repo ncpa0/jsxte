@@ -5,9 +5,12 @@ import { SELF_CLOSING_TAG_LIST } from "../utilities/self-closing-tag-list";
 import { mapAttributesToHtmlTagString } from "./attribute-to-html-tag-string";
 import { getHTMLStruct } from "./get-html-struct";
 
-const isSyncElem = (e: JSX.Element): e is JSXTE.SyncElement => true;
+function assertSyncElem(
+  e: JSXTE.TagElement | JSXTE.TextNodeElement | JSX.AsyncElement,
+): asserts e is JSXTE.SyncElement {}
+
 const isTextNode = (e: JSX.Element): e is JSXTE.TextNodeElement =>
-  "type" in e && e.type === "textNode";
+  typeof e === "object" && e != null && "type" in e && e.type === "textNode";
 
 export type RendererInternalOptions = {
   indent?: number;
@@ -20,6 +23,22 @@ export const jsxElemToHtmlSync = (
   _componentApi?: ComponentApi,
   options?: RendererInternalOptions,
 ): string => {
+  // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
+  switch (typeof element) {
+    case "string":
+      return element;
+    case "bigint":
+    case "number":
+      return String(element);
+    case "boolean":
+    case "function":
+    case "symbol":
+    case "undefined":
+      return "";
+  }
+
+  if (element === null) return "";
+
   const attributeMap = options?.attributeMap ?? {};
   const currentIndent = options?.currentIndent ?? 0;
   const indent = options?.indent ?? 2;
@@ -28,7 +47,7 @@ export const jsxElemToHtmlSync = (
     ? ComponentApi.clone(_componentApi)
     : ComponentApi.create(options);
 
-  if (!isSyncElem(element)) throw new Error("");
+  assertSyncElem(element);
 
   if (element.type === "textNode") {
     const indentPadding = " ".repeat(currentIndent);
@@ -163,12 +182,28 @@ export const jsxElemToHtmlAsync = async (
   _componentApi?: ComponentApi,
   options?: RendererInternalOptions,
 ): Promise<string> => {
+  // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
+  switch (typeof element) {
+    case "string":
+      return element;
+    case "bigint":
+    case "number":
+      return String(element);
+    case "boolean":
+    case "function":
+    case "symbol":
+    case "undefined":
+      return "";
+  }
+
+  if (element === null) return "";
+
   const { attributeMap = {}, currentIndent = 0, indent = 2 } = options ?? {};
   const componentApi = _componentApi
     ? ComponentApi.clone(_componentApi)
     : ComponentApi.create(options);
 
-  if (!isSyncElem(element)) throw new Error("");
+  assertSyncElem(element);
 
   if (element.type === "textNode") {
     const indentPadding = " ".repeat(currentIndent);
