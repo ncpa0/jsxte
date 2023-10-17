@@ -49,8 +49,23 @@ import type { HTMLProps } from "./base-html-tag-props";
 
 declare global {
   namespace JSX {
-    type AsyncElement = Promise<JSXTE.TagElement | JSXTE.TextNodeElement>;
-    type SyncElement = JSXTE.TagElement | JSXTE.TextNodeElement;
+    type AsyncElement = Promise<
+      | JSXTE.TagElement
+      | JSXTE.TextNodeElement
+      | null
+      | undefined
+      | boolean
+      | string
+      | number
+    >;
+    type SyncElement =
+      | JSXTE.TagElement
+      | JSXTE.TextNodeElement
+      | null
+      | undefined
+      | boolean
+      | string
+      | number;
 
     type Element = SyncElement | AsyncElement;
 

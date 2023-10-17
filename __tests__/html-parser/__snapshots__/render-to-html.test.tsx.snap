@@ -68,6 +68,64 @@ exports[`renderToHTML should correctly generate html from simple jsx 1`] = `
 </div>"
 `;
 
+exports[`renderToHTML should correctly handle component children of type nulls, undefined and other 1`] = `
+"<div>
+  <div>
+    Undef: 
+    <span></span>
+  </div>
+  <div>
+    Null: 
+    <span></span>
+  </div>
+  <div>
+    True: 
+    <span></span>
+  </div>
+  <div>
+    False: 
+    <span></span>
+  </div>
+  <div>
+    Str: 
+    <span>Hello World</span>
+  </div>
+  <div>
+    Num: 
+    <span>1234</span>
+  </div>
+  <div>
+    Arr: 
+    <span>hi423</span>
+  </div>
+</div>"
+`;
+
+exports[`renderToHTML should correctly handle components returning nulls, undefined and other types 1`] = `
+"<div>
+  <div>
+    Undef: 
+  </div>
+  <div>
+    Null: 
+  </div>
+  <div>
+    True: 
+  </div>
+  <div>
+    False: 
+  </div>
+  <div>
+    Str: 
+Hello World
+  </div>
+  <div>
+    Num: 
+1234
+  </div>
+</div>"
+`;
+
 exports[`renderToHTML should correctly parse async components 1`] = `
 "<html>
   <head>
