@@ -1,3 +1,38 @@
+## 3.1.6 (October 23, 2023)
+
+### Features
+
+- #### feat: Add view-transition as allowed name for meta-tag. ([#225](https://github.com/ncpa0/jsxte/pull/225))
+
+  Updated types for the `<meta>` tag to allow for the `view-transition` as name attribute value.
+
+- #### feat: allow null, undefined, booleans, string and numbers as jsx elements ([#221](https://github.com/ncpa0/jsxte/pull/221))
+
+  It is now possible to return other things from function components than elements created via `createElement` or JSX syntax. Anything that is not an object, string or number will be treated as if `<></>` was returned, returned strings and numbers will be treated as `<>{value}</>`, objects are expected to be elements created via `createElement` or JSX syntax (no change here).
+
+  This means that the following components are now possible:
+
+  ```tsx
+  function MyComponent() {
+    return !!condition && <div>...</div>;
+  }
+
+  function MyComponent() {
+    return "Hello";
+  }
+
+  function MyComponent() {
+    return 2023;
+  }
+
+  // ok
+  renderToHtml(
+    <div>
+      <MyComponent />
+    </div>,
+  );
+  ```
+
 ## 3.1.5 (October 10, 2023)
 
 ### Bug Fixes
