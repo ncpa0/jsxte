@@ -2,7 +2,7 @@ import "../../src/jsx/jsx.types";
 import {
   renderToHtml,
   renderToHtmlAsync,
-} from "../../src/html-parser/render-to-html";
+} from "../../src/html-renderer/render-to-html";
 // @ts-ignore
 import { jsx, Fragment } from "../../src/jsx/jsx-runtime";
 import {

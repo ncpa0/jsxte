@@ -2,7 +2,7 @@ import {
   jsxElemToHtmlAsync,
   jsxElemToHtmlSync,
   type RendererInternalOptions,
-} from "../html-parser/jsx-elem-to-html";
+} from "../html-renderer/jsx-elem-to-html";
 import {
   jsxElemToJsonAsync,
   jsxElemToJsonSync,

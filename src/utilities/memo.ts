@@ -1,11 +1,14 @@
 import type { ComponentApi } from "../component-api/component-api";
-import { renderToHtml, renderToHtmlAsync } from "../html-parser/render-to-html";
+import {
+  renderToHtml,
+  renderToHtmlAsync,
+} from "../html-renderer/render-to-html";
 import { jsx, Fragment } from "../jsx-runtime";
 import { Cache } from "./cache";
 
 const ReplaceMap = <P extends { context: ComponentApi }>(
   props: JSXTE.PropsWithChildren<P>,
-  context: ComponentApi
+  context: ComponentApi,
 ) => {
   context.ctx.replace(props.context.ctx);
   // @ts-ignore
@@ -13,34 +16,33 @@ const ReplaceMap = <P extends { context: ComponentApi }>(
 };
 
 /**
- * Creates an in-memory cache for the provided component and
- * returns a new component that will shallow compare props
- * provided to it and return a cached html string if the props
- * match those provided in previous renders.
+ * Creates an in-memory cache for the provided component and returns a new
+ * component that will shallow compare props provided to it and return a cached
+ * html string if the props match those provided in previous renders.
  *
- * Props comparison is shallow, so it's best to avoid using
- * `memo` on components that have objects passed to it as props.
+ * Props comparison is shallow, so it's best to avoid using `memo` on components
+ * that have objects passed to it as props.
  *
- * Component children are not compared, so if only children
- * change, the component will use the cached html string and not
- * reflect those changes.
+ * Component children are not compared, so if only children change, the
+ * component will use the cached html string and not reflect those changes.
  */
 export const memo = <P extends object & { children?: any }>(
   Component: (props: P, context: ComponentApi) => JSX.Element,
   options?: {
-    /** Time in milliseconds. Default: 15 minutes. */
+    /**
+     * Time in milliseconds. Default: 15 minutes.
+     */
     maxCacheAge?: number;
     /**
-     * Whether to use `renderToHtmlAsync` or `renderToHtml` to
-     * render this component. Default: `false`.
+     * Whether to use `renderToHtmlAsync` or `renderToHtml` to render this
+     * component. Default: `false`.
      */
     renderAsynchronously?: boolean;
     /**
-     * Maximum number of cached entries to keep in memory.
-     * Default: 10.
+     * Maximum number of cached entries to keep in memory. Default: 10.
      */
     maxCacheEntries?: number;
-  }
+  },
 ) => {
   const {
     maxCacheAge,
@@ -53,7 +55,7 @@ export const memo = <P extends object & { children?: any }>(
   if (renderAsynchronously) {
     const MemoComponentAsync = async (
       props: P,
-      context: ComponentApi
+      context: ComponentApi,
     ): Promise<JSXTE.TextNodeElement> => {
       const { children, ...propsNoChildren } = props;
 
@@ -64,8 +66,8 @@ export const memo = <P extends object & { children?: any }>(
         jsx(
           ReplaceMap,
           { context },
-          jsx(Component, { ...propsNoChildren }, children)
-        )
+          jsx(Component, { ...propsNoChildren }, children),
+        ),
       );
       const textNode: JSXTE.TextNodeElement = {
         text: result,
@@ -81,7 +83,7 @@ export const memo = <P extends object & { children?: any }>(
 
   const MemoComponent = (
     props: P,
-    context: ComponentApi
+    context: ComponentApi,
   ): JSXTE.TextNodeElement => {
     const { children, ...propsNoChildren } = props;
 
@@ -92,8 +94,8 @@ export const memo = <P extends object & { children?: any }>(
       jsx(
         ReplaceMap,
         { context },
-        jsx(Component, { ...propsNoChildren }, children)
-      )
+        jsx(Component, { ...propsNoChildren }, children),
+      ),
     );
     const textNode: JSXTE.TextNodeElement = {
       text: result,

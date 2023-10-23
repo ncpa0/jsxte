@@ -1,5 +1,5 @@
-import { mapAttributeName } from "../../string-template-parser/map-attribute-name";
-import type { HTMLElementStruct, RendererHTMLAttributes } from "../types";
+import { mapAttributeName } from "../string-template-renderer/map-attribute-name";
+import type { HTMLElementStruct, RendererHTMLAttributes } from "./types";
 
 export class HTMLElementResolver {
   private attributeMap: Record<string, string> = {};

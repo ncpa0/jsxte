@@ -5,7 +5,7 @@ import {
 import {
   renderToHtml,
   renderToHtmlAsync,
-} from "../../src/html-parser/render-to-html";
+} from "../../src/html-renderer/render-to-html";
 import { jsx } from "../../src/jsx/jsx-runtime";
 import { memo } from "../../src/utilities/memo";
 
@@ -45,7 +45,7 @@ describe("memo", () => {
       () => {
         return <h1>{variable}</h1>;
       },
-      { maxCacheAge: 100 }
+      { maxCacheAge: 100 },
     );
 
     const Root = () => {
@@ -141,7 +141,7 @@ describe("memo", () => {
 
         return <h1>{variable}</h1>;
       },
-      { renderAsynchronously: true }
+      { renderAsynchronously: true },
     );
 
     const Root = () => {

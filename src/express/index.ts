@@ -1,4 +1,4 @@
-import { renderToHtmlAsync } from "../html-parser/render-to-html";
+import { renderToHtmlAsync } from "../html-renderer/render-to-html";
 import { createElement } from "../jsx/jsx-runtime";
 
 /**
@@ -9,7 +9,7 @@ import { createElement } from "../jsx/jsx-runtime";
 const __express = async <P extends object>(
   filePath: string,
   options: P,
-  callback: (e: any, rendered?: string | undefined) => void
+  callback: (e: any, rendered?: string | undefined) => void,
 ) => {
   // @ts-expect-error
   options ??= {};
@@ -30,8 +30,8 @@ type ExpressApp = {
     fn: (
       path: string,
       options: object,
-      callback: (e: any, rendered?: string) => void
-    ) => void
+      callback: (e: any, rendered?: string) => void,
+    ) => void,
   ): any;
   set(setting: string, val: any): any;
 };
@@ -39,8 +39,8 @@ type ExpressApp = {
 /**
  * Extends the Express server to use jsxte engine for rendering views.
  *
- * View files should have `.js` extension and have a default
- * export with a jsx component.
+ * View files should have `.js` extension and have a default export with a jsx
+ * component.
  */
 export const expressExtend = (app: ExpressApp) => {
   app.engine("js", __express);

@@ -1,6 +1,6 @@
 import type { ComponentApi } from "../component-api/component-api";
 import type { ErrorBoundaryElement } from "../error-boundary/error-boundary";
-import type { Rewrap } from "../html-parser/types";
+import type { Rewrap } from "../html-renderer/types";
 
 export type AttributeBool = true | false | "true" | "false";
 

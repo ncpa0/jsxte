@@ -1,6 +1,6 @@
 import { ComponentApi } from "../component-api/component-api";
 import { ErrorBoundary } from "../error-boundary/error-boundary";
-import { getHTMLStruct } from "../html-parser/get-html-struct";
+import { getHTMLStruct } from "../html-renderer/get-html-struct";
 
 function assertSyncElem(
   e: JSXTE.TagElement | JSXTE.TextNodeElement | JSX.AsyncElement,
