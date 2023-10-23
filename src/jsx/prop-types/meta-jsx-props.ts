@@ -15,7 +15,8 @@ declare global {
         | "description"
         | "generator"
         | "keywords"
-        | "viewport";
+        | "viewport"
+        | "view-transition";
     }
   }
 }
