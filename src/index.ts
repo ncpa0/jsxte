@@ -21,6 +21,7 @@ export {
 export { renderToStringTemplateTag } from "./string-template-renderer/render-to-string-template-tag";
 export { memo } from "./utilities/memo";
 export { createElement } from "./jsx/jsx-runtime";
+export { JsxteRenderError } from "./jsxte-render-error";
 
 export type {
   ContextDefinition,

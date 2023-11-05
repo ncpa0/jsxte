@@ -1,5 +1,8 @@
 import { ComponentApi } from "../component-api/component-api";
 import { ErrorBoundary } from "../error-boundary/error-boundary";
+import { JsxteRenderError } from "../jsxte-render-error";
+import { getComponentName } from "../utilities/get-component-name";
+import { getErrorMessage } from "../utilities/get-err-message";
 import { join } from "../utilities/join";
 import { SELF_CLOSING_TAG_LIST } from "../utilities/self-closing-tag-list";
 import { mapAttributesToHtmlTagString } from "./attribute-to-html-tag-string";
@@ -65,8 +68,9 @@ export const jsxElemToHtmlSync = (
         ) as any as JSXTE.SyncElement;
 
         if (subElem instanceof Promise) {
-          throw new Error(
+          throw new JsxteRenderError(
             `Encountered an async Component: [${element.tag.name}.render] Asynchronous Component's cannot be parsed by rendertoHTML. If you wante to use asynchronous components use renderToHtmlAsync instead.`,
+            getComponentName(element.tag),
           );
         }
 
@@ -76,103 +80,157 @@ export const jsxElemToHtmlSync = (
           attributeMap,
         });
       } catch (e) {
-        const fallbackElem = boundary.onError(e, element.props, componentApi);
+        try {
+          const fallbackElem = boundary.onError(e, element.props, componentApi);
 
-        if (fallbackElem instanceof Promise) {
-          throw new Error(
-            `Encountered an async Component: [${element.tag.name}.onError] Asynchronous Component's cannot be parsed by rendertoHTML. If you wante to use asynchronous components use renderToHtmlAsync instead.`,
-          );
+          if (fallbackElem instanceof Promise) {
+            throw new JsxteRenderError(
+              `Encountered an async Component: [${element.tag.name}.onError] Asynchronous Component's cannot be parsed by rendertoHTML. If you wante to use asynchronous components use renderToHtmlAsync instead.`,
+            );
+          }
+
+          return jsxElemToHtmlSync(fallbackElem, componentApi, {
+            indent,
+            currentIndent: currentIndent,
+            attributeMap,
+          });
+        } catch (err) {
+          const tagname = getComponentName(element.tag) + ".onError";
+
+          if (!JsxteRenderError.is(err)) {
+            throw new JsxteRenderError(
+              "Rendering has failed due to an error: " + getErrorMessage(err),
+              tagname,
+            );
+          }
+
+          err.pushParent(tagname);
+          throw err;
         }
-
-        return jsxElemToHtmlSync(fallbackElem, componentApi, {
-          indent,
-          currentIndent: currentIndent,
-          attributeMap,
-        });
       }
     }
 
-    const subElem = element.tag(
-      element.props,
-      componentApi,
-    ) as any as JSXTE.SyncElement;
-
-    if (subElem instanceof Promise) {
-      throw new Error(
-        `Encountered an async Component: [${element.tag.name}] Asynchronous Component's cannot be parsed by rendertoHTML. If you wante to use asynchronous components use renderToHtmlAsync instead.`,
-      );
+    if (typeof element.tag !== "function") {
+      throw new JsxteRenderError("Encountered an invalid element.");
     }
 
-    return jsxElemToHtmlSync(subElem, componentApi, {
-      indent,
-      currentIndent: currentIndent,
-      attributeMap,
-    });
+    try {
+      const subElem = element.tag(
+        element.props,
+        componentApi,
+      ) as any as JSXTE.SyncElement;
+
+      if (subElem instanceof Promise) {
+        throw new JsxteRenderError(
+          `Encountered an async Component: [${element.tag.name}], Asynchronous Component's cannot be parsed by renderToHTML(). If you want to use asynchronous components use renderToHtmlAsync() instead.`,
+        );
+      }
+
+      return jsxElemToHtmlSync(subElem, componentApi, {
+        indent,
+        currentIndent: currentIndent,
+        attributeMap,
+      });
+    } catch (err) {
+      if (!JsxteRenderError.is(err)) {
+        throw new JsxteRenderError(
+          "Rendering has failed due to an error: " + getErrorMessage(err),
+          getComponentName(element.tag),
+        );
+      }
+
+      err.pushParent(getComponentName(element.tag));
+      throw err;
+    }
   } else {
     const htmlStruct = getHTMLStruct(element, attributeMap);
 
     if (htmlStruct.tag === "") {
-      const results: string[] = [];
-      for (let i = 0; i < htmlStruct.children.length; i++) {
-        const child = htmlStruct.children[i]!;
-        const renderedChild = jsxElemToHtmlSync(child, componentApi, {
-          indent,
-          currentIndent: currentIndent + indent,
-          attributeMap,
-        });
-        if (renderedChild.length > 0) results.push(renderedChild);
+      try {
+        const results: string[] = [];
+        for (let i = 0; i < htmlStruct.children.length; i++) {
+          const child = htmlStruct.children[i]!;
+          const renderedChild = jsxElemToHtmlSync(child, componentApi, {
+            indent,
+            currentIndent: currentIndent + indent,
+            attributeMap,
+          });
+          if (renderedChild.length > 0) results.push(renderedChild);
+        }
+        return join(results);
+      } catch (err) {
+        if (!JsxteRenderError.is(err)) {
+          throw new JsxteRenderError(
+            "Rendering has failed due to an error: " + getErrorMessage(err),
+            htmlStruct.tag,
+          );
+        }
+
+        err.pushParent(htmlStruct.tag);
+        throw err;
       }
-      return join(results);
     } else {
-      const isSelfClosingTag =
-        htmlStruct.children.length === 0 &&
-        SELF_CLOSING_TAG_LIST.includes(htmlStruct.tag);
-      const inlineTag =
-        htmlStruct.children.length === 0 ||
-        htmlStruct.children.every(isTextNode);
-      const indentPadding = " ".repeat(currentIndent);
+      try {
+        const isSelfClosingTag =
+          htmlStruct.children.length === 0 &&
+          SELF_CLOSING_TAG_LIST.includes(htmlStruct.tag);
+        const inlineTag =
+          htmlStruct.children.length === 0 ||
+          htmlStruct.children.every(isTextNode);
+        const indentPadding = " ".repeat(currentIndent);
 
-      const attrString = join(
-        mapAttributesToHtmlTagString(htmlStruct.attributes),
-        " ",
-      );
+        const attrString = join(
+          mapAttributesToHtmlTagString(htmlStruct.attributes),
+          " ",
+        );
 
-      const separator = attrString.length ? " " : "";
+        const separator = attrString.length ? " " : "";
 
-      if (isSelfClosingTag) {
-        return (
+        if (isSelfClosingTag) {
+          return (
+            `${indentPadding}<${htmlStruct.tag}` +
+            separator +
+            join(mapAttributesToHtmlTagString(htmlStruct.attributes), " ") +
+            separator +
+            "/>"
+          );
+        }
+
+        const startTag =
           `${indentPadding}<${htmlStruct.tag}` +
           separator +
           join(mapAttributesToHtmlTagString(htmlStruct.attributes), " ") +
-          separator +
-          "/>"
-        );
+          ">";
+        const endTag = `${inlineTag ? "" : indentPadding}</${htmlStruct.tag}>`;
+        const children: string[] = [];
+
+        for (let i = 0; i < htmlStruct.children.length; i++) {
+          const child = htmlStruct.children[i]!;
+          const renderedChild = jsxElemToHtmlSync(child, componentApi, {
+            indent: inlineTag ? 0 : indent,
+            currentIndent: inlineTag ? 0 : currentIndent + indent,
+            attributeMap,
+          });
+
+          if (renderedChild.length > 0) children.push(renderedChild);
+        }
+
+        if (inlineTag) {
+          return startTag + join(children, "") + endTag;
+        }
+
+        return join([startTag, ...children, endTag]);
+      } catch (err) {
+        if (!JsxteRenderError.is(err)) {
+          throw new JsxteRenderError(
+            "Rendering has failed due to an error: " + getErrorMessage(err),
+            htmlStruct.tag,
+          );
+        }
+
+        err.pushParent(htmlStruct.tag);
+        throw err;
       }
-
-      const startTag =
-        `${indentPadding}<${htmlStruct.tag}` +
-        separator +
-        join(mapAttributesToHtmlTagString(htmlStruct.attributes), " ") +
-        ">";
-      const endTag = `${inlineTag ? "" : indentPadding}</${htmlStruct.tag}>`;
-      const children: string[] = [];
-
-      for (let i = 0; i < htmlStruct.children.length; i++) {
-        const child = htmlStruct.children[i]!;
-        const renderedChild = jsxElemToHtmlSync(child, componentApi, {
-          indent: inlineTag ? 0 : indent,
-          currentIndent: inlineTag ? 0 : currentIndent + indent,
-          attributeMap,
-        });
-
-        if (renderedChild.length > 0) children.push(renderedChild);
-      }
-
-      if (inlineTag) {
-        return startTag + join(children, "") + endTag;
-      }
-
-      return join([startTag, ...children, endTag]);
     }
   }
 };
@@ -226,91 +284,145 @@ export const jsxElemToHtmlAsync = async (
           attributeMap,
         });
       } catch (e) {
-        const fallbackElem = await boundary.onError(
-          e,
-          element.props,
-          componentApi,
-        );
+        try {
+          const fallbackElem = await boundary.onError(
+            e,
+            element.props,
+            componentApi,
+          );
 
-        return await jsxElemToHtmlAsync(fallbackElem, componentApi, {
-          indent,
-          currentIndent: currentIndent,
-          attributeMap,
-        });
+          return await jsxElemToHtmlAsync(fallbackElem, componentApi, {
+            indent,
+            currentIndent: currentIndent,
+            attributeMap,
+          });
+        } catch (err) {
+          const tagname = getComponentName(element.tag) + ".onError";
+
+          if (!JsxteRenderError.is(err)) {
+            throw new JsxteRenderError(
+              "Rendering has failed due to an error: " + getErrorMessage(err),
+              tagname,
+            );
+          }
+
+          err.pushParent(tagname);
+          throw err;
+        }
       }
     }
 
-    const subElem = (await element.tag(
-      element.props,
-      componentApi,
-    )) as any as JSXTE.SyncElement;
+    if (typeof element.tag !== "function") {
+      throw new JsxteRenderError("Encountered an invalid element.");
+    }
 
-    return await jsxElemToHtmlAsync(subElem, componentApi, {
-      indent,
-      currentIndent: currentIndent,
-      attributeMap,
-    });
+    try {
+      const subElem = (await element.tag(
+        element.props,
+        componentApi,
+      )) as any as JSXTE.SyncElement;
+
+      return await jsxElemToHtmlAsync(subElem, componentApi, {
+        indent,
+        currentIndent: currentIndent,
+        attributeMap,
+      });
+    } catch (err) {
+      if (!JsxteRenderError.is(err)) {
+        throw new JsxteRenderError(
+          "Rendering has failed due to an error: " + getErrorMessage(err),
+          getComponentName(element.tag),
+        );
+      }
+
+      err.pushParent(getComponentName(element.tag));
+      throw err;
+    }
   } else {
     const htmlStruct = getHTMLStruct(element, attributeMap);
 
     if (htmlStruct.tag === "") {
-      const results: string[] = [];
-      for (let i = 0; i < htmlStruct.children.length; i++) {
-        const child = htmlStruct.children[i]!;
-        const renderedChild = await jsxElemToHtmlAsync(child, componentApi, {
-          indent,
-          currentIndent: currentIndent + indent,
-          attributeMap,
-        });
-        if (renderedChild.length > 0) results.push(renderedChild);
+      try {
+        const results: string[] = [];
+        for (let i = 0; i < htmlStruct.children.length; i++) {
+          const child = htmlStruct.children[i]!;
+          const renderedChild = await jsxElemToHtmlAsync(child, componentApi, {
+            indent,
+            currentIndent: currentIndent + indent,
+            attributeMap,
+          });
+          if (renderedChild.length > 0) results.push(renderedChild);
+        }
+        return join(results);
+      } catch (err) {
+        if (!JsxteRenderError.is(err)) {
+          throw new JsxteRenderError(
+            "Rendering has failed due to an error: " + getErrorMessage(err),
+            htmlStruct.tag,
+          );
+        }
+
+        err.pushParent(htmlStruct.tag);
+        throw err;
       }
-      return join(results);
     } else {
-      const isSelfClosingTag =
-        htmlStruct.children.length === 0 &&
-        SELF_CLOSING_TAG_LIST.includes(htmlStruct.tag);
-      const inlineTag =
-        htmlStruct.children.length === 0 ||
-        htmlStruct.children.every(isTextNode);
-      const indentPadding = " ".repeat(currentIndent);
+      try {
+        const isSelfClosingTag =
+          htmlStruct.children.length === 0 &&
+          SELF_CLOSING_TAG_LIST.includes(htmlStruct.tag);
+        const inlineTag =
+          htmlStruct.children.length === 0 ||
+          htmlStruct.children.every(isTextNode);
+        const indentPadding = " ".repeat(currentIndent);
 
-      const attrString = join(
-        mapAttributesToHtmlTagString(htmlStruct.attributes),
-        " ",
-      );
-
-      const separator = attrString.length ? " " : "";
-
-      if (isSelfClosingTag) {
-        return (
-          `${indentPadding}<${htmlStruct.tag}` +
-          separator +
-          join(mapAttributesToHtmlTagString(htmlStruct.attributes), " ") +
-          separator +
-          "/>"
+        const attrString = join(
+          mapAttributesToHtmlTagString(htmlStruct.attributes),
+          " ",
         );
+
+        const separator = attrString.length ? " " : "";
+
+        if (isSelfClosingTag) {
+          return (
+            `${indentPadding}<${htmlStruct.tag}` +
+            separator +
+            join(mapAttributesToHtmlTagString(htmlStruct.attributes), " ") +
+            separator +
+            "/>"
+          );
+        }
+
+        const startTag =
+          `${indentPadding}<${htmlStruct.tag}` + separator + attrString + ">";
+        const endTag = `${inlineTag ? "" : indentPadding}</${htmlStruct.tag}>`;
+        const children: string[] = [];
+
+        for (let i = 0; i < htmlStruct.children.length; i++) {
+          const child = htmlStruct.children[i]!;
+          const renderedChild = await jsxElemToHtmlAsync(child, componentApi, {
+            indent: inlineTag ? 0 : indent,
+            currentIndent: inlineTag ? 0 : currentIndent + indent,
+            attributeMap,
+          });
+          if (renderedChild.length > 0) children.push(renderedChild);
+        }
+
+        if (inlineTag) {
+          return startTag + join(children, "") + endTag;
+        }
+
+        return join([startTag, ...children, endTag]);
+      } catch (err) {
+        if (!JsxteRenderError.is(err)) {
+          throw new JsxteRenderError(
+            "Rendering has failed due to an error: " + getErrorMessage(err),
+            htmlStruct.tag,
+          );
+        }
+
+        err.pushParent(htmlStruct.tag);
+        throw err;
       }
-
-      const startTag =
-        `${indentPadding}<${htmlStruct.tag}` + separator + attrString + ">";
-      const endTag = `${inlineTag ? "" : indentPadding}</${htmlStruct.tag}>`;
-      const children: string[] = [];
-
-      for (let i = 0; i < htmlStruct.children.length; i++) {
-        const child = htmlStruct.children[i]!;
-        const renderedChild = await jsxElemToHtmlAsync(child, componentApi, {
-          indent: inlineTag ? 0 : indent,
-          currentIndent: inlineTag ? 0 : currentIndent + indent,
-          attributeMap,
-        });
-        if (renderedChild.length > 0) children.push(renderedChild);
-      }
-
-      if (inlineTag) {
-        return startTag + join(children, "") + endTag;
-      }
-
-      return join([startTag, ...children, endTag]);
     }
   }
 };

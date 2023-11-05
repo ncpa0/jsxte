@@ -1,6 +1,9 @@
 import { ComponentApi } from "../component-api/component-api";
 import { ErrorBoundary } from "../error-boundary/error-boundary";
 import { getHTMLStruct } from "../html-renderer/get-html-struct";
+import { JsxteRenderError } from "../jsxte-render-error";
+import { getComponentName } from "../utilities/get-component-name";
+import { getErrorMessage } from "../utilities/get-err-message";
 
 function assertSyncElem(
   e: JSXTE.TagElement | JSXTE.TextNodeElement | JSX.AsyncElement,
@@ -60,8 +63,9 @@ export const jsxElemToJsonSync = (
         ) as any as JSXTE.SyncElement;
 
         if (subElem instanceof Promise) {
-          throw new Error(
+          throw new JsxteRenderError(
             `Encountered an async Component: [${element.tag.name}.render] Asynchronous Component's cannot be parsed by rendertoHTML. If you wante to use asynchronous components use renderToHtmlAsync instead.`,
+            getComponentName(element.tag),
           );
         }
 
@@ -69,34 +73,64 @@ export const jsxElemToJsonSync = (
           attributeMap,
         });
       } catch (e) {
-        const fallbackElem = boundary.onError(e, element.props, componentApi);
+        try {
+          const fallbackElem = boundary.onError(e, element.props, componentApi);
 
-        if (fallbackElem instanceof Promise) {
-          throw new Error(
-            `Encountered an async Component: [${element.tag.name}.onError] Asynchronous Component's cannot be parsed by rendertoHTML. If you wante to use asynchronous components use renderToHtmlAsync instead.`,
-          );
+          if (fallbackElem instanceof Promise) {
+            throw new JsxteRenderError(
+              `Encountered an async Component: [${element.tag.name}.onError] Asynchronous Component's cannot be parsed by rendertoHTML. If you wante to use asynchronous components use renderToHtmlAsync instead.`,
+            );
+          }
+
+          return jsxElemToJsonSync(fallbackElem, componentApi, {
+            attributeMap,
+          });
+        } catch (err) {
+          const tagname = getComponentName(element.tag) + ".onError";
+
+          if (!JsxteRenderError.is(err)) {
+            throw new JsxteRenderError(
+              "Rendering has failed due to an error: " + getErrorMessage(err),
+              tagname,
+            );
+          }
+
+          err.pushParent(tagname);
+          throw err;
         }
-
-        return jsxElemToJsonSync(fallbackElem, componentApi, {
-          attributeMap,
-        });
       }
     }
 
-    const subElem = element.tag(
-      element.props,
-      componentApi,
-    ) as any as JSXTE.SyncElement;
-
-    if (subElem instanceof Promise) {
-      throw new Error(
-        `Encountered an async Component: [${element.tag.name}] Asynchronous Component's cannot be parsed by rendertoHTML. If you wante to use asynchronous components use renderToHtmlAsync instead.`,
-      );
+    if (typeof element.tag !== "function") {
+      throw new JsxteRenderError("Encountered an invalid element.");
     }
 
-    return jsxElemToJsonSync(subElem, componentApi, {
-      attributeMap,
-    });
+    try {
+      const subElem = element.tag(
+        element.props,
+        componentApi,
+      ) as any as JSXTE.SyncElement;
+
+      if (subElem instanceof Promise) {
+        throw new Error(
+          `Encountered an async Component: [${element.tag.name}] Asynchronous Component's cannot be parsed by rendertoHTML. If you wante to use asynchronous components use renderToHtmlAsync instead.`,
+        );
+      }
+
+      return jsxElemToJsonSync(subElem, componentApi, {
+        attributeMap,
+      });
+    } catch (err) {
+      if (!JsxteRenderError.is(err)) {
+        throw new JsxteRenderError(
+          "Rendering has failed due to an error: " + getErrorMessage(err),
+          getComponentName(element.tag),
+        );
+      }
+
+      err.pushParent(getComponentName(element.tag));
+      throw err;
+    }
   } else {
     const htmlStruct = getHTMLStruct(element, attributeMap);
 
@@ -106,17 +140,29 @@ export const jsxElemToJsonSync = (
       children: [],
     };
 
-    for (let i = 0; i < htmlStruct.children.length; i++) {
-      const child = htmlStruct.children[i]!;
+    try {
+      for (let i = 0; i < htmlStruct.children.length; i++) {
+        const child = htmlStruct.children[i]!;
 
-      const rendered = jsxElemToJsonSync(child, componentApi, {
-        attributeMap,
-      });
+        const rendered = jsxElemToJsonSync(child, componentApi, {
+          attributeMap,
+        });
 
-      r.children.push(rendered);
+        r.children.push(rendered);
+      }
+
+      return r;
+    } catch (err) {
+      if (!JsxteRenderError.is(err)) {
+        throw new JsxteRenderError(
+          "Rendering has failed due to an error: " + getErrorMessage(err),
+          htmlStruct.tag,
+        );
+      }
+
+      err.pushParent(htmlStruct.tag);
+      throw err;
     }
-
-    return r;
   }
 };
 
@@ -167,26 +213,56 @@ export const jsxElemToJsonAsync = async (
           attributeMap,
         });
       } catch (e) {
-        const fallbackElem = await boundary.onError(
-          e,
-          element.props,
-          componentApi,
-        );
+        try {
+          const fallbackElem = await boundary.onError(
+            e,
+            element.props,
+            componentApi,
+          );
 
-        return await jsxElemToJsonAsync(fallbackElem, componentApi, {
-          attributeMap,
-        });
+          return await jsxElemToJsonAsync(fallbackElem, componentApi, {
+            attributeMap,
+          });
+        } catch (err) {
+          const tagname = getComponentName(element.tag) + ".onError";
+
+          if (!JsxteRenderError.is(err)) {
+            throw new JsxteRenderError(
+              "Rendering has failed due to an error: " + getErrorMessage(err),
+              tagname,
+            );
+          }
+
+          err.pushParent(tagname);
+          throw err;
+        }
       }
     }
 
-    const subElem = (await element.tag(
-      element.props,
-      componentApi,
-    )) as any as JSXTE.SyncElement;
+    if (typeof element.tag !== "function") {
+      throw new JsxteRenderError("Encountered an invalid element.");
+    }
 
-    return await jsxElemToJsonAsync(subElem, componentApi, {
-      attributeMap,
-    });
+    try {
+      const subElem = (await element.tag(
+        element.props,
+        componentApi,
+      )) as any as JSXTE.SyncElement;
+
+      return await jsxElemToJsonAsync(subElem, componentApi, {
+        attributeMap,
+      });
+    } catch (err) {
+      if (!JsxteRenderError.is(err)) {
+        throw new JsxteRenderError(
+          "Rendering has failed due to an error: " + getErrorMessage(err),
+          getComponentName(element.tag),
+        );
+      }
+
+      err.pushParent(getComponentName(element.tag));
+      throw err;
+    }
   } else {
     const htmlStruct = getHTMLStruct(element, attributeMap);
 
@@ -196,16 +272,28 @@ export const jsxElemToJsonAsync = async (
       children: [],
     };
 
-    for (let i = 0; i < htmlStruct.children.length; i++) {
-      const child = htmlStruct.children[i]!;
+    try {
+      for (let i = 0; i < htmlStruct.children.length; i++) {
+        const child = htmlStruct.children[i]!;
 
-      const rendered = await jsxElemToJsonAsync(child, componentApi, {
-        attributeMap,
-      });
+        const rendered = await jsxElemToJsonAsync(child, componentApi, {
+          attributeMap,
+        });
 
-      r.children.push(rendered);
+        r.children.push(rendered);
+      }
+
+      return r;
+    } catch (err) {
+      if (!JsxteRenderError.is(err)) {
+        throw new JsxteRenderError(
+          "Rendering has failed due to an error: " + getErrorMessage(err),
+          htmlStruct.tag,
+        );
+      }
+
+      err.pushParent(htmlStruct.tag);
+      throw err;
     }
-
-    return r;
   }
 };

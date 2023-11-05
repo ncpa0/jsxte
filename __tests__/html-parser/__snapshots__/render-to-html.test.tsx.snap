@@ -40,6 +40,77 @@ exports[`renderToHTML ErrorBoundary should render the fallback if the direct chi
 </html>"
 `;
 
+exports[`renderToHTML errors error throw should contain information on which place in the tree the error occurred scenario 1 1`] = `
+[JsxteRenderError: The below error has occurred in:
+<html>
+<body>
+<div>
+<Failing>
+
+Rendering has failed due to an error: I'm failing]
+`;
+
+exports[`renderToHTML errors error throw should contain information on which place in the tree the error occurred scenario 2 1`] = `
+[JsxteRenderError: The below error has occurred in:
+<Main>
+<html>
+<body>
+<div>
+<Failing>
+
+Rendering has failed due to an error: I'm failing]
+`;
+
+exports[`renderToHTML errors error throw should contain information on which place in the tree the error occurred scenario 3 1`] = `
+[JsxteRenderError: The below error has occurred in:
+<Main>
+<Html>
+<html>
+<body>
+<div>
+<Wrapper>
+<div>
+<FailsEventually>
+<span>
+<Failing>
+
+Rendering has failed due to an error: I'm failing]
+`;
+
+exports[`renderToHTML errors error throw should contain information on which place in the tree the error occurred scenario 4 1`] = `
+[JsxteRenderError: The below error has occurred in:
+<Main>
+<Html>
+<html>
+<body>
+<div>
+<Wrapper>
+<div>
+<FailsEventually>
+<span>
+<Failing>
+
+Rendering has failed due to an error: I'm failing async]
+`;
+
+exports[`renderToHTML errors error throw should contain information on which place in the tree the error occurred scenario 5 1`] = `
+[JsxteRenderError: The below error has occurred in:
+<Main>
+<Html>
+<html>
+<body>
+<div>
+<Wrapper>
+<div>
+<>
+<FailsEventually>
+<span>
+<>
+<Failing>
+
+Rendering has failed due to an error: I'm failing async]
+`;
+
 exports[`renderToHTML should correctly generate html from component base jsx structure 1`] = `
 "<html>
   <head>
