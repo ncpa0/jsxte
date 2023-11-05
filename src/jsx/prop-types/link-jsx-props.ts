@@ -29,6 +29,7 @@ declare global {
       rel?:
         | "alternate"
         | "author"
+        | "canonical"
         | "dns-prefetch"
         | "help"
         | "icon"
