@@ -1316,4 +1316,182 @@ describe("renderToJson", () => {
 
     expect(html).toMatchSnapshot();
   });
+
+  describe("errors", () => {
+    describe("error throw should contain information on which place in the tree the error occurred", () => {
+      const Failing = () => {
+        throw new Error("I'm failing");
+      };
+
+      it("scenario 1", () => {
+        expect.assertions(1);
+        try {
+          renderToJson(
+            <html>
+              <body>
+                <div>
+                  <Failing />
+                </div>
+              </body>
+            </html>,
+          );
+        } catch (err) {
+          expect(err).toMatchSnapshot();
+        }
+      });
+
+      it("scenario 2", () => {
+        expect.assertions(1);
+        try {
+          const Main = () => {
+            return (
+              <html>
+                <body>
+                  <div>
+                    <Failing />
+                  </div>
+                </body>
+              </html>
+            );
+          };
+          renderToJson(<Main />);
+        } catch (err) {
+          expect(err).toMatchSnapshot();
+        }
+      });
+
+      it("scenario 3", () => {
+        expect.assertions(1);
+        try {
+          const Html = (props: JSXTE.PropsWithChildren<{}>) => {
+            return (
+              <html>
+                <body>{props.children}</body>
+              </html>
+            );
+          };
+
+          const Wrapper = (props: JSXTE.PropsWithChildren<{}>) => {
+            return <div>{props.children}</div>;
+          };
+
+          const FailsEventually = () => {
+            return (
+              <span>
+                <Failing></Failing>
+              </span>
+            );
+          };
+
+          const Main = () => {
+            return (
+              <Html>
+                <div>
+                  <Wrapper>
+                    <FailsEventually />
+                  </Wrapper>
+                </div>
+              </Html>
+            );
+          };
+          renderToJson(<Main />);
+        } catch (err) {
+          expect(err).toMatchSnapshot();
+        }
+      });
+
+      it("scenario 4", async () => {
+        expect.assertions(1);
+        try {
+          const Html = async (props: JSXTE.PropsWithChildren<{}>) => {
+            return (
+              <html>
+                <body>{props.children}</body>
+              </html>
+            );
+          };
+
+          const Wrapper = async (props: JSXTE.PropsWithChildren<{}>) => {
+            return <div>{props.children}</div>;
+          };
+
+          const Failing = async () => {
+            throw new Error("I'm failing async");
+          };
+
+          const FailsEventually = async () => {
+            return (
+              <span>
+                <Failing></Failing>
+              </span>
+            );
+          };
+
+          const Main = () => {
+            return (
+              <Html>
+                <div>
+                  <Wrapper>
+                    <FailsEventually />
+                  </Wrapper>
+                </div>
+              </Html>
+            );
+          };
+          await renderToJsonAsync(<Main />);
+        } catch (err) {
+          expect(err).toMatchSnapshot();
+        }
+      });
+
+      it("scenario 5", async () => {
+        expect.assertions(1);
+        try {
+          const Html = async (props: JSXTE.PropsWithChildren<{}>) => {
+            return (
+              <html>
+                <body>{props.children}</body>
+              </html>
+            );
+          };
+
+          const Wrapper = async (props: JSXTE.PropsWithChildren<{}>) => {
+            return <div>{props.children}</div>;
+          };
+
+          const Failing = async () => {
+            throw new Error("I'm failing async");
+          };
+
+          const FailsEventually = async () => {
+            return (
+              <span>
+                <>
+                  <Failing></Failing>
+                  {"lol"}
+                </>
+              </span>
+            );
+          };
+
+          const Main = () => {
+            return (
+              <Html>
+                <div>
+                  <Wrapper>
+                    <>
+                      <FailsEventually />
+                    </>
+                  </Wrapper>
+                </div>
+              </Html>
+            );
+          };
+          await renderToJsonAsync(<Main />);
+        } catch (err) {
+          expect(err).toMatchSnapshot();
+        }
+      });
+    });
+  });
 });
