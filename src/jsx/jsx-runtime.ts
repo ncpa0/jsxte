@@ -5,6 +5,43 @@ type CreateElementProps = {
   children?: JSXTE.ElementChildren;
 };
 
+(() => {
+  if(typeof Symbol.toHtmlTag === "symbol") return;
+
+  Object.defineProperty(Symbol, "toHtmlTag", {
+    value: Symbol("toHtmlTag"),
+    enumerable: false,
+    configurable: true,
+  });
+})();
+
+declare global {
+  interface SymbolConstructor {
+    /**
+     * Method under this property defines how an object should be converted to
+     * HTML by the JSXTE renderer.
+     *
+     * @example
+     *   class User {
+     *     constructor(
+     *       public firstname: string,
+     *       public lastname: string,
+     *       public email: string,
+     *       public age: number,
+     *     ) {}
+     *
+     *     [Symbol.toHtmlTag]() {
+     *       return `${this.firstname} ${this.lastname}`;
+     *     }
+     *   }
+     *
+     *   const user = new User("John", "Doe", "joedoe@gmai.com", 26);
+     *   renderToHtml(<div>{user}</div>); // => <div>John Doe</div>
+     */
+    readonly toHtmlTag: symbol;
+  }
+}
+
 const mapChildren = (
   children: JSXTE.ElementChildren,
   accumulator: JSX.Element[],
@@ -24,7 +61,15 @@ const mapChildren = (
           mapChildren(child, accumulator);
         }
       } else if (children != null) {
-        accumulator.push(children);
+        if (
+          Symbol.toHtmlTag in children &&
+          typeof children[Symbol.toHtmlTag] === "function"
+        ) {
+          const html = String((children[Symbol.toHtmlTag] as Function)());
+          accumulator.push({ type: "textNode", text: html });
+        } else {
+          accumulator.push(children);
+        }
       }
       break;
   }

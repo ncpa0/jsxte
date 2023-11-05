@@ -1287,4 +1287,36 @@ describe("renderToHTML", () => {
 
     expect(html).toMatchSnapshot();
   });
+
+  it("should correctly render objects implementing toHtmlTag symbol interface", () => {
+    class User {
+      constructor(
+        public firstName: string,
+        public lastName: string,
+        public age: number,
+        public email: string,
+        public friends: User[],
+      ) {}
+
+      [Symbol.toHtmlTag]() {
+        return `${this.firstName} ${this.lastName}`;
+      }
+    }
+
+    const user = new User("John", "Doe", 30, "johndoe@gmail.com", []);
+
+    const App = () => {
+      return (
+        <div>
+          <div>
+            <span>{user}</span>
+          </div>
+        </div>
+      );
+    };
+
+    const html = renderToHtml(<App />);
+
+    expect(html).toMatchSnapshot();
+  });
 });

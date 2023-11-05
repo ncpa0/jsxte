@@ -789,6 +789,28 @@ Object {
 }
 `;
 
+exports[`renderToJson should correctly render objects implementing toHtmlTag symbol interface 1`] = `
+Object {
+  "attributes": Array [],
+  "children": Array [
+    Object {
+      "attributes": Array [],
+      "children": Array [
+        Object {
+          "attributes": Array [],
+          "children": Array [
+            "John Doe",
+          ],
+          "element": "span",
+        },
+      ],
+      "element": "div",
+    },
+  ],
+  "element": "div",
+}
+`;
+
 exports[`renderToJson should properly handle context data Provider and Consumer 1`] = `
 Object {
   "attributes": Array [],

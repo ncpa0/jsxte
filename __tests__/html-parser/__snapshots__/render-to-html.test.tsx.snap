@@ -170,6 +170,14 @@ exports[`renderToHTML should correctly render jsx with arrays in between element
 </div>"
 `;
 
+exports[`renderToHTML should correctly render objects implementing toHtmlTag symbol interface 1`] = `
+"<div>
+  <div>
+    <span>John Doe</span>
+  </div>
+</div>"
+`;
+
 exports[`renderToHTML should properly handle context data Provider and Consumer 1`] = `
 "<html>
   <body>
