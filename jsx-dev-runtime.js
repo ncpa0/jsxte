@@ -21,10 +21,10 @@ var __reExport = (target, mod, secondTarget) => (
 var __toCommonJS = (mod) =>
   __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-var jsx_runtime_exports = {};
-module.exports = __toCommonJS(jsx_runtime_exports);
+var jsx_dev_runtime_exports = {};
+module.exports = __toCommonJS(jsx_dev_runtime_exports);
 __reExport(
-  jsx_runtime_exports,
-  require("./dist/legacy/jsx-runtime"),
+  jsx_dev_runtime_exports,
+  require("./dist/legacy/jsx-dev-runtime"),
   module.exports,
 );
