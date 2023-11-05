@@ -1,3 +1,73 @@
+## 3.1.7 (November 5, 2023)
+
+### Features
+
+- #### feat: added component traces to errors ([#236](https://github.com/ncpa0/jsxte/pull/236))
+
+  Added traces to errors thrown by the renderer to allow easier debugging. This is achieved by catching any errors during rendering and when that happens, throwing custom errors instead. Original errors can still be accessed via the `.cause` property. 
+  
+  ### Example
+  
+  If an error occurs in a component called `MyComponent` you might see an error like this:
+  ```
+  JsxteRendererError: The below error has occurred in:
+  <App>
+  <html>
+  <body>
+  <Layout>
+  <div>
+  <MyComponent>
+  
+  Rendering has failed due to an error: <Actual error message>
+  ```
+  
+  #### Accessing the original error
+  
+  ```tsx
+  try {
+    const html = renderToHtml(<App />);
+  } catch (error) {
+    error; // -> JsxteRendererError
+    error.cause; // -> original error
+  }
+  ```
+
+- #### feat: added toHtmlTag symbol ([#235](https://github.com/ncpa0/jsxte/pull/235))
+
+  Added a special symbol that allows to determine how an object should be stringified when used as a child of a JSX element.
+  
+  ### Example
+  
+  ```tsx
+  class User {
+    constructor(
+      public id: string,
+      public username: string,
+      public email: string,
+    ) {}
+  
+    [Symbol.toHtmlTag]() {
+      return `User: ${this.username}`;
+    }
+  }
+  
+  const user = new User("001", "Johny", "johny0169@gmail.com");
+  
+  renderToHtml(<div>{user}</div>);
+  ```
+  The above will produce this result:
+  ```html
+  <div>User: Johny</div>
+  ```
+
+- #### feat: added jsx-dev-runtime to the exported paths ([#234](https://github.com/ncpa0/jsxte/pull/234))
+
+  Added a new export under `jsxte/jsx-dev-runtime`, atm it exports the exact same functions as the `jsxte/jsx-runtime`. This should prevent build errors when the "jsx" build option is set to `jsx-reactdev`. This change specifically targets Bun, which always assumes this settings unless NODE_ENV is set to `production`.
+
+### Bug Fixes
+
+- #### fix: add "canonical" as allowed attribute for link-rel ([#231](https://github.com/ncpa0/jsxte/pull/231))
+
 ## 3.1.6 (October 23, 2023)
 
 ### Features
