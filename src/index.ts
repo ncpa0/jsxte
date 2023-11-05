@@ -20,6 +20,7 @@ export {
 } from "./json-renderer/render-to-json";
 export { renderToStringTemplateTag } from "./string-template-renderer/render-to-string-template-tag";
 export { memo } from "./utilities/memo";
+export { createElement } from "./jsx/jsx-runtime";
 
 export type {
   ContextDefinition,
