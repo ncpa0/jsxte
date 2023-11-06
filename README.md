@@ -14,14 +14,15 @@ A JSX based html templating engine for browsers or Node environments.
    2. [Provider/Consumer Pattern](#providerconsumer-pattern)
 5. [Error Boundaries](#error-boundaries)
    1. [Example](#example-1)
-6. [Extending the typings](#extending-the-typings)
+6. [toHtmlTag symbol](#tohtmltag-symbol)
+7. [Extending the typings](#extending-the-typings)
    1. [Adding custom web component tags](#adding-custom-web-component-tags)
    2. [Adding a global html attribute](#adding-a-global-html-attribute)
-7. [Express JS View Engine](#express-js-view-engine)
-8. [Rendering to a string tag template](#rendering-to-a-string-tag-template)
+8. [Express JS View Engine](#express-js-view-engine)
+9. [Rendering to a string tag template](#rendering-to-a-string-tag-template)
    1. [Example](#example-2)
-9. [Monkey-Patching type definitions](#monkey-patching-type-definitions)
-10. [Contributing](#contributing)
+10. [Monkey-Patching type definitions](#monkey-patching-type-definitions)
+11. [Contributing](#contributing)
 
 ## Getting started
 
@@ -57,13 +58,13 @@ If you use something else, like babel you will also need to adapt the configurat
 Once you are done with that you can start writing your templates and rendering them.
 
 ```tsx
-import { renderToHtml } from "jsxte";
+import { renderToHtml, createElement } from "jsxte";
 
-const Header: JSXTE.Component = (props: { label: string }) => {
+const Header: JSXTE.Component<{ label: string }> = (props) => {
   return <h1>{props.label}</h1>;
 };
 
-const App: JSXTE.Component = (props: { label: string }) => {
+const App: JSXTE.Component<{ label: string }> = (props) => {
   return (
     <html>
       <head>
@@ -86,7 +87,7 @@ const App: JSXTE.Component = (props: { label: string }) => {
 
 const html = renderToHtml(<App label="Hello World!" />);
 // OR
-const html = renderToHtml(jsx(App, { label: "Hello World!" }));
+const html = renderToHtml(createElement(App, { label: "Hello World!" }));
 ```
 
 ## Examples
@@ -249,6 +250,36 @@ const html = renderToHtml(
 // <div>
 //   <h1>Something went wrong!</h1>
 // </div>
+```
+
+## toHtmlTag symbol
+
+`Symobl.toHtmlTag` is a special symbol that allows to determine how an object should be stringified when used as a child of a JSX element.
+
+### Example
+
+```tsx
+class User {
+  constructor(
+    public id: string,
+    public username: string,
+    public email: string,
+  ) {}
+
+  [Symbol.toHtmlTag]() {
+    return `User: ${this.username}`;
+  }
+}
+
+const user = new User("001", "Johny", "johny0169@gmail.com");
+
+renderToHtml(<div>{user}</div>);
+```
+
+Result:
+
+```html
+<div>User: Johny</div>
 ```
 
 ## Extending the typings
