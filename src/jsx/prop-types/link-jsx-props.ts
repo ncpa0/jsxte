@@ -28,12 +28,15 @@ declare global {
       referrerpolicy?: RefererPolicy;
       rel?:
         | "alternate"
+        | "apple-touch-icon"
         | "author"
         | "canonical"
         | "dns-prefetch"
         | "help"
         | "icon"
         | "license"
+        | "manifest"
+        | "mask-icon"
         | "next"
         | "pingback"
         | "preconnect"
