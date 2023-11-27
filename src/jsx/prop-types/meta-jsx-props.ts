@@ -15,6 +15,8 @@ declare global {
         | "description"
         | "generator"
         | "keywords"
+        | "msapplication-TileColor"
+        | "theme-color"
         | "viewport"
         | "view-transition";
     }
