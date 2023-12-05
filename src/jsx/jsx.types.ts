@@ -157,10 +157,11 @@ declare global {
       ruby: HTMLProps<JSXTE.RubyTagProps>;
       s: HTMLProps<JSXTE.STagProps>;
       samp: HTMLProps<JSXTE.SampTagProps>;
-      slot: HTMLProps<JSXTE.SlotTagProps>;
+      search: HTMLProps<JSXTE.SearchTagProps>;
       script: HTMLProps<JSXTE.ScriptTagProps>;
       section: HTMLProps<JSXTE.SectionTagProps>;
       select: HTMLProps<JSXTE.SelectTagProps>;
+      slot: HTMLProps<JSXTE.SlotTagProps>;
       small: HTMLProps<JSXTE.SmallTagProps>;
       source: HTMLProps<JSXTE.SourceTagProps>;
       span: HTMLProps<JSXTE.SpanTagProps>;
@@ -170,9 +171,9 @@ declare global {
       summary: HTMLProps<JSXTE.SummaryTagProps>;
       sup: HTMLProps<JSXTE.SupTagProps>;
       table: HTMLProps<JSXTE.TableTagProps>;
-      template: HTMLProps<JSXTE.TemplateTagProps>;
       tbody: HTMLProps<JSXTE.TbodyTagProps>;
       td: HTMLProps<JSXTE.TdTagProps>;
+      template: HTMLProps<JSXTE.TemplateTagProps>;
       textarea: HTMLProps<JSXTE.TextareaTagProps>;
       tfoot: HTMLProps<JSXTE.TfootTagProps>;
       th: HTMLProps<JSXTE.ThTagProps>;
@@ -201,11 +202,11 @@ declare global {
     interface AddressTagProps {}
     interface ArticleTagProps {}
     interface AsideTagProps {}
-    interface BTagProps {}
     interface BdiTagProps {}
     interface BigTagProps {}
     interface BodyTagProps {}
     interface BrTagProps {}
+    interface BTagProps {}
     interface CaptionTagProps {}
     interface CiteTagProps {}
     interface CodeTagProps {}
@@ -225,8 +226,8 @@ declare global {
     interface H4TagProps {}
     interface H5TagProps {}
     interface H6TagProps {}
-    interface HeadTagProps {}
     interface HeaderTagProps {}
+    interface HeadTagProps {}
     interface HgroupTagProps {}
     interface HrTagProps {}
     interface ITagProps {}
@@ -235,8 +236,8 @@ declare global {
     interface LegendTagProps {}
     interface MainTagProps {}
     interface MarkTagProps {}
-    interface MenuTagProps {}
     interface MenuitemTagProps {}
+    interface MenuTagProps {}
     interface NavTagProps {}
     interface NoindexTagProps {}
     interface NoscriptTagProps {}
@@ -246,28 +247,29 @@ declare global {
     interface RpTagProps {}
     interface RtTagProps {}
     interface RubyTagProps {}
-    interface STagProps {}
     interface SampTagProps {}
-    interface SlotTagProps {}
+    interface SearchTagProps {}
     interface SectionTagProps {}
+    interface SlotTagProps {}
     interface SmallTagProps {}
     interface SpanTagProps {}
+    interface STagProps {}
     interface StrongTagProps {}
     interface SubTagProps {}
     interface SummaryTagProps {}
     interface SupTagProps {}
+    interface SvgTagProps {}
     interface TableTagProps {}
-    interface TemplateTagProps {}
     interface TbodyTagProps {}
+    interface TemplateTagProps {}
     interface TfootTagProps {}
     interface TheadTagProps {}
     interface TitleTagProps {}
     interface TrTagProps {}
-    interface UTagProps {}
     interface UlTagProps {}
+    interface UTagProps {}
     interface VarTagProps {}
     interface WbrTagProps {}
     interface WebviewTagProps {}
-    interface SvgTagProps {}
   }
 }
