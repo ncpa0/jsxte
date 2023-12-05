@@ -9,14 +9,7 @@ declare global {
         | "refresh";
       charset?: string;
       content?: string;
-      name?:
-        | "application-name"
-        | "author"
-        | "description"
-        | "generator"
-        | "keywords"
-        | "viewport"
-        | "view-transition";
+      name?: string;
     }
   }
 }

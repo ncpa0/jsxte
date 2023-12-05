@@ -26,23 +26,7 @@ declare global {
       media?: string;
       prefetch?: string;
       referrerpolicy?: RefererPolicy;
-      rel?:
-        | "alternate"
-        | "author"
-        | "canonical"
-        | "dns-prefetch"
-        | "help"
-        | "icon"
-        | "license"
-        | "next"
-        | "pingback"
-        | "preconnect"
-        | "prefetch"
-        | "preload"
-        | "prerender"
-        | "prev"
-        | "search"
-        | "stylesheet";
+      rel?: string;
       sizes?: string;
       title?: string;
       type?: string;
