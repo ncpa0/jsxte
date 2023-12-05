@@ -1,3 +1,4 @@
+import { JsxteRenderError } from "../jsxte-render-error";
 import { jsxElemToHtmlAsync, jsxElemToHtmlSync } from "./jsx-elem-to-html";
 
 type HtmlRenderOptions = {
@@ -13,7 +14,14 @@ export const renderToHtml = (
   component: JSX.Element,
   options?: HtmlRenderOptions,
 ) => {
-  return jsxElemToHtmlSync(component, undefined, options);
+  try {
+    return jsxElemToHtmlSync(component, undefined, options);
+  } catch (err) {
+    if (JsxteRenderError.is(err)) {
+      err.regenerateMessage();
+    }
+    throw err;
+  }
 };
 
 /**
@@ -25,5 +33,12 @@ export const renderToHtmlAsync = async (
   component: JSX.Element | Promise<JSX.Element>,
   options?: HtmlRenderOptions,
 ) => {
-  return await jsxElemToHtmlAsync(await component, undefined, options);
+  try {
+    return await jsxElemToHtmlAsync(await component, undefined, options);
+  } catch (err) {
+    if (JsxteRenderError.is(err)) {
+      err.regenerateMessage();
+    }
+    throw err;
+  }
 };

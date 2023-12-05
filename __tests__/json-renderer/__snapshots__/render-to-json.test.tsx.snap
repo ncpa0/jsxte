@@ -263,10 +263,8 @@ exports[`renderToJson errors error throw should contain information on which pla
 <div>
 <Wrapper>
 <div>
-<>
 <FailsEventually>
 <span>
-<>
 <Failing>
 
 Rendering has failed due to an error: I'm failing async]

@@ -32,18 +32,21 @@ export class JsxteRenderError extends Error {
         writable: true,
       });
     }
-
-    this.message = this.generateMessage();
   }
 
+  /**
+   * @internal
+   */
   pushParent(tag: string) {
     this.parentTags.push(tag);
-    this.message = this.generateMessage();
   }
 
-  generateMessage() {
-    return `The below error has occurred in:\n${mapReverse(
-      this.parentTags,
+  /**
+   * @internal
+   */
+  regenerateMessage() {
+    this.message = `The below error has occurred in:\n${mapReverse(
+      this.parentTags.filter((t) => t !== ""),
       (tag) => `<${tag}>`,
     ).join("\n")}\n\n${this.baseMessage}`;
   }
