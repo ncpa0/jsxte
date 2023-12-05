@@ -1,14 +1,50 @@
+## 3.1.8 (December 5, 2023)
+
+### Features
+
+- #### feat: removed fragments from the render error's component traces ([#258](https://github.com/ncpa0/jsxte/pull/258))
+
+  In the previous version a new feature was added that added component traces to the rendering errors. As a result you would see error messages that looked like this:
+
+  ```
+  JsxteRendererError: The below error has occurred in:
+    <html>
+    <body>
+    <div>
+    <>
+    <span>
+
+    Rendering has failed due to an error...
+  ```
+
+  These messages have been updated to omit fragments from these traces, i.e. `<>` tags will no longer appear in the error message traces.
+
+- #### feat: added types for the search tag ([#256](https://github.com/ncpa0/jsxte/pull/256))
+
+  Added a type definition for the newly standardized `<search>` tag.
+
+### Bug Fixes
+
+- #### fix: incorrect function name exported from jsx-dev-runtime ([#257](https://github.com/ncpa0/jsxte/pull/257))
+
+  The `jsx-dev-runtime` export is supposed to provide a named exported function under the name `jsxDEV`, that however was not the case, as it was only exporting functions that were named identically to those from `jsx-runtime`.
+
+- #### fix: meta's name and link's rel attribute types prevented valid values ([#255](https://github.com/ncpa0/jsxte/pull/255))
+
+  Type for the `<meta>`'s `name` attribute was preventing valid values from being used, same for the `<link>`'s `rel` attribute. These attributes will now allow any string to be used.
+
 ## 3.1.7 (November 5, 2023)
 
 ### Features
 
 - #### feat: added component traces to errors ([#236](https://github.com/ncpa0/jsxte/pull/236))
 
-  Added traces to errors thrown by the renderer to allow easier debugging. This is achieved by catching any errors during rendering and when that happens, throwing custom errors instead. Original errors can still be accessed via the `.cause` property. 
-  
+  Added traces to errors thrown by the renderer to allow easier debugging. This is achieved by catching any errors during rendering and when that happens, throwing custom errors instead. Original errors can still be accessed via the `.cause` property.
+
   ### Example
-  
+
   If an error occurs in a component called `MyComponent` you might see an error like this:
+
   ```
   JsxteRendererError: The below error has occurred in:
   <App>
@@ -17,12 +53,12 @@
   <Layout>
   <div>
   <MyComponent>
-  
+
   Rendering has failed due to an error: <Actual error message>
   ```
-  
+
   #### Accessing the original error
-  
+
   ```tsx
   try {
     const html = renderToHtml(<App />);
@@ -35,9 +71,9 @@
 - #### feat: added toHtmlTag symbol ([#235](https://github.com/ncpa0/jsxte/pull/235))
 
   Added a special symbol that allows to determine how an object should be stringified when used as a child of a JSX element.
-  
+
   ### Example
-  
+
   ```tsx
   class User {
     constructor(
@@ -45,17 +81,19 @@
       public username: string,
       public email: string,
     ) {}
-  
+
     [Symbol.toHtmlTag]() {
       return `User: ${this.username}`;
     }
   }
-  
+
   const user = new User("001", "Johny", "johny0169@gmail.com");
-  
+
   renderToHtml(<div>{user}</div>);
   ```
+
   The above will produce this result:
+
   ```html
   <div>User: Johny</div>
   ```
