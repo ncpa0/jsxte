@@ -10,6 +10,8 @@ declare global {
       charset?: string;
       content?: string;
       name?: string;
+      property?: string;
+      media?: string;
     }
   }
 }

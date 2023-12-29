@@ -4,7 +4,7 @@ declare global {
   namespace JSXTE {
     interface ButtonTagProps {
       autofocus?: AttributeBool;
-      disabled?: string;
+      disabled?: AttributeBool;
       form?: string;
       formaction?: string;
       formenctype?: string;
