@@ -1,3 +1,13 @@
+## 3.1.9 (December 29, 2023)
+
+### Bug Fixes
+
+- #### fix: missing meta properties and button disabled prop type ([#272](https://github.com/ncpa0/jsxte/pull/272))
+
+  Added the missing `<meta>` tag properties to the prop type definitions (`property` and `media`).
+
+  Fixed the typing on the `<button>` disabled property.
+
 ## 3.1.8 (December 5, 2023)
 
 ### Features
