@@ -1,12 +1,12 @@
 import type { ComponentApi } from "../component-api/component-api";
 
-type CreateElementProps = {
+export type CreateElementProps = {
   [k: string]: any;
   children?: JSXTE.ElementChildren;
 };
 
 (() => {
-  if(typeof Symbol.toHtmlTag === "symbol") return;
+  if (typeof Symbol.toHtmlTag === "symbol") return;
 
   Object.defineProperty(Symbol, "toHtmlTag", {
     value: Symbol("toHtmlTag"),
@@ -23,16 +23,16 @@ declare global {
      *
      * @example
      *   class User {
-     *     constructor(
-     *       public firstname: string,
-     *       public lastname: string,
-     *       public email: string,
-     *       public age: number,
-     *     ) {}
+     *   constructor(
+     *   public firstname: string,
+     *   public lastname: string,
+     *   public email: string,
+     *   public age: number,
+     *   ) {}
      *
-     *     [Symbol.toHtmlTag]() {
-     *       return `${this.firstname} ${this.lastname}`;
-     *     }
+     *   [Symbol.toHtmlTag]() {
+     *   return `${this.firstname} ${this.lastname}`;
+     *   }
      *   }
      *
      *   const user = new User("John", "Doe", "joedoe@gmai.com", 26);
