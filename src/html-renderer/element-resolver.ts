@@ -1,4 +1,4 @@
-import { mapAttributeName } from "../string-template-renderer/map-attribute-name";
+import { mapAttributeName } from "../utilities/map-attribute-name";
 import type { HTMLElementStruct, RendererHTMLAttributes } from "./types";
 
 export class HTMLElementResolver {
