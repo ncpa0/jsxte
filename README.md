@@ -19,10 +19,8 @@ A JSX based html templating engine for browsers or Node environments.
    1. [Adding custom web component tags](#adding-custom-web-component-tags)
    2. [Adding a global html attribute](#adding-a-global-html-attribute)
 8. [Express JS View Engine](#express-js-view-engine)
-9. [Rendering to a string tag template](#rendering-to-a-string-tag-template)
-   1. [Example](#example-2)
-10. [Monkey-Patching type definitions](#monkey-patching-type-definitions)
-11. [Contributing](#contributing)
+9. [Monkey-Patching type definitions](#monkey-patching-type-definitions)
+10. [Contributing](#contributing)
 
 ## Getting started
 
@@ -347,60 +345,6 @@ app.get("/", (_, resp) => {
 ```
 
 For this approach to work, the JSX Components must be exported as defaults (ex. `export default () => <div></div>` or `exports.default = () => <div></div>`) and the views must be transpiled to `.js` files.
-
-## Rendering to a string tag template
-
-A [string tag template](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates) is special type of function that can be used for custom parsing of template literals.
-
-JSXTE allows you to leverage any existing string tag templates but with a JSX syntax instead of a template literal.
-
-### Example
-
-```tsx
-// using template literal:
-import { html } from "some-library";
-const props = {
-  /* ... */
-};
-const result = html`<div class="${props.className}">
-  <h1>${props.header}</h1>
-</div>`;
-
-// using JSXTE:
-import { renderToStringTemplateTag } from "jsxte";
-import { html } from "some-library";
-const props = {
-  /* ... */
-};
-const result = renderToStringTemplateTag(
-  html,
-  <div class={props.className}>
-    <h1>{props.header}</h1>
-  </div>,
-);
-```
-
-If the string tag template function uses non standard html attribute names (ex. `className` instead of `class` or `@click` instead of `onclick`) you can map the attribute names render by this method by specifying mapping for those:
-
-```tsx
-const result = renderToStringTemplateTag(
-  html,
-  <div>
-    <button
-      class="my-class"
-      onclick={handler}
-    >
-      Click Me
-    </button>
-  </div>,
-  {
-    attributeMap: {
-      onclick: "@click",
-      class: "className",
-    },
-  },
-);
-```
 
 ## Monkey-Patching type definitions
 
