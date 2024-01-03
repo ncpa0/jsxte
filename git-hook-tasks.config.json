@@ -8,8 +8,12 @@
         "script": "test:tsc"
       },
       {
-        "name": "ESLint",
+        "name": "Lint",
         "script": "test:lint"
+      },
+      {
+        "name": "Style lint",
+        "script": "test:fmt"
       },
       {
         "name": "Unit Tests",

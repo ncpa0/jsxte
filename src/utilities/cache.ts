@@ -31,7 +31,7 @@ export class Cache<T> {
 
   constructor(
     private readonly maxAge: number = 15 * 60 * 1000,
-    private readonly maxEntries: number = 10
+    private readonly maxEntries: number = 10,
   ) {
     if (maxEntries < 1) {
       throw new Error("Cache maxEntries must be greater than 0");
@@ -61,8 +61,9 @@ export class Cache<T> {
       entry.compareProps(propsEntries)
     );
 
-    if (cacheEntry && !cacheEntry.isExpired(Date.now()))
+    if (cacheEntry && !cacheEntry.isExpired(Date.now())) {
       return cacheEntry.value;
+    }
 
     return undefined;
   }

@@ -2,7 +2,7 @@
 
 function flat<A extends any[], D extends number = 1>(
   this: A,
-  depth?: D
+  depth?: D,
 ): FlatArray<A, D>[] {
   const copy: FlatArray<A, D>[] = [];
 

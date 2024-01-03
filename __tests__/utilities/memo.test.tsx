@@ -1,6 +1,7 @@
+import { describe, expect, it } from "vitest";
 import {
-  defineContext,
   type ComponentApi,
+  defineContext,
 } from "../../src/component-api/component-api";
 import {
   renderToHtml,
@@ -8,7 +9,6 @@ import {
 } from "../../src/html-renderer/render-to-html";
 import { jsx } from "../../src/jsx/jsx-runtime";
 import { memo } from "../../src/utilities/memo";
-import { describe, expect, it } from "vitest";
 
 const sleep = (t: number) =>
   new Promise<void>((resolve) => setTimeout(() => resolve(), t));
@@ -39,7 +39,7 @@ describe("memo", () => {
     expect(render1).toMatchSnapshot();
   });
 
-  it('should "forget" memoized results that are past expire time', async () => {
+  it("should \"forget\" memoized results that are past expire time", async () => {
     let variable = "Hello World";
 
     const MemoizedComponent = memo(

@@ -13,7 +13,7 @@ export class JsxteRenderError extends Error {
 
   private baseMessage: string = "";
   private parentTags: string[] = [];
-  public declare cause: any;
+  declare public cause: any;
 
   constructor(message: string, insideTag?: string, causedBy?: any) {
     // @ts-expect-error
@@ -45,9 +45,11 @@ export class JsxteRenderError extends Error {
    * @internal
    */
   regenerateMessage() {
-    this.message = `The below error has occurred in:\n${mapReverse(
-      this.parentTags.filter((t) => t !== ""),
-      (tag) => `<${tag}>`,
-    ).join("\n")}\n\n${this.baseMessage}`;
+    this.message = `The below error has occurred in:\n${
+      mapReverse(
+        this.parentTags.filter((t) => t !== ""),
+        (tag) => `<${tag}>`,
+      ).join("\n")
+    }\n\n${this.baseMessage}`;
   }
 }

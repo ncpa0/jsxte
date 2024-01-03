@@ -52,10 +52,10 @@ export class ContextAccessor {
     const data = this.get(ref);
 
     if (
-      typeof data === "object" &&
-      data !== null &&
-      typeof updateData === "object" &&
-      updateData !== null
+      typeof data === "object"
+      && data !== null
+      && typeof updateData === "object"
+      && updateData !== null
     ) {
       if (Array.isArray(data)) {
         const arr = Array.from(data);
@@ -143,7 +143,7 @@ export class ComponentApi {
     return Promise.resolve(component).then((c) =>
       jsxElemToHtmlAsync(c, thisCopy, {
         attributeMap: thisCopy.attributeMap,
-      }),
+      })
     );
   }
 
@@ -160,7 +160,7 @@ export class ComponentApi {
     return Promise.resolve(component).then((c) =>
       jsxElemToJsonAsync(c, thisCopy, {
         attributeMap: thisCopy.attributeMap,
-      }),
+      })
     );
   }
 }

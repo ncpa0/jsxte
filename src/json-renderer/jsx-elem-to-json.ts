@@ -1,5 +1,5 @@
 import type { ComponentApi } from "../component-api/component-api";
-import { JsxteRenderer, type ElementGenerator } from "../renderer/renderer";
+import { type ElementGenerator, JsxteRenderer } from "../renderer/renderer";
 import type { JsonRenderOptions } from "./render-to-json";
 
 export type JsxteJson = {

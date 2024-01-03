@@ -75,10 +75,10 @@ type NIL = typeof NIL;
 
 function isTagElement(element: JSX.Element): element is JSXTE.TagElement {
   return (
-    typeof element === "object" &&
-    element !== null &&
-    "type" in element &&
-    element.type === "tag"
+    typeof element === "object"
+    && element !== null
+    && "type" in element
+    && element.type === "tag"
   );
 }
 
@@ -88,20 +88,20 @@ function isErrorBoundaryElement(element: JSXTE.TagElement): element is {
   props: JSXTE.ElementProps;
 } {
   return (
-    typeof element.tag === "function" &&
-    ErrorBoundary._isErrorBoundary(element.tag)
+    typeof element.tag === "function"
+    && ErrorBoundary._isErrorBoundary(element.tag)
   );
 }
 
 function isPromiseLike<T, K>(obj: K | Promise<T>): obj is Promise<T> {
   return (
-    obj instanceof Promise ||
-    (typeof obj === "object" &&
-      obj !== null &&
+    obj instanceof Promise
+    || (typeof obj === "object"
+      && obj !== null
       // @ts-ignore
-      typeof obj.then === "function" &&
+      && typeof obj.then === "function"
       // @ts-ignore
-      typeof obj.catch === "function")
+      && typeof obj.catch === "function")
   );
 }
 
@@ -272,8 +272,9 @@ class ElementMatcher<T> {
     const awaits: Promise<any>[] = [];
     for (let i = 0; i < elements.length; i++) {
       const element = elements[i]!;
-      const r = mapFn(element, (element, context) =>
-        this.match(element, context),
+      const r = mapFn(
+        element,
+        (element, context) => this.match(element, context),
       );
       if (isPromiseLike(r)) {
         if (this.options.allowAsync === false) {
@@ -407,8 +408,8 @@ export class JsxteRenderer<T> {
 
   private mapAttributeName(attributeName: string): string {
     if (
-      this.options.attributeMap &&
-      attributeName in this.options.attributeMap
+      this.options.attributeMap
+      && attributeName in this.options.attributeMap
     ) {
       return this.options.attributeMap[attributeName]!;
     }

@@ -1,17 +1,15 @@
 import type { ComponentApi } from "../component-api/component-api";
 
-type Rewrap<T extends object> = T extends infer OBJ
-  ? {
-      [K in keyof OBJ]: OBJ[K] extends infer O ? O : never;
-    }
+type Rewrap<T extends object> = T extends infer OBJ ? {
+    [K in keyof OBJ]: OBJ[K] extends infer O ? O : never;
+  }
   : never;
 
 export type AttributeBool = true | false | "true" | "false";
 
 export type HTMLProps<T extends object = never> = Rewrap<
   ExtendBaseProps<
-    [T] extends [never]
-      ? JSXTE.BaseHTMLTagProps
+    [T] extends [never] ? JSXTE.BaseHTMLTagProps
       : Partial<T> & JSXTE.BaseHTMLTagProps
   >
 >;
@@ -19,8 +17,7 @@ export type HTMLProps<T extends object = never> = Rewrap<
 type ExtendBaseProps<P> = {
   [K in keyof P]: JSXTE.AttributeAcceptedTypes extends {
     [E in K]: infer T;
-  }
-    ? T | P[K]
+  } ? T | P[K]
     : P[K];
 };
 
@@ -33,7 +30,7 @@ declare global {
     }
 
     interface ClassComponent<P extends object = {}> {
-      new (props: P): {
+      new(props: P): {
         props: P;
         render(props: P, contextMap: ComponentApi): JSX.Element;
         onError(
@@ -65,8 +62,8 @@ declare global {
       | string
       | number
       | Array<
-          JSX.Element | string | number | Array<JSX.Element | string | number>
-        >;
+        JSX.Element | string | number | Array<JSX.Element | string | number>
+      >;
 
     type ElementProps = {
       children?: ElementChildren;

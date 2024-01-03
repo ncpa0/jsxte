@@ -1,4 +1,16 @@
 {
+  "[javascript]": {
+    "editor.defaultFormatter": "dprint.dprint"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "dprint.dprint"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "dprint.dprint"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "dprint.dprint"
+  },
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.organizeImports": "never",

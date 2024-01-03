@@ -1,8 +1,8 @@
 import type { ComponentApi } from "../component-api/component-api";
-import { JsxteRenderer, type ElementGenerator } from "../renderer/renderer";
+import { type ElementGenerator, JsxteRenderer } from "../renderer/renderer";
 import { join } from "../utilities/join";
-import { mapAttributesToHtmlTagString } from "./attribute-to-html-tag-string";
 import { SELF_CLOSING_TAG_LIST } from "../utilities/self-closing-tag-list";
+import { mapAttributesToHtmlTagString } from "./attribute-to-html-tag-string";
 import type { HtmlRenderOptions } from "./render-to-html";
 
 function leftPad(str: string, padLength: number): string {
@@ -58,8 +58,7 @@ class BaseHtmlGenerator {
   }
 }
 
-export class HtmlGenerator
-  extends BaseHtmlGenerator
+export class HtmlGenerator extends BaseHtmlGenerator
   implements ElementGenerator<string>
 {
   createTextNode(text: string | number | bigint): string {
@@ -94,8 +93,7 @@ export const jsxElemToHtmlSync = (
   return renderer.render(element);
 };
 
-export class AsyncHtmlGenerator
-  extends BaseHtmlGenerator
+export class AsyncHtmlGenerator extends BaseHtmlGenerator
   implements ElementGenerator<string | Promise<string>>
 {
   createElement(

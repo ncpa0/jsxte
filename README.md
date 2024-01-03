@@ -56,7 +56,7 @@ If you use something else, like babel you will also need to adapt the configurat
 Once you are done with that you can start writing your templates and rendering them.
 
 ```tsx
-import { renderToHtml, createElement } from "jsxte";
+import { createElement, renderToHtml } from "jsxte";
 
 const Header: JSXTE.Component<{ label: string }> = (props) => {
   return <h1>{props.label}</h1>;
@@ -302,7 +302,8 @@ declare global {
 
 // with it it's possible to use this without type errors:
 const MyComponent: JSXTE.Component = () => (
-  <my-custom-web-component data-example-attribute="Hello"></my-custom-web-component>
+  <my-custom-web-component data-example-attribute="Hello">
+  </my-custom-web-component>
 );
 ```
 

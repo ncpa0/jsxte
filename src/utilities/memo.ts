@@ -3,7 +3,7 @@ import {
   renderToHtml,
   renderToHtmlAsync,
 } from "../html-renderer/render-to-html";
-import { jsx, Fragment } from "../jsx-runtime";
+import { Fragment, jsx } from "../jsx-runtime";
 import { Cache } from "./cache";
 
 const ReplaceMap = <P extends { context: ComponentApi }>(

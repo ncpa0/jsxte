@@ -1,6 +1,6 @@
-import path from "path";
-import { URL, fileURLToPath } from "url";
 import { build } from "@ncpa0cpl/nodepack";
+import path from "path";
+import { fileURLToPath, URL } from "url";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 

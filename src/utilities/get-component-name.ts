@@ -4,8 +4,8 @@ export const getComponentName = (element: JSXTE.TagElement) => {
   }
 
   if (
-    "displayName" in element.tag &&
-    typeof element.tag.displayName === "string"
+    "displayName" in element.tag
+    && typeof element.tag.displayName === "string"
   ) {
     return element.tag.displayName;
   }

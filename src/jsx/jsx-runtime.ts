@@ -62,8 +62,8 @@ const mapChildren = (
         }
       } else if (children != null) {
         if (
-          Symbol.toHtmlTag in children &&
-          typeof children[Symbol.toHtmlTag] === "function"
+          Symbol.toHtmlTag in children
+          && typeof children[Symbol.toHtmlTag] === "function"
         ) {
           const html = String((children[Symbol.toHtmlTag] as Function)());
           accumulator.push({ type: "textNode", text: html });

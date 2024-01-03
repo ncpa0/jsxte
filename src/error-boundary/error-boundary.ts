@@ -1,6 +1,6 @@
 import type { ComponentApi } from "../component-api/component-api";
 
-export type ErrorBoundaryElement<P extends object = {}> = new (
+export type ErrorBoundaryElement<P extends object = {}> = new(
   props: JSXTE.PropsWithChildren<P>,
 ) => Pick<ErrorBoundary<P>, keyof ErrorBoundary>;
 

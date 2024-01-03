@@ -1,13 +1,13 @@
+import { describe, expect, it } from "vitest";
 import {
+  ComponentApi,
+  ContextDefinition,
+  defineContext,
+  ErrorBoundary,
   renderToHtml,
   renderToHtmlAsync,
-  ErrorBoundary,
-  ContextDefinition,
-  ComponentApi,
-  defineContext,
 } from "../../src/index";
-import { jsx, Fragment } from "../../src/jsx/jsx-runtime";
-import { describe, expect, it } from "vitest";
+import { Fragment, jsx } from "../../src/jsx/jsx-runtime";
 
 const sleep = (t: number) =>
   new Promise<void>((resolve) => setTimeout(() => resolve(), t));
@@ -22,7 +22,7 @@ describe("renderToHTML", () => {
         >
           <h1>Hello World</h1>
           <h2>{props.title}</h2>
-          <button onclick={'console.log("Hello World!")'}>Click me!</button>
+          <button onclick={"console.log(\"Hello World!\")"}>Click me!</button>
           <input
             autofocus={true}
             disabled={false}
@@ -104,9 +104,7 @@ describe("renderToHTML", () => {
       return (
         <div>
           <h1>Header</h1>
-          {Array.from({ length: 2 }, (_, i) => i).map((i) => (
-            <p>{i}</p>
-          ))}
+          {Array.from({ length: 2 }, (_, i) => i).map((i) => <p>{i}</p>)}
           <footer />
         </div>
       );

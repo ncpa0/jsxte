@@ -16,4 +16,4 @@ const jsxDEV = (
   return jsx(tag, restProps, children);
 };
 
-export { Fragment, jsx, jsxs, jsxDEV };
+export { Fragment, jsx, jsxDEV, jsxs };
