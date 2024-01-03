@@ -93,6 +93,18 @@ function isErrorBoundaryElement(element: JSXTE.TagElement): element is {
   );
 }
 
+function isPromiseLike<T, K>(obj: K | Promise<T>): obj is Promise<T> {
+  return (
+    obj instanceof Promise ||
+    (typeof obj === "object" &&
+      obj !== null &&
+      // @ts-ignore
+      typeof obj.then === "function" &&
+      // @ts-ignore
+      typeof obj.catch === "function")
+  );
+}
+
 function asyncError(): never {
   throw new JsxteRenderError(
     "Encountered an async Component: Asynchronous Component's cannot be parsed by this renderer.",
@@ -185,7 +197,7 @@ class ElementMatcher<T> {
     return (...args: Parameters<F>): RendererResult<T> => {
       try {
         const result = func.apply(null, args);
-        if (result instanceof Promise) {
+        if (isPromiseLike(result)) {
           return result.catch((err) => {
             return this.handleError(err, args[2], args[1]);
           });
@@ -233,7 +245,7 @@ class ElementMatcher<T> {
   }
 
   match(element: JSX.Element, context: RenderingContext): RendererResult<T> {
-    if (element instanceof Promise) {
+    if (isPromiseLike(element)) {
       if (this.options.allowAsync === false) {
         asyncError();
       }
@@ -263,7 +275,7 @@ class ElementMatcher<T> {
       const r = mapFn(element, (element, context) =>
         this.match(element, context),
       );
-      if (r instanceof Promise) {
+      if (isPromiseLike(r)) {
         if (this.options.allowAsync === false) {
           asyncError();
         }
@@ -447,7 +459,7 @@ export class JsxteRenderer<T> {
     if (result === NIL) {
       return this.generator.createTextNode("");
     }
-    if (result instanceof Promise) {
+    if (isPromiseLike(result)) {
       return result.then((result) => {
         if (result === NIL) {
           return this.generator.createTextNode("");
