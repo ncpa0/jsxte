@@ -38,7 +38,7 @@ jobs:
       - name: Test Unit
         uses: Borales/actions-yarn@v3.0.0
         with:
-          cmd: test:jest
+          cmd: test:unit
       - name: Build
         uses: Borales/actions-yarn@v3.0.0
         with:
