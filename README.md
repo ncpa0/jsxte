@@ -15,12 +15,13 @@ A JSX based html templating engine for browsers or Node environments.
 5. [Error Boundaries](#error-boundaries)
    1. [Example](#example-1)
 6. [toHtmlTag symbol](#tohtmltag-symbol)
-7. [Extending the typings](#extending-the-typings)
+7. [JsxteRenderer](#jsxterenderer)
+8. [Extending the typings](#extending-the-typings)
    1. [Adding custom web component tags](#adding-custom-web-component-tags)
    2. [Adding a global html attribute](#adding-a-global-html-attribute)
-8. [Express JS View Engine](#express-js-view-engine)
-9. [Monkey-Patching type definitions](#monkey-patching-type-definitions)
-10. [Contributing](#contributing)
+9. [Express JS View Engine](#express-js-view-engine)
+10. [Monkey-Patching type definitions](#monkey-patching-type-definitions)
+11. [Contributing](#contributing)
 
 ## Getting started
 
@@ -278,6 +279,69 @@ Result:
 
 ```html
 <div>User: Johny</div>
+```
+
+## JsxteRenderer
+
+`JsxteRenderer` is a base class around which HTML and JSON renderer are built upon. This renderer requires a specific interface that provides methods for creating the final output format:
+
+```ts
+// T is the type of the renderer return value
+export interface ElementGenerator<T> {
+  createElement(
+    type: string,
+    attributes: Array<[attributeName: string, attributeValue: any]>,
+    children: Array<T>,
+  ): T;
+  createTextNode(text: string | number | bigint): T;
+  createFragment(children: Array<T>): T;
+}
+```
+
+It is possible to render to other formats than HTML or JSON by providing a custom `ElementGenerator` implementation to the renderer.
+
+### Example
+
+```tsx
+import { JsxteRenderer } from "jsxte";
+
+class DomGenerator
+  implements ElementGenerator<HTMLElement | Text | DocumentFragment>
+{
+  createElement(
+    type: string,
+    attributes: Array<[attributeName: string, attributeValue: any]>,
+    children: Array<HTMLElement | Text | DocumentFragment>,
+  ): HTMLElement | Text | DocumentFragment {
+    const element = document.createElement(type);
+    for (const [name, value] of attributes) {
+      element.setAttribute(name, value);
+    }
+    for (const child of children) {
+      element.appendChild(child);
+    }
+    return element;
+  }
+
+  createTextNode(
+    text: string | number | bigint,
+  ): HTMLElement | Text | DocumentFragment {
+    return document.createTextNode(String(text));
+  }
+
+  createFragment(
+    children: Array<HTMLElement | Text | DocumentFragment>,
+  ): HTMLElement | Text | DocumentFragment {
+    const fragment = document.createDocumentFragment();
+    for (const child of children) {
+      fragment.appendChild(child);
+    }
+    return fragment;
+  }
+}
+
+const renderer = new JsxteRenderer(new DomGenerator());
+const divElement = renderer.render(<div>Hello World!</div>);
 ```
 
 ## Extending the typings
