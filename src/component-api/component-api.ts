@@ -1,14 +1,13 @@
 import {
   jsxElemToHtmlAsync,
   jsxElemToHtmlSync,
-  type RendererInternalOptions,
 } from "../html-renderer/jsx-elem-to-html";
 import {
   jsxElemToJsonAsync,
   jsxElemToJsonSync,
-  type JsxteJson,
 } from "../json-renderer/jsx-elem-to-json";
 import { jsx } from "../jsx-runtime";
+import type { RendererOptions } from "../renderer/renderer";
 
 export class ContextAccessor {
   public static clone(original: ContextAccessor): ContextAccessor {
@@ -33,9 +32,7 @@ export class ContextAccessor {
     return value as T;
   }
 
-  /**
-   * Retrieve the context data for the specified context.
-   */
+  /** Retrieve the context data for the specified context. */
   public get<T>(ref: ContextDefinition<T>): T | undefined {
     const value = this.map.get(ref.id);
     return value as any;
@@ -91,9 +88,7 @@ export class ContextAccessor {
     this.map.set(ref.id, data);
   }
 
-  /**
-   * Check if the context data for the specified context is set.
-   */
+  /** Check if the context data for the specified context is set. */
   public has<T>(ref: ContextDefinition<T>): boolean {
     return this.map.has(ref.id);
   }
@@ -109,7 +104,7 @@ export class ContextAccessor {
 }
 
 export class ComponentApi {
-  public static create(options?: RendererInternalOptions): ComponentApi {
+  public static create(options?: RendererOptions): ComponentApi {
     return new ComponentApi(options?.attributeMap);
   }
 
@@ -120,9 +115,7 @@ export class ComponentApi {
     );
   }
 
-  /**
-   * Access to the current context data.
-   */
+  /** Access to the current context data. */
   public ctx;
 
   private constructor(
@@ -154,7 +147,7 @@ export class ComponentApi {
     );
   }
 
-  public renderToJson(component: JSX.Element): JsxteJson | string {
+  public renderToJson(component: JSX.Element) {
     return jsxElemToJsonSync(component, this, {
       attributeMap: this.attributeMap,
     });
@@ -162,7 +155,7 @@ export class ComponentApi {
 
   public async renderToJsonAsync(
     component: JSX.Element | Promise<JSX.Element>,
-  ): Promise<JsxteJson | string> {
+  ) {
     const thisCopy = ComponentApi.clone(this);
     return Promise.resolve(component).then((c) =>
       jsxElemToJsonAsync(c, thisCopy, {

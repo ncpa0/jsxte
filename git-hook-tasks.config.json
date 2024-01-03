@@ -12,9 +12,8 @@
         "script": "test:lint"
       },
       {
-        "mustRunAlone": true,
-        "name": "Jest",
-        "script": "test:jest"
+        "name": "Unit Tests",
+        "script": "test:unit"
       }
     ],
     "pre-commit": [],

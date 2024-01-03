@@ -16,6 +16,8 @@ export {
 export { memo } from "./utilities/memo";
 export { createElement } from "./jsx/jsx-runtime";
 export { JsxteRenderError } from "./jsxte-render-error";
+export type { ElementGenerator, RendererOptions } from "./renderer/renderer";
+export { JsxteRenderer } from "./renderer/renderer";
 
 export type {
   ContextDefinition,
@@ -27,3 +29,5 @@ export type { RefererPolicy } from "./jsx/prop-types/shared/referer-policy";
 export type { Target } from "./jsx/prop-types/shared/target";
 export type { JsxteJson } from "./json-renderer/jsx-elem-to-json";
 export type { InputType } from "./jsx/prop-types/input-jsx-props";
+export type { HtmlRenderOptions } from "./html-renderer/render-to-html";
+export type { JsonRenderOptions } from "./json-renderer/render-to-json";

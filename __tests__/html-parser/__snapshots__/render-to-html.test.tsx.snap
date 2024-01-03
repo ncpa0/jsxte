@@ -1,83 +1,81 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderToHTML ErrorBoundary should correctly render the tree that's inside an ErrorBoundary 1`] = `
+exports[`renderToHTML > ErrorBoundary > should correctly render the tree thats inside an ErrorBoundary 1`] = `
 "  <html>
     <head>
-      <meta charset=\\"utf-8\\" />
-      <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\" />
-      <title>Page Title</title>
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\" />
-      <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\" />
+      <meta charset="utf-8" />
+      <meta http-equiv="x-ua-compatible" content="IE=edge" />
+      <title>
+        Page Title
+      </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     </head>
     <body>
-      <div class=\\"main-container\\">
-          <h2>Hello World!</h2>
-          <input value=\\"write here\\" />
-          <button>Submit</button>
+      <div class="main-container">
+          <h2>
+            Hello World!
+          </h2>
+          <input value="write here" />
+          <button>
+            Submit
+          </button>
       </div>
     </body>
   </html>"
 `;
 
-exports[`renderToHTML ErrorBoundary should render the fallback if a nested async child throws an error 1`] = `
+exports[`renderToHTML > ErrorBoundary > should render the fallback if a nested async child throws an error 1`] = `
 "<html>
-  <span>Async test:</span>
-  <h1>Oops. Something went wrong.</h1>
+  <span>
+    Async test:
+  </span>
+  <h1>
+    Oops. Something went wrong.
+  </h1>
 </html>"
 `;
 
-exports[`renderToHTML ErrorBoundary should render the fallback if a nested child throws an error 1`] = `
+exports[`renderToHTML > ErrorBoundary > should render the fallback if a nested child throws an error 1`] = `
 "<html>
-  <h1>Oops. Something went wrong.</h1>
+  <h1>
+    Oops. Something went wrong.
+  </h1>
 </html>"
 `;
 
-exports[`renderToHTML ErrorBoundary should render the fallback if the direct child throws an error 1`] = `
+exports[`renderToHTML > ErrorBoundary > should render the fallback if the direct child throws an error 1`] = `
 "<html>
   <body>
-    <h1>Oops. Something went wrong.</h1>
+    <h1>
+      Oops. Something went wrong.
+    </h1>
   </body>
 </html>"
 `;
 
-exports[`renderToHTML errors error throw should contain information on which place in the tree the error occurred scenario 1 1`] = `
+exports[`renderToHTML > errors > error throw should contain information on which place in the tree the error occurred > scenario 1 1`] = `
 [JsxteRenderError: The below error has occurred in:
 <html>
 <body>
 <div>
 <Failing>
 
-Rendering has failed due to an error: I'm failing]
+Rendering has failed due to an error: I'm failing 4]
 `;
 
-exports[`renderToHTML errors error throw should contain information on which place in the tree the error occurred scenario 2 1`] = `
-[JsxteRenderError: The below error has occurred in:
-<Main>
-<html>
-<body>
-<div>
-<Failing>
-
-Rendering has failed due to an error: I'm failing]
-`;
-
-exports[`renderToHTML errors error throw should contain information on which place in the tree the error occurred scenario 3 1`] = `
+exports[`renderToHTML > errors > error throw should contain information on which place in the tree the error occurred > scenario 2 1`] = `
 [JsxteRenderError: The below error has occurred in:
 <Main>
-<Html>
 <html>
 <body>
 <div>
-<Wrapper>
-<div>
-<FailsEventually>
-<span>
 <Failing>
 
-Rendering has failed due to an error: I'm failing]
+Rendering has failed due to an error: I'm failing 4]
 `;
 
-exports[`renderToHTML errors error throw should contain information on which place in the tree the error occurred scenario 4 1`] = `
+exports[`renderToHTML > errors > error throw should contain information on which place in the tree the error occurred > scenario 3 1`] = `
 [JsxteRenderError: The below error has occurred in:
 <Main>
 <Html>
@@ -90,10 +88,10 @@ exports[`renderToHTML errors error throw should contain information on which pla
 <span>
 <Failing>
 
-Rendering has failed due to an error: I'm failing async]
+Rendering has failed due to an error: I'm failing 4]
 `;
 
-exports[`renderToHTML errors error throw should contain information on which place in the tree the error occurred scenario 5 1`] = `
+exports[`renderToHTML > errors > error throw should contain information on which place in the tree the error occurred > scenario 4 1`] = `
 [JsxteRenderError: The below error has occurred in:
 <Main>
 <Html>
@@ -104,40 +102,68 @@ exports[`renderToHTML errors error throw should contain information on which pla
 <div>
 <FailsEventually>
 <span>
-<Failing>
+<Failing2>
 
-Rendering has failed due to an error: I'm failing async]
+Rendering has failed due to an error: I'm failing async 1]
 `;
 
-exports[`renderToHTML should correctly generate html from component base jsx structure 1`] = `
+exports[`renderToHTML > errors > error throw should contain information on which place in the tree the error occurred > scenario 5 1`] = `
+[JsxteRenderError: The below error has occurred in:
+<Main>
+<Html>
+<html>
+<body>
+<div>
+<Wrapper>
+<div>
+<FailsEventually>
+<span>
+<Failing2>
+
+Rendering has failed due to an error: I'm failing async 2]
+`;
+
+exports[`renderToHTML > should correctly generate html from component base jsx structure 1`] = `
 "<html>
   <head>
-    <meta charset=\\"utf-8\\" />
-    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\" />
-    <title>Page Title</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\" />
-    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\" />
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge" />
+    <title>
+      Page Title
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
   </head>
   <body>
-    <div class=\\"main-container\\">
-        <h2>Hello World!</h2>
-        <input value=\\"write here\\" />
-        <button>Submit</button>
+    <div class="main-container">
+        <h2>
+          Hello World!
+        </h2>
+        <input value="write here" />
+        <button>
+          Submit
+        </button>
     </div>
   </body>
 </html>"
 `;
 
-exports[`renderToHTML should correctly generate html from simple jsx 1`] = `
-"<div id=\\"container\\" class=\\"bordered active\\">
-  <h1>Hello World</h1>
-  <h2>Prop Title</h2>
-  <button onclick=\\"console.log(&quot;Hello World!&quot;)\\">Click me!</button>
+exports[`renderToHTML > should correctly generate html from simple jsx 1`] = `
+"<div id="container" class="bordered active">
+  <h1>
+    Hello World
+  </h1>
+  <h2>
+    Prop Title
+  </h2>
+  <button onclick="console.log(&quot;Hello World!&quot;)">
+    Click me!
+  </button>
   <input autofocus draggable />
 </div>"
 `;
 
-exports[`renderToHTML should correctly handle component children of type nulls, undefined and other 1`] = `
+exports[`renderToHTML > should correctly handle component children of type nulls, undefined and other 1`] = `
 "<div>
   <div>
     Undef: 
@@ -157,20 +183,27 @@ exports[`renderToHTML should correctly handle component children of type nulls, 
   </div>
   <div>
     Str: 
-    <span>Hello World</span>
+    <span>
+      Hello World
+    </span>
   </div>
   <div>
     Num: 
-    <span>1234</span>
+    <span>
+      1234
+    </span>
   </div>
   <div>
     Arr: 
-    <span>hi423</span>
+    <span>
+      hi
+      423
+    </span>
   </div>
 </div>"
 `;
 
-exports[`renderToHTML should correctly handle components returning nulls, undefined and other types 1`] = `
+exports[`renderToHTML > should correctly handle components returning nulls, undefined and other types 1`] = `
 "<div>
   <div>
     Undef: 
@@ -186,103 +219,175 @@ exports[`renderToHTML should correctly handle components returning nulls, undefi
   </div>
   <div>
     Str: 
-Hello World
+    Hello World
   </div>
   <div>
     Num: 
-1234
+    1234
   </div>
 </div>"
 `;
 
-exports[`renderToHTML should correctly parse async components 1`] = `
+exports[`renderToHTML > should correctly parse async components 1`] = `
 "<html>
   <head>
-    <meta charset=\\"utf-8\\" />
-    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\" />
-    <title>Page Title</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\" />
-    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\" />
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge" />
+    <title>
+      Page Title
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
   </head>
   <body>
-    <div class=\\"main-container\\">
-        <h2>Async title</h2>
-        <input value=\\"write here\\" />
-        <button>Submit</button>
+    <div class="main-container">
+        <h2>
+          Async title
+        </h2>
+        <input value="write here" />
+        <button>
+          Submit
+        </button>
     </div>
   </body>
 </html>"
 `;
 
-exports[`renderToHTML should correctly perform sub renders async render rendered computer can access the context defined on the parent 1`] = `
-"<div class=\\"main\\">
-  <div><div>async foo</div><div>async foo</div><div>async bar</div></div>
+exports[`renderToHTML > should correctly perform sub renders > async render > rendered computer can access the context defined on the parent 1`] = `
+"<div class="main">
+  <div>
+    <div>
+      async foo
+    </div>
+    <div>
+      async foo
+    </div>
+    <div>
+      async bar
+    </div>
+  </div>
 </div>"
 `;
 
-exports[`renderToHTML should correctly perform sub renders async render renders a simple component 1`] = `"<div><div>Hello World!</div></div>"`;
-
-exports[`renderToHTML should correctly perform sub renders sync render rendered computer can access the context defined on the parent 1`] = `
-"<div class=\\"main\\">
-  <div><div>foo</div><div>foo</div><div>bar</div></div>
-</div>"
-`;
-
-exports[`renderToHTML should correctly perform sub renders sync render renders a simple component 1`] = `"<div><div>Hello World!</div></div>"`;
-
-exports[`renderToHTML should correctly render jsx with arrays in between elements 1`] = `
+exports[`renderToHTML > should correctly perform sub renders > async render > renders a simple component 1`] = `
 "<div>
-  <h1>Header</h1>
-  <p>0</p>
-  <p>1</p>
+  <div>
+    Hello World!
+  </div>
+</div>"
+`;
+
+exports[`renderToHTML > should correctly perform sub renders > sync render > rendered computer can access the context defined on the parent 1`] = `
+"<div class="main">
+  <div>
+    <div>
+      foo
+    </div>
+    <div>
+      foo
+    </div>
+    <div>
+      bar
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renderToHTML > should correctly perform sub renders > sync render > renders a simple component 1`] = `
+"<div>
+  <div>
+    Hello World!
+  </div>
+</div>"
+`;
+
+exports[`renderToHTML > should correctly render jsx with arrays in between elements 1`] = `
+"<div>
+  <h1>
+    Header
+  </h1>
+  <p>
+    0
+  </p>
+  <p>
+    1
+  </p>
   <footer></footer>
 </div>"
 `;
 
-exports[`renderToHTML should correctly render objects implementing toHtmlTag symbol interface 1`] = `
+exports[`renderToHTML > should correctly render objects implementing toHtmlTag symbol interface 1`] = `
 "<div>
   <div>
-    <span>John Doe</span>
+    <span>
+      John Doe
+    </span>
   </div>
 </div>"
 `;
 
-exports[`renderToHTML should properly handle context data Provider and Consumer 1`] = `
+exports[`renderToHTML > should properly handle context data > Provider and Consumer 1`] = `
 "<html>
   <body>
-    <div id=\\"root\\">
-      <div id=\\"1\\" class=\\"foo\\">no value</div>
-      <span id=\\"span-1\\">no value</span>
-        <div id=\\"2\\" class=\\"foo\\">FOO</div>
-        <span id=\\"span-2\\">FOO</span>
-          <div id=\\"3\\" class=\\"foo\\">BAR</div>
-          <span id=\\"span-3\\">BAR</span>
+    <div id="root">
+      <div id="1" class="foo">
+        no value
+      </div>
+      <span id="span-1">
+        no value
+      </span>
+        <div id="2" class="foo">
+          FOO
+        </div>
+        <span id="span-2">
+          FOO
+        </span>
+          <div id="3" class="foo">
+            BAR
+          </div>
+          <span id="span-3">
+            BAR
+          </span>
     </div>
   </body>
 </html>"
 `;
 
-exports[`renderToHTML should properly handle context data close-by providers should not interfere with each other 1`] = `
+exports[`renderToHTML > should properly handle context data > close-by providers should not interfere with each other 1`] = `
 "<html>
   <body>
-        <p>bar</p>
-        <p>baz</p>
-        <p>qux</p>
-        <p>coorg</p>
-        <p>fred</p>
-        <p>thud</p>
-      <p>foo</p>
+        <p>
+          bar
+        </p>
+        <p>
+          baz
+        </p>
+        <p>
+          qux
+        </p>
+        <p>
+          coorg
+        </p>
+        <p>
+          fred
+        </p>
+        <p>
+          thud
+        </p>
+      <p>
+        foo
+      </p>
   </body>
 </html>"
 `;
 
-exports[`renderToHTML should properly handle context data correctly handles encapsulated providers 1`] = `
+exports[`renderToHTML > should properly handle context data > correctly handles encapsulated providers 1`] = `
 "<html>
   <body>
-    <div id=\\"root\\">
-        <div class=\\"template for-magic\\">
+    <div id="root">
+        <div class="template for-magic">
           <div>
-              <input type=\\"text\\" name=\\"repeating_magic_dwarf\\" />
+              <input type="text" name="repeating_magic_dwarf" />
           </div>
         </div>
     </div>
@@ -290,7 +395,7 @@ exports[`renderToHTML should properly handle context data correctly handles enca
 </html>"
 `;
 
-exports[`renderToHTML should properly handle context data should correctly drill the prop data through multiple components 1`] = `
+exports[`renderToHTML > should properly handle context data > should correctly drill the prop data through multiple components 1`] = `
 "<html>
   <body>
       <div>
@@ -301,7 +406,9 @@ exports[`renderToHTML should properly handle context data should correctly drill
                 <div>
                   <div>
                     <div>
-                      <p>foo</p>
+                      <p>
+                        foo
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -314,94 +421,118 @@ exports[`renderToHTML should properly handle context data should correctly drill
 </html>"
 `;
 
-exports[`renderToHTML should properly handle context data should correctly handle provider pattern 1`] = `
+exports[`renderToHTML > should properly handle context data > should correctly handle provider pattern 1`] = `
 "<html>
   <head>
-    <meta charset=\\"utf-8\\" />
-    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\" />
-    <title>Page Title</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\" />
-    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\" />
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge" />
+    <title>
+      Page Title
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
   </head>
     <body>
-      <div class=\\"main-container\\">
+      <div class="main-container">
         <div>
-          <h1>Provided title</h1>
+          <h1>
+            Provided title
+          </h1>
         </div>
       </div>
     </body>
 </html>"
 `;
 
-exports[`renderToHTML should properly handle context data should correctly override existing context data 1`] = `
+exports[`renderToHTML > should properly handle context data > should correctly override existing context data 1`] = `
 "<html>
   <head>
-    <meta charset=\\"utf-8\\" />
-    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\" />
-    <title>Page Title</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\" />
-    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\" />
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge" />
+    <title>
+      Page Title
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
   </head>
   <body>
-      <h1>This title was overridden</h1>
-      <input placeholder=\\"write here\\" />
+      <h1>
+        This title was overridden
+      </h1>
+      <input placeholder="write here" />
   </body>
 </html>"
 `;
 
-exports[`renderToHTML should properly handle context data should correctly render jsx with context data 1`] = `
+exports[`renderToHTML > should properly handle context data > should correctly render jsx with context data 1`] = `
 "<html>
   <head>
-    <meta charset=\\"utf-8\\" />
-    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\" />
-    <title>Page Title</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\" />
-    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\" />
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge" />
+    <title>
+      Page Title
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
   </head>
   <body>
-    <div class=\\"main-container\\">
+    <div class="main-container">
       <div>
-        <h1>This title is set via the context</h1>
+        <h1>
+          This title is set via the context
+        </h1>
       </div>
     </div>
   </body>
 </html>"
 `;
 
-exports[`renderToHTML should properly handle context data should correctly render jsx with context data and arrays in between elements 1`] = `
+exports[`renderToHTML > should properly handle context data > should correctly render jsx with context data and arrays in between elements 1`] = `
 "<html>
   <head>
-    <meta charset=\\"utf-8\\" />
-    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\" />
-    <title>Page Title</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\" />
-    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\" />
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge" />
+    <title>
+      Page Title
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
   </head>
   <body>
       <div>
-        <h1>This title is set via the context</h1>
+        <h1>
+          This title is set via the context
+        </h1>
       </div>
-      <input placeholder=\\"write here\\" />
-      <button>Submit</button>
+      <input placeholder="write here" />
+      <button>
+        Submit
+      </button>
   </body>
 </html>"
 `;
 
-exports[`renderToHTML should properly handle context data should correctly render jsx with context data and async components 1`] = `
+exports[`renderToHTML > should properly handle context data > should correctly render jsx with context data and async components 1`] = `
 "<html>
   <head>
-    <meta charset=\\"utf-8\\" />
-    <meta http-equiv=\\"x-ua-compatible\\" content=\\"IE=edge\\" />
-    <title>Page Title</title>
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\" />
-    <link rel=\\"stylesheet\\" type=\\"text/css\\" media=\\"screen\\" href=\\"main.css\\" />
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge" />
+    <title>
+      Page Title
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
   </head>
   <body>
       <div>
-        <h1>This title is set via the context</h1>
+        <h1>
+          This title is set via the context
+        </h1>
       </div>
-      <input placeholder=\\"write here\\" />
-      <button>Submit</button>
+      <input placeholder="write here" />
+      <button>
+        Submit
+      </button>
   </body>
 </html>"
 `;

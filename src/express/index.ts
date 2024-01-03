@@ -1,27 +1,47 @@
-import { renderToHtmlAsync } from "../html-renderer/render-to-html";
+import {
+  renderToHtml,
+  renderToHtmlAsync,
+} from "../html-renderer/render-to-html";
 import { createElement } from "../jsx/jsx-runtime";
 
-/**
- * Express.js support.
- *
- * Allows to support Express.js builtin templating.
- */
-const __express = async <P extends object>(
-  filePath: string,
-  options: P,
-  callback: (e: any, rendered?: string | undefined) => void,
-) => {
-  // @ts-expect-error
-  options ??= {};
+const expressTmplEngineFactory = (syncOnly: boolean) => {
+  if (syncOnly) {
+    return async function jsxteTemplateEngine<P extends object>(
+      filePath: string,
+      options: P,
+      callback: (e: any, rendered?: string | undefined) => void,
+    ) {
+      // @ts-expect-error
+      options ??= {};
 
-  try {
-    // eslint-disable-next-line
-    const Component: JSXTE.AsyncComponent<P> = require(filePath).default;
-    const html = await renderToHtmlAsync(createElement(Component, options));
-    return callback(null, html);
-  } catch (e) {
-    callback(e);
+      try {
+        // @ts-ignore
+        const Component: JSXTE.AsyncComponent<P> = require(filePath).default;
+        const html = await renderToHtml(createElement(Component, options));
+        return callback(null, html);
+      } catch (e) {
+        callback(e);
+      }
+    };
   }
+
+  return async function jsxteTemplateEngine<P extends object>(
+    filePath: string,
+    options: P,
+    callback: (e: any, rendered?: string | undefined) => void,
+  ) {
+    // @ts-expect-error
+    options ??= {};
+
+    try {
+      // @ts-ignore
+      const Component: JSXTE.AsyncComponent<P> = require(filePath).default;
+      const html = await renderToHtmlAsync(createElement(Component, options));
+      return callback(null, html);
+    } catch (e) {
+      callback(e);
+    }
+  };
 };
 
 type ExpressApp = {
@@ -42,7 +62,10 @@ type ExpressApp = {
  * View files should have `.js` extension and have a default export with a jsx
  * component.
  */
-export const expressExtend = (app: ExpressApp) => {
-  app.engine("js", __express);
+export const expressExtend = (
+  app: ExpressApp,
+  opt?: { syncOnly?: boolean },
+) => {
+  app.engine("js", expressTmplEngineFactory(opt?.syncOnly ?? false));
   app.set("view engine", "js");
 };

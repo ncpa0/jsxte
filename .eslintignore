@@ -21,3 +21,4 @@ jsx-dev-runtime.d.ts
 jsx-dev-runtime.js
 docs
 scripts
+vitest.config.mts

@@ -1,4 +1,4 @@
-import type { RendererHTMLAttributes } from "./types";
+import { join } from "../utilities/join";
 
 export const attributeToHtmlTagString = ([key, value]: [
   string,
@@ -14,8 +14,8 @@ export const attributeToHtmlTagString = ([key, value]: [
 };
 
 export const mapAttributesToHtmlTagString = (
-  attributes: RendererHTMLAttributes,
-): string[] => {
+  attributes: [string, any][],
+): string => {
   const results: string[] = [];
 
   for (let i = 0; i < attributes.length; i++) {
@@ -24,5 +24,5 @@ export const mapAttributesToHtmlTagString = (
     if (html.length > 0) results.push(html);
   }
 
-  return results;
+  return join(results, " ");
 };
