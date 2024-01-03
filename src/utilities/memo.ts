@@ -1,19 +1,6 @@
 import type { ComponentApi } from "../component-api/component-api";
-import {
-  renderToHtml,
-  renderToHtmlAsync,
-} from "../html-renderer/render-to-html";
-import { Fragment, jsx } from "../jsx-runtime";
+import { createElement } from "../jsx-runtime";
 import { Cache } from "./cache";
-
-const ReplaceMap = <P extends { context: ComponentApi }>(
-  props: JSXTE.PropsWithChildren<P>,
-  context: ComponentApi,
-) => {
-  context.ctx.replace(props.context.ctx);
-  // @ts-ignore
-  return jsx(Fragment, {}, props.children);
-};
 
 /**
  * Creates an in-memory cache for the provided component and returns a new
@@ -62,17 +49,15 @@ export const memo = <P extends object & { children?: any }>(
       const cachedResult = cache.get(propsNoChildren);
       if (cachedResult) return cachedResult;
 
-      const result = await renderToHtmlAsync(
-        jsx(
-          ReplaceMap,
-          { context },
-          jsx(Component, { ...propsNoChildren }, children),
-        ),
+      const result = await context.renderAsync(
+        createElement(Component, { ...propsNoChildren }, children),
       );
+
       const textNode: JSXTE.TextNodeElement = {
         text: result,
         type: "textNode",
       };
+
       cache.set(propsNoChildren, textNode);
 
       return textNode;
@@ -90,13 +75,10 @@ export const memo = <P extends object & { children?: any }>(
     const cachedResult = cache.get(propsNoChildren);
     if (cachedResult) return cachedResult;
 
-    const result = renderToHtml(
-      jsx(
-        ReplaceMap,
-        { context },
-        jsx(Component, { ...propsNoChildren }, children),
-      ),
+    const result = context.render(
+      createElement(Component, { ...propsNoChildren }, children),
     );
+
     const textNode: JSXTE.TextNodeElement = {
       text: result,
       type: "textNode",
