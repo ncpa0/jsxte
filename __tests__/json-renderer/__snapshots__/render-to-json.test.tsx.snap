@@ -1,124 +1,124 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderToJson ErrorBoundary should correctly render the tree that's inside an ErrorBoundary 1`] = `
-Object {
-  "attributes": Array [],
-  "children": Array [
-    Object {
-      "attributes": Array [],
-      "children": Array [
-        Object {
-          "attributes": Array [],
-          "children": Array [
-            Object {
-              "attributes": Array [
-                Array [
+exports[`renderToJson > ErrorBoundary > should correctly render the tree that's inside an ErrorBoundary 1`] = `
+{
+  "attributes": [],
+  "children": [
+    {
+      "attributes": [],
+      "children": [
+        {
+          "attributes": [],
+          "children": [
+            {
+              "attributes": [
+                [
                   "charset",
                   "utf-8",
                 ],
               ],
-              "children": Array [],
+              "children": [],
               "element": "meta",
             },
-            Object {
-              "attributes": Array [
-                Array [
+            {
+              "attributes": [
+                [
                   "http-equiv",
                   "x-ua-compatible",
                 ],
-                Array [
+                [
                   "content",
                   "IE=edge",
                 ],
               ],
-              "children": Array [],
+              "children": [],
               "element": "meta",
             },
-            Object {
-              "attributes": Array [],
-              "children": Array [
+            {
+              "attributes": [],
+              "children": [
                 "Page Title",
               ],
               "element": "title",
             },
-            Object {
-              "attributes": Array [
-                Array [
+            {
+              "attributes": [
+                [
                   "name",
                   "viewport",
                 ],
-                Array [
+                [
                   "content",
                   "width=device-width, initial-scale=1",
                 ],
               ],
-              "children": Array [],
+              "children": [],
               "element": "meta",
             },
-            Object {
-              "attributes": Array [
-                Array [
+            {
+              "attributes": [
+                [
                   "rel",
                   "stylesheet",
                 ],
-                Array [
+                [
                   "type",
                   "text/css",
                 ],
-                Array [
+                [
                   "media",
                   "screen",
                 ],
-                Array [
+                [
                   "href",
                   "main.css",
                 ],
               ],
-              "children": Array [],
+              "children": [],
               "element": "link",
             },
           ],
           "element": "head",
         },
-        Object {
-          "attributes": Array [],
-          "children": Array [
-            Object {
-              "attributes": Array [
-                Array [
+        {
+          "attributes": [],
+          "children": [
+            {
+              "attributes": [
+                [
                   "class",
                   "main-container",
                 ],
               ],
-              "children": Array [
-                Object {
-                  "attributes": Array [],
-                  "children": Array [
-                    Object {
-                      "attributes": Array [],
-                      "children": Array [
+              "children": [
+                {
+                  "attributes": [],
+                  "children": [
+                    {
+                      "attributes": [],
+                      "children": [
                         "Hello World!",
                       ],
                       "element": "h2",
                     },
-                    Object {
-                      "attributes": Array [
-                        Array [
+                    {
+                      "attributes": [
+                        [
                           "value",
                           "write here",
                         ],
                       ],
-                      "children": Array [],
+                      "children": [],
                       "element": "input",
                     },
-                    Object {
-                      "attributes": Array [
-                        Array [
+                    {
+                      "attributes": [
+                        [
                           "style",
                           undefined,
                         ],
                       ],
-                      "children": Array [
+                      "children": [
                         "Submit",
                       ],
                       "element": "button",
@@ -140,20 +140,20 @@ Object {
 }
 `;
 
-exports[`renderToJson ErrorBoundary should render the fallback if a nested async child throws an error 1`] = `
-Object {
-  "attributes": Array [],
-  "children": Array [
-    Object {
-      "attributes": Array [],
-      "children": Array [
+exports[`renderToJson > ErrorBoundary > should render the fallback if a nested async child throws an error 1`] = `
+{
+  "attributes": [],
+  "children": [
+    {
+      "attributes": [],
+      "children": [
         "Async test:",
       ],
       "element": "span",
     },
-    Object {
-      "attributes": Array [],
-      "children": Array [
+    {
+      "attributes": [],
+      "children": [
         "Oops. Something went wrong.",
       ],
       "element": "h1",
@@ -163,13 +163,13 @@ Object {
 }
 `;
 
-exports[`renderToJson ErrorBoundary should render the fallback if a nested child throws an error 1`] = `
-Object {
-  "attributes": Array [],
-  "children": Array [
-    Object {
-      "attributes": Array [],
-      "children": Array [
+exports[`renderToJson > ErrorBoundary > should render the fallback if a nested child throws an error 1`] = `
+{
+  "attributes": [],
+  "children": [
+    {
+      "attributes": [],
+      "children": [
         "Oops. Something went wrong.",
       ],
       "element": "h1",
@@ -179,16 +179,16 @@ Object {
 }
 `;
 
-exports[`renderToJson ErrorBoundary should render the fallback if the direct child throws an error 1`] = `
-Object {
-  "attributes": Array [],
-  "children": Array [
-    Object {
-      "attributes": Array [],
-      "children": Array [
-        Object {
-          "attributes": Array [],
-          "children": Array [
+exports[`renderToJson > ErrorBoundary > should render the fallback if the direct child throws an error 1`] = `
+{
+  "attributes": [],
+  "children": [
+    {
+      "attributes": [],
+      "children": [
+        {
+          "attributes": [],
+          "children": [
             "Oops. Something went wrong.",
           ],
           "element": "h1",
@@ -201,7 +201,7 @@ Object {
 }
 `;
 
-exports[`renderToJson errors error throw should contain information on which place in the tree the error occurred scenario 1 1`] = `
+exports[`renderToJson > errors > error throw should contain information on which place in the tree the error occurred > scenario 1 1`] = `
 [JsxteRenderError: The below error has occurred in:
 <html>
 <body>
@@ -211,34 +211,18 @@ exports[`renderToJson errors error throw should contain information on which pla
 Rendering has failed due to an error: I'm failing]
 `;
 
-exports[`renderToJson errors error throw should contain information on which place in the tree the error occurred scenario 2 1`] = `
-[JsxteRenderError: The below error has occurred in:
-<Main>
-<html>
-<body>
-<div>
-<Failing>
-
-Rendering has failed due to an error: I'm failing]
-`;
-
-exports[`renderToJson errors error throw should contain information on which place in the tree the error occurred scenario 3 1`] = `
+exports[`renderToJson > errors > error throw should contain information on which place in the tree the error occurred > scenario 2 1`] = `
 [JsxteRenderError: The below error has occurred in:
 <Main>
-<Html>
 <html>
 <body>
 <div>
-<Wrapper>
-<div>
-<FailsEventually>
-<span>
 <Failing>
 
 Rendering has failed due to an error: I'm failing]
 `;
 
-exports[`renderToJson errors error throw should contain information on which place in the tree the error occurred scenario 4 1`] = `
+exports[`renderToJson > errors > error throw should contain information on which place in the tree the error occurred > scenario 3 1`] = `
 [JsxteRenderError: The below error has occurred in:
 <Main>
 <Html>
@@ -250,11 +234,27 @@ exports[`renderToJson errors error throw should contain information on which pla
 <FailsEventually>
 <span>
 <Failing>
+
+Rendering has failed due to an error: I'm failing]
+`;
+
+exports[`renderToJson > errors > error throw should contain information on which place in the tree the error occurred > scenario 4 1`] = `
+[JsxteRenderError: The below error has occurred in:
+<Main>
+<Html>
+<html>
+<body>
+<div>
+<Wrapper>
+<div>
+<FailsEventually>
+<span>
+<Failing2>
 
 Rendering has failed due to an error: I'm failing async]
 `;
 
-exports[`renderToJson errors error throw should contain information on which place in the tree the error occurred scenario 5 1`] = `
+exports[`renderToJson > errors > error throw should contain information on which place in the tree the error occurred > scenario 5 1`] = `
 [JsxteRenderError: The below error has occurred in:
 <Main>
 <Html>
@@ -265,127 +265,127 @@ exports[`renderToJson errors error throw should contain information on which pla
 <div>
 <FailsEventually>
 <span>
-<Failing>
+<Failing2>
 
 Rendering has failed due to an error: I'm failing async]
 `;
 
-exports[`renderToJson should correctly generate html from component base jsx structure 1`] = `
-Object {
-  "attributes": Array [],
-  "children": Array [
-    Object {
-      "attributes": Array [],
-      "children": Array [
-        Object {
-          "attributes": Array [
-            Array [
+exports[`renderToJson > should correctly generate html from component base jsx structure 1`] = `
+{
+  "attributes": [],
+  "children": [
+    {
+      "attributes": [],
+      "children": [
+        {
+          "attributes": [
+            [
               "charset",
               "utf-8",
             ],
           ],
-          "children": Array [],
+          "children": [],
           "element": "meta",
         },
-        Object {
-          "attributes": Array [
-            Array [
+        {
+          "attributes": [
+            [
               "http-equiv",
               "x-ua-compatible",
             ],
-            Array [
+            [
               "content",
               "IE=edge",
             ],
           ],
-          "children": Array [],
+          "children": [],
           "element": "meta",
         },
-        Object {
-          "attributes": Array [],
-          "children": Array [
+        {
+          "attributes": [],
+          "children": [
             "Page Title",
           ],
           "element": "title",
         },
-        Object {
-          "attributes": Array [
-            Array [
+        {
+          "attributes": [
+            [
               "name",
               "viewport",
             ],
-            Array [
+            [
               "content",
               "width=device-width, initial-scale=1",
             ],
           ],
-          "children": Array [],
+          "children": [],
           "element": "meta",
         },
-        Object {
-          "attributes": Array [
-            Array [
+        {
+          "attributes": [
+            [
               "rel",
               "stylesheet",
             ],
-            Array [
+            [
               "type",
               "text/css",
             ],
-            Array [
+            [
               "media",
               "screen",
             ],
-            Array [
+            [
               "href",
               "main.css",
             ],
           ],
-          "children": Array [],
+          "children": [],
           "element": "link",
         },
       ],
       "element": "head",
     },
-    Object {
-      "attributes": Array [],
-      "children": Array [
-        Object {
-          "attributes": Array [
-            Array [
+    {
+      "attributes": [],
+      "children": [
+        {
+          "attributes": [
+            [
               "class",
               "main-container",
             ],
           ],
-          "children": Array [
-            Object {
-              "attributes": Array [],
-              "children": Array [
-                Object {
-                  "attributes": Array [],
-                  "children": Array [
+          "children": [
+            {
+              "attributes": [],
+              "children": [
+                {
+                  "attributes": [],
+                  "children": [
                     "Hello World!",
                   ],
                   "element": "h2",
                 },
-                Object {
-                  "attributes": Array [
-                    Array [
+                {
+                  "attributes": [
+                    [
                       "value",
                       "write here",
                     ],
                   ],
-                  "children": Array [],
+                  "children": [],
                   "element": "input",
                 },
-                Object {
-                  "attributes": Array [
-                    Array [
+                {
+                  "attributes": [
+                    [
                       "style",
                       undefined,
                     ],
                   ],
-                  "children": Array [
+                  "children": [
                     "Submit",
                   ],
                   "element": "button",
@@ -404,61 +404,61 @@ Object {
 }
 `;
 
-exports[`renderToJson should correctly generate html from simple jsx 1`] = `
-Object {
-  "attributes": Array [
-    Array [
+exports[`renderToJson > should correctly generate html from simple jsx 1`] = `
+{
+  "attributes": [
+    [
       "id",
       "container",
     ],
-    Array [
+    [
       "class",
       "bordered active",
     ],
   ],
-  "children": Array [
-    Object {
-      "attributes": Array [],
-      "children": Array [
+  "children": [
+    {
+      "attributes": [],
+      "children": [
         "Hello World",
       ],
       "element": "h1",
     },
-    Object {
-      "attributes": Array [],
-      "children": Array [
+    {
+      "attributes": [],
+      "children": [
         "Prop Title",
       ],
       "element": "h2",
     },
-    Object {
-      "attributes": Array [
-        Array [
+    {
+      "attributes": [
+        [
           "onclick",
-          "console.log(\\"Hello World!\\")",
+          "console.log("Hello World!")",
         ],
       ],
-      "children": Array [
+      "children": [
         "Click me!",
       ],
       "element": "button",
     },
-    Object {
-      "attributes": Array [
-        Array [
+    {
+      "attributes": [
+        [
           "autofocus",
           true,
         ],
-        Array [
+        [
           "disabled",
           false,
         ],
-        Array [
+        [
           "draggable",
           true,
         ],
       ],
-      "children": Array [],
+      "children": [],
       "element": "input",
     },
   ],
@@ -466,65 +466,65 @@ Object {
 }
 `;
 
-exports[`renderToJson should correctly handle component children of type nulls, undefined and other 1`] = `
-Object {
-  "attributes": Array [],
-  "children": Array [
-    Object {
-      "attributes": Array [],
-      "children": Array [
+exports[`renderToJson > should correctly handle component children of type nulls, undefined and other 1`] = `
+{
+  "attributes": [],
+  "children": [
+    {
+      "attributes": [],
+      "children": [
         "Undef: ",
-        Object {
-          "attributes": Array [],
-          "children": Array [],
+        {
+          "attributes": [],
+          "children": [],
           "element": "span",
         },
       ],
       "element": "div",
     },
-    Object {
-      "attributes": Array [],
-      "children": Array [
+    {
+      "attributes": [],
+      "children": [
         "Null: ",
-        Object {
-          "attributes": Array [],
-          "children": Array [],
+        {
+          "attributes": [],
+          "children": [],
           "element": "span",
         },
       ],
       "element": "div",
     },
-    Object {
-      "attributes": Array [],
-      "children": Array [
+    {
+      "attributes": [],
+      "children": [
         "True: ",
-        Object {
-          "attributes": Array [],
-          "children": Array [],
+        {
+          "attributes": [],
+          "children": [],
           "element": "span",
         },
       ],
       "element": "div",
     },
-    Object {
-      "attributes": Array [],
-      "children": Array [
+    {
+      "attributes": [],
+      "children": [
         "False: ",
-        Object {
-          "attributes": Array [],
-          "children": Array [],
+        {
+          "attributes": [],
+          "children": [],
           "element": "span",
         },
       ],
       "element": "div",
     },
-    Object {
-      "attributes": Array [],
-      "children": Array [
+    {
+      "attributes": [],
+      "children": [
         "Str: ",
-        Object {
-          "attributes": Array [],
-          "children": Array [
+        {
+          "attributes": [],
+          "children": [
             "Hello World",
           ],
           "element": "span",
@@ -532,13 +532,13 @@ Object {
       ],
       "element": "div",
     },
-    Object {
-      "attributes": Array [],
-      "children": Array [
+    {
+      "attributes": [],
+      "children": [
         "Num: ",
-        Object {
-          "attributes": Array [],
-          "children": Array [
+        {
+          "attributes": [],
+          "children": [
             "1234",
           ],
           "element": "span",
@@ -546,13 +546,13 @@ Object {
       ],
       "element": "div",
     },
-    Object {
-      "attributes": Array [],
-      "children": Array [
+    {
+      "attributes": [],
+      "children": [
         "Arr: ",
-        Object {
-          "attributes": Array [],
-          "children": Array [
+        {
+          "attributes": [],
+          "children": [
             "hi",
             "423",
           ],
@@ -566,55 +566,51 @@ Object {
 }
 `;
 
-exports[`renderToJson should correctly handle components returning nulls, undefined and other types 1`] = `
-Object {
-  "attributes": Array [],
-  "children": Array [
-    Object {
-      "attributes": Array [],
-      "children": Array [
+exports[`renderToJson > should correctly handle components returning nulls, undefined and other types 1`] = `
+{
+  "attributes": [],
+  "children": [
+    {
+      "attributes": [],
+      "children": [
         "Undef: ",
-        "",
       ],
       "element": "div",
     },
-    Object {
-      "attributes": Array [],
-      "children": Array [
+    {
+      "attributes": [],
+      "children": [
         "Null: ",
-        "",
       ],
       "element": "div",
     },
-    Object {
-      "attributes": Array [],
-      "children": Array [
+    {
+      "attributes": [],
+      "children": [
         "True: ",
-        "",
       ],
       "element": "div",
     },
-    Object {
-      "attributes": Array [],
-      "children": Array [
+    {
+      "attributes": [],
+      "children": [
         "False: ",
-        "",
       ],
       "element": "div",
     },
-    Object {
-      "attributes": Array [],
-      "children": Array [
+    {
+      "attributes": [],
+      "children": [
         "Str: ",
         "Hello World",
       ],
       "element": "div",
     },
-    Object {
-      "attributes": Array [],
-      "children": Array [
+    {
+      "attributes": [],
+      "children": [
         "Num: ",
-        "1234",
+        1234,
       ],
       "element": "div",
     },
@@ -623,122 +619,122 @@ Object {
 }
 `;
 
-exports[`renderToJson should correctly parse async components 1`] = `
-Object {
-  "attributes": Array [],
-  "children": Array [
-    Object {
-      "attributes": Array [],
-      "children": Array [
-        Object {
-          "attributes": Array [
-            Array [
+exports[`renderToJson > should correctly parse async components 1`] = `
+{
+  "attributes": [],
+  "children": [
+    {
+      "attributes": [],
+      "children": [
+        {
+          "attributes": [
+            [
               "charset",
               "utf-8",
             ],
           ],
-          "children": Array [],
+          "children": [],
           "element": "meta",
         },
-        Object {
-          "attributes": Array [
-            Array [
+        {
+          "attributes": [
+            [
               "http-equiv",
               "x-ua-compatible",
             ],
-            Array [
+            [
               "content",
               "IE=edge",
             ],
           ],
-          "children": Array [],
+          "children": [],
           "element": "meta",
         },
-        Object {
-          "attributes": Array [],
-          "children": Array [
+        {
+          "attributes": [],
+          "children": [
             "Page Title",
           ],
           "element": "title",
         },
-        Object {
-          "attributes": Array [
-            Array [
+        {
+          "attributes": [
+            [
               "name",
               "viewport",
             ],
-            Array [
+            [
               "content",
               "width=device-width, initial-scale=1",
             ],
           ],
-          "children": Array [],
+          "children": [],
           "element": "meta",
         },
-        Object {
-          "attributes": Array [
-            Array [
+        {
+          "attributes": [
+            [
               "rel",
               "stylesheet",
             ],
-            Array [
+            [
               "type",
               "text/css",
             ],
-            Array [
+            [
               "media",
               "screen",
             ],
-            Array [
+            [
               "href",
               "main.css",
             ],
           ],
-          "children": Array [],
+          "children": [],
           "element": "link",
         },
       ],
       "element": "head",
     },
-    Object {
-      "attributes": Array [],
-      "children": Array [
-        Object {
-          "attributes": Array [
-            Array [
+    {
+      "attributes": [],
+      "children": [
+        {
+          "attributes": [
+            [
               "class",
               "main-container",
             ],
           ],
-          "children": Array [
-            Object {
-              "attributes": Array [],
-              "children": Array [
-                Object {
-                  "attributes": Array [],
-                  "children": Array [
+          "children": [
+            {
+              "attributes": [],
+              "children": [
+                {
+                  "attributes": [],
+                  "children": [
                     "Async title",
                   ],
                   "element": "h2",
                 },
-                Object {
-                  "attributes": Array [
-                    Array [
+                {
+                  "attributes": [
+                    [
                       "value",
                       "write here",
                     ],
                   ],
-                  "children": Array [],
+                  "children": [],
                   "element": "input",
                 },
-                Object {
-                  "attributes": Array [
-                    Array [
+                {
+                  "attributes": [
+                    [
                       "style",
                       undefined,
                     ],
                   ],
-                  "children": Array [
+                  "children": [
                     "Submit",
                   ],
                   "element": "button",
@@ -757,21 +753,21 @@ Object {
 }
 `;
 
-exports[`renderToJson should correctly perform sub renders async render rendered component can access the context defined on the parent 1`] = `
-Object {
-  "attributes": Array [
-    Array [
+exports[`renderToJson > should correctly perform sub renders > async render > rendered component can access the context defined on the parent 1`] = `
+{
+  "attributes": [
+    [
       "class",
       "main",
     ],
   ],
-  "children": Array [
-    Object {
-      "attributes": Array [],
-      "children": Array [
-        "{\\"element\\":\\"div\\",\\"attributes\\":[],\\"children\\":[\\"async foo\\"]}",
-        "{\\"element\\":\\"div\\",\\"attributes\\":[],\\"children\\":[\\"async foo\\"]}",
-        "{\\"element\\":\\"div\\",\\"attributes\\":[],\\"children\\":[\\"async bar\\"]}",
+  "children": [
+    {
+      "attributes": [],
+      "children": [
+        "{"element":"div","attributes":[],"children":["async foo"]}",
+        "{"element":"div","attributes":[],"children":["async foo"]}",
+        "{"element":"div","attributes":[],"children":["async bar"]}",
       ],
       "element": "div",
     },
@@ -780,31 +776,31 @@ Object {
 }
 `;
 
-exports[`renderToJson should correctly perform sub renders async render renders a simple component 1`] = `
-Object {
-  "attributes": Array [],
-  "children": Array [
-    "{\\"element\\":\\"div\\",\\"attributes\\":[],\\"children\\":[\\"Hello World!\\"]}",
+exports[`renderToJson > should correctly perform sub renders > async render > renders a simple component 1`] = `
+{
+  "attributes": [],
+  "children": [
+    "{"element":"div","attributes":[],"children":["Hello World!"]}",
   ],
   "element": "div",
 }
 `;
 
-exports[`renderToJson should correctly perform sub renders sync render rendered computer can access the context defined on the parent 1`] = `
-Object {
-  "attributes": Array [
-    Array [
+exports[`renderToJson > should correctly perform sub renders > sync render > rendered computer can access the context defined on the parent 1`] = `
+{
+  "attributes": [
+    [
       "class",
       "main",
     ],
   ],
-  "children": Array [
-    Object {
-      "attributes": Array [],
-      "children": Array [
-        "{\\"element\\":\\"div\\",\\"attributes\\":[],\\"children\\":[\\"foo\\"]}",
-        "{\\"element\\":\\"div\\",\\"attributes\\":[],\\"children\\":[\\"foo\\"]}",
-        "{\\"element\\":\\"div\\",\\"attributes\\":[],\\"children\\":[\\"bar\\"]}",
+  "children": [
+    {
+      "attributes": [],
+      "children": [
+        "{"element":"div","attributes":[],"children":["foo"]}",
+        "{"element":"div","attributes":[],"children":["foo"]}",
+        "{"element":"div","attributes":[],"children":["bar"]}",
       ],
       "element": "div",
     },
@@ -813,44 +809,44 @@ Object {
 }
 `;
 
-exports[`renderToJson should correctly perform sub renders sync render renders a simple component 1`] = `
-Object {
-  "attributes": Array [],
-  "children": Array [
-    "{\\"element\\":\\"div\\",\\"attributes\\":[],\\"children\\":[\\"Hello World!\\"]}",
+exports[`renderToJson > should correctly perform sub renders > sync render > renders a simple component 1`] = `
+{
+  "attributes": [],
+  "children": [
+    "{"element":"div","attributes":[],"children":["Hello World!"]}",
   ],
   "element": "div",
 }
 `;
 
-exports[`renderToJson should correctly render jsx with arrays in between elements 1`] = `
-Object {
-  "attributes": Array [],
-  "children": Array [
-    Object {
-      "attributes": Array [],
-      "children": Array [
+exports[`renderToJson > should correctly render jsx with arrays in between elements 1`] = `
+{
+  "attributes": [],
+  "children": [
+    {
+      "attributes": [],
+      "children": [
         "Header",
       ],
       "element": "h1",
     },
-    Object {
-      "attributes": Array [],
-      "children": Array [
+    {
+      "attributes": [],
+      "children": [
         "0",
       ],
       "element": "p",
     },
-    Object {
-      "attributes": Array [],
-      "children": Array [
+    {
+      "attributes": [],
+      "children": [
         "1",
       ],
       "element": "p",
     },
-    Object {
-      "attributes": Array [],
-      "children": Array [],
+    {
+      "attributes": [],
+      "children": [],
       "element": "footer",
     },
   ],
@@ -858,16 +854,16 @@ Object {
 }
 `;
 
-exports[`renderToJson should correctly render objects implementing toHtmlTag symbol interface 1`] = `
-Object {
-  "attributes": Array [],
-  "children": Array [
-    Object {
-      "attributes": Array [],
-      "children": Array [
-        Object {
-          "attributes": Array [],
-          "children": Array [
+exports[`renderToJson > should correctly render objects implementing toHtmlTag symbol interface 1`] = `
+{
+  "attributes": [],
+  "children": [
+    {
+      "attributes": [],
+      "children": [
+        {
+          "attributes": [],
+          "children": [
             "John Doe",
           ],
           "element": "span",
@@ -880,107 +876,107 @@ Object {
 }
 `;
 
-exports[`renderToJson should properly handle context data Provider and Consumer 1`] = `
-Object {
-  "attributes": Array [],
-  "children": Array [
-    Object {
-      "attributes": Array [],
-      "children": Array [
-        Object {
-          "attributes": Array [
-            Array [
+exports[`renderToJson > should properly handle context data > Provider and Consumer 1`] = `
+{
+  "attributes": [],
+  "children": [
+    {
+      "attributes": [],
+      "children": [
+        {
+          "attributes": [
+            [
               "id",
               "root",
             ],
           ],
-          "children": Array [
-            Object {
-              "attributes": Array [
-                Array [
+          "children": [
+            {
+              "attributes": [
+                [
                   "id",
                   "1",
                 ],
-                Array [
+                [
                   "class",
                   "foo",
                 ],
               ],
-              "children": Array [
+              "children": [
                 "no value",
               ],
               "element": "div",
             },
-            Object {
-              "attributes": Array [
-                Array [
+            {
+              "attributes": [
+                [
                   "id",
                   "span-1",
                 ],
               ],
-              "children": Array [
+              "children": [
                 "no value",
               ],
               "element": "span",
             },
-            Object {
-              "attributes": Array [],
-              "children": Array [
-                Object {
-                  "attributes": Array [
-                    Array [
+            {
+              "attributes": [],
+              "children": [
+                {
+                  "attributes": [
+                    [
                       "id",
                       "2",
                     ],
-                    Array [
+                    [
                       "class",
                       "foo",
                     ],
                   ],
-                  "children": Array [
+                  "children": [
                     "FOO",
                   ],
                   "element": "div",
                 },
-                Object {
-                  "attributes": Array [
-                    Array [
+                {
+                  "attributes": [
+                    [
                       "id",
                       "span-2",
                     ],
                   ],
-                  "children": Array [
+                  "children": [
                     "FOO",
                   ],
                   "element": "span",
                 },
-                Object {
-                  "attributes": Array [],
-                  "children": Array [
-                    Object {
-                      "attributes": Array [
-                        Array [
+                {
+                  "attributes": [],
+                  "children": [
+                    {
+                      "attributes": [
+                        [
                           "id",
                           "3",
                         ],
-                        Array [
+                        [
                           "class",
                           "foo",
                         ],
                       ],
-                      "children": Array [
+                      "children": [
                         "BAR",
                       ],
                       "element": "div",
                     },
-                    Object {
-                      "attributes": Array [
-                        Array [
+                    {
+                      "attributes": [
+                        [
                           "id",
                           "span-3",
                         ],
                       ],
-                      "children": Array [
+                      "children": [
                         "BAR",
                       ],
                       "element": "span",
@@ -1002,22 +998,22 @@ Object {
 }
 `;
 
-exports[`renderToJson should properly handle context data close-by providers should not interfere with each other 1`] = `
-Object {
-  "attributes": Array [],
-  "children": Array [
-    Object {
-      "attributes": Array [],
-      "children": Array [
-        Object {
-          "attributes": Array [],
-          "children": Array [
-            Object {
-              "attributes": Array [],
-              "children": Array [
-                Object {
-                  "attributes": Array [],
-                  "children": Array [
+exports[`renderToJson > should properly handle context data > close-by providers should not interfere with each other 1`] = `
+{
+  "attributes": [],
+  "children": [
+    {
+      "attributes": [],
+      "children": [
+        {
+          "attributes": [],
+          "children": [
+            {
+              "attributes": [],
+              "children": [
+                {
+                  "attributes": [],
+                  "children": [
                     "bar",
                   ],
                   "element": "p",
@@ -1025,12 +1021,12 @@ Object {
               ],
               "element": "",
             },
-            Object {
-              "attributes": Array [],
-              "children": Array [
-                Object {
-                  "attributes": Array [],
-                  "children": Array [
+            {
+              "attributes": [],
+              "children": [
+                {
+                  "attributes": [],
+                  "children": [
                     "baz",
                   ],
                   "element": "p",
@@ -1038,12 +1034,12 @@ Object {
               ],
               "element": "",
             },
-            Object {
-              "attributes": Array [],
-              "children": Array [
-                Object {
-                  "attributes": Array [],
-                  "children": Array [
+            {
+              "attributes": [],
+              "children": [
+                {
+                  "attributes": [],
+                  "children": [
                     "qux",
                   ],
                   "element": "p",
@@ -1051,12 +1047,12 @@ Object {
               ],
               "element": "",
             },
-            Object {
-              "attributes": Array [],
-              "children": Array [
-                Object {
-                  "attributes": Array [],
-                  "children": Array [
+            {
+              "attributes": [],
+              "children": [
+                {
+                  "attributes": [],
+                  "children": [
                     "coorg",
                   ],
                   "element": "p",
@@ -1064,12 +1060,12 @@ Object {
               ],
               "element": "",
             },
-            Object {
-              "attributes": Array [],
-              "children": Array [
-                Object {
-                  "attributes": Array [],
-                  "children": Array [
+            {
+              "attributes": [],
+              "children": [
+                {
+                  "attributes": [],
+                  "children": [
                     "fred",
                   ],
                   "element": "p",
@@ -1077,12 +1073,12 @@ Object {
               ],
               "element": "",
             },
-            Object {
-              "attributes": Array [],
-              "children": Array [
-                Object {
-                  "attributes": Array [],
-                  "children": Array [
+            {
+              "attributes": [],
+              "children": [
+                {
+                  "attributes": [],
+                  "children": [
                     "thud",
                   ],
                   "element": "p",
@@ -1090,9 +1086,9 @@ Object {
               ],
               "element": "",
             },
-            Object {
-              "attributes": Array [],
-              "children": Array [
+            {
+              "attributes": [],
+              "children": [
                 "foo",
               ],
               "element": "p",
@@ -1108,50 +1104,50 @@ Object {
 }
 `;
 
-exports[`renderToJson should properly handle context data correctly handles encapsulated providers 1`] = `
-Object {
-  "attributes": Array [],
-  "children": Array [
-    Object {
-      "attributes": Array [],
-      "children": Array [
-        Object {
-          "attributes": Array [
-            Array [
+exports[`renderToJson > should properly handle context data > correctly handles encapsulated providers 1`] = `
+{
+  "attributes": [],
+  "children": [
+    {
+      "attributes": [],
+      "children": [
+        {
+          "attributes": [
+            [
               "id",
               "root",
             ],
           ],
-          "children": Array [
-            Object {
-              "attributes": Array [],
-              "children": Array [
-                Object {
-                  "attributes": Array [
-                    Array [
+          "children": [
+            {
+              "attributes": [],
+              "children": [
+                {
+                  "attributes": [
+                    [
                       "class",
                       "template for-magic",
                     ],
                   ],
-                  "children": Array [
-                    Object {
-                      "attributes": Array [],
-                      "children": Array [
-                        Object {
-                          "attributes": Array [],
-                          "children": Array [
-                            Object {
-                              "attributes": Array [
-                                Array [
+                  "children": [
+                    {
+                      "attributes": [],
+                      "children": [
+                        {
+                          "attributes": [],
+                          "children": [
+                            {
+                              "attributes": [
+                                [
                                   "type",
                                   "text",
                                 ],
-                                Array [
+                                [
                                   "name",
                                   "repeating_magic_dwarf",
                                 ],
                               ],
-                              "children": Array [],
+                              "children": [],
                               "element": "input",
                             },
                           ],
@@ -1177,43 +1173,43 @@ Object {
 }
 `;
 
-exports[`renderToJson should properly handle context data should correctly drill the prop data through multiple components 1`] = `
-Object {
-  "attributes": Array [],
-  "children": Array [
-    Object {
-      "attributes": Array [],
-      "children": Array [
-        Object {
-          "attributes": Array [],
-          "children": Array [
-            Object {
-              "attributes": Array [],
-              "children": Array [
-                Object {
-                  "attributes": Array [],
-                  "children": Array [
-                    Object {
-                      "attributes": Array [],
-                      "children": Array [
-                        Object {
-                          "attributes": Array [],
-                          "children": Array [
-                            Object {
-                              "attributes": Array [],
-                              "children": Array [
-                                Object {
-                                  "attributes": Array [],
-                                  "children": Array [
-                                    Object {
-                                      "attributes": Array [],
-                                      "children": Array [
-                                        Object {
-                                          "attributes": Array [],
-                                          "children": Array [
-                                            Object {
-                                              "attributes": Array [],
-                                              "children": Array [
+exports[`renderToJson > should properly handle context data > should correctly drill the prop data through multiple components 1`] = `
+{
+  "attributes": [],
+  "children": [
+    {
+      "attributes": [],
+      "children": [
+        {
+          "attributes": [],
+          "children": [
+            {
+              "attributes": [],
+              "children": [
+                {
+                  "attributes": [],
+                  "children": [
+                    {
+                      "attributes": [],
+                      "children": [
+                        {
+                          "attributes": [],
+                          "children": [
+                            {
+                              "attributes": [],
+                              "children": [
+                                {
+                                  "attributes": [],
+                                  "children": [
+                                    {
+                                      "attributes": [],
+                                      "children": [
+                                        {
+                                          "attributes": [],
+                                          "children": [
+                                            {
+                                              "attributes": [],
+                                              "children": [
                                                 "foo",
                                               ],
                                               "element": "p",
@@ -1253,103 +1249,103 @@ Object {
 }
 `;
 
-exports[`renderToJson should properly handle context data should correctly handle provider pattern 1`] = `
-Object {
-  "attributes": Array [],
-  "children": Array [
-    Object {
-      "attributes": Array [],
-      "children": Array [
-        Object {
-          "attributes": Array [
-            Array [
+exports[`renderToJson > should properly handle context data > should correctly handle provider pattern 1`] = `
+{
+  "attributes": [],
+  "children": [
+    {
+      "attributes": [],
+      "children": [
+        {
+          "attributes": [
+            [
               "charset",
               "utf-8",
             ],
           ],
-          "children": Array [],
+          "children": [],
           "element": "meta",
         },
-        Object {
-          "attributes": Array [
-            Array [
+        {
+          "attributes": [
+            [
               "http-equiv",
               "x-ua-compatible",
             ],
-            Array [
+            [
               "content",
               "IE=edge",
             ],
           ],
-          "children": Array [],
+          "children": [],
           "element": "meta",
         },
-        Object {
-          "attributes": Array [],
-          "children": Array [
+        {
+          "attributes": [],
+          "children": [
             "Page Title",
           ],
           "element": "title",
         },
-        Object {
-          "attributes": Array [
-            Array [
+        {
+          "attributes": [
+            [
               "name",
               "viewport",
             ],
-            Array [
+            [
               "content",
               "width=device-width, initial-scale=1",
             ],
           ],
-          "children": Array [],
+          "children": [],
           "element": "meta",
         },
-        Object {
-          "attributes": Array [
-            Array [
+        {
+          "attributes": [
+            [
               "rel",
               "stylesheet",
             ],
-            Array [
+            [
               "type",
               "text/css",
             ],
-            Array [
+            [
               "media",
               "screen",
             ],
-            Array [
+            [
               "href",
               "main.css",
             ],
           ],
-          "children": Array [],
+          "children": [],
           "element": "link",
         },
       ],
       "element": "head",
     },
-    Object {
-      "attributes": Array [],
-      "children": Array [
-        Object {
-          "attributes": Array [],
-          "children": Array [
-            Object {
-              "attributes": Array [
-                Array [
+    {
+      "attributes": [],
+      "children": [
+        {
+          "attributes": [],
+          "children": [
+            {
+              "attributes": [
+                [
                   "class",
                   "main-container",
                 ],
               ],
-              "children": Array [
-                Object {
-                  "attributes": Array [],
-                  "children": Array [
-                    Object {
-                      "attributes": Array [],
-                      "children": Array [
+              "children": [
+                {
+                  "attributes": [],
+                  "children": [
+                    {
+                      "attributes": [],
+                      "children": [
                         "Provided title",
                       ],
                       "element": "h1",
@@ -1371,104 +1367,104 @@ Object {
 }
 `;
 
-exports[`renderToJson should properly handle context data should correctly override existing context data 1`] = `
-Object {
-  "attributes": Array [],
-  "children": Array [
-    Object {
-      "attributes": Array [],
-      "children": Array [
-        Object {
-          "attributes": Array [
-            Array [
+exports[`renderToJson > should properly handle context data > should correctly override existing context data 1`] = `
+{
+  "attributes": [],
+  "children": [
+    {
+      "attributes": [],
+      "children": [
+        {
+          "attributes": [
+            [
               "charset",
               "utf-8",
             ],
           ],
-          "children": Array [],
+          "children": [],
           "element": "meta",
         },
-        Object {
-          "attributes": Array [
-            Array [
+        {
+          "attributes": [
+            [
               "http-equiv",
               "x-ua-compatible",
             ],
-            Array [
+            [
               "content",
               "IE=edge",
             ],
           ],
-          "children": Array [],
+          "children": [],
           "element": "meta",
         },
-        Object {
-          "attributes": Array [],
-          "children": Array [
+        {
+          "attributes": [],
+          "children": [
             "Page Title",
           ],
           "element": "title",
         },
-        Object {
-          "attributes": Array [
-            Array [
+        {
+          "attributes": [
+            [
               "name",
               "viewport",
             ],
-            Array [
+            [
               "content",
               "width=device-width, initial-scale=1",
             ],
           ],
-          "children": Array [],
+          "children": [],
           "element": "meta",
         },
-        Object {
-          "attributes": Array [
-            Array [
+        {
+          "attributes": [
+            [
               "rel",
               "stylesheet",
             ],
-            Array [
+            [
               "type",
               "text/css",
             ],
-            Array [
+            [
               "media",
               "screen",
             ],
-            Array [
+            [
               "href",
               "main.css",
             ],
           ],
-          "children": Array [],
+          "children": [],
           "element": "link",
         },
       ],
       "element": "head",
     },
-    Object {
-      "attributes": Array [],
-      "children": Array [
-        Object {
-          "attributes": Array [],
-          "children": Array [
-            Object {
-              "attributes": Array [],
-              "children": Array [
+    {
+      "attributes": [],
+      "children": [
+        {
+          "attributes": [],
+          "children": [
+            {
+              "attributes": [],
+              "children": [
                 "This title was overridden",
               ],
               "element": "h1",
             },
-            Object {
-              "attributes": Array [
-                Array [
+            {
+              "attributes": [
+                [
                   "placeholder",
                   "write here",
                 ],
               ],
-              "children": Array [],
+              "children": [],
               "element": "input",
             },
           ],
@@ -1482,100 +1478,100 @@ Object {
 }
 `;
 
-exports[`renderToJson should properly handle context data should correctly render jsx with context data 1`] = `
-Object {
-  "attributes": Array [],
-  "children": Array [
-    Object {
-      "attributes": Array [],
-      "children": Array [
-        Object {
-          "attributes": Array [
-            Array [
+exports[`renderToJson > should properly handle context data > should correctly render jsx with context data 1`] = `
+{
+  "attributes": [],
+  "children": [
+    {
+      "attributes": [],
+      "children": [
+        {
+          "attributes": [
+            [
               "charset",
               "utf-8",
             ],
           ],
-          "children": Array [],
+          "children": [],
           "element": "meta",
         },
-        Object {
-          "attributes": Array [
-            Array [
+        {
+          "attributes": [
+            [
               "http-equiv",
               "x-ua-compatible",
             ],
-            Array [
+            [
               "content",
               "IE=edge",
             ],
           ],
-          "children": Array [],
+          "children": [],
           "element": "meta",
         },
-        Object {
-          "attributes": Array [],
-          "children": Array [
+        {
+          "attributes": [],
+          "children": [
             "Page Title",
           ],
           "element": "title",
         },
-        Object {
-          "attributes": Array [
-            Array [
+        {
+          "attributes": [
+            [
               "name",
               "viewport",
             ],
-            Array [
+            [
               "content",
               "width=device-width, initial-scale=1",
             ],
           ],
-          "children": Array [],
+          "children": [],
           "element": "meta",
         },
-        Object {
-          "attributes": Array [
-            Array [
+        {
+          "attributes": [
+            [
               "rel",
               "stylesheet",
             ],
-            Array [
+            [
               "type",
               "text/css",
             ],
-            Array [
+            [
               "media",
               "screen",
             ],
-            Array [
+            [
               "href",
               "main.css",
             ],
           ],
-          "children": Array [],
+          "children": [],
           "element": "link",
         },
       ],
       "element": "head",
     },
-    Object {
-      "attributes": Array [],
-      "children": Array [
-        Object {
-          "attributes": Array [
-            Array [
+    {
+      "attributes": [],
+      "children": [
+        {
+          "attributes": [
+            [
               "class",
               "main-container",
             ],
           ],
-          "children": Array [
-            Object {
-              "attributes": Array [],
-              "children": Array [
-                Object {
-                  "attributes": Array [],
-                  "children": Array [
+          "children": [
+            {
+              "attributes": [],
+              "children": [
+                {
+                  "attributes": [],
+                  "children": [
                     "This title is set via the context",
                   ],
                   "element": "h1",
@@ -1594,95 +1590,95 @@ Object {
 }
 `;
 
-exports[`renderToJson should properly handle context data should correctly render jsx with context data and arrays in between elements 1`] = `
-Object {
-  "attributes": Array [],
-  "children": Array [
-    Object {
-      "attributes": Array [],
-      "children": Array [
-        Object {
-          "attributes": Array [
-            Array [
+exports[`renderToJson > should properly handle context data > should correctly render jsx with context data and arrays in between elements 1`] = `
+{
+  "attributes": [],
+  "children": [
+    {
+      "attributes": [],
+      "children": [
+        {
+          "attributes": [
+            [
               "charset",
               "utf-8",
             ],
           ],
-          "children": Array [],
+          "children": [],
           "element": "meta",
         },
-        Object {
-          "attributes": Array [
-            Array [
+        {
+          "attributes": [
+            [
               "http-equiv",
               "x-ua-compatible",
             ],
-            Array [
+            [
               "content",
               "IE=edge",
             ],
           ],
-          "children": Array [],
+          "children": [],
           "element": "meta",
         },
-        Object {
-          "attributes": Array [],
-          "children": Array [
+        {
+          "attributes": [],
+          "children": [
             "Page Title",
           ],
           "element": "title",
         },
-        Object {
-          "attributes": Array [
-            Array [
+        {
+          "attributes": [
+            [
               "name",
               "viewport",
             ],
-            Array [
+            [
               "content",
               "width=device-width, initial-scale=1",
             ],
           ],
-          "children": Array [],
+          "children": [],
           "element": "meta",
         },
-        Object {
-          "attributes": Array [
-            Array [
+        {
+          "attributes": [
+            [
               "rel",
               "stylesheet",
             ],
-            Array [
+            [
               "type",
               "text/css",
             ],
-            Array [
+            [
               "media",
               "screen",
             ],
-            Array [
+            [
               "href",
               "main.css",
             ],
           ],
-          "children": Array [],
+          "children": [],
           "element": "link",
         },
       ],
       "element": "head",
     },
-    Object {
-      "attributes": Array [],
-      "children": Array [
-        Object {
-          "attributes": Array [],
-          "children": Array [
-            Object {
-              "attributes": Array [],
-              "children": Array [
-                Object {
-                  "attributes": Array [],
-                  "children": Array [
+    {
+      "attributes": [],
+      "children": [
+        {
+          "attributes": [],
+          "children": [
+            {
+              "attributes": [],
+              "children": [
+                {
+                  "attributes": [],
+                  "children": [
                     "This title is set via the context",
                   ],
                   "element": "h1",
@@ -1690,19 +1686,19 @@ Object {
               ],
               "element": "div",
             },
-            Object {
-              "attributes": Array [
-                Array [
+            {
+              "attributes": [
+                [
                   "placeholder",
                   "write here",
                 ],
               ],
-              "children": Array [],
+              "children": [],
               "element": "input",
             },
-            Object {
-              "attributes": Array [],
-              "children": Array [
+            {
+              "attributes": [],
+              "children": [
                 "Submit",
               ],
               "element": "button",
@@ -1718,95 +1714,95 @@ Object {
 }
 `;
 
-exports[`renderToJson should properly handle context data should correctly render jsx with context data and async components 1`] = `
-Object {
-  "attributes": Array [],
-  "children": Array [
-    Object {
-      "attributes": Array [],
-      "children": Array [
-        Object {
-          "attributes": Array [
-            Array [
+exports[`renderToJson > should properly handle context data > should correctly render jsx with context data and async components 1`] = `
+{
+  "attributes": [],
+  "children": [
+    {
+      "attributes": [],
+      "children": [
+        {
+          "attributes": [
+            [
               "charset",
               "utf-8",
             ],
           ],
-          "children": Array [],
+          "children": [],
           "element": "meta",
         },
-        Object {
-          "attributes": Array [
-            Array [
+        {
+          "attributes": [
+            [
               "http-equiv",
               "x-ua-compatible",
             ],
-            Array [
+            [
               "content",
               "IE=edge",
             ],
           ],
-          "children": Array [],
+          "children": [],
           "element": "meta",
         },
-        Object {
-          "attributes": Array [],
-          "children": Array [
+        {
+          "attributes": [],
+          "children": [
             "Page Title",
           ],
           "element": "title",
         },
-        Object {
-          "attributes": Array [
-            Array [
+        {
+          "attributes": [
+            [
               "name",
               "viewport",
             ],
-            Array [
+            [
               "content",
               "width=device-width, initial-scale=1",
             ],
           ],
-          "children": Array [],
+          "children": [],
           "element": "meta",
         },
-        Object {
-          "attributes": Array [
-            Array [
+        {
+          "attributes": [
+            [
               "rel",
               "stylesheet",
             ],
-            Array [
+            [
               "type",
               "text/css",
             ],
-            Array [
+            [
               "media",
               "screen",
             ],
-            Array [
+            [
               "href",
               "main.css",
             ],
           ],
-          "children": Array [],
+          "children": [],
           "element": "link",
         },
       ],
       "element": "head",
     },
-    Object {
-      "attributes": Array [],
-      "children": Array [
-        Object {
-          "attributes": Array [],
-          "children": Array [
-            Object {
-              "attributes": Array [],
-              "children": Array [
-                Object {
-                  "attributes": Array [],
-                  "children": Array [
+    {
+      "attributes": [],
+      "children": [
+        {
+          "attributes": [],
+          "children": [
+            {
+              "attributes": [],
+              "children": [
+                {
+                  "attributes": [],
+                  "children": [
                     "This title is set via the context",
                   ],
                   "element": "h1",
@@ -1814,19 +1810,19 @@ Object {
               ],
               "element": "div",
             },
-            Object {
-              "attributes": Array [
-                Array [
+            {
+              "attributes": [
+                [
                   "placeholder",
                   "write here",
                 ],
               ],
-              "children": Array [],
+              "children": [],
               "element": "input",
             },
-            Object {
-              "attributes": Array [],
-              "children": Array [
+            {
+              "attributes": [],
+              "children": [
                 "Submit",
               ],
               "element": "button",

@@ -1,13 +1,13 @@
-import "../../src/jsx/jsx.types";
-// @ts-ignore
 import { jsx, Fragment } from "../../src/jsx/jsx-runtime";
 import {
+  renderToJson,
+  renderToJsonAsync,
+  ErrorBoundary,
   ContextDefinition,
   ComponentApi,
   defineContext,
-} from "../../src/component-api/component-api";
-import { ErrorBoundary } from "../../src/error-boundary/error-boundary";
-import { renderToJson, renderToJsonAsync } from "../../src/index";
+} from "../../src/index";
+import { describe, expect, it } from "vitest";
 
 const sleep = (t: number) =>
   new Promise<void>((resolve) => setTimeout(() => resolve(), t));

@@ -1,7 +1,7 @@
 import { JsxteRenderError } from "../jsxte-render-error";
 import { jsxElemToJsonAsync, jsxElemToJsonSync } from "./jsx-elem-to-json";
 
-type HtmlRenderOptions = {
+export type JsonRenderOptions = {
   attributeMap?: Record<string, string>;
 };
 
@@ -11,7 +11,7 @@ type HtmlRenderOptions = {
  */
 export const renderToJson = (
   component: JSX.Element,
-  options?: HtmlRenderOptions,
+  options?: JsonRenderOptions,
 ) => {
   try {
     return jsxElemToJsonSync(component, undefined, options);
@@ -29,7 +29,7 @@ export const renderToJson = (
  */
 export const renderToJsonAsync = async (
   component: JSX.Element,
-  options?: HtmlRenderOptions,
+  options?: JsonRenderOptions,
 ) => {
   try {
     return await jsxElemToJsonAsync(component, undefined, options);

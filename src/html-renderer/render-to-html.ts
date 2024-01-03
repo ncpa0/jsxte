@@ -1,9 +1,9 @@
 import { JsxteRenderError } from "../jsxte-render-error";
 import { jsxElemToHtmlAsync, jsxElemToHtmlSync } from "./jsx-elem-to-html";
 
-type HtmlRenderOptions = {
-  indent?: number;
+export type HtmlRenderOptions = {
   attributeMap?: Record<string, string>;
+  compact?: boolean;
 };
 
 /**

@@ -1,6 +1,10 @@
 import type { ComponentApi } from "../component-api/component-api";
-import type { ErrorBoundaryElement } from "../error-boundary/error-boundary";
-import type { Rewrap } from "../html-renderer/types";
+
+type Rewrap<T extends object> = T extends infer OBJ
+  ? {
+      [K in keyof OBJ]: OBJ[K] extends infer O ? O : never;
+    }
+  : never;
 
 export type AttributeBool = true | false | "true" | "false";
 
@@ -24,11 +28,28 @@ declare global {
   namespace JSXTE {
     interface AttributeAcceptedTypes {}
 
+    interface FunctionalComponent<P extends object = {}> {
+      (props: P, contextMap: ComponentApi): JSX.Element;
+    }
+
+    interface ClassComponent<P extends object = {}> {
+      new (props: P): {
+        props: P;
+        render(props: P, contextMap: ComponentApi): JSX.Element;
+        onError(
+          error: unknown,
+          originalProps: P,
+          contextMap: ComponentApi,
+        ): JSX.Element;
+      };
+    }
+
     type TagElement = {
       type: "tag";
       tag:
-        | ((props: ElementProps, contextMap: ComponentApi) => JSX.Element)
-        | ErrorBoundaryElement;
+        | FunctionalComponent<ElementProps>
+        | ClassComponent<ElementProps>
+        | string;
       props: ElementProps;
     };
 

@@ -1,16 +1,13 @@
-import "../../src/jsx/jsx.types";
 import {
   renderToHtml,
   renderToHtmlAsync,
-} from "../../src/html-renderer/render-to-html";
-// @ts-ignore
-import { jsx, Fragment } from "../../src/jsx/jsx-runtime";
-import {
+  ErrorBoundary,
   ContextDefinition,
   ComponentApi,
   defineContext,
-} from "../../src/component-api/component-api";
-import { ErrorBoundary } from "../../src/error-boundary/error-boundary";
+} from "../../src/index";
+import { jsx, Fragment } from "../../src/jsx/jsx-runtime";
+import { describe, expect, it } from "vitest";
 
 const sleep = (t: number) =>
   new Promise<void>((resolve) => setTimeout(() => resolve(), t));
@@ -926,7 +923,7 @@ describe("renderToHTML", () => {
       }
     }
 
-    it("should correctly render the tree that's inside an ErrorBoundary", () => {
+    it("should correctly render the tree thats inside an ErrorBoundary", () => {
       const Header = (props: { title: string }) => {
         return <h2>{props.title}</h2>;
       };
@@ -992,7 +989,7 @@ describe("renderToHTML", () => {
 
     it("should render the fallback if the direct child throws an error", () => {
       const FailingComponent = (): JSX.Element => {
-        throw new Error("I'm failing");
+        throw new Error("I'm failing 1");
       };
 
       const App = () => {
@@ -1014,7 +1011,7 @@ describe("renderToHTML", () => {
 
     it("should render the fallback if a nested child throws an error", () => {
       const FailingComponent = (): JSX.Element => {
-        throw new Error("I'm failing");
+        throw new Error("I'm failing 2");
       };
 
       const Header = () => {
@@ -1050,9 +1047,13 @@ describe("renderToHTML", () => {
     });
 
     it("should render the fallback if a nested async child throws an error", async () => {
+      process.on("unhandledRejection", (err, promise) => {
+        debugger;
+      });
+
       const FailingComponent = async (): JSX.AsyncElement => {
         await sleep(10).then(() => {
-          throw new Error("I'm failing");
+          throw new Error("I'm failing 3");
         });
 
         return <></>;
@@ -1323,7 +1324,7 @@ describe("renderToHTML", () => {
   describe("errors", () => {
     describe("error throw should contain information on which place in the tree the error occurred", () => {
       const Failing = () => {
-        throw new Error("I'm failing");
+        throw new Error("I'm failing 4");
       };
 
       it("scenario 1", () => {
@@ -1419,7 +1420,7 @@ describe("renderToHTML", () => {
           };
 
           const Failing = async () => {
-            throw new Error("I'm failing async");
+            throw new Error("I'm failing async 1");
           };
 
           const FailsEventually = async () => {
@@ -1463,7 +1464,7 @@ describe("renderToHTML", () => {
           };
 
           const Failing = async () => {
-            throw new Error("I'm failing async");
+            throw new Error("I'm failing async 2");
           };
 
           const FailsEventually = async () => {
