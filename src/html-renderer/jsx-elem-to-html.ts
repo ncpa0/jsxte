@@ -5,15 +5,41 @@ import { SELF_CLOSING_TAG_LIST } from "../utilities/self-closing-tag-list";
 import { mapAttributesToHtmlTagString } from "./attribute-to-html-tag-string";
 import type { HtmlRenderOptions } from "./render-to-html";
 
-function leftPad(str: string, padLength: number): string {
+function leftPadHtml(str: string, padLength: number): string {
   const pad = " ".repeat(padLength);
 
   let result = pad;
+  let isPreformatted = false;
   for (let i = 0; i < str.length; i++) {
     const char = str[i]!;
-    if (char === "\n" && i + 1 < str.length) {
-      result += char + pad;
+
+    if (!isPreformatted) {
+      if (
+        char === "e"
+        && i > 2
+        && str[i - 1] === "r"
+        && str[i - 2] === "p"
+        && str[i - 3] === "<"
+      ) {
+        isPreformatted = true;
+      }
+
+      if (char === "\n" && i + 1 < str.length) {
+        result += char + pad;
+      } else {
+        result += char;
+      }
     } else {
+      if (
+        char === "<"
+        && i + 4 < str.length
+        && str[i + 1] === "/"
+        && str[i + 2] === "p"
+        && str[i + 3] === "r"
+        && str[i + 4] === "e"
+      ) {
+        isPreformatted = false;
+      }
       result += char;
     }
   }
@@ -24,13 +50,24 @@ function leftPad(str: string, padLength: number): string {
 class BaseHtmlGenerator {
   constructor(protected options?: HtmlRenderOptions | undefined) {}
 
-  protected prepareContent(content: string[]): string | undefined {
+  protected prepareContent(tag: string, content: string[]): string | undefined {
     if (content.length === 0) return undefined;
 
     if (this.options?.compact === true) {
       return join(content);
     }
-    return leftPad(join(content, "\n"), this.options?.indent ?? 2);
+
+    if (tag === "pre") {
+      return join(content, "");
+    }
+
+    const padded = leftPadHtml(join(content, ""), this.options?.indent ?? 2);
+
+    if (padded[padded.length - 1] === "\n") {
+      return padded.slice(0, -1);
+    }
+
+    return padded;
   }
 
   protected generateTag(tag: string, attributes?: string, content?: string) {
@@ -42,21 +79,21 @@ class BaseHtmlGenerator {
 
     if (!content) {
       if (SELF_CLOSING_TAG_LIST.includes(tag)) {
-        return `<${tag}${attributes} />`;
+        return `<${tag}${attributes} />\n`;
       } else {
-        return `<${tag}${attributes}></${tag}>`;
+        return `<${tag}${attributes}></${tag}>\n`;
       }
     }
 
     if (this.options?.compact === true) {
-      return `<${tag}${attributes}>${content}</${tag}>`;
+      return `<${tag}${attributes}>${content}</${tag}>\n`;
     }
 
     if (tag === "pre") {
-      return `<${tag}${attributes}>${content}</${tag}>`;
+      return `<${tag}${attributes}>${content}</${tag}>\n`;
     }
 
-    return `<${tag}${attributes}>\n${content}\n</${tag}>`;
+    return `<${tag}${attributes}>\n${content}\n</${tag}>\n`;
   }
 }
 
@@ -73,12 +110,12 @@ export class HtmlGenerator extends BaseHtmlGenerator
     children: string[],
   ): string {
     const attributesString = mapAttributesToHtmlTagString(attributes);
-    const content = this.prepareContent(children);
+    const content = this.prepareContent(type, children);
     return this.generateTag(type, attributesString, content);
   }
 
   createFragment(children: string[]): string {
-    return this.prepareContent(children) ?? "";
+    return this.prepareContent("pre", children) ?? "";
   }
 }
 
@@ -107,7 +144,7 @@ export class AsyncHtmlGenerator extends BaseHtmlGenerator
       .then((c) => Promise.all(c))
       .then((children) => {
         const attributesString = mapAttributesToHtmlTagString(attributes);
-        const content = this.prepareContent(children);
+        const content = this.prepareContent(type, children);
         return this.generateTag(type, attributesString, content);
       });
   }
@@ -122,7 +159,7 @@ export class AsyncHtmlGenerator extends BaseHtmlGenerator
     return Promise.resolve(children)
       .then((c) => Promise.all(c))
       .then((children) => {
-        return this.prepareContent(children) ?? "";
+        return this.prepareContent("pre", children) ?? "";
       });
   }
 }

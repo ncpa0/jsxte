@@ -5,7 +5,8 @@ exports[`memo > asynchronous memoized components should works as expected 1`] = 
   <h1>
     Hello World
   </h1>
-</div>"
+</div>
+"
 `;
 
 exports[`memo > children of the memoized components should have access to the top level context 1`] = `
@@ -17,7 +18,8 @@ exports[`memo > children of the memoized components should have access to the to
       </h1>
     </div>
   </div>
-</div>"
+</div>
+"
 `;
 
 exports[`memo > memoized components should have access to the context of it's parent 1`] = `
@@ -25,7 +27,8 @@ exports[`memo > memoized components should have access to the context of it's pa
   <h1>
     Hello
   </h1>
-</div>"
+</div>
+"
 `;
 
 exports[`memo > should "forget" memoized results that are past expire time 1`] = `
@@ -33,7 +36,8 @@ exports[`memo > should "forget" memoized results that are past expire time 1`] =
   <h1>
     Bye cruel world
   </h1>
-</div>"
+</div>
+"
 `;
 
 exports[`memo > should correctly memoize the component 1`] = `
@@ -41,5 +45,6 @@ exports[`memo > should correctly memoize the component 1`] = `
   <h1>
     Hello World
   </h1>
-</div>"
+</div>
+"
 `;

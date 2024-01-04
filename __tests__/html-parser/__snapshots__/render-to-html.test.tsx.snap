@@ -1,28 +1,29 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`renderToHTML > ErrorBoundary > should correctly render the tree thats inside an ErrorBoundary 1`] = `
-"  <html>
-    <head>
-      <meta charset="utf-8" />
-      <meta http-equiv="x-ua-compatible" content="IE=edge" />
-      <title>
-        Page Title
-      </title>
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    </head>
-    <body>
-      <div class="main-container">
-          <h2>
-            Hello World!
-          </h2>
-          <input value="write here" />
-          <button>
-            Submit
-          </button>
-      </div>
-    </body>
-  </html>"
+"<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge" />
+    <title>
+      Page Title
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+  </head>
+  <body>
+    <div class="main-container">
+      <h2>
+        Hello World!
+      </h2>
+      <input value="write here" />
+      <button>
+        Submit
+      </button>
+    </div>
+  </body>
+</html>
+"
 `;
 
 exports[`renderToHTML > ErrorBoundary > should render the fallback if a nested async child throws an error 1`] = `
@@ -33,7 +34,8 @@ exports[`renderToHTML > ErrorBoundary > should render the fallback if a nested a
   <h1>
     Oops. Something went wrong.
   </h1>
-</html>"
+</html>
+"
 `;
 
 exports[`renderToHTML > ErrorBoundary > should render the fallback if a nested child throws an error 1`] = `
@@ -41,7 +43,8 @@ exports[`renderToHTML > ErrorBoundary > should render the fallback if a nested c
   <h1>
     Oops. Something went wrong.
   </h1>
-</html>"
+</html>
+"
 `;
 
 exports[`renderToHTML > ErrorBoundary > should render the fallback if the direct child throws an error 1`] = `
@@ -51,7 +54,8 @@ exports[`renderToHTML > ErrorBoundary > should render the fallback if the direct
       Oops. Something went wrong.
     </h1>
   </body>
-</html>"
+</html>
+"
 `;
 
 exports[`renderToHTML > errors > error throw should contain information on which place in the tree the error occurred > scenario 1 1`] = `
@@ -136,16 +140,17 @@ exports[`renderToHTML > should correctly generate html from component base jsx s
   </head>
   <body>
     <div class="main-container">
-        <h2>
-          Hello World!
-        </h2>
-        <input value="write here" />
-        <button>
-          Submit
-        </button>
+      <h2>
+        Hello World!
+      </h2>
+      <input value="write here" />
+      <button>
+        Submit
+      </button>
     </div>
   </body>
-</html>"
+</html>
+"
 `;
 
 exports[`renderToHTML > should correctly generate html from simple jsx 1`] = `
@@ -160,47 +165,41 @@ exports[`renderToHTML > should correctly generate html from simple jsx 1`] = `
     Click me!
   </button>
   <input autofocus draggable />
-</div>"
+</div>
+"
 `;
 
 exports[`renderToHTML > should correctly handle component children of type nulls, undefined and other 1`] = `
 "<div>
   <div>
-    Undef: 
-    <span></span>
+    Undef: <span></span>
   </div>
   <div>
-    Null: 
-    <span></span>
+    Null: <span></span>
   </div>
   <div>
-    True: 
-    <span></span>
+    True: <span></span>
   </div>
   <div>
-    False: 
-    <span></span>
+    False: <span></span>
   </div>
   <div>
-    Str: 
-    <span>
+    Str: <span>
       Hello World
     </span>
   </div>
   <div>
-    Num: 
-    <span>
+    Num: <span>
       1234
     </span>
   </div>
   <div>
-    Arr: 
-    <span>
-      hi
-      423
+    Arr: <span>
+      hi423
     </span>
   </div>
-</div>"
+</div>
+"
 `;
 
 exports[`renderToHTML > should correctly handle components returning nulls, undefined and other types 1`] = `
@@ -218,14 +217,13 @@ exports[`renderToHTML > should correctly handle components returning nulls, unde
     False: 
   </div>
   <div>
-    Str: 
-    Hello World
+    Str: Hello World
   </div>
   <div>
-    Num: 
-    1234
+    Num: 1234
   </div>
-</div>"
+</div>
+"
 `;
 
 exports[`renderToHTML > should correctly parse async components 1`] = `
@@ -241,16 +239,17 @@ exports[`renderToHTML > should correctly parse async components 1`] = `
   </head>
   <body>
     <div class="main-container">
-        <h2>
-          Async title
-        </h2>
-        <input value="write here" />
-        <button>
-          Submit
-        </button>
+      <h2>
+        Async title
+      </h2>
+      <input value="write here" />
+      <button>
+        Submit
+      </button>
     </div>
   </body>
-</html>"
+</html>
+"
 `;
 
 exports[`renderToHTML > should correctly perform sub renders > async render > rendered computer can access the context defined on the parent 1`] = `
@@ -266,7 +265,8 @@ exports[`renderToHTML > should correctly perform sub renders > async render > re
       async bar
     </div>
   </div>
-</div>"
+</div>
+"
 `;
 
 exports[`renderToHTML > should correctly perform sub renders > async render > renders a simple component 1`] = `
@@ -274,7 +274,8 @@ exports[`renderToHTML > should correctly perform sub renders > async render > re
   <div>
     Hello World!
   </div>
-</div>"
+</div>
+"
 `;
 
 exports[`renderToHTML > should correctly perform sub renders > sync render > rendered computer can access the context defined on the parent 1`] = `
@@ -290,7 +291,8 @@ exports[`renderToHTML > should correctly perform sub renders > sync render > ren
       bar
     </div>
   </div>
-</div>"
+</div>
+"
 `;
 
 exports[`renderToHTML > should correctly perform sub renders > sync render > renders a simple component 1`] = `
@@ -298,7 +300,23 @@ exports[`renderToHTML > should correctly perform sub renders > sync render > ren
   <div>
     Hello World!
   </div>
-</div>"
+</div>
+"
+`;
+
+exports[`renderToHTML > should correctly render <pre> tags 1`] = `
+"<html>
+  <body>
+    <div id="root">
+      <div>
+        <pre>const foo = "bar";
+const bar = "baz";
+console.log(foo + " " + bar);</pre>
+      </div>
+    </div>
+  </body>
+</html>
+"
 `;
 
 exports[`renderToHTML > should correctly render jsx with arrays in between elements 1`] = `
@@ -313,7 +331,16 @@ exports[`renderToHTML > should correctly render jsx with arrays in between eleme
     1
   </p>
   <footer></footer>
-</div>"
+</div>
+"
+`;
+
+exports[`renderToHTML > should correctly render multiline text with interpolated values inside <pre> tag 1`] = `
+"<div>
+  <pre>Hello Daniel, how is it going?
+123 / 1000</pre>
+</div>
+"
 `;
 
 exports[`renderToHTML > should correctly render objects implementing toHtmlTag symbol interface 1`] = `
@@ -323,7 +350,17 @@ exports[`renderToHTML > should correctly render objects implementing toHtmlTag s
       John Doe
     </span>
   </div>
-</div>"
+</div>
+"
+`;
+
+exports[`renderToHTML > should correctly render text with interpolated values 1`] = `
+"<div>
+  <span>
+    Hello Daniel, how is it going? It's Monday today.
+  </span>
+</div>
+"
 `;
 
 exports[`renderToHTML > should properly handle context data > Provider and Consumer 1`] = `
@@ -336,68 +373,72 @@ exports[`renderToHTML > should properly handle context data > Provider and Consu
       <span id="span-1">
         no value
       </span>
-        <div id="2" class="foo">
-          FOO
-        </div>
-        <span id="span-2">
-          FOO
-        </span>
-          <div id="3" class="foo">
-            BAR
-          </div>
-          <span id="span-3">
-            BAR
-          </span>
+      <div id="2" class="foo">
+        FOO
+      </div>
+      <span id="span-2">
+        FOO
+      </span>
+      <div id="3" class="foo">
+        BAR
+      </div>
+      <span id="span-3">
+        BAR
+      </span>
     </div>
   </body>
-</html>"
+</html>
+"
 `;
 
 exports[`renderToHTML > should properly handle context data > close-by providers should not interfere with each other 1`] = `
 "<html>
   <body>
-        <p>
-          bar
-        </p>
-        <p>
-          baz
-        </p>
-        <p>
-          qux
-        </p>
-        <p>
-          coorg
-        </p>
-        <p>
-          fred
-        </p>
-        <p>
-          thud
-        </p>
-      <p>
-        foo
-      </p>
+    <p>
+      bar
+    </p>
+    <p>
+      baz
+    </p>
+    <p>
+      qux
+    </p>
+    <p>
+      coorg
+    </p>
+    <p>
+      fred
+    </p>
+    <p>
+      thud
+    </p>
+    <p>
+      foo
+    </p>
   </body>
-</html>"
+</html>
+"
 `;
 
 exports[`renderToHTML > should properly handle context data > correctly handles encapsulated providers 1`] = `
 "<html>
   <body>
     <div id="root">
-        <div class="template for-magic">
-          <div>
-              <input type="text" name="repeating_magic_dwarf" />
-          </div>
+      <div class="template for-magic">
+        <div>
+          <input type="text" name="repeating_magic_dwarf" />
         </div>
+      </div>
     </div>
   </body>
-</html>"
+</html>
+"
 `;
 
 exports[`renderToHTML > should properly handle context data > should correctly drill the prop data through multiple components 1`] = `
 "<html>
   <body>
+    <div>
       <div>
         <div>
           <div>
@@ -405,11 +446,9 @@ exports[`renderToHTML > should properly handle context data > should correctly d
               <div>
                 <div>
                   <div>
-                    <div>
-                      <p>
-                        foo
-                      </p>
-                    </div>
+                    <p>
+                      foo
+                    </p>
                   </div>
                 </div>
               </div>
@@ -417,8 +456,10 @@ exports[`renderToHTML > should properly handle context data > should correctly d
           </div>
         </div>
       </div>
+    </div>
   </body>
-</html>"
+</html>
+"
 `;
 
 exports[`renderToHTML > should properly handle context data > should correctly handle provider pattern 1`] = `
@@ -432,16 +473,17 @@ exports[`renderToHTML > should properly handle context data > should correctly h
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
   </head>
-    <body>
-      <div class="main-container">
-        <div>
-          <h1>
-            Provided title
-          </h1>
-        </div>
+  <body>
+    <div class="main-container">
+      <div>
+        <h1>
+          Provided title
+        </h1>
       </div>
-    </body>
-</html>"
+    </div>
+  </body>
+</html>
+"
 `;
 
 exports[`renderToHTML > should properly handle context data > should correctly override existing context data 1`] = `
@@ -456,12 +498,13 @@ exports[`renderToHTML > should properly handle context data > should correctly o
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
   </head>
   <body>
-      <h1>
-        This title was overridden
-      </h1>
-      <input placeholder="write here" />
+    <h1>
+      This title was overridden
+    </h1>
+    <input placeholder="write here" />
   </body>
-</html>"
+</html>
+"
 `;
 
 exports[`renderToHTML > should properly handle context data > should correctly render jsx with context data 1`] = `
@@ -484,7 +527,8 @@ exports[`renderToHTML > should properly handle context data > should correctly r
       </div>
     </div>
   </body>
-</html>"
+</html>
+"
 `;
 
 exports[`renderToHTML > should properly handle context data > should correctly render jsx with context data and arrays in between elements 1`] = `
@@ -499,17 +543,18 @@ exports[`renderToHTML > should properly handle context data > should correctly r
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
   </head>
   <body>
-      <div>
-        <h1>
-          This title is set via the context
-        </h1>
-      </div>
-      <input placeholder="write here" />
-      <button>
-        Submit
-      </button>
+    <div>
+      <h1>
+        This title is set via the context
+      </h1>
+    </div>
+    <input placeholder="write here" />
+    <button>
+      Submit
+    </button>
   </body>
-</html>"
+</html>
+"
 `;
 
 exports[`renderToHTML > should properly handle context data > should correctly render jsx with context data and async components 1`] = `
@@ -524,15 +569,16 @@ exports[`renderToHTML > should properly handle context data > should correctly r
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
   </head>
   <body>
-      <div>
-        <h1>
-          This title is set via the context
-        </h1>
-      </div>
-      <input placeholder="write here" />
-      <button>
-        Submit
-      </button>
+    <div>
+      <h1>
+        This title is set via the context
+      </h1>
+    </div>
+    <input placeholder="write here" />
+    <button>
+      Submit
+    </button>
   </body>
-</html>"
+</html>
+"
 `;

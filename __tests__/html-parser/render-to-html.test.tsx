@@ -245,6 +245,59 @@ describe("renderToHTML", () => {
     expect(renderedStandardDiv).toEqual(renderedDivWithTrue);
   });
 
+  it("should correctly render <pre> tags", () => {
+    const App = () => {
+      return (
+        <html>
+          <body>
+            <div id="root">
+              <div>
+                <pre>{`const foo = "bar";\nconst bar = "baz";\nconsole.log(foo + " " + bar);`}</pre>
+              </div>
+            </div>
+          </body>
+        </html>
+      );
+    };
+
+    const html = renderToHtml(<App />);
+
+    expect(html).toMatchSnapshot();
+  });
+
+  it("should correctly render text with interpolated values", () => {
+    const App = () => {
+      return (
+        <div>
+          <span>
+            Hello {"Daniel"}, how is it going? It's {"Monday"} today.
+          </span>
+        </div>
+      );
+    };
+
+    const html = renderToHtml(<App />);
+
+    expect(html).toMatchSnapshot();
+  });
+
+  it("should correctly render multiline text with interpolated values inside <pre> tag", () => {
+    const App = () => {
+      return (
+        <div>
+          <pre>
+Hello {"Daniel"}, how is it going?{"\n"}
+{123} / {1000}
+          </pre>
+        </div>
+      );
+    };
+
+    const html = renderToHtml(<App />);
+
+    expect(html).toMatchSnapshot();
+  });
+
   describe("should properly handle context data", () => {
     it("should correctly render jsx with context data", () => {
       const context = defineContext<{ title: string }>();
