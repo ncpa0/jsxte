@@ -2,7 +2,16 @@ import { JsxteRenderError } from "../jsxte-render-error";
 import { jsxElemToHtmlAsync, jsxElemToHtmlSync } from "./jsx-elem-to-html";
 
 export type HtmlRenderOptions = {
+  /**
+   * The number of spaces to use for indentation.
+   * @default 2
+   */
+  indent?: number;
   attributeMap?: Record<string, string>;
+  /**
+   * If true, the generated html will be compacted, removing all unnecessary
+   * whitespace.
+   */
   compact?: boolean;
 };
 

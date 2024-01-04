@@ -30,12 +30,14 @@ class BaseHtmlGenerator {
     if (this.options?.compact === true) {
       return join(content);
     }
-    return leftPad(join(content, "\n"), 2);
+    return leftPad(join(content, "\n"), this.options?.indent ?? 2);
   }
 
   protected generateTag(tag: string, attributes?: string, content?: string) {
     if (attributes) {
       attributes = " " + attributes;
+    } else {
+      attributes = "";
     }
 
     if (!content) {
