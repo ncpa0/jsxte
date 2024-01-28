@@ -172,29 +172,36 @@ exports[`renderToHTML > should correctly generate html from simple jsx 1`] = `
 exports[`renderToHTML > should correctly handle component children of type nulls, undefined and other 1`] = `
 "<div>
   <div>
-    Undef: <span></span>
+    Undef:
+    <span></span>
   </div>
   <div>
-    Null: <span></span>
+    Null:
+    <span></span>
   </div>
   <div>
-    True: <span></span>
+    True:
+    <span></span>
   </div>
   <div>
-    False: <span></span>
+    False:
+    <span></span>
   </div>
   <div>
-    Str: <span>
+    Str:
+    <span>
       Hello World
     </span>
   </div>
   <div>
-    Num: <span>
+    Num:
+    <span>
       1234
     </span>
   </div>
   <div>
-    Arr: <span>
+    Arr:
+    <span>
       hi423
     </span>
   </div>
@@ -205,16 +212,16 @@ exports[`renderToHTML > should correctly handle component children of type nulls
 exports[`renderToHTML > should correctly handle components returning nulls, undefined and other types 1`] = `
 "<div>
   <div>
-    Undef: 
+    Undef:
   </div>
   <div>
-    Null: 
+    Null:
   </div>
   <div>
-    True: 
+    True:
   </div>
   <div>
-    False: 
+    False:
   </div>
   <div>
     Str: Hello World
@@ -350,6 +357,22 @@ exports[`renderToHTML > should correctly render objects implementing toHtmlTag s
       John Doe
     </span>
   </div>
+</div>
+"
+`;
+
+exports[`renderToHTML > should correctly render text with interpolated multiline values 1`] = `
+"<div>
+  <span>
+    Hello Daniel, how is it going?
+    
+    Task for today:
+    - Clean the house
+    - Do the laundry
+    - Buy some milk
+    - Buy some bread
+    That is all
+  </span>
 </div>
 "
 `;
