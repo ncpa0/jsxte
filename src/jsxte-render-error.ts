@@ -16,7 +16,6 @@ export class JsxteRenderError extends Error {
   declare public cause: any;
 
   constructor(message: string, insideTag?: string, causedBy?: any) {
-    // @ts-expect-error
     super(message, { cause: causedBy });
     this.name = "JsxteRenderError";
     this.baseMessage = message;
