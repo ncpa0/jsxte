@@ -58,7 +58,7 @@
     "dprint": "^0.45.0",
     "esbuild": "~0.19.5",
     "eslint": "~8.56.0",
-    "git-hook-tasks": "ncpa0cpl/git-hook-tasks",
+    "git-hook-tasks": "git+https://github.com/ncpa0cpl/git-hook-tasks#0.0.1",
     "husky": "~8.0.3",
     "jsdom": "^24.0.0",
     "node-os-walk": "~1.0.2",

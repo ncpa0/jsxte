@@ -956,9 +956,9 @@ check-error@^1.0.3:
   dependencies:
     get-func-name "^2.0.2"
 
-clify.js@ncpa0cpl/clify.js#0.0.5:
+"clify.js@git+https://github.com/ncpa0cpl/clify.js#0.0.5":
   version "1.0.3"
-  resolved "https://codeload.github.com/ncpa0cpl/clify.js/tar.gz/63c08dd0ad286d9416f89a34da6014f204258b38"
+  resolved "git+https://github.com/ncpa0cpl/clify.js#63c08dd0ad286d9416f89a34da6014f204258b38"
   dependencies:
     chalk "^4.1.2"
 
@@ -1583,13 +1583,13 @@ get-symbol-description@^1.0.0:
     call-bind "^1.0.2"
     get-intrinsic "^1.1.1"
 
-git-hook-tasks@ncpa0cpl/git-hook-tasks:
+"git-hook-tasks@git+https://github.com/ncpa0cpl/git-hook-tasks#0.0.1":
   version "1.0.0"
-  resolved "https://codeload.github.com/ncpa0cpl/git-hook-tasks/tar.gz/98d2b72c63ed154d281bcf116e622f2177055fc1"
+  resolved "git+https://github.com/ncpa0cpl/git-hook-tasks#4fada7136e96600b0f66606e7427cf57b857504d"
   dependencies:
     async-await-queue "^1.2.1"
     chalk "^4.0.0"
-    clify.js ncpa0cpl/clify.js
+    clify.js "git+https://github.com/ncpa0cpl/clify.js#0.0.5"
     dilswer "^1.2.0"
     node-os-walk "^1.0.0"
     strip-ansi "^6.0.1"
