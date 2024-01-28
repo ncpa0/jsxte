@@ -11,6 +11,9 @@
   "[typescriptreact]": {
     "editor.defaultFormatter": "dprint.dprint"
   },
+  "[markdown]": {
+    "editor.defaultFormatter": "dprint.dprint"
+  },
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.organizeImports": "never",
