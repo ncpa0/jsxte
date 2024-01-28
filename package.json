@@ -38,7 +38,8 @@
     "test:tsc": "tsc --noEmit",
     "test:unit": "vitest run",
     "test:fmt": "dprint check",
-    "fmt": "dprint fmt"
+    "fmt": "dprint fmt",
+    "prepare": "husky install"
   },
   "author": {
     "name": "Szymon Bretner (ncpa0cpl)",
