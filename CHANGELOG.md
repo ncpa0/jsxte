@@ -1,3 +1,15 @@
+## 3.2.0 (January 28, 2024)
+
+### Features
+
+- #### feat: rewritten the renderer ([#280](https://github.com/ncpa0/jsxte/pull/280))
+
+  Rewritten the renderer into a more generic solution, previous version had 4 different copies of render functions (html sync /async renderers and json sync/async renderers) and a lot of duplicated code. This new version introduces a generic `JsxteRenderer` class which performs most of the work while unaware of the final output format, and is capable of both synchornous and asynchronous work. This separation allows for better code reuse and smaller library size, and makes it easier to introduce new changes in the future.
+
+- #### feat: removed the `renderToStringTemplateTag` render function ([#279](https://github.com/ncpa0/jsxte/pull/279))
+
+  Removed the string template renderer.
+
 ## 3.1.9 (December 29, 2023)
 
 ### Bug Fixes
