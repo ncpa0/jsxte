@@ -309,7 +309,7 @@ export class JsxteRenderer<T> {
   constructor(
     private generator: ElementGenerator<T>,
     private options: RendererOptions = { allowAsync: false },
-    private rootComponentApi: ComponentApi = ComponentApi.create(),
+    private rootComponentApi: ComponentApi = ComponentApi.create(options),
   ) {
     this.matcher = new ElementMatcher(options);
     const renderer = this;

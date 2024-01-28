@@ -281,6 +281,29 @@ describe("renderToHTML", () => {
     expect(html).toMatchSnapshot();
   });
 
+  it("should correctly render text with interpolated multiline values", () => {
+    const App = () => {
+      return (
+        <div>
+          <span>
+            Hello {"Daniel"}, how is it going?{"\n"}
+            {"\n"}
+            Task for today:{"\n"}
+            {"- Clean the house\n"}
+            {"- Do the laundry\n"}
+            - {"Buy some milk\n"}
+            {"- Buy some bread\n"}
+            That is all
+          </span>
+        </div>
+      );
+    };
+
+    const html = renderToHtml(<App />);
+
+    expect(html).toMatchSnapshot();
+  });
+
   it("should correctly render multiline text with interpolated values inside <pre> tag", () => {
     const App = () => {
       return (

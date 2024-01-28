@@ -2,12 +2,12 @@ import {
   jsxElemToHtmlAsync,
   jsxElemToHtmlSync,
 } from "../html-renderer/jsx-elem-to-html";
+import type { HtmlRenderOptions } from "../html-renderer/render-to-html";
 import {
   jsxElemToJsonAsync,
   jsxElemToJsonSync,
 } from "../json-renderer/jsx-elem-to-json";
 import { jsx } from "../jsx-runtime";
-import type { RendererOptions } from "../renderer/renderer";
 
 export class ContextAccessor {
   public static clone(original: ContextAccessor): ContextAccessor {
@@ -104,13 +104,13 @@ export class ContextAccessor {
 }
 
 export class ComponentApi {
-  public static create(options?: RendererOptions): ComponentApi {
-    return new ComponentApi(options?.attributeMap);
+  public static create(options?: HtmlRenderOptions): ComponentApi {
+    return new ComponentApi(options);
   }
 
   public static clone(original: ComponentApi): ComponentApi {
     return new ComponentApi(
-      original.attributeMap,
+      original.options,
       ContextAccessor.clone(original.ctx),
     );
   }
@@ -119,7 +119,7 @@ export class ComponentApi {
   public ctx;
 
   private constructor(
-    private attributeMap?: Record<string, string>,
+    private options?: HtmlRenderOptions,
     accessor?: ContextAccessor,
   ) {
     this.ctx = accessor ?? new ContextAccessor();
@@ -131,9 +131,7 @@ export class ComponentApi {
    * given component as well.
    */
   public render(component: JSX.Element): string {
-    return jsxElemToHtmlSync(component, this, {
-      attributeMap: this.attributeMap,
-    });
+    return jsxElemToHtmlSync(component, this, this.options);
   }
 
   public async renderAsync(
@@ -141,16 +139,12 @@ export class ComponentApi {
   ): Promise<string> {
     const thisCopy = ComponentApi.clone(this);
     return Promise.resolve(component).then((c) =>
-      jsxElemToHtmlAsync(c, thisCopy, {
-        attributeMap: thisCopy.attributeMap,
-      })
+      jsxElemToHtmlAsync(c, thisCopy, this.options)
     );
   }
 
   public renderToJson(component: JSX.Element) {
-    return jsxElemToJsonSync(component, this, {
-      attributeMap: this.attributeMap,
-    });
+    return jsxElemToJsonSync(component, this, this.options);
   }
 
   public async renderToJsonAsync(
@@ -158,9 +152,7 @@ export class ComponentApi {
   ) {
     const thisCopy = ComponentApi.clone(this);
     return Promise.resolve(component).then((c) =>
-      jsxElemToJsonAsync(c, thisCopy, {
-        attributeMap: thisCopy.attributeMap,
-      })
+      jsxElemToJsonAsync(c, thisCopy, this.options)
     );
   }
 }
