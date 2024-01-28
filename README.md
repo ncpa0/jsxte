@@ -15,13 +15,14 @@ A JSX based html templating engine for browsers or Node environments.
 5. [Error Boundaries](#error-boundaries)
    1. [Example](#example-1)
 6. [toHtmlTag symbol](#tohtmltag-symbol)
-7. [JsxteRenderer](#jsxterenderer)
-8. [Extending the typings](#extending-the-typings)
+7. [DomRenderer](#domrenderer)
+8. [JsxteRenderer](#jsxterenderer)
+9. [Extending the typings](#extending-the-typings)
    1. [Adding custom web component tags](#adding-custom-web-component-tags)
    2. [Adding a global html attribute](#adding-a-global-html-attribute)
-9. [Express JS View Engine](#express-js-view-engine)
-10. [Monkey-Patching type definitions](#monkey-patching-type-definitions)
-11. [Contributing](#contributing)
+10. [Express JS View Engine](#express-js-view-engine)
+11. [Monkey-Patching type definitions](#monkey-patching-type-definitions)
+12. [Contributing](#contributing)
 
 ## Getting started
 
