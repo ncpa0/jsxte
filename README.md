@@ -281,6 +281,20 @@ Result:
 <div>User: Johny</div>
 ```
 
+## DomRenderer
+
+`DomRenderer` renders given JSX into a DOM object. It requires a window object to be passed to the constructor.
+
+```tsx
+import { DomRenderer } from "jsxte";
+
+const renderer = new DomRenderer(window);
+const divElement = renderer.render(<div>Hello World!</div>);
+
+divElement.outerHTML; // <div>Hello World!</div>
+window.document.body.appendChild(divElement);
+```
+
 ## JsxteRenderer
 
 `JsxteRenderer` is a base class around which HTML and JSON renderer are built upon. This renderer requires a specific interface that provides methods for creating the final output format:
