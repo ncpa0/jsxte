@@ -1,62 +1,67 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`renderToHTML > ErrorBoundary > should correctly render the tree thats inside an ErrorBoundary 1`] = `
-"<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="IE=edge" />
-    <title>
-      Page Title
-    </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-  </head>
-  <body>
-    <div class="main-container">
-      <h2>
-        Hello World!
-      </h2>
-      <input value="write here" />
-      <button>
-        Submit
-      </button>
-    </div>
-  </body>
-</html>
-"
+exports[`renderToHTML > compact > ErrorBoundary > should correctly render the tree thats inside an ErrorBoundary 1`] = `"<html><head><meta charset="utf-8" /><meta http-equiv="x-ua-compatible" content="IE=edge" /><title>Page Title</title><meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="stylesheet" type="text/css" media="screen" href="main.css" /></head><body><div class="main-container"><h2>Hello World!</h2><input value="write here" /><button>Submit</button></div></body></html>"`;
+
+exports[`renderToHTML > compact > ErrorBoundary > should render the fallback if a nested async child throws an error 1`] = `"<html><span>Async test:</span><h1>Oops. Something went wrong.</h1></html>"`;
+
+exports[`renderToHTML > compact > ErrorBoundary > should render the fallback if a nested child throws an error 1`] = `"<html><h1>Oops. Something went wrong.</h1></html>"`;
+
+exports[`renderToHTML > compact > ErrorBoundary > should render the fallback if the direct child throws an error 1`] = `"<html><body><h1>Oops. Something went wrong.</h1></body></html>"`;
+
+exports[`renderToHTML > compact > should correctly generate html from component base jsx structure 1`] = `"<html><head><meta charset="utf-8" /><meta http-equiv="x-ua-compatible" content="IE=edge" /><title>Page Title</title><meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="stylesheet" type="text/css" media="screen" href="main.css" /></head><body><div class="main-container"><h2>Hello World!</h2><input value="write here" /><button>Submit</button></div></body></html>"`;
+
+exports[`renderToHTML > compact > should correctly generate html from simple jsx 1`] = `"<div id="container" class="bordered active"><h1>Hello World</h1><h2>Prop Title</h2><button onclick="console.log(&quot;Hello World!&quot;)">Click me!</button><input autofocus draggable /></div>"`;
+
+exports[`renderToHTML > compact > should correctly handle component children of type nulls, undefined and other 1`] = `"<div><div>Undef:<span></span></div><div>Null:<span></span></div><div>True:<span></span></div><div>False:<span></span></div><div>Str:<span>Hello World</span></div><div>Num:<span>1234</span></div><div>Arr:<span>hi423</span></div></div>"`;
+
+exports[`renderToHTML > compact > should correctly handle components returning nulls, undefined and other types 1`] = `"<div><div>Undef:</div><div>Null:</div><div>True:</div><div>False:</div><div>Str: Hello World</div><div>Num: 1234</div></div>"`;
+
+exports[`renderToHTML > compact > should correctly parse async components 1`] = `"<html><head><meta charset="utf-8" /><meta http-equiv="x-ua-compatible" content="IE=edge" /><title>Page Title</title><meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="stylesheet" type="text/css" media="screen" href="main.css" /></head><body><div class="main-container"><h2>Async title</h2><input value="write here" /><button>Submit</button></div></body></html>"`;
+
+exports[`renderToHTML > compact > should correctly perform sub renders > async render > rendered computer can access the context defined on the parent 1`] = `"<div class="main"><div><div>async foo</div><div>async foo</div><div>async bar</div></div></div>"`;
+
+exports[`renderToHTML > compact > should correctly perform sub renders > async render > renders a simple component 1`] = `"<div><div>Hello World!</div></div>"`;
+
+exports[`renderToHTML > compact > should correctly perform sub renders > sync render > rendered computer can access the context defined on the parent 1`] = `"<div class="main"><div><div>foo</div><div>foo</div><div>bar</div></div></div>"`;
+
+exports[`renderToHTML > compact > should correctly perform sub renders > sync render > renders a simple component 1`] = `"<div><div>Hello World!</div></div>"`;
+
+exports[`renderToHTML > compact > should correctly render <pre> tags 1`] = `
+"<html><body><div id="root"><div><pre>const foo = "bar";
+const bar = "baz";
+console.log(foo + " " + bar);</pre></div></div></body></html>"
 `;
 
-exports[`renderToHTML > ErrorBoundary > should render the fallback if a nested async child throws an error 1`] = `
-"<html>
-  <span>
-    Async test:
-  </span>
-  <h1>
-    Oops. Something went wrong.
-  </h1>
-</html>
-"
+exports[`renderToHTML > compact > should correctly render jsx with arrays in between elements 1`] = `"<div><h1>Header</h1><p>0</p><p>1</p><footer></footer></div>"`;
+
+exports[`renderToHTML > compact > should correctly render multiline text with interpolated values inside <pre> tag 1`] = `
+"<div><pre>Hello Daniel, how is it going?
+123 / 1000</pre></div>"
 `;
 
-exports[`renderToHTML > ErrorBoundary > should render the fallback if a nested child throws an error 1`] = `
-"<html>
-  <h1>
-    Oops. Something went wrong.
-  </h1>
-</html>
-"
-`;
+exports[`renderToHTML > compact > should correctly render objects implementing toHtmlTag symbol interface 1`] = `"<div><div><span>John Doe</span></div></div>"`;
 
-exports[`renderToHTML > ErrorBoundary > should render the fallback if the direct child throws an error 1`] = `
-"<html>
-  <body>
-    <h1>
-      Oops. Something went wrong.
-    </h1>
-  </body>
-</html>
-"
-`;
+exports[`renderToHTML > compact > should correctly render text with interpolated multiline values 1`] = `"<div><span>Hello Daniel, how is it going?  Task for today: - Clean the house - Do the laundry - Buy some milk - Buy some bread That is all</span></div>"`;
+
+exports[`renderToHTML > compact > should correctly render text with interpolated values 1`] = `"<div><span>Hello Daniel, how is it going? It's Monday today.</span></div>"`;
+
+exports[`renderToHTML > compact > should properly handle context data > Provider and Consumer 1`] = `"<html><body><div id="root"><div id="1" class="foo">no value</div><span id="span-1">no value</span><div id="2" class="foo">FOO</div><span id="span-2">FOO</span><div id="3" class="foo">BAR</div><span id="span-3">BAR</span></div></body></html>"`;
+
+exports[`renderToHTML > compact > should properly handle context data > close-by providers should not interfere with each other 1`] = `"<html><body><p>bar</p><p>baz</p><p>qux</p><p>coorg</p><p>fred</p><p>thud</p><p>foo</p></body></html>"`;
+
+exports[`renderToHTML > compact > should properly handle context data > correctly handles encapsulated providers 1`] = `"<html><body><div id="root"><div class="template for-magic"><div><input type="text" name="repeating_magic_dwarf" /></div></div></div></body></html>"`;
+
+exports[`renderToHTML > compact > should properly handle context data > should correctly drill the prop data through multiple components 1`] = `"<html><body><div><div><div><div><div><div><div><div><p>foo</p></div></div></div></div></div></div></div></div></body></html>"`;
+
+exports[`renderToHTML > compact > should properly handle context data > should correctly handle provider pattern 1`] = `"<html><head><meta charset="utf-8" /><meta http-equiv="x-ua-compatible" content="IE=edge" /><title>Page Title</title><meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="stylesheet" type="text/css" media="screen" href="main.css" /></head><body><div class="main-container"><div><h1>Provided title</h1></div></div></body></html>"`;
+
+exports[`renderToHTML > compact > should properly handle context data > should correctly override existing context data 1`] = `"<html><head><meta charset="utf-8" /><meta http-equiv="x-ua-compatible" content="IE=edge" /><title>Page Title</title><meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="stylesheet" type="text/css" media="screen" href="main.css" /></head><body><h1>This title was overridden</h1><input placeholder="write here" /></body></html>"`;
+
+exports[`renderToHTML > compact > should properly handle context data > should correctly render jsx with context data 1`] = `"<html><head><meta charset="utf-8" /><meta http-equiv="x-ua-compatible" content="IE=edge" /><title>Page Title</title><meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="stylesheet" type="text/css" media="screen" href="main.css" /></head><body><div class="main-container"><div><h1>This title is set via the context</h1></div></div></body></html>"`;
+
+exports[`renderToHTML > compact > should properly handle context data > should correctly render jsx with context data and arrays in between elements 1`] = `"<html><head><meta charset="utf-8" /><meta http-equiv="x-ua-compatible" content="IE=edge" /><title>Page Title</title><meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="stylesheet" type="text/css" media="screen" href="main.css" /></head><body><div><h1>This title is set via the context</h1></div><input placeholder="write here" /><button>Submit</button></body></html>"`;
+
+exports[`renderToHTML > compact > should properly handle context data > should correctly render jsx with context data and async components 1`] = `"<html><head><meta charset="utf-8" /><meta http-equiv="x-ua-compatible" content="IE=edge" /><title>Page Title</title><meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="stylesheet" type="text/css" media="screen" href="main.css" /></head><body><div><h1>This title is set via the context</h1></div><input placeholder="write here" /><button>Submit</button></body></html>"`;
 
 exports[`renderToHTML > errors > error throw should contain information on which place in the tree the error occurred > scenario 1 1`] = `
 [JsxteRenderError: The below error has occurred in:
@@ -127,7 +132,7 @@ exports[`renderToHTML > errors > error throw should contain information on which
 Rendering has failed due to an error: I'm failing async 2]
 `;
 
-exports[`renderToHTML > should correctly generate html from component base jsx structure 1`] = `
+exports[`renderToHTML > expanded/pretty > ErrorBoundary > should correctly render the tree thats inside an ErrorBoundary 1`] = `
 "<html>
   <head>
     <meta charset="utf-8" />
@@ -153,7 +158,65 @@ exports[`renderToHTML > should correctly generate html from component base jsx s
 "
 `;
 
-exports[`renderToHTML > should correctly generate html from simple jsx 1`] = `
+exports[`renderToHTML > expanded/pretty > ErrorBoundary > should render the fallback if a nested async child throws an error 1`] = `
+"<html>
+  <span>
+    Async test:
+  </span>
+  <h1>
+    Oops. Something went wrong.
+  </h1>
+</html>
+"
+`;
+
+exports[`renderToHTML > expanded/pretty > ErrorBoundary > should render the fallback if a nested child throws an error 1`] = `
+"<html>
+  <h1>
+    Oops. Something went wrong.
+  </h1>
+</html>
+"
+`;
+
+exports[`renderToHTML > expanded/pretty > ErrorBoundary > should render the fallback if the direct child throws an error 1`] = `
+"<html>
+  <body>
+    <h1>
+      Oops. Something went wrong.
+    </h1>
+  </body>
+</html>
+"
+`;
+
+exports[`renderToHTML > expanded/pretty > should correctly generate html from component base jsx structure 1`] = `
+"<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge" />
+    <title>
+      Page Title
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+  </head>
+  <body>
+    <div class="main-container">
+      <h2>
+        Hello World!
+      </h2>
+      <input value="write here" />
+      <button>
+        Submit
+      </button>
+    </div>
+  </body>
+</html>
+"
+`;
+
+exports[`renderToHTML > expanded/pretty > should correctly generate html from simple jsx 1`] = `
 "<div id="container" class="bordered active">
   <h1>
     Hello World
@@ -169,7 +232,7 @@ exports[`renderToHTML > should correctly generate html from simple jsx 1`] = `
 "
 `;
 
-exports[`renderToHTML > should correctly handle component children of type nulls, undefined and other 1`] = `
+exports[`renderToHTML > expanded/pretty > should correctly handle component children of type nulls, undefined and other 1`] = `
 "<div>
   <div>
     Undef:
@@ -209,7 +272,7 @@ exports[`renderToHTML > should correctly handle component children of type nulls
 "
 `;
 
-exports[`renderToHTML > should correctly handle components returning nulls, undefined and other types 1`] = `
+exports[`renderToHTML > expanded/pretty > should correctly handle components returning nulls, undefined and other types 1`] = `
 "<div>
   <div>
     Undef:
@@ -233,7 +296,7 @@ exports[`renderToHTML > should correctly handle components returning nulls, unde
 "
 `;
 
-exports[`renderToHTML > should correctly parse async components 1`] = `
+exports[`renderToHTML > expanded/pretty > should correctly parse async components 1`] = `
 "<html>
   <head>
     <meta charset="utf-8" />
@@ -259,7 +322,7 @@ exports[`renderToHTML > should correctly parse async components 1`] = `
 "
 `;
 
-exports[`renderToHTML > should correctly perform sub renders > async render > rendered computer can access the context defined on the parent 1`] = `
+exports[`renderToHTML > expanded/pretty > should correctly perform sub renders > async render > rendered computer can access the context defined on the parent 1`] = `
 "<div class="main">
   <div>
     <div>
@@ -276,7 +339,7 @@ exports[`renderToHTML > should correctly perform sub renders > async render > re
 "
 `;
 
-exports[`renderToHTML > should correctly perform sub renders > async render > renders a simple component 1`] = `
+exports[`renderToHTML > expanded/pretty > should correctly perform sub renders > async render > renders a simple component 1`] = `
 "<div>
   <div>
     Hello World!
@@ -285,7 +348,7 @@ exports[`renderToHTML > should correctly perform sub renders > async render > re
 "
 `;
 
-exports[`renderToHTML > should correctly perform sub renders > sync render > rendered computer can access the context defined on the parent 1`] = `
+exports[`renderToHTML > expanded/pretty > should correctly perform sub renders > sync render > rendered computer can access the context defined on the parent 1`] = `
 "<div class="main">
   <div>
     <div>
@@ -302,7 +365,7 @@ exports[`renderToHTML > should correctly perform sub renders > sync render > ren
 "
 `;
 
-exports[`renderToHTML > should correctly perform sub renders > sync render > renders a simple component 1`] = `
+exports[`renderToHTML > expanded/pretty > should correctly perform sub renders > sync render > renders a simple component 1`] = `
 "<div>
   <div>
     Hello World!
@@ -311,7 +374,7 @@ exports[`renderToHTML > should correctly perform sub renders > sync render > ren
 "
 `;
 
-exports[`renderToHTML > should correctly render <pre> tags 1`] = `
+exports[`renderToHTML > expanded/pretty > should correctly render <pre> tags 1`] = `
 "<html>
   <body>
     <div id="root">
@@ -326,7 +389,7 @@ console.log(foo + " " + bar);</pre>
 "
 `;
 
-exports[`renderToHTML > should correctly render jsx with arrays in between elements 1`] = `
+exports[`renderToHTML > expanded/pretty > should correctly render jsx with arrays in between elements 1`] = `
 "<div>
   <h1>
     Header
@@ -342,7 +405,7 @@ exports[`renderToHTML > should correctly render jsx with arrays in between eleme
 "
 `;
 
-exports[`renderToHTML > should correctly render multiline text with interpolated values inside <pre> tag 1`] = `
+exports[`renderToHTML > expanded/pretty > should correctly render multiline text with interpolated values inside <pre> tag 1`] = `
 "<div>
   <pre>Hello Daniel, how is it going?
 123 / 1000</pre>
@@ -350,7 +413,7 @@ exports[`renderToHTML > should correctly render multiline text with interpolated
 "
 `;
 
-exports[`renderToHTML > should correctly render objects implementing toHtmlTag symbol interface 1`] = `
+exports[`renderToHTML > expanded/pretty > should correctly render objects implementing toHtmlTag symbol interface 1`] = `
 "<div>
   <div>
     <span>
@@ -361,7 +424,7 @@ exports[`renderToHTML > should correctly render objects implementing toHtmlTag s
 "
 `;
 
-exports[`renderToHTML > should correctly render text with interpolated multiline values 1`] = `
+exports[`renderToHTML > expanded/pretty > should correctly render text with interpolated multiline values 1`] = `
 "<div>
   <span>
     Hello Daniel, how is it going?
@@ -377,7 +440,7 @@ exports[`renderToHTML > should correctly render text with interpolated multiline
 "
 `;
 
-exports[`renderToHTML > should correctly render text with interpolated values 1`] = `
+exports[`renderToHTML > expanded/pretty > should correctly render text with interpolated values 1`] = `
 "<div>
   <span>
     Hello Daniel, how is it going? It's Monday today.
@@ -386,7 +449,7 @@ exports[`renderToHTML > should correctly render text with interpolated values 1`
 "
 `;
 
-exports[`renderToHTML > should properly handle context data > Provider and Consumer 1`] = `
+exports[`renderToHTML > expanded/pretty > should properly handle context data > Provider and Consumer 1`] = `
 "<html>
   <body>
     <div id="root">
@@ -414,7 +477,7 @@ exports[`renderToHTML > should properly handle context data > Provider and Consu
 "
 `;
 
-exports[`renderToHTML > should properly handle context data > close-by providers should not interfere with each other 1`] = `
+exports[`renderToHTML > expanded/pretty > should properly handle context data > close-by providers should not interfere with each other 1`] = `
 "<html>
   <body>
     <p>
@@ -443,7 +506,7 @@ exports[`renderToHTML > should properly handle context data > close-by providers
 "
 `;
 
-exports[`renderToHTML > should properly handle context data > correctly handles encapsulated providers 1`] = `
+exports[`renderToHTML > expanded/pretty > should properly handle context data > correctly handles encapsulated providers 1`] = `
 "<html>
   <body>
     <div id="root">
@@ -458,7 +521,7 @@ exports[`renderToHTML > should properly handle context data > correctly handles 
 "
 `;
 
-exports[`renderToHTML > should properly handle context data > should correctly drill the prop data through multiple components 1`] = `
+exports[`renderToHTML > expanded/pretty > should properly handle context data > should correctly drill the prop data through multiple components 1`] = `
 "<html>
   <body>
     <div>
@@ -485,7 +548,7 @@ exports[`renderToHTML > should properly handle context data > should correctly d
 "
 `;
 
-exports[`renderToHTML > should properly handle context data > should correctly handle provider pattern 1`] = `
+exports[`renderToHTML > expanded/pretty > should properly handle context data > should correctly handle provider pattern 1`] = `
 "<html>
   <head>
     <meta charset="utf-8" />
@@ -509,7 +572,7 @@ exports[`renderToHTML > should properly handle context data > should correctly h
 "
 `;
 
-exports[`renderToHTML > should properly handle context data > should correctly override existing context data 1`] = `
+exports[`renderToHTML > expanded/pretty > should properly handle context data > should correctly override existing context data 1`] = `
 "<html>
   <head>
     <meta charset="utf-8" />
@@ -530,7 +593,7 @@ exports[`renderToHTML > should properly handle context data > should correctly o
 "
 `;
 
-exports[`renderToHTML > should properly handle context data > should correctly render jsx with context data 1`] = `
+exports[`renderToHTML > expanded/pretty > should properly handle context data > should correctly render jsx with context data 1`] = `
 "<html>
   <head>
     <meta charset="utf-8" />
@@ -554,7 +617,7 @@ exports[`renderToHTML > should properly handle context data > should correctly r
 "
 `;
 
-exports[`renderToHTML > should properly handle context data > should correctly render jsx with context data and arrays in between elements 1`] = `
+exports[`renderToHTML > expanded/pretty > should properly handle context data > should correctly render jsx with context data and arrays in between elements 1`] = `
 "<html>
   <head>
     <meta charset="utf-8" />
@@ -580,7 +643,7 @@ exports[`renderToHTML > should properly handle context data > should correctly r
 "
 `;
 
-exports[`renderToHTML > should properly handle context data > should correctly render jsx with context data and async components 1`] = `
+exports[`renderToHTML > expanded/pretty > should properly handle context data > should correctly render jsx with context data and async components 1`] = `
 "<html>
   <head>
     <meta charset="utf-8" />

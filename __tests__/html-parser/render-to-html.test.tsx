@@ -4,6 +4,7 @@ import {
   ContextDefinition,
   defineContext,
   ErrorBoundary,
+  HtmlRenderOptions,
   renderToHtml,
   renderToHtmlAsync,
 } from "../../src/index";
@@ -12,7 +13,7 @@ import { Fragment, jsx } from "../../src/jsx/jsx-runtime";
 const sleep = (t: number) =>
   new Promise<void>((resolve) => setTimeout(() => resolve(), t));
 
-describe("renderToHTML", () => {
+const allTests = (renderOpts: HtmlRenderOptions = {}) => () => {
   it("should correctly generate html from simple jsx", () => {
     const Component = (props: { title: string }) => {
       return (
@@ -32,7 +33,7 @@ describe("renderToHTML", () => {
       );
     };
 
-    const html = renderToHtml(<Component title="Prop Title" />);
+    const html = renderToHtml(<Component title="Prop Title" />, renderOpts);
 
     expect(html).toMatchSnapshot();
   });
@@ -94,7 +95,7 @@ describe("renderToHTML", () => {
 
     const structure = <App />;
 
-    const html = renderToHtml(structure);
+    const html = renderToHtml(structure, renderOpts);
 
     expect(html).toMatchSnapshot();
   });
@@ -110,7 +111,7 @@ describe("renderToHTML", () => {
       );
     };
 
-    const html = renderToHtml(<App />);
+    const html = renderToHtml(<App />, renderOpts);
 
     expect(html).toMatchSnapshot();
   });
@@ -173,9 +174,9 @@ describe("renderToHTML", () => {
       );
     };
 
-    expect(() => renderToHtml(<App />)).toThrowError();
+    expect(() => renderToHtml(<App />, renderOpts)).toThrowError();
 
-    const html = await renderToHtmlAsync(<App />);
+    const html = await renderToHtmlAsync(<App />, renderOpts);
     expect(html).toMatchSnapshot();
   });
 
@@ -232,12 +233,15 @@ describe("renderToHTML", () => {
       );
     };
 
-    const renderedStandardDiv = renderToHtml(<StandardDiv />);
+    const renderedStandardDiv = renderToHtml(<StandardDiv />, renderOpts);
 
-    const renderedDivWithNulls = renderToHtml(<DivWithNulls />);
-    const renderedDivWithUndefined = renderToHtml(<DivWithUndefined />);
-    const renderedDivWithFalse = renderToHtml(<DivWithFalse />);
-    const renderedDivWithTrue = renderToHtml(<DivWithTrue />);
+    const renderedDivWithNulls = renderToHtml(<DivWithNulls />, renderOpts);
+    const renderedDivWithUndefined = renderToHtml(
+      <DivWithUndefined />,
+      renderOpts,
+    );
+    const renderedDivWithFalse = renderToHtml(<DivWithFalse />, renderOpts);
+    const renderedDivWithTrue = renderToHtml(<DivWithTrue />, renderOpts);
 
     expect(renderedStandardDiv).toEqual(renderedDivWithNulls);
     expect(renderedStandardDiv).toEqual(renderedDivWithUndefined);
@@ -260,7 +264,7 @@ describe("renderToHTML", () => {
       );
     };
 
-    const html = renderToHtml(<App />);
+    const html = renderToHtml(<App />, renderOpts);
 
     expect(html).toMatchSnapshot();
   });
@@ -276,7 +280,7 @@ describe("renderToHTML", () => {
       );
     };
 
-    const html = renderToHtml(<App />);
+    const html = renderToHtml(<App />, renderOpts);
 
     expect(html).toMatchSnapshot();
   });
@@ -299,7 +303,7 @@ describe("renderToHTML", () => {
       );
     };
 
-    const html = renderToHtml(<App />);
+    const html = renderToHtml(<App />, renderOpts);
 
     expect(html).toMatchSnapshot();
   });
@@ -316,7 +320,7 @@ Hello {"Daniel"}, how is it going?{"\n"}
       );
     };
 
-    const html = renderToHtml(<App />);
+    const html = renderToHtml(<App />, renderOpts);
 
     expect(html).toMatchSnapshot();
   });
@@ -374,7 +378,7 @@ Hello {"Daniel"}, how is it going?{"\n"}
         );
       };
 
-      const html = renderToHtml(<App />);
+      const html = renderToHtml(<App />, renderOpts);
 
       expect(html).toMatchSnapshot();
     });
@@ -457,7 +461,7 @@ Hello {"Daniel"}, how is it going?{"\n"}
         );
       };
 
-      const html = renderToHtml(<App />);
+      const html = renderToHtml(<App />, renderOpts);
 
       expect(html).toMatchSnapshot();
     });
@@ -543,7 +547,7 @@ Hello {"Daniel"}, how is it going?{"\n"}
         );
       };
 
-      const html = await renderToHtmlAsync(<App />);
+      const html = await renderToHtmlAsync(<App />, renderOpts);
 
       expect(html).toMatchSnapshot();
     });
@@ -619,7 +623,7 @@ Hello {"Daniel"}, how is it going?{"\n"}
         );
       };
 
-      const html = await renderToHtmlAsync(<App />);
+      const html = await renderToHtmlAsync(<App />, renderOpts);
 
       expect(html).toMatchSnapshot();
     });
@@ -693,7 +697,7 @@ Hello {"Daniel"}, how is it going?{"\n"}
         );
       };
 
-      const html = renderToHtml(<App />);
+      const html = renderToHtml(<App />, renderOpts);
 
       expect(html).toMatchSnapshot();
     });
@@ -764,6 +768,7 @@ Hello {"Daniel"}, how is it going?{"\n"}
             </Provider>
           </body>
         </html>,
+        renderOpts,
       );
 
       expect(html).toMatchSnapshot();
@@ -843,6 +848,7 @@ Hello {"Daniel"}, how is it going?{"\n"}
             </Provider>
           </body>
         </html>,
+        renderOpts,
       );
 
       expect(html).toMatchSnapshot();
@@ -929,7 +935,7 @@ Hello {"Daniel"}, how is it going?{"\n"}
         );
       };
 
-      const html = renderToHtml(<App />);
+      const html = renderToHtml(<App />, renderOpts);
 
       expect(html).toMatchSnapshot();
     });
@@ -976,7 +982,7 @@ Hello {"Daniel"}, how is it going?{"\n"}
         );
       };
 
-      const html = renderToHtml(<App />);
+      const html = renderToHtml(<App />, renderOpts);
 
       expect(html).toMatchSnapshot();
     });
@@ -1056,7 +1062,7 @@ Hello {"Daniel"}, how is it going?{"\n"}
 
       const structure = <App />;
 
-      const html = renderToHtml(structure);
+      const html = renderToHtml(structure, renderOpts);
 
       expect(html).toMatchSnapshot();
     });
@@ -1078,7 +1084,7 @@ Hello {"Daniel"}, how is it going?{"\n"}
         );
       };
 
-      const html = renderToHtml(<App />);
+      const html = renderToHtml(<App />, renderOpts);
 
       expect(html).toMatchSnapshot();
     });
@@ -1115,7 +1121,7 @@ Hello {"Daniel"}, how is it going?{"\n"}
         );
       };
 
-      const html = renderToHtml(<App />);
+      const html = renderToHtml(<App />, renderOpts);
 
       expect(html).toMatchSnapshot();
     });
@@ -1163,7 +1169,7 @@ Hello {"Daniel"}, how is it going?{"\n"}
         );
       };
 
-      const html = await renderToHtmlAsync(<App />);
+      const html = await renderToHtmlAsync(<App />, renderOpts);
 
       expect(html).toMatchSnapshot();
     });
@@ -1177,7 +1183,7 @@ Hello {"Daniel"}, how is it going?{"\n"}
           return <div>{content}</div>;
         };
 
-        const html = renderToHtml(<App />);
+        const html = renderToHtml(<App />, renderOpts);
 
         expect(html).toMatchSnapshot();
       });
@@ -1216,7 +1222,7 @@ Hello {"Daniel"}, how is it going?{"\n"}
           );
         };
 
-        const html = renderToHtml(<App />);
+        const html = renderToHtml(<App />, renderOpts);
 
         expect(html).toMatchSnapshot();
       });
@@ -1234,7 +1240,7 @@ Hello {"Daniel"}, how is it going?{"\n"}
           return <div>{content}</div>;
         };
 
-        const html = await renderToHtmlAsync(<App />);
+        const html = await renderToHtmlAsync(<App />, renderOpts);
 
         expect(html).toMatchSnapshot();
       });
@@ -1274,7 +1280,7 @@ Hello {"Daniel"}, how is it going?{"\n"}
           );
         };
 
-        const html = await renderToHtmlAsync(<App />);
+        const html = await renderToHtmlAsync(<App />, renderOpts);
 
         expect(html).toMatchSnapshot();
       });
@@ -1314,7 +1320,7 @@ Hello {"Daniel"}, how is it going?{"\n"}
       );
     };
 
-    const html = renderToHtml(<Main />);
+    const html = renderToHtml(<Main />, renderOpts);
 
     expect(html).toMatchSnapshot();
   });
@@ -1358,7 +1364,7 @@ Hello {"Daniel"}, how is it going?{"\n"}
       );
     };
 
-    const html = renderToHtml(<Main />);
+    const html = renderToHtml(<Main />, renderOpts);
 
     expect(html).toMatchSnapshot();
   });
@@ -1390,10 +1396,15 @@ Hello {"Daniel"}, how is it going?{"\n"}
       );
     };
 
-    const html = renderToHtml(<App />);
+    const html = renderToHtml(<App />, renderOpts);
 
     expect(html).toMatchSnapshot();
   });
+};
+
+describe("renderToHTML", () => {
+  describe("expanded/pretty", allTests());
+  describe("compact", allTests({ compact: true }));
 
   describe("errors", () => {
     describe("error throw should contain information on which place in the tree the error occurred", () => {
