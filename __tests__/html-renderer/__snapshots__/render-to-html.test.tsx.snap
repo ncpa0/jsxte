@@ -12,11 +12,13 @@ exports[`renderToHTML > compact > should correctly generate html from component 
 
 exports[`renderToHTML > compact > should correctly generate html from simple jsx 1`] = `"<div id="container" class="bordered active"><h1>Hello World</h1><h2>Prop Title</h2><button onclick="console.log(&quot;Hello World!&quot;)">Click me!</button><input autofocus draggable /></div>"`;
 
-exports[`renderToHTML > compact > should correctly handle component children of type nulls, undefined and other 1`] = `"<div><div>Undef:<span></span></div><div>Null:<span></span></div><div>True:<span></span></div><div>False:<span></span></div><div>Str:<span>Hello World</span></div><div>Num:<span>1234</span></div><div>Arr:<span>hi423</span></div></div>"`;
+exports[`renderToHTML > compact > should correctly handle component children of type nulls, undefined and other 1`] = `"<div><div>Undef: <span></span></div><div>Null: <span></span></div><div>True: <span></span></div><div>False: <span></span></div><div>Str: <span>Hello World</span></div><div>Num: <span>1234</span></div><div>Arr: <span>hi423</span></div></div>"`;
 
-exports[`renderToHTML > compact > should correctly handle components returning nulls, undefined and other types 1`] = `"<div><div>Undef:</div><div>Null:</div><div>True:</div><div>False:</div><div>Str: Hello World</div><div>Num: 1234</div></div>"`;
+exports[`renderToHTML > compact > should correctly handle components returning nulls, undefined and other types 1`] = `"<div><div>Undef: </div><div>Null: </div><div>True: </div><div>False: </div><div>Str: Hello World</div><div>Num: 1234</div></div>"`;
 
 exports[`renderToHTML > compact > should correctly parse async components 1`] = `"<html><head><meta charset="utf-8" /><meta http-equiv="x-ua-compatible" content="IE=edge" /><title>Page Title</title><meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="stylesheet" type="text/css" media="screen" href="main.css" /></head><body><div class="main-container"><h2>Async title</h2><input value="write here" /><button>Submit</button></div></body></html>"`;
+
+exports[`renderToHTML > compact > should correctly parse html with and without whitespace 1`] = `"<div><span><span>Foo</span> <span>Bar</span> <span>These should have whitespace between</span></span><br /><span><span>Foo</span><span>Bar</span><span>These should not have whitespace between</span></span><br /><span>-<span>should be all in-line</span></span><br /><span>- <span>should have a space between the "-" and the tag (not a new line)</span></span><br /><span>-<span>should have no space between the "-" and the tag</span></span><br /><span>[<span>(<span>***</span>)</span>]</span><br /><span>[ <span>( <span>***</span> )</span> ]</span><br /><div><span>Text<span><span>Foo</span></span></span></div><br /><div><span>*<strong>item</strong>line1</span><span>*item<span class="class1">line</span>4</span></div></div>"`;
 
 exports[`renderToHTML > compact > should correctly perform sub renders > async render > rendered computer can access the context defined on the parent 1`] = `"<div class="main"><div><div>async foo</div><div>async foo</div><div>async bar</div></div></div>"`;
 
@@ -41,7 +43,16 @@ exports[`renderToHTML > compact > should correctly render multiline text with in
 
 exports[`renderToHTML > compact > should correctly render objects implementing toHtmlTag symbol interface 1`] = `"<div><div><span>John Doe</span></div></div>"`;
 
-exports[`renderToHTML > compact > should correctly render text with interpolated multiline values 1`] = `"<div><span>Hello Daniel, how is it going?  Task for today: - Clean the house - Do the laundry - Buy some milk - Buy some bread That is all</span></div>"`;
+exports[`renderToHTML > compact > should correctly render text with interpolated multiline values 1`] = `
+"<div><span>Hello Daniel, how is it going?
+
+Task for today:
+- Clean the house
+- Do the laundry
+- Buy some milk
+- Buy some bread
+That is all</span></div>"
+`;
 
 exports[`renderToHTML > compact > should correctly render text with interpolated values 1`] = `"<div><span>Hello Daniel, how is it going? It's Monday today.</span></div>"`;
 
@@ -137,21 +148,15 @@ exports[`renderToHTML > expanded/pretty > ErrorBoundary > should correctly rende
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="IE=edge" />
-    <title>
-      Page Title
-    </title>
+    <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
   </head>
   <body>
     <div class="main-container">
-      <h2>
-        Hello World!
-      </h2>
+      <h2>Hello World!</h2>
       <input value="write here" />
-      <button>
-        Submit
-      </button>
+      <button>Submit</button>
     </div>
   </body>
 </html>
@@ -160,21 +165,14 @@ exports[`renderToHTML > expanded/pretty > ErrorBoundary > should correctly rende
 
 exports[`renderToHTML > expanded/pretty > ErrorBoundary > should render the fallback if a nested async child throws an error 1`] = `
 "<html>
-  <span>
-    Async test:
-  </span>
-  <h1>
-    Oops. Something went wrong.
-  </h1>
+  <span>Async test:</span><h1>Oops. Something went wrong.</h1>
 </html>
 "
 `;
 
 exports[`renderToHTML > expanded/pretty > ErrorBoundary > should render the fallback if a nested child throws an error 1`] = `
 "<html>
-  <h1>
-    Oops. Something went wrong.
-  </h1>
+  <h1>Oops. Something went wrong.</h1>
 </html>
 "
 `;
@@ -182,9 +180,7 @@ exports[`renderToHTML > expanded/pretty > ErrorBoundary > should render the fall
 exports[`renderToHTML > expanded/pretty > ErrorBoundary > should render the fallback if the direct child throws an error 1`] = `
 "<html>
   <body>
-    <h1>
-      Oops. Something went wrong.
-    </h1>
+    <h1>Oops. Something went wrong.</h1>
   </body>
 </html>
 "
@@ -195,21 +191,15 @@ exports[`renderToHTML > expanded/pretty > should correctly generate html from co
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="IE=edge" />
-    <title>
-      Page Title
-    </title>
+    <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
   </head>
   <body>
     <div class="main-container">
-      <h2>
-        Hello World!
-      </h2>
+      <h2>Hello World!</h2>
       <input value="write here" />
-      <button>
-        Submit
-      </button>
+      <button>Submit</button>
     </div>
   </body>
 </html>
@@ -218,15 +208,7 @@ exports[`renderToHTML > expanded/pretty > should correctly generate html from co
 
 exports[`renderToHTML > expanded/pretty > should correctly generate html from simple jsx 1`] = `
 "<div id="container" class="bordered active">
-  <h1>
-    Hello World
-  </h1>
-  <h2>
-    Prop Title
-  </h2>
-  <button onclick="console.log(&quot;Hello World!&quot;)">
-    Click me!
-  </button>
+  <h1>Hello World</h1><h2>Prop Title</h2><button onclick="console.log(&quot;Hello World!&quot;)">Click me!</button>
   <input autofocus draggable />
 </div>
 "
@@ -234,39 +216,20 @@ exports[`renderToHTML > expanded/pretty > should correctly generate html from si
 
 exports[`renderToHTML > expanded/pretty > should correctly handle component children of type nulls, undefined and other 1`] = `
 "<div>
-  <div>
-    Undef:
+  <div>Undef:
     <span></span>
-  </div>
-  <div>
-    Null:
+  </div><div>Null:
     <span></span>
-  </div>
-  <div>
-    True:
+  </div><div>True:
     <span></span>
-  </div>
-  <div>
-    False:
+  </div><div>False:
     <span></span>
-  </div>
-  <div>
-    Str:
-    <span>
-      Hello World
-    </span>
-  </div>
-  <div>
-    Num:
-    <span>
-      1234
-    </span>
-  </div>
-  <div>
-    Arr:
-    <span>
-      hi423
-    </span>
+  </div><div>Str:
+    <span>Hello World</span>
+  </div><div>Num:
+    <span>1234</span>
+  </div><div>Arr:
+    <span>hi423</span>
   </div>
 </div>
 "
@@ -274,24 +237,7 @@ exports[`renderToHTML > expanded/pretty > should correctly handle component chil
 
 exports[`renderToHTML > expanded/pretty > should correctly handle components returning nulls, undefined and other types 1`] = `
 "<div>
-  <div>
-    Undef:
-  </div>
-  <div>
-    Null:
-  </div>
-  <div>
-    True:
-  </div>
-  <div>
-    False:
-  </div>
-  <div>
-    Str: Hello World
-  </div>
-  <div>
-    Num: 1234
-  </div>
+  <div>Undef:</div><div>Null:</div><div>True:</div><div>False:</div><div>Str: Hello World</div><div>Num: 1234</div>
 </div>
 "
 `;
@@ -301,76 +247,91 @@ exports[`renderToHTML > expanded/pretty > should correctly parse async component
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="IE=edge" />
-    <title>
-      Page Title
-    </title>
+    <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
   </head>
   <body>
     <div class="main-container">
-      <h2>
-        Async title
-      </h2>
+      <h2>Async title</h2>
       <input value="write here" />
-      <button>
-        Submit
-      </button>
+      <button>Submit</button>
     </div>
   </body>
 </html>
 "
 `;
 
+exports[`renderToHTML > expanded/pretty > should correctly parse html with and without whitespace 1`] = `
+"<div>
+  <span>
+    <span>Foo</span>
+    <span>Bar</span>
+    <span>These should have whitespace between</span>
+  </span>
+  <br />
+  <span>
+    <span>Foo</span><span>Bar</span><span>These should not have whitespace between</span>
+  </span>
+  <br />
+  <span>-<span>should be all in-line</span>
+  </span>
+  <br />
+  <span>-
+    <span>should have a space between the "-" and the tag (not a new line)</span>
+  </span>
+  <br />
+  <span>-<span>should have no space between the "-" and the tag</span>
+  </span>
+  <br />
+  <span>[<span>(<span>***</span>)</span>]</span>
+  <br />
+  <span>[
+    <span>(
+      <span>***</span>
+      )</span>
+    ]</span>
+  <br />
+  <div>
+    <span>Text
+      <span>
+        <span>Foo</span>
+      </span>
+    </span>
+  </div>
+  <br />
+  <div>
+    <span>*<strong>item</strong>line1</span><span>*item<span class="class1">line</span>4</span>
+  </div>
+</div>
+"
+`;
+
 exports[`renderToHTML > expanded/pretty > should correctly perform sub renders > async render > rendered computer can access the context defined on the parent 1`] = `
 "<div class="main">
-  <div>
-    <div>
-      async foo
-    </div>
-    <div>
-      async foo
-    </div>
-    <div>
-      async bar
-    </div>
-  </div>
+  <div><div>async foo</div>
+<div>async foo</div>
+<div>async bar</div></div>
 </div>
 "
 `;
 
 exports[`renderToHTML > expanded/pretty > should correctly perform sub renders > async render > renders a simple component 1`] = `
-"<div>
-  <div>
-    Hello World!
-  </div>
-</div>
+"<div><div>Hello World!</div></div>
 "
 `;
 
 exports[`renderToHTML > expanded/pretty > should correctly perform sub renders > sync render > rendered computer can access the context defined on the parent 1`] = `
 "<div class="main">
-  <div>
-    <div>
-      foo
-    </div>
-    <div>
-      foo
-    </div>
-    <div>
-      bar
-    </div>
-  </div>
+  <div><div>foo</div>
+<div>foo</div>
+<div>bar</div></div>
 </div>
 "
 `;
 
 exports[`renderToHTML > expanded/pretty > should correctly perform sub renders > sync render > renders a simple component 1`] = `
-"<div>
-  <div>
-    Hello World!
-  </div>
-</div>
+"<div><div>Hello World!</div></div>
 "
 `;
 
@@ -391,16 +352,7 @@ console.log(foo + " " + bar);</pre>
 
 exports[`renderToHTML > expanded/pretty > should correctly render jsx with arrays in between elements 1`] = `
 "<div>
-  <h1>
-    Header
-  </h1>
-  <p>
-    0
-  </p>
-  <p>
-    1
-  </p>
-  <footer></footer>
+  <h1>Header</h1><p>0</p><p>1</p><footer></footer>
 </div>
 "
 `;
@@ -416,9 +368,7 @@ exports[`renderToHTML > expanded/pretty > should correctly render multiline text
 exports[`renderToHTML > expanded/pretty > should correctly render objects implementing toHtmlTag symbol interface 1`] = `
 "<div>
   <div>
-    <span>
-      John Doe
-    </span>
+    <span>John Doe</span>
   </div>
 </div>
 "
@@ -426,25 +376,21 @@ exports[`renderToHTML > expanded/pretty > should correctly render objects implem
 
 exports[`renderToHTML > expanded/pretty > should correctly render text with interpolated multiline values 1`] = `
 "<div>
-  <span>
-    Hello Daniel, how is it going?
-    
-    Task for today:
-    - Clean the house
-    - Do the laundry
-    - Buy some milk
-    - Buy some bread
-    That is all
-  </span>
+  <span>Hello Daniel, how is it going?
+
+Task for today:
+- Clean the house
+- Do the laundry
+- Buy some milk
+- Buy some bread
+That is all</span>
 </div>
 "
 `;
 
 exports[`renderToHTML > expanded/pretty > should correctly render text with interpolated values 1`] = `
 "<div>
-  <span>
-    Hello Daniel, how is it going? It's Monday today.
-  </span>
+  <span>Hello Daniel, how is it going? It's Monday today.</span>
 </div>
 "
 `;
@@ -453,24 +399,7 @@ exports[`renderToHTML > expanded/pretty > should properly handle context data > 
 "<html>
   <body>
     <div id="root">
-      <div id="1" class="foo">
-        no value
-      </div>
-      <span id="span-1">
-        no value
-      </span>
-      <div id="2" class="foo">
-        FOO
-      </div>
-      <span id="span-2">
-        FOO
-      </span>
-      <div id="3" class="foo">
-        BAR
-      </div>
-      <span id="span-3">
-        BAR
-      </span>
+      <div id="1" class="foo">no value</div><span id="span-1">no value</span><div id="2" class="foo">FOO</div><span id="span-2">FOO</span><div id="3" class="foo">BAR</div><span id="span-3">BAR</span>
     </div>
   </body>
 </html>
@@ -480,27 +409,7 @@ exports[`renderToHTML > expanded/pretty > should properly handle context data > 
 exports[`renderToHTML > expanded/pretty > should properly handle context data > close-by providers should not interfere with each other 1`] = `
 "<html>
   <body>
-    <p>
-      bar
-    </p>
-    <p>
-      baz
-    </p>
-    <p>
-      qux
-    </p>
-    <p>
-      coorg
-    </p>
-    <p>
-      fred
-    </p>
-    <p>
-      thud
-    </p>
-    <p>
-      foo
-    </p>
+    <p>bar</p><p>baz</p><p>qux</p><p>coorg</p><p>fred</p><p>thud</p><p>foo</p>
   </body>
 </html>
 "
@@ -532,9 +441,7 @@ exports[`renderToHTML > expanded/pretty > should properly handle context data > 
               <div>
                 <div>
                   <div>
-                    <p>
-                      foo
-                    </p>
+                    <p>foo</p>
                   </div>
                 </div>
               </div>
@@ -553,18 +460,14 @@ exports[`renderToHTML > expanded/pretty > should properly handle context data > 
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="IE=edge" />
-    <title>
-      Page Title
-    </title>
+    <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
   </head>
   <body>
     <div class="main-container">
       <div>
-        <h1>
-          Provided title
-        </h1>
+        <h1>Provided title</h1>
       </div>
     </div>
   </body>
@@ -577,16 +480,12 @@ exports[`renderToHTML > expanded/pretty > should properly handle context data > 
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="IE=edge" />
-    <title>
-      Page Title
-    </title>
+    <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
   </head>
   <body>
-    <h1>
-      This title was overridden
-    </h1>
+    <h1>This title was overridden</h1>
     <input placeholder="write here" />
   </body>
 </html>
@@ -598,18 +497,14 @@ exports[`renderToHTML > expanded/pretty > should properly handle context data > 
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="IE=edge" />
-    <title>
-      Page Title
-    </title>
+    <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
   </head>
   <body>
     <div class="main-container">
       <div>
-        <h1>
-          This title is set via the context
-        </h1>
+        <h1>This title is set via the context</h1>
       </div>
     </div>
   </body>
@@ -622,22 +517,16 @@ exports[`renderToHTML > expanded/pretty > should properly handle context data > 
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="IE=edge" />
-    <title>
-      Page Title
-    </title>
+    <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
   </head>
   <body>
     <div>
-      <h1>
-        This title is set via the context
-      </h1>
+      <h1>This title is set via the context</h1>
     </div>
     <input placeholder="write here" />
-    <button>
-      Submit
-    </button>
+    <button>Submit</button>
   </body>
 </html>
 "
@@ -648,22 +537,16 @@ exports[`renderToHTML > expanded/pretty > should properly handle context data > 
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="IE=edge" />
-    <title>
-      Page Title
-    </title>
+    <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
   </head>
   <body>
     <div>
-      <h1>
-        This title is set via the context
-      </h1>
+      <h1>This title is set via the context</h1>
     </div>
     <input placeholder="write here" />
-    <button>
-      Submit
-    </button>
+    <button>Submit</button>
   </body>
 </html>
 "

@@ -49,9 +49,9 @@ export const memo = <P extends object & { children?: any }>(
       const cachedResult = cache.get(propsNoChildren);
       if (cachedResult) return cachedResult;
 
-      const result = await context.renderAsync(
+      const result = (await context.renderAsync(
         createElement(Component, { ...propsNoChildren }, children),
-      );
+      )).slice(0, -1);
 
       const textNode: JSXTE.TextNodeElement = {
         text: result,
@@ -77,7 +77,7 @@ export const memo = <P extends object & { children?: any }>(
 
     const result = context.render(
       createElement(Component, { ...propsNoChildren }, children),
-    );
+    ).slice(0, -1);
 
     const textNode: JSXTE.TextNodeElement = {
       text: result,

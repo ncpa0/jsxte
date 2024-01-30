@@ -1,7 +1,5 @@
-import {
-  jsxElemToHtmlAsync,
-  jsxElemToHtmlSync,
-} from "../html-renderer/jsx-elem-to-html";
+import { jsxElemToHtmlAsync } from "../html-renderer/jsx-elem-to-html-async";
+import { jsxElemToHtmlSync } from "../html-renderer/jsx-elem-to-html-sync";
 import type { HtmlRenderOptions } from "../html-renderer/render-to-html";
 import {
   jsxElemToJsonAsync,
