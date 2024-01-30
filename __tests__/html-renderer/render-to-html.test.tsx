@@ -38,6 +38,78 @@ const allTests = (renderOpts: HtmlRenderOptions = {}) => () => {
     expect(html).toMatchSnapshot();
   });
 
+  it("should correctly parse html with and without whitespace", () => {
+    const App = () => {
+      return (
+        <div>
+          <span>
+            <span>Foo</span> <span>Bar</span>{" "}
+            <span>These should have whitespace between</span>
+          </span>
+          <br />
+          <span>
+            <span>Foo</span>
+            <span>Bar</span>
+            <span>These should not have whitespace between</span>
+          </span>
+          <br />
+          <span>
+            -<span>should be all in-line</span>
+          </span>
+          <br />
+          <span>
+            -{" "}
+            <span>
+              should have a space between the "-" and the tag (not a new line)
+            </span>
+          </span>
+          <br />
+          <span>
+            -
+            <span>
+              should have no space between the "-" and the tag
+            </span>
+          </span>
+          <br />
+          <span>
+            [<span>
+              (<span>***</span>)
+            </span>]
+          </span>
+          <br />
+          <span>
+            [{" "}
+            <span>
+              ( <span>***</span> )
+            </span>{" "}
+            ]
+          </span>
+          <br />
+          <div>
+            <span>
+              Text<span>
+                <span>Foo</span>
+              </span>
+            </span>
+          </div>
+          <br />
+          <div>
+            <span>
+              *<strong>item</strong>line1
+            </span>
+            <span>
+              *item<span class="class1">line</span>4
+            </span>
+          </div>
+        </div>
+      );
+    };
+
+    const html = renderToHtml(<App />, renderOpts);
+
+    expect(html).toMatchSnapshot();
+  });
+
   it("should correctly generate html from component base jsx structure", () => {
     const Header = (props: { title: string }) => {
       return <h2>{props.title}</h2>;
@@ -1403,8 +1475,8 @@ Hello {"Daniel"}, how is it going?{"\n"}
 };
 
 describe("renderToHTML", () => {
-  describe("expanded/pretty", allTests());
-  describe("compact", allTests({ compact: true }));
+  describe("expanded/pretty", allTests({ pretty: true }));
+  describe("compact", allTests());
 
   describe("errors", () => {
     describe("error throw should contain information on which place in the tree the error occurred", () => {
