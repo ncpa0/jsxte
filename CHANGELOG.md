@@ -1,3 +1,25 @@
+## 3.3.0 (February 1, 2024)
+
+### Features
+
+- #### feat: improved the typing for the Dom renderer to better acommodate jsdom, happydom or similar libs ([#312](https://github.com/ncpa0/jsxte/pull/312))
+
+  Improved the typing for the DomRenderer to better accommodate for fake Dom libraries like `jsdom`, `happy-dom`, etc.
+
+- #### feat: add dom render methods to component api and allow for option overrides ([#311](https://github.com/ncpa0/jsxte/pull/311))
+
+  Added a `renderToDom` and `renderToDomAsync` options to the Component API.
+
+  Added the option to override the renderer options when calling any render method via the Component API.
+
+### Bug Fixes
+
+- #### fix: prevent adding unintended whitespaces to the generated html ([#310](https://github.com/ncpa0/jsxte/pull/310))
+
+  Fixed an issue where the generated html with `compact` option set as false (which is the default) would add unintended whitespaces between text elements separated by open or closing tags.
+
+  Also replaced the `compact` option with `pretty`, as from now on the default is to produce non formatted html.
+
 ## 3.2.0 (January 28, 2024)
 
 ### Features
