@@ -1,7 +1,55 @@
 import type { ComponentApi } from "../component-api/component-api";
 import { type ElementGenerator, JsxteRenderer } from "../renderer/renderer";
 
-export type DomRenderOptions = {
+export type NodeLike = object;
+export type DocumentFragmentLike = {
+  appendChild: (
+    child: any,
+  ) => any;
+};
+export type HTMLElementLike = {
+  appendChild: (
+    child: any,
+  ) => any;
+  setAttribute: (name: string, value: any) => void;
+};
+export type TextLike = {
+  textContent: string | null;
+};
+
+export type DocumentLike = {
+  createElement: (type: string) => HTMLElementLike;
+  createTextNode: (text: string) => TextLike;
+  createDocumentFragment: () => DocumentFragmentLike;
+};
+
+export type WindowLike = {
+  document: DocumentLike;
+};
+
+export type AsDocumentFragmentLike<T> = T extends DocumentFragmentLike ? T
+  : never;
+export type AsHtmlElementLike<T> = T extends HTMLElementLike ? T : never;
+export type AsTextLike<T> = T extends TextLike ? T : never;
+
+export type GetDocumentFragmentType<W extends WindowLike> =
+  AsDocumentFragmentLike<
+    ReturnType<
+      W["document"]["createDocumentFragment"]
+    >
+  >;
+export type GetHtmlElementType<W extends WindowLike> = AsHtmlElementLike<
+  ReturnType<
+    W["document"]["createElement"]
+  >
+>;
+export type GetTextType<W extends WindowLike> = AsTextLike<
+  ReturnType<
+    W["document"]["createTextNode"]
+  >
+>;
+
+export type DomRenderOptions<W extends WindowLike> = {
   [key: string]: any;
   attributeMap?: Record<string, string> | undefined;
   /**
@@ -9,18 +57,33 @@ export type DomRenderOptions = {
    * properties for some JSX attributes instead of `HTMLElement.setAttribute`.
    *
    * @default element.setAttribute(name, value) */
-  attributeSetter?: (element: HTMLElement, name: string, value: any) => void;
+  attributeSetter?: (
+    element: GetHtmlElementType<W>,
+    name: string,
+    value: any,
+  ) => void;
 };
 
-export class DomRenderer {
+export class DomRenderer<W extends WindowLike> {
   private generator;
-  private setAttribute = (element: HTMLElement, name: string, value: any) => {
+  private setAttribute = (
+    element: GetHtmlElementType<W>,
+    name: string,
+    value: any,
+  ) => {
+    if (typeof value === "boolean") {
+      if (value) {
+        value = name;
+      } else {
+        return;
+      }
+    }
     element.setAttribute(name, value);
   };
 
   constructor(
-    private window: Window,
-    private options: DomRenderOptions = {},
+    private window: W,
+    private options: DomRenderOptions<W> = {},
   ) {
     if (options.attributeSetter) {
       this.setAttribute = options.attributeSetter;
@@ -29,15 +92,18 @@ export class DomRenderer {
     const doc = this.window.document;
     const domrenderer = this;
 
-    class DomGenerator
-      implements ElementGenerator<HTMLElement | Text | DocumentFragment>
-    {
+    type R =
+      | GetHtmlElementType<W>
+      | GetTextType<W>
+      | GetDocumentFragmentType<W>;
+
+    class DomGenerator implements ElementGenerator<R> {
       createElement(
         type: string,
         attributes: Array<[attributeName: string, attributeValue: any]>,
-        children: Array<HTMLElement | Text | DocumentFragment>,
-      ): HTMLElement | Text | DocumentFragment {
-        const element = doc.createElement(type);
+        children: Array<R>,
+      ): R {
+        const element = doc.createElement(type) as GetHtmlElementType<W>;
         for (const [name, value] of attributes) {
           domrenderer.setAttribute(element, name, value);
         }
@@ -49,18 +115,18 @@ export class DomRenderer {
 
       createTextNode(
         text: string | number | bigint,
-      ): HTMLElement | Text | DocumentFragment {
-        return doc.createTextNode(String(text));
+      ): R {
+        return doc.createTextNode(String(text)) as GetTextType<W>;
       }
 
       createFragment(
-        children: Array<HTMLElement | Text | DocumentFragment>,
-      ): HTMLElement | Text | DocumentFragment {
+        children: Array<R>,
+      ): R {
         const fragment = doc.createDocumentFragment();
         for (const child of children) {
           fragment.appendChild(child);
         }
-        return fragment;
+        return fragment as GetDocumentFragmentType<W>;
       }
     }
 
@@ -70,7 +136,7 @@ export class DomRenderer {
   public render(
     component: JSX.Element,
     componentApi?: ComponentApi,
-  ): HTMLElement | Text | DocumentFragment {
+  ): GetHtmlElementType<W> | GetTextType<W> | GetDocumentFragmentType<W> {
     const renderer = new JsxteRenderer(this.generator, {
       ...this.options,
       allowAsync: false,
@@ -81,7 +147,9 @@ export class DomRenderer {
   public async renderAsync(
     component: JSX.Element,
     componentApi?: ComponentApi,
-  ): Promise<HTMLElement | Text | DocumentFragment> {
+  ): Promise<
+    GetHtmlElementType<W> | GetTextType<W> | GetDocumentFragmentType<W>
+  > {
     const renderer = new JsxteRenderer(this.generator, {
       ...this.options,
       allowAsync: true,
