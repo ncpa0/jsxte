@@ -1,12 +1,16 @@
-import {
-  jsxElemToHtmlAsync,
-  jsxElemToHtmlSync,
-} from "../html-renderer/jsx-elem-to-html";
+import type {
+  DomRenderOptions,
+  WindowLike,
+} from "../dom-renderer/dom-renderer";
+import { DomRenderer } from "../dom-renderer/dom-renderer";
+import { jsxElemToHtmlAsync } from "../html-renderer/jsx-elem-to-html-async";
+import { jsxElemToHtmlSync } from "../html-renderer/jsx-elem-to-html-sync";
 import type { HtmlRenderOptions } from "../html-renderer/render-to-html";
 import {
   jsxElemToJsonAsync,
   jsxElemToJsonSync,
 } from "../json-renderer/jsx-elem-to-json";
+import type { JsonRenderOptions } from "../json-renderer/render-to-json";
 import { jsx } from "../jsx-runtime";
 
 export class ContextAccessor {
@@ -130,30 +134,102 @@ export class ComponentApi {
    * component. All context available to this component will be available to the
    * given component as well.
    */
-  public render(component: JSX.Element): string {
-    return jsxElemToHtmlSync(component, this, this.options);
+  public render(
+    component: JSX.Element,
+    optionsOverrides?: HtmlRenderOptions,
+  ): string {
+    const thisCopy = ComponentApi.clone(this);
+    if (optionsOverrides) {
+      return jsxElemToHtmlSync(component, thisCopy, {
+        ...this.options,
+        ...optionsOverrides,
+      });
+    }
+    return jsxElemToHtmlSync(component, thisCopy, this.options);
   }
 
   public async renderAsync(
     component: JSX.Element | Promise<JSX.Element>,
+    optionsOverrides?: HtmlRenderOptions,
   ): Promise<string> {
     const thisCopy = ComponentApi.clone(this);
+    if (optionsOverrides) {
+      return Promise.resolve(component).then((c) =>
+        jsxElemToHtmlAsync(c, thisCopy, {
+          ...this.options,
+          ...optionsOverrides,
+        })
+      );
+    }
     return Promise.resolve(component).then((c) =>
       jsxElemToHtmlAsync(c, thisCopy, this.options)
     );
   }
 
-  public renderToJson(component: JSX.Element) {
-    return jsxElemToJsonSync(component, this, this.options);
+  public renderToJson(
+    component: JSX.Element,
+    optionsOverrides?: JsonRenderOptions,
+  ) {
+    const thisCopy = ComponentApi.clone(this);
+    if (optionsOverrides) {
+      return jsxElemToJsonSync(component, thisCopy, {
+        ...this.options,
+        ...optionsOverrides,
+      });
+    }
+    return jsxElemToJsonSync(component, thisCopy, this.options);
   }
 
   public async renderToJsonAsync(
     component: JSX.Element | Promise<JSX.Element>,
+    optionsOverrides?: JsonRenderOptions,
   ) {
     const thisCopy = ComponentApi.clone(this);
+    if (optionsOverrides) {
+      return Promise.resolve(component).then((c) =>
+        jsxElemToJsonAsync(c, thisCopy, {
+          ...this.options,
+          ...optionsOverrides,
+        })
+      );
+    }
     return Promise.resolve(component).then((c) =>
       jsxElemToJsonAsync(c, thisCopy, this.options)
     );
+  }
+
+  public renderToDom<W extends WindowLike>(
+    window: W,
+    component: JSX.Element,
+    optionsOverrides?: DomRenderOptions<W>,
+  ) {
+    const thisCopy = ComponentApi.clone(this);
+    if (optionsOverrides) {
+      const r = new DomRenderer(window, {
+        ...this.options,
+        ...optionsOverrides,
+      });
+      return r.render(component, thisCopy);
+    }
+    const r = new DomRenderer(window, this.options);
+    return r.render(component, thisCopy);
+  }
+
+  public async renderToDomAsync<W extends WindowLike>(
+    window: W,
+    component: JSX.Element | Promise<JSX.Element>,
+    optionsOverrides?: DomRenderOptions<W>,
+  ) {
+    const thisCopy = ComponentApi.clone(this);
+    if (optionsOverrides) {
+      const r = new DomRenderer(window, {
+        ...this.options,
+        ...optionsOverrides,
+      });
+      return Promise.resolve(component).then((c) => r.renderAsync(c, thisCopy));
+    }
+    const r = new DomRenderer(window, this.options);
+    return Promise.resolve(component).then((c) => r.renderAsync(c, thisCopy));
   }
 }
 
