@@ -1,3 +1,4 @@
+import type { ComponentApi } from "../component-api/component-api";
 import { type ElementGenerator, JsxteRenderer } from "../renderer/renderer";
 
 export type DomRenderOptions = {
@@ -66,21 +67,25 @@ export class DomRenderer {
     this.generator = new DomGenerator();
   }
 
-  public render(component: JSX.Element): HTMLElement | Text | DocumentFragment {
+  public render(
+    component: JSX.Element,
+    componentApi?: ComponentApi,
+  ): HTMLElement | Text | DocumentFragment {
     const renderer = new JsxteRenderer(this.generator, {
       ...this.options,
       allowAsync: false,
-    });
+    }, componentApi);
     return renderer.render(component);
   }
 
   public async renderAsync(
     component: JSX.Element,
+    componentApi?: ComponentApi,
   ): Promise<HTMLElement | Text | DocumentFragment> {
     const renderer = new JsxteRenderer(this.generator, {
       ...this.options,
       allowAsync: true,
-    });
+    }, componentApi);
     return renderer.render(component);
   }
 }
