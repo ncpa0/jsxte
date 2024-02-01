@@ -64,22 +64,6 @@ export class BaseHtmlGenerator {
       }
     }
 
-    if (tag === "pre") {
-      return [
-        {
-          type: "tag-open",
-          tag: tag,
-          content: `<${tag}${attributes}>`,
-        },
-        ...content,
-        {
-          type: "tag-close",
-          tag: tag,
-          content: `</${tag}>`,
-        },
-      ];
-    }
-
     return [
       {
         type: "tag-open",
