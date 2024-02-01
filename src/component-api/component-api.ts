@@ -1,4 +1,7 @@
-import type { DomRenderOptions } from "../dom-renderer/dom-renderer";
+import type {
+  DomRenderOptions,
+  WindowLike,
+} from "../dom-renderer/dom-renderer";
 import { DomRenderer } from "../dom-renderer/dom-renderer";
 import { jsxElemToHtmlAsync } from "../html-renderer/jsx-elem-to-html-async";
 import { jsxElemToHtmlSync } from "../html-renderer/jsx-elem-to-html-sync";
@@ -195,10 +198,10 @@ export class ComponentApi {
     );
   }
 
-  public renderToDom(
-    window: Window,
+  public renderToDom<W extends WindowLike>(
+    window: W,
     component: JSX.Element,
-    optionsOverrides?: DomRenderOptions,
+    optionsOverrides?: DomRenderOptions<W>,
   ) {
     const thisCopy = ComponentApi.clone(this);
     if (optionsOverrides) {
@@ -212,9 +215,10 @@ export class ComponentApi {
     return r.render(component, thisCopy);
   }
 
-  public async renderToDomAsync(
+  public async renderToDomAsync<W extends WindowLike>(
+    window: W,
     component: JSX.Element | Promise<JSX.Element>,
-    optionsOverrides?: DomRenderOptions,
+    optionsOverrides?: DomRenderOptions<W>,
   ) {
     const thisCopy = ComponentApi.clone(this);
     if (optionsOverrides) {

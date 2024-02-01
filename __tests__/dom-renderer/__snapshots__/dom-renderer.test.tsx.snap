@@ -9,7 +9,7 @@ exports[`DomRenderer > renders a div with text 1`] = `"<div>Hello</div>"`;
 exports[`DomRenderer > renders a nested structure with attributes 1`] = `
 <body
   class="foo"
-  draggable="true"
+  draggable="draggable"
   id="root"
 >
   <head>
