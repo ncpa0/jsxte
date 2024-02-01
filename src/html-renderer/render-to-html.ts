@@ -1,5 +1,6 @@
 import { JsxteRenderError } from "../jsxte-render-error";
-import { jsxElemToHtmlAsync, jsxElemToHtmlSync } from "./jsx-elem-to-html";
+import { jsxElemToHtmlAsync } from "./jsx-elem-to-html-async";
+import { jsxElemToHtmlSync } from "./jsx-elem-to-html-sync";
 
 export type HtmlRenderOptions = {
   /**
@@ -9,10 +10,10 @@ export type HtmlRenderOptions = {
   indent?: number;
   attributeMap?: Record<string, string>;
   /**
-   * If true, the generated html will be compacted, removing all unnecessary
-   * whitespace.
+   * If true, the generated html will be prettified, adding new lines and
+   * indentation.
    */
-  compact?: boolean;
+  pretty?: boolean;
 };
 
 /**
