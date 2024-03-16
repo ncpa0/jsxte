@@ -1,3 +1,32 @@
+## 3.3.1 (March 16, 2024)
+
+### Features
+
+- #### feat: added an option to extend the allowed attribute type on all tags all at once ([#330](https://github.com/ncpa0/jsxte/pull/330))
+
+  Added a new functionality that allows users to define a type that all attributes on all tags will accept.
+
+  ```ts
+  class Box<T> {
+    constructor(public v: T) {}
+
+    toString() {
+      return String(this.v);
+    }
+  }
+
+  declare global {
+    namespace JSXTE {
+      interface AttributeAcceptedTypes {
+        ALL: Box<any>;
+      }
+    }
+  }
+
+  // thanks to the interface declared above, the following will not raise errors:
+  const div = <div class={new Box(123)}></div>; // ok
+  ```
+
 ## 3.3.0 (February 1, 2024)
 
 ### Features
