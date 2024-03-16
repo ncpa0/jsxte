@@ -14,11 +14,16 @@ export type HTMLProps<T extends object = never> = Rewrap<
   >
 >;
 
+type ExtendAllValues<T> = JSXTE.AttributeAcceptedTypes extends {
+  ALL: infer U;
+} ? T | U
+  : T;
+
 type ExtendBaseProps<P> = {
   [K in keyof P]: JSXTE.AttributeAcceptedTypes extends {
     [E in K]: infer T;
-  } ? T | P[K]
-    : P[K];
+  } ? ExtendAllValues<T | P[K]>
+    : ExtendAllValues<P[K]>;
 };
 
 declare global {
