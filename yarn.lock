@@ -350,12 +350,12 @@
     uuid "^9.0.0"
 
 "@ncpa0cpl/nodepack@~2.3.0":
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/@ncpa0cpl/nodepack/-/nodepack-2.3.2.tgz#61e51493e878e95507684d9744618696578bd4bf"
-  integrity sha512-20xckr8M3UvNVGysGWVEl/IgVtZL+zRwtdoInDUGYR4ouRhlxi49sV0/fFiPz5DirJfXw79qzYE5PIbd4znrZQ==
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/@ncpa0cpl/nodepack/-/nodepack-2.3.3.tgz#32e30846bb5d972b3cd26d910f6edd52eef33379"
+  integrity sha512-H3vhxRBS4en7Z2Z6esaVKssoC4kKYKIB+BXV3w+0vf941UZqTW5O64tubE40fGF+3LdQGY7Rw7GEU8r+TDAw/g==
   dependencies:
     "@ncpa0cpl/node-worker-bridge" "^0.0.3"
-    "@ts-morph/bootstrap" "^0.20.0"
+    "@ts-morph/bootstrap" "^0.23.0"
     chokidar "^3.5.3"
     dilswer "2.1.1"
     lodash.mergewith "^4.6.2"
@@ -566,21 +566,21 @@
   resolved "https://registry.yarnpkg.com/@sinclair/typebox/-/typebox-0.27.8.tgz#6667fac16c436b5434a387a34dedb013198f6e6e"
   integrity sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==
 
-"@ts-morph/bootstrap@^0.20.0":
-  version "0.20.0"
-  resolved "https://registry.yarnpkg.com/@ts-morph/bootstrap/-/bootstrap-0.20.0.tgz#fcb0774be54bf8b02a15d3ca98a01f3acb1d8629"
-  integrity sha512-F7MfQ5Gt1dCVaGU+AbEzoLbG2sIXHVXPTRO5wzBfBw1loeSLJ0dWI0Ns97NTX2w7RTKHDRP2VrTvMjaQZsLA1g==
+"@ts-morph/bootstrap@^0.23.0":
+  version "0.23.0"
+  resolved "https://registry.yarnpkg.com/@ts-morph/bootstrap/-/bootstrap-0.23.0.tgz#469b06cab89b00d404408980b07b97e1a548fede"
+  integrity sha512-ymJv4mgtELz7hMrm8ZBdONW2GaAjO3EcdS3Edc/91t0wiBsl6v4ge67nPAJrGZo75kM2loQfyYwHl864PdPbTw==
   dependencies:
-    "@ts-morph/common" "~0.20.0"
+    "@ts-morph/common" "~0.23.0"
 
-"@ts-morph/common@~0.20.0":
-  version "0.20.0"
-  resolved "https://registry.yarnpkg.com/@ts-morph/common/-/common-0.20.0.tgz#3f161996b085ba4519731e4d24c35f6cba5b80af"
-  integrity sha512-7uKjByfbPpwuzkstL3L5MQyuXPSKdoNG93Fmi2JoDcTf3pEP731JdRFAduRVkOs8oqxPsXKA+ScrWkdQ8t/I+Q==
+"@ts-morph/common@~0.23.0":
+  version "0.23.0"
+  resolved "https://registry.yarnpkg.com/@ts-morph/common/-/common-0.23.0.tgz#bd4ddbd3f484f29476c8bd985491592ae5fc147e"
+  integrity sha512-m7Lllj9n/S6sOkCkRftpM7L24uvmfXQFedlW/4hENcuJH1HHm9u5EgxZb9uVjQSCGrbBWBkOGgcTxNg36r6ywA==
   dependencies:
-    fast-glob "^3.2.12"
-    minimatch "^7.4.3"
-    mkdirp "^2.1.6"
+    fast-glob "^3.3.2"
+    minimatch "^9.0.3"
+    mkdirp "^3.0.1"
     path-browserify "^1.0.1"
 
 "@types/estree@^1.0.0":
@@ -1495,10 +1495,10 @@ fast-deep-equal@^3.1.1, fast-deep-equal@^3.1.3:
   resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz#3a7d56b559d6cbc3eb512325244e619a65c6c525"
   integrity sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==
 
-fast-glob@^3.2.12:
-  version "3.2.12"
-  resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.2.12.tgz#7f39ec99c2e6ab030337142da9e0c18f37afae80"
-  integrity sha512-DVj4CQIYYow0BlaelwK1pHl5n5cRSJfM60UA0zK891sVInoPri2Ekj7+e1CT3/3qxXenpI+nBBmQAcJPJgaj4w==
+fast-glob@^3.2.9:
+  version "3.2.11"
+  resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.2.11.tgz#a1172ad95ceb8a16e20caa5c5e56480e5129c1d9"
+  integrity sha512-xrO3+1bxSo3ZVHAnqzyuewYT6aMFHRAd4Kcs92MAonjwQZLsK9d0SF1IyQ3k5PoirxTW0Oe/RqFgMQ6TcNE5Ew==
   dependencies:
     "@nodelib/fs.stat" "^2.0.2"
     "@nodelib/fs.walk" "^1.2.3"
@@ -1506,10 +1506,10 @@ fast-glob@^3.2.12:
     merge2 "^1.3.0"
     micromatch "^4.0.4"
 
-fast-glob@^3.2.9:
-  version "3.2.11"
-  resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.2.11.tgz#a1172ad95ceb8a16e20caa5c5e56480e5129c1d9"
-  integrity sha512-xrO3+1bxSo3ZVHAnqzyuewYT6aMFHRAd4Kcs92MAonjwQZLsK9d0SF1IyQ3k5PoirxTW0Oe/RqFgMQ6TcNE5Ew==
+fast-glob@^3.3.2:
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.3.2.tgz#a904501e57cfdd2ffcded45e99a54fef55e46129"
+  integrity sha512-oX2ruAFQwf/Orj8m737Y5adxDQO0LAB7/S5MnxCdTNDd4p6BsyIVsv9JQsATbTSq8KHRpLwIHbVlUNatxd+1Ow==
   dependencies:
     "@nodelib/fs.stat" "^2.0.2"
     "@nodelib/fs.walk" "^1.2.3"
@@ -2203,17 +2203,17 @@ minimatch@^3.0.4, minimatch@^3.0.5, minimatch@^3.1.2:
   dependencies:
     brace-expansion "^1.1.7"
 
-minimatch@^7.4.3:
-  version "7.4.6"
-  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-7.4.6.tgz#845d6f254d8f4a5e4fd6baf44d5f10c8448365fb"
-  integrity sha512-sBz8G/YjVniEz6lKPNpKxXwazJe4c19fEfV2GDMX6AjFz+MX9uDWIZW8XreVhkFW3fkIdTv/gxWr/Kks5FFAVw==
+minimatch@^9.0.3:
+  version "9.0.4"
+  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-9.0.4.tgz#8e49c731d1749cbec05050ee5145147b32496a51"
+  integrity sha512-KqWh+VchfxcMNRAJjj2tnsSJdNbHsVgnkBhTNrW7AjVo6OvLtxw8zfT9oLw1JSohlFzJ8jCoTgaoXvJ+kHt6fw==
   dependencies:
     brace-expansion "^2.0.1"
 
-mkdirp@^2.1.6:
-  version "2.1.6"
-  resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-2.1.6.tgz#964fbcb12b2d8c5d6fbc62a963ac95a273e2cc19"
-  integrity sha512-+hEnITedc8LAtIP9u3HJDFIdcLV2vXP33sqLLIzkv1Db1zO/1OxbvYf0Y1OC/S/Qo5dxHXepofhmxL02PsKe+A==
+mkdirp@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-3.0.1.tgz#e44e4c5607fb279c168241713cc6e0fea9adcb50"
+  integrity sha512-+NsyUUAZDmo6YVHzL/stxSu3t9YS1iljliy3BSDrXJ/dkn1KYdmtZODGGjLcc9XLgVVpH4KshHB8XmZgMhaBXg==
 
 mlly@^1.2.0, mlly@^1.4.2:
   version "1.4.2"
