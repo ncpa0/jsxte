@@ -56,7 +56,7 @@
     "@typescript-eslint/parser": "~6.21.0",
     "axios": "~1.6.0",
     "dprint": "^0.46.3",
-    "esbuild": "~0.20.0",
+    "esbuild": "~0.23.0",
     "eslint": "~8.57.0",
     "git-hook-tasks": "git+https://github.com/ncpa0cpl/git-hook-tasks#0.0.1",
     "husky": "~8.0.3",
