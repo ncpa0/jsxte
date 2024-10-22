@@ -610,11 +610,6 @@
     "@types/tough-cookie" "*"
     parse5 "^7.0.0"
 
-"@types/json-schema@^7.0.11":
-  version "7.0.11"
-  resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.11.tgz#d421b6c527a3037f7c84433fd2c4229e016863d3"
-  integrity sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==
-
 "@types/json-schema@^7.0.12":
   version "7.0.12"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.12.tgz#d70faba7039d5fca54c83c7dbab41051d2b6f6cb"
@@ -906,10 +901,10 @@ assertion-error@^2.0.1:
   resolved "https://registry.yarnpkg.com/assertion-error/-/assertion-error-2.0.1.tgz#f641a196b335690b1070bf00b6e7593fec190bf7"
   integrity sha512-Izi8RQcffqCeNVgFigKli1ssklIbpHnCYc6AknXGYoB6grJqyeby7jv12JUQgmTAnIDnbck1uxksT4dzN3PWBA==
 
-async-await-queue@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/async-await-queue/-/async-await-queue-1.2.1.tgz#baf459f5fbac902b060a88fee4da853fd86f2128"
-  integrity sha512-v2j+/EMzAnuJZ8I4570KJMFhi6G9g3WZyFh6cPnmQSJh3nLao77XpRt01kyFegQazPSKvue1yaIYDp/NfV/b0g==
+async-await-queue@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/async-await-queue/-/async-await-queue-2.1.4.tgz#0c44a405cd31369b561f6ac663b74b4b4ffb99ad"
+  integrity sha512-3DpDtxkKO0O/FPlWbk/CrbexjuSxWm1CH1bXlVNVyMBIkKHhT5D85gzHmGJokG3ibNGWQ7pHBmStxUW/z/0LYQ==
 
 asynckit@^0.4.0:
   version "0.4.0"
@@ -1029,11 +1024,12 @@ chokidar@^3.5.3:
   optionalDependencies:
     fsevents "~2.3.2"
 
-"clify.js@git+https://github.com/ncpa0cpl/clify.js#0.0.5":
-  version "1.0.3"
-  resolved "git+https://github.com/ncpa0cpl/clify.js#63c08dd0ad286d9416f89a34da6014f204258b38"
+clify.js@^1.0.0-beta.4:
+  version "1.0.0-beta.5"
+  resolved "https://registry.yarnpkg.com/clify.js/-/clify.js-1.0.0-beta.5.tgz#0162885160e57384eda77ba67348fe70c4f5823d"
+  integrity sha512-qIOfln1ZP4ILHhttT2uvMp58S7pH4APrdlobNAJiipFNoyDYKKmcr2fLTlWMddQ3PoUAxM6QGtAPqg7EpIo8uQ==
   dependencies:
-    chalk "^4.1.2"
+    minimist "^1.2.8"
 
 clify@ncpa0cpl/clify.js#0.0.4:
   version "1.0.3"
@@ -1152,19 +1148,12 @@ deprecation@^2.0.0:
   resolved "https://registry.yarnpkg.com/deprecation/-/deprecation-2.3.1.tgz#6368cbdb40abf3373b525ac87e4a260c3a700919"
   integrity sha512-xmHIy4F3scKVwMsQ4WnVaS8bHOx0DmVwRywosKhaILI0ywMDWPtBSku2HNxRvF7jtwDRsoEwYQSfbxj8b7RlJQ==
 
-dilswer@2.1.1, dilswer@^2.0.2:
+dilswer@2.1.1, dilswer@^2.0.2, dilswer@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/dilswer/-/dilswer-2.1.1.tgz#82a10b128c3f98b89961b1da04b23e4b91b57bd7"
   integrity sha512-GTpSyWGniwk19hh1JKrVFsENqFqZv4Ga59JxJW5ZvGHMBLcvcGAj4YPzh2gyiz4CLDPBDXyYF9b+xxVW1Md4RA==
   dependencies:
     "@types/json-schema" "^7.0.12"
-
-dilswer@^1.2.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/dilswer/-/dilswer-1.5.0.tgz#b95922da65ffef276624ad29f980b8920a78b5ce"
-  integrity sha512-J53vAsWMg1Yh469v+pSIMYEyaAefzFTcqoos8MIA59l0qD9US0Qfw7egpt4NkScNJuD8vLogToluh942aRhHNg==
-  dependencies:
-    "@types/json-schema" "^7.0.11"
 
 dir-glob@^3.0.1:
   version "3.0.1"
@@ -1631,15 +1620,16 @@ get-symbol-description@^1.0.0:
     call-bind "^1.0.2"
     get-intrinsic "^1.1.1"
 
-"git-hook-tasks@git+https://github.com/ncpa0cpl/git-hook-tasks#0.0.1":
-  version "1.0.0"
-  resolved "git+https://github.com/ncpa0cpl/git-hook-tasks#4fada7136e96600b0f66606e7427cf57b857504d"
+"git-hook-tasks@git+https://github.com/ncpa0cpl/git-hook-tasks#2.0.0":
+  version "2.0.0"
+  uid "1c70c0404277aa23c462c1615109061768c51e4c"
+  resolved "git+https://github.com/ncpa0cpl/git-hook-tasks#1c70c0404277aa23c462c1615109061768c51e4c"
   dependencies:
-    async-await-queue "^1.2.1"
+    async-await-queue "^2.1.4"
     chalk "^4.0.0"
-    clify.js "git+https://github.com/ncpa0cpl/clify.js#0.0.5"
-    dilswer "^1.2.0"
-    node-os-walk "^1.0.0"
+    clify.js "^1.0.0-beta.4"
+    dilswer "^2.1.1"
+    node-os-walk "^1.0.2"
     strip-ansi "^6.0.1"
 
 git-up@^7.0.0:
@@ -2156,6 +2146,11 @@ minimatch@^9.0.3:
   dependencies:
     brace-expansion "^2.0.1"
 
+minimist@^1.2.8:
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.8.tgz#c1a464e7693302e082a075cee0c057741ac4772c"
+  integrity sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==
+
 mkdirp@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-3.0.1.tgz#e44e4c5607fb279c168241713cc6e0fea9adcb50"
@@ -2183,7 +2178,7 @@ node-fetch@^2.6.7:
   dependencies:
     whatwg-url "^5.0.0"
 
-node-os-walk@>=1.0.2, node-os-walk@^1.0.0, node-os-walk@~1.0.2:
+node-os-walk@>=1.0.2, node-os-walk@^1.0.2, node-os-walk@~1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/node-os-walk/-/node-os-walk-1.0.2.tgz#82011408577437856451398f14cfe7fd0982902f"
   integrity sha512-aJOH1sKNP2vdYZwLyaSqPouM5Bg5YnNd0t/8cdLz2mjxDGxZyqFpa7vTsbhfjUdJM3ZBwiLPwu84kl2tET8T+Q==
