@@ -54,7 +54,7 @@
     "@types/node": "^22.5.0",
     "@typescript-eslint/eslint-plugin": "~7.0.0",
     "@typescript-eslint/parser": "~6.21.0",
-    "axios": "~1.7.4",
+    "axios": "~1.8.2",
     "dprint": "^0.47.2",
     "esbuild": "~0.24.0",
     "eslint": "~8.57.0",
