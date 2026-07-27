@@ -9,7 +9,8 @@ import {
 } from "../../src/index";
 import { Fragment, jsx } from "../../src/jsx/jsx-runtime";
 
-const sleep = (t: number) => new Promise<void>((resolve) => setTimeout(() => resolve(), t));
+const sleep = (t: number) =>
+  new Promise<void>((resolve) => setTimeout(() => resolve(), t));
 
 describe("renderToJson", () => {
   it("should correctly generate html from simple jsx", () => {
@@ -18,7 +19,7 @@ describe("renderToJson", () => {
         <div id="container" class={"bordered active"}>
           <h1>Hello World</h1>
           <h2>{props.title}</h2>
-          <button onclick={'console.log("Hello World!")'}>Click me!</button>
+          <button onclick={"console.log(\"Hello World!\")"}>Click me!</button>
           <input autofocus={true} disabled={false} draggable />
         </div>
       );
@@ -45,8 +46,16 @@ describe("renderToJson", () => {
             <meta charset="utf-8" />
             <meta http-equiv="x-ua-compatible" content="IE=edge" />
             <title>Page Title</title>
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1"
+            />
+            <link
+              rel="stylesheet"
+              type="text/css"
+              media="screen"
+              href="main.css"
+            />
           </head>
           <body>{children}</body>
         </html>
@@ -85,9 +94,7 @@ describe("renderToJson", () => {
       return (
         <div>
           <h1>Header</h1>
-          {Array.from({ length: 2 }, (_, i) => i).map((i) => (
-            <p>{i}</p>
-          ))}
+          {Array.from({ length: 2 }, (_, i) => i).map((i) => <p>{i}</p>)}
           <footer />
         </div>
       );
@@ -116,8 +123,16 @@ describe("renderToJson", () => {
             <meta charset="utf-8" />
             <meta http-equiv="x-ua-compatible" content="IE=edge" />
             <title>Page Title</title>
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1"
+            />
+            <link
+              rel="stylesheet"
+              type="text/css"
+              media="screen"
+              href="main.css"
+            />
           </head>
           <body>{children}</body>
         </html>
@@ -177,7 +192,9 @@ describe("renderToJson", () => {
         <div>
           <div>{undefined}</div>
           <div>{[undefined]}</div>
-          <div>{[<span>before</span>, undefined, undefined, <span>after</span>]}</div>
+          <div>
+            {[<span>before</span>, undefined, undefined, <span>after</span>]}
+          </div>
         </div>
       );
     };
@@ -247,8 +264,16 @@ describe("renderToJson", () => {
               <meta charset="utf-8" />
               <meta http-equiv="x-ua-compatible" content="IE=edge" />
               <title>Page Title</title>
-              <meta name="viewport" content="width=device-width, initial-scale=1" />
-              <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+              <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1"
+              />
+              <link
+                rel="stylesheet"
+                type="text/css"
+                media="screen"
+                href="main.css"
+              />
             </head>
             <body>
               <Content />
@@ -319,8 +344,16 @@ describe("renderToJson", () => {
               <meta charset="utf-8" />
               <meta http-equiv="x-ua-compatible" content="IE=edge" />
               <title>Page Title</title>
-              <meta name="viewport" content="width=device-width, initial-scale=1" />
-              <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+              <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1"
+              />
+              <link
+                rel="stylesheet"
+                type="text/css"
+                media="screen"
+                href="main.css"
+              />
             </head>
             <body>
               <Content />
@@ -394,8 +427,16 @@ describe("renderToJson", () => {
               <meta charset="utf-8" />
               <meta http-equiv="x-ua-compatible" content="IE=edge" />
               <title>Page Title</title>
-              <meta name="viewport" content="width=device-width, initial-scale=1" />
-              <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+              <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1"
+              />
+              <link
+                rel="stylesheet"
+                type="text/css"
+                media="screen"
+                href="main.css"
+              />
             </head>
             <body>
               <Content />
@@ -459,8 +500,16 @@ describe("renderToJson", () => {
               <meta charset="utf-8" />
               <meta http-equiv="x-ua-compatible" content="IE=edge" />
               <title>Page Title</title>
-              <meta name="viewport" content="width=device-width, initial-scale=1" />
-              <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+              <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1"
+              />
+              <link
+                rel="stylesheet"
+                type="text/css"
+                media="screen"
+                href="main.css"
+              />
             </head>
             <body>
               <Content />
@@ -517,8 +566,16 @@ describe("renderToJson", () => {
               <meta charset="utf-8" />
               <meta http-equiv="x-ua-compatible" content="IE=edge" />
               <title>Page Title</title>
-              <meta name="viewport" content="width=device-width, initial-scale=1" />
-              <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+              <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1"
+              />
+              <link
+                rel="stylesheet"
+                type="text/css"
+                media="screen"
+                href="main.css"
+              />
             </head>
             <Provider context={myContext} value={{ title: "Provided title" }}>
               <body>
@@ -671,7 +728,10 @@ describe("renderToJson", () => {
             ctx.set(dctx, props.value);
             return <>{props.children}</>;
           },
-          Consumer: (props: { render: (value?: T) => JSX.Element }, { ctx }: ComponentApi) => {
+          Consumer: (
+            props: { render: (value?: T) => JSX.Element },
+            { ctx }: ComponentApi,
+          ) => {
             if (ctx.has(dctx)) {
               const value = ctx.get(dctx);
               return <>{props.render(value)}</>;
@@ -684,11 +744,15 @@ describe("renderToJson", () => {
 
       const MagicalContext = makeContextWithProvider<string>();
 
-      const RollTemplate: JSXTE.Component<{ name: string }> = ({ children, name }) => {
+      const RollTemplate: JSXTE.Component<{ name: string }> = (
+        { children, name },
+      ) => {
         return <div class={`template for-${name}`}>{children}</div>;
       };
 
-      const Repeater: JSXTE.Component<{ name: string }> = ({ children, ...props }) => {
+      const Repeater: JSXTE.Component<{ name: string }> = (
+        { children, ...props },
+      ) => {
         return (
           <MagicalContext.Provider value={`repeating_${props.name}_`}>
             <RollTemplate {...props}>{children}</RollTemplate>
@@ -746,13 +810,19 @@ describe("renderToJson", () => {
             <body>
               <div id="root">
                 <Foo id={"1"} />
-                <MagicalContext.Consumer render={(v) => <span id="span-1">{v ?? "no value"}</span>} />
+                <MagicalContext.Consumer
+                  render={(v) => <span id="span-1">{v ?? "no value"}</span>}
+                />
                 <MagicalContext.Provider value="FOO">
                   <Foo id={"2"} />
-                  <MagicalContext.Consumer render={(v) => <span id="span-2">{v}</span>} />
+                  <MagicalContext.Consumer
+                    render={(v) => <span id="span-2">{v}</span>}
+                  />
                   <MagicalContext.Provider value="BAR">
                     <Foo id={"3"} />
-                    <MagicalContext.Consumer render={(v) => <span id="span-3">{v}</span>} />
+                    <MagicalContext.Consumer
+                      render={(v) => <span id="span-3">{v}</span>}
+                    />
                   </MagicalContext.Provider>
                 </MagicalContext.Provider>
               </div>
@@ -773,7 +843,11 @@ describe("renderToJson", () => {
         return <>{props.children}</>;
       }
 
-      onError(error: unknown, originalProps: JSXTE.ElementProps, contextMap: ComponentApi): JSX.Element {
+      onError(
+        error: unknown,
+        originalProps: JSXTE.ElementProps,
+        contextMap: ComponentApi,
+      ): JSX.Element {
         return <h1>Oops. Something went wrong.</h1>;
       }
     }
@@ -794,8 +868,16 @@ describe("renderToJson", () => {
               <meta charset="utf-8" />
               <meta http-equiv="x-ua-compatible" content="IE=edge" />
               <title>Page Title</title>
-              <meta name="viewport" content="width=device-width, initial-scale=1" />
-              <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+              <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1"
+              />
+              <link
+                rel="stylesheet"
+                type="text/css"
+                media="screen"
+                href="main.css"
+              />
             </head>
             <body>{children}</body>
           </html>
@@ -1092,7 +1174,9 @@ describe("renderToJson", () => {
     const RetFalse = () => <span>{false}</span>;
     const RetStr = () => <span>{"Hello World"}</span>;
     const RetNum = () => <span>{1234}</span>;
-    const RetArr = () => <span>{[undefined, null, true, false, "hi", 423]}</span>;
+    const RetArr = () => (
+      <span>{[undefined, null, true, false, "hi", 423]}</span>
+    );
 
     const Main = () => {
       return (

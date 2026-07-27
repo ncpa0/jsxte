@@ -31,18 +31,24 @@ export const memo = <P extends object & { children?: any }>(
     maxCacheEntries?: number;
   },
 ) => {
-  const { maxCacheAge, maxCacheEntries, renderAsynchronously = false } = options ?? {};
+  const { maxCacheAge, maxCacheEntries, renderAsynchronously = false } = options
+    ?? {};
 
   const cache = new Cache<JSXTE.TextNodeElement>(maxCacheAge, maxCacheEntries);
 
   if (renderAsynchronously) {
-    const MemoComponentAsync = async (props: P, context: ComponentApi): Promise<JSXTE.TextNodeElement> => {
+    const MemoComponentAsync = async (
+      props: P,
+      context: ComponentApi,
+    ): Promise<JSXTE.TextNodeElement> => {
       const { children, __self, __source, ...propsNoChildren } = props;
 
       const cachedResult = cache.get(propsNoChildren);
       if (cachedResult) return cachedResult;
 
-      const result = (await context.renderAsync(createElement(Component, { ...propsNoChildren }, children))).slice(
+      const result = (await context.renderAsync(
+        createElement(Component, { ...propsNoChildren }, children),
+      )).slice(
         0,
         -1,
       );
@@ -60,13 +66,18 @@ export const memo = <P extends object & { children?: any }>(
     return MemoComponentAsync;
   }
 
-  const MemoComponent = (props: P, context: ComponentApi): JSXTE.TextNodeElement => {
+  const MemoComponent = (
+    props: P,
+    context: ComponentApi,
+  ): JSXTE.TextNodeElement => {
     const { children, __self, __source, ...propsNoChildren } = props;
 
     const cachedResult = cache.get(propsNoChildren);
     if (cachedResult) return cachedResult;
 
-    const result = context.render(createElement(Component, { ...propsNoChildren }, children)).slice(0, -1);
+    const result = context.render(
+      createElement(Component, { ...propsNoChildren }, children),
+    ).slice(0, -1);
 
     const textNode: JSXTE.TextNodeElement = {
       text: result,
