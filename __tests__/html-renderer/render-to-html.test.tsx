@@ -1,14 +1,18 @@
 import { describe, expect, it } from "vitest";
-import {
+import type {
   ComponentApi,
   ContextDefinition,
-  defineContext,
-  ErrorBoundary,
   HtmlRenderOptions,
-  renderToHtml,
-  renderToHtmlAsync,
 } from "../../src/index";
 import { Fragment, jsx } from "../../src/jsx/jsx-runtime";
+import { Lib } from "../lib";
+
+const {
+  defineContext,
+  ErrorBoundary,
+  renderToHtml,
+  renderToHtmlAsync,
+} = Lib;
 
 const sleep = (t: number) =>
   new Promise<void>((resolve) => setTimeout(() => resolve(), t));

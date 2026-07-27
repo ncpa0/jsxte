@@ -49,7 +49,7 @@
     "url": "https://github.com/ncpa0/jsxte"
   },
   "devDependencies": {
-    "@ncpa0cpl/nodepack": "^2.3.6",
+    "@ncpa0cpl/nodepack": "^2.4.1",
     "@types/jsdom": "^28.0.3",
     "@types/node": "^24.13.3",
     "dprint": "^0.55.2",

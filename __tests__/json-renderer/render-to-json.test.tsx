@@ -1,13 +1,14 @@
 import { describe, expect, it } from "vitest";
-import {
-  ComponentApi,
-  ContextDefinition,
+import type { ComponentApi, ContextDefinition } from "../../src/index";
+import { Fragment, jsx } from "../../src/jsx/jsx-runtime";
+import { Lib } from "../lib";
+
+const {
   defineContext,
   ErrorBoundary,
   renderToJson,
   renderToJsonAsync,
-} from "../../src/index";
-import { Fragment, jsx } from "../../src/jsx/jsx-runtime";
+} = Lib;
 
 const sleep = (t: number) =>
   new Promise<void>((resolve) => setTimeout(() => resolve(), t));

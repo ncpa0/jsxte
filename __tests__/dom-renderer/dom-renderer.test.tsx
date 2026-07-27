@@ -1,8 +1,10 @@
 import { JSDOM } from "jsdom";
 import { describe, expect, it } from "vitest";
-import { DomRenderer } from "../../src/index";
 // @ts-ignore
 import { Fragment, jsx } from "../../src/jsx/jsx-runtime";
+import { Lib } from "../lib";
+
+const { DomRenderer } = Lib;
 
 describe("DomRenderer", () => {
   const { window } = new JSDOM();
