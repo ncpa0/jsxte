@@ -11,11 +11,7 @@ export type RendererOptions = {
 };
 
 export interface ElementGenerator<T> {
-  createElement(
-    type: string,
-    attributes: Array<[attributeName: string, attributeValue: any]>,
-    children: Array<T>,
-  ): T;
+  createElement(type: string, attributes: Array<[attributeName: string, attributeValue: any]>, children: Array<T>): T;
   createTextNode(text: string | number | bigint): T;
   createFragment(children: Array<T>): T;
 }
@@ -59,11 +55,7 @@ type OnPrimitiveHandler<T> = (
   context: RenderingContext,
   orgElement: JSX.Element,
 ) => RendererResult<T>;
-type ErrorHandler<T> = (
-  error: unknown,
-  element: JSX.Element,
-  context: RenderingContext,
-) => RendererResult<T> | never;
+type ErrorHandler<T> = (error: unknown, element: JSX.Element, context: RenderingContext) => RendererResult<T> | never;
 
 type ResolvedProps = {
   attributes: Array<[attributeName: string, attributeValue: any]>;
@@ -74,12 +66,7 @@ const NIL = Symbol("NIL");
 type NIL = typeof NIL;
 
 function isTagElement(element: JSX.Element): element is JSXTE.TagElement {
-  return (
-    typeof element === "object"
-    && element !== null
-    && "type" in element
-    && element.type === "tag"
-  );
+  return typeof element === "object" && element !== null && "type" in element && element.type === "tag";
 }
 
 function isErrorBoundaryElement(element: JSXTE.TagElement): element is {
@@ -87,21 +74,18 @@ function isErrorBoundaryElement(element: JSXTE.TagElement): element is {
   tag: JSXTE.ClassComponent;
   props: JSXTE.ElementProps;
 } {
-  return (
-    typeof element.tag === "function"
-    && ErrorBoundary._isErrorBoundary(element.tag)
-  );
+  return typeof element.tag === "function" && ErrorBoundary._isErrorBoundary(element.tag);
 }
 
 function isPromiseLike<T, K>(obj: K | Promise<T>): obj is Promise<T> {
   return (
-    obj instanceof Promise
-    || (typeof obj === "object"
-      && obj !== null
+    obj instanceof Promise ||
+    (typeof obj === "object" &&
+      obj !== null &&
       // @ts-ignore
-      && typeof obj.then === "function"
+      typeof obj.then === "function" &&
       // @ts-ignore
-      && typeof obj.catch === "function")
+      typeof obj.catch === "function")
   );
 }
 
@@ -122,10 +106,7 @@ class ElementMatcher<T> {
 
   constructor(private options: RendererOptions) {}
 
-  private matchSyncElem(
-    element: JSX.SyncElement,
-    context: RenderingContext,
-  ): RendererResult<T> {
+  private matchSyncElem(element: JSX.SyncElement, context: RenderingContext): RendererResult<T> {
     // eslint-disable-next-line
     switch (typeof element) {
       case "string":
@@ -187,13 +168,9 @@ class ElementMatcher<T> {
     return NIL;
   }
 
-  private createHandler<
-    F extends (
-      _: any,
-      context: RenderingContext,
-      element: JSX.Element,
-    ) => RendererResult<T>,
-  >(func: F) {
+  private createHandler<F extends (_: any, context: RenderingContext, element: JSX.Element) => RendererResult<T>>(
+    func: F,
+  ) {
     return (...args: Parameters<F>): RendererResult<T> => {
       try {
         const result = func.apply(null, args);
@@ -263,19 +240,13 @@ class ElementMatcher<T> {
 
   matchMap(
     elements: JSX.Element[],
-    mapFn: <V>(
-      element: JSX.Element,
-      cont: (element: JSX.Element, context: RenderingContext) => V,
-    ) => V,
+    mapFn: <V>(element: JSX.Element, cont: (element: JSX.Element, context: RenderingContext) => V) => V,
   ): T[] | Promise<T[]> {
     const results: T[] = [];
     const awaits: Promise<any>[] = [];
     for (let i = 0; i < elements.length; i++) {
       const element = elements[i]!;
-      const r = mapFn(
-        element,
-        (element, context) => this.match(element, context),
-      );
+      const r = mapFn(element, (element, context) => this.match(element, context));
       if (isPromiseLike(r)) {
         if (this.options.allowAsync === false) {
           asyncError();
@@ -315,31 +286,21 @@ export class JsxteRenderer<T> {
     const renderer = this;
     this.matcher
       .functionTag((tagElement, context) => {
-        const elem = tagElement.funcComponent(
-          tagElement.props,
-          context.componentApi,
-        );
+        const elem = tagElement.funcComponent(tagElement.props, context.componentApi);
         return renderer.renderChild(elem, context);
       })
       .classTag((tagElement, context) => {
-        const compoentInstance = new tagElement.classComponent(
-          tagElement.props,
-        );
-        const elem = compoentInstance.render(
-          tagElement.props,
-          context.componentApi,
-        );
+        const compoentInstance = new tagElement.classComponent(tagElement.props);
+        const elem = compoentInstance.render(tagElement.props, context.componentApi);
         return renderer.renderChild(elem, context);
       })
       .stringTag((tagElement, context) => {
         const { attributes, children } = this.resolveProps(tagElement.props);
 
-        const renderedChildren = this.matcher.matchMap(
-          children,
-          (child, next) =>
-            next(child, {
-              componentApi: ComponentApi.clone(context.componentApi),
-            }),
+        const renderedChildren = this.matcher.matchMap(children, (child, next) =>
+          next(child, {
+            componentApi: ComponentApi.clone(context.componentApi),
+          }),
         );
 
         return this.generator.createElement(
@@ -350,16 +311,12 @@ export class JsxteRenderer<T> {
         );
       })
       .fragment((fragmentElement, context) => {
-        const childrenArray = Array.isArray(fragmentElement)
-          ? fragmentElement.flat(1)
-          : [fragmentElement];
+        const childrenArray = Array.isArray(fragmentElement) ? fragmentElement.flat(1) : [fragmentElement];
 
-        const renderedChildren = this.matcher.matchMap(
-          childrenArray,
-          (child, next) =>
-            next(child, {
-              componentApi: ComponentApi.clone(context.componentApi),
-            }),
+        const renderedChildren = this.matcher.matchMap(childrenArray, (child, next) =>
+          next(child, {
+            componentApi: ComponentApi.clone(context.componentApi),
+          }),
         );
 
         // assume generator accepts promises of T[] (allowAsync is true)
@@ -382,11 +339,7 @@ export class JsxteRenderer<T> {
               type: "tag",
               tag: function ErrorHandler() {
                 const component = new element.tag(element.props);
-                return component.onError!(
-                  err,
-                  element.props,
-                  context.componentApi,
-                );
+                return component.onError!(err, element.props, context.componentApi);
               },
               props: {},
             },
@@ -407,19 +360,13 @@ export class JsxteRenderer<T> {
   }
 
   private mapAttributeName(attributeName: string): string {
-    if (
-      this.options.attributeMap
-      && attributeName in this.options.attributeMap
-    ) {
+    if (this.options.attributeMap && attributeName in this.options.attributeMap) {
       return this.options.attributeMap[attributeName]!;
     }
     return attributeName;
   }
 
-  private resolveProps({
-    children,
-    ...props
-  }: JSXTE.ElementProps): ResolvedProps {
+  private resolveProps({ children, ...props }: JSXTE.ElementProps): ResolvedProps {
     const rprops: ResolvedProps = {
       attributes: [],
       children: [],
@@ -436,16 +383,16 @@ export class JsxteRenderer<T> {
     const entries = Object.entries(props);
     for (let i = 0; i < entries.length; i++) {
       const [name, value] = entries[i]!;
+      if (name === "__self" || name === "__source") {
+        continue;
+      }
       rprops.attributes.push([this.mapAttributeName(name), value]);
     }
 
     return rprops;
   }
 
-  private renderChild(
-    element: JSX.Element,
-    context: RenderingContext,
-  ): RendererResult<T> {
+  private renderChild(element: JSX.Element, context: RenderingContext): RendererResult<T> {
     if (element === null) {
       return NIL;
     }

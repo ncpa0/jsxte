@@ -9,25 +9,17 @@ import {
 } from "../../src/index";
 import { Fragment, jsx } from "../../src/jsx/jsx-runtime";
 
-const sleep = (t: number) =>
-  new Promise<void>((resolve) => setTimeout(() => resolve(), t));
+const sleep = (t: number) => new Promise<void>((resolve) => setTimeout(() => resolve(), t));
 
 describe("renderToJson", () => {
   it("should correctly generate html from simple jsx", () => {
     const Component = (props: { title: string }) => {
       return (
-        <div
-          id="container"
-          class={"bordered active"}
-        >
+        <div id="container" class={"bordered active"}>
           <h1>Hello World</h1>
           <h2>{props.title}</h2>
-          <button onclick={"console.log(\"Hello World!\")"}>Click me!</button>
-          <input
-            autofocus={true}
-            disabled={false}
-            draggable
-          />
+          <button onclick={'console.log("Hello World!")'}>Click me!</button>
+          <input autofocus={true} disabled={false} draggable />
         </div>
       );
     };
@@ -51,21 +43,10 @@ describe("renderToJson", () => {
         <html>
           <head>
             <meta charset="utf-8" />
-            <meta
-              http-equiv="x-ua-compatible"
-              content="IE=edge"
-            />
+            <meta http-equiv="x-ua-compatible" content="IE=edge" />
             <title>Page Title</title>
-            <meta
-              name="viewport"
-              content="width=device-width, initial-scale=1"
-            />
-            <link
-              rel="stylesheet"
-              type="text/css"
-              media="screen"
-              href="main.css"
-            />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
           </head>
           <body>{children}</body>
         </html>
@@ -104,7 +85,9 @@ describe("renderToJson", () => {
       return (
         <div>
           <h1>Header</h1>
-          {Array.from({ length: 2 }, (_, i) => i).map((i) => <p>{i}</p>)}
+          {Array.from({ length: 2 }, (_, i) => i).map((i) => (
+            <p>{i}</p>
+          ))}
           <footer />
         </div>
       );
@@ -131,21 +114,10 @@ describe("renderToJson", () => {
         <html>
           <head>
             <meta charset="utf-8" />
-            <meta
-              http-equiv="x-ua-compatible"
-              content="IE=edge"
-            />
+            <meta http-equiv="x-ua-compatible" content="IE=edge" />
             <title>Page Title</title>
-            <meta
-              name="viewport"
-              content="width=device-width, initial-scale=1"
-            />
-            <link
-              rel="stylesheet"
-              type="text/css"
-              media="screen"
-              href="main.css"
-            />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
           </head>
           <body>{children}</body>
         </html>
@@ -205,9 +177,7 @@ describe("renderToJson", () => {
         <div>
           <div>{undefined}</div>
           <div>{[undefined]}</div>
-          <div>
-            {[<span>before</span>, undefined, undefined, <span>after</span>]}
-          </div>
+          <div>{[<span>before</span>, undefined, undefined, <span>after</span>]}</div>
         </div>
       );
     };
@@ -275,21 +245,10 @@ describe("renderToJson", () => {
           <html>
             <head>
               <meta charset="utf-8" />
-              <meta
-                http-equiv="x-ua-compatible"
-                content="IE=edge"
-              />
+              <meta http-equiv="x-ua-compatible" content="IE=edge" />
               <title>Page Title</title>
-              <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1"
-              />
-              <link
-                rel="stylesheet"
-                type="text/css"
-                media="screen"
-                href="main.css"
-              />
+              <meta name="viewport" content="width=device-width, initial-scale=1" />
+              <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
             </head>
             <body>
               <Content />
@@ -358,21 +317,10 @@ describe("renderToJson", () => {
           <html>
             <head>
               <meta charset="utf-8" />
-              <meta
-                http-equiv="x-ua-compatible"
-                content="IE=edge"
-              />
+              <meta http-equiv="x-ua-compatible" content="IE=edge" />
               <title>Page Title</title>
-              <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1"
-              />
-              <link
-                rel="stylesheet"
-                type="text/css"
-                media="screen"
-                href="main.css"
-              />
+              <meta name="viewport" content="width=device-width, initial-scale=1" />
+              <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
             </head>
             <body>
               <Content />
@@ -444,21 +392,10 @@ describe("renderToJson", () => {
           <html>
             <head>
               <meta charset="utf-8" />
-              <meta
-                http-equiv="x-ua-compatible"
-                content="IE=edge"
-              />
+              <meta http-equiv="x-ua-compatible" content="IE=edge" />
               <title>Page Title</title>
-              <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1"
-              />
-              <link
-                rel="stylesheet"
-                type="text/css"
-                media="screen"
-                href="main.css"
-              />
+              <meta name="viewport" content="width=device-width, initial-scale=1" />
+              <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
             </head>
             <body>
               <Content />
@@ -520,21 +457,10 @@ describe("renderToJson", () => {
           <html>
             <head>
               <meta charset="utf-8" />
-              <meta
-                http-equiv="x-ua-compatible"
-                content="IE=edge"
-              />
+              <meta http-equiv="x-ua-compatible" content="IE=edge" />
               <title>Page Title</title>
-              <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1"
-              />
-              <link
-                rel="stylesheet"
-                type="text/css"
-                media="screen"
-                href="main.css"
-              />
+              <meta name="viewport" content="width=device-width, initial-scale=1" />
+              <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
             </head>
             <body>
               <Content />
@@ -589,26 +515,12 @@ describe("renderToJson", () => {
           <html>
             <head>
               <meta charset="utf-8" />
-              <meta
-                http-equiv="x-ua-compatible"
-                content="IE=edge"
-              />
+              <meta http-equiv="x-ua-compatible" content="IE=edge" />
               <title>Page Title</title>
-              <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1"
-              />
-              <link
-                rel="stylesheet"
-                type="text/css"
-                media="screen"
-                href="main.css"
-              />
+              <meta name="viewport" content="width=device-width, initial-scale=1" />
+              <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
             </head>
-            <Provider
-              context={myContext}
-              value={{ title: "Provided title" }}
-            >
+            <Provider context={myContext} value={{ title: "Provided title" }}>
               <body>
                 <Content />
               </body>
@@ -676,10 +588,7 @@ describe("renderToJson", () => {
       const html = await renderToJsonAsync(
         <html>
           <body>
-            <Provider
-              context={store}
-              value={"foo"}
-            >
+            <Provider context={store} value={"foo"}>
               <div>
                 <div>
                   <W1 />
@@ -717,50 +626,25 @@ describe("renderToJson", () => {
       const html = await renderToJsonAsync(
         <html>
           <body>
-            <Provider
-              context={store}
-              value={"foo"}
-            >
-              <Provider
-                sleep={30}
-                context={store}
-                value={"bar"}
-              >
+            <Provider context={store} value={"foo"}>
+              <Provider sleep={30} context={store} value={"bar"}>
                 <Title />
               </Provider>
               {[
-                <Provider
-                  context={store}
-                  value={"baz"}
-                >
+                <Provider context={store} value={"baz"}>
                   <Title />
                 </Provider>,
-                <Provider
-                  sleep={50}
-                  context={store}
-                  value={"qux"}
-                >
+                <Provider sleep={50} context={store} value={"qux"}>
                   <Title />
                 </Provider>,
-                <Provider
-                  sleep={10}
-                  context={store}
-                  value={"coorg"}
-                >
+                <Provider sleep={10} context={store} value={"coorg"}>
                   <Title />
                 </Provider>,
               ]}
-              <Provider
-                sleep={30}
-                context={store}
-                value={"fred"}
-              >
+              <Provider sleep={30} context={store} value={"fred"}>
                 <Title />
               </Provider>
-              <Provider
-                context={store}
-                value={"thud"}
-              >
+              <Provider context={store} value={"thud"}>
                 <Title />
               </Provider>
               <Title />
@@ -787,10 +671,7 @@ describe("renderToJson", () => {
             ctx.set(dctx, props.value);
             return <>{props.children}</>;
           },
-          Consumer: (
-            props: { render: (value?: T) => JSX.Element },
-            { ctx }: ComponentApi,
-          ) => {
+          Consumer: (props: { render: (value?: T) => JSX.Element }, { ctx }: ComponentApi) => {
             if (ctx.has(dctx)) {
               const value = ctx.get(dctx);
               return <>{props.render(value)}</>;
@@ -803,17 +684,11 @@ describe("renderToJson", () => {
 
       const MagicalContext = makeContextWithProvider<string>();
 
-      const RollTemplate: JSXTE.Component<{ name: string }> = ({
-        children,
-        name,
-      }) => {
+      const RollTemplate: JSXTE.Component<{ name: string }> = ({ children, name }) => {
         return <div class={`template for-${name}`}>{children}</div>;
       };
 
-      const Repeater: JSXTE.Component<{ name: string }> = ({
-        children,
-        ...props
-      }) => {
+      const Repeater: JSXTE.Component<{ name: string }> = ({ children, ...props }) => {
         return (
           <MagicalContext.Provider value={`repeating_${props.name}_`}>
             <RollTemplate {...props}>{children}</RollTemplate>
@@ -826,12 +701,7 @@ describe("renderToJson", () => {
           <MagicalContext.Consumer
             render={(ctxName) => {
               const fullName = `${ctxName ?? ""}${name}`;
-              return (
-                <input
-                  type="text"
-                  name={fullName}
-                />
-              );
+              return <input type="text" name={fullName} />;
             }}
           />
         );
@@ -864,10 +734,7 @@ describe("renderToJson", () => {
       const Foo: JSXTE.Component<{ id: string }> = (props, { ctx }) => {
         const value = ctx.get(MagicalContext) ?? "no value";
         return (
-          <div
-            id={props.id}
-            class="foo"
-          >
+          <div id={props.id} class="foo">
             {value}
           </div>
         );
@@ -879,19 +746,13 @@ describe("renderToJson", () => {
             <body>
               <div id="root">
                 <Foo id={"1"} />
-                <MagicalContext.Consumer
-                  render={(v) => <span id="span-1">{v ?? "no value"}</span>}
-                />
+                <MagicalContext.Consumer render={(v) => <span id="span-1">{v ?? "no value"}</span>} />
                 <MagicalContext.Provider value="FOO">
                   <Foo id={"2"} />
-                  <MagicalContext.Consumer
-                    render={(v) => <span id="span-2">{v}</span>}
-                  />
+                  <MagicalContext.Consumer render={(v) => <span id="span-2">{v}</span>} />
                   <MagicalContext.Provider value="BAR">
                     <Foo id={"3"} />
-                    <MagicalContext.Consumer
-                      render={(v) => <span id="span-3">{v}</span>}
-                    />
+                    <MagicalContext.Consumer render={(v) => <span id="span-3">{v}</span>} />
                   </MagicalContext.Provider>
                 </MagicalContext.Provider>
               </div>
@@ -912,11 +773,7 @@ describe("renderToJson", () => {
         return <>{props.children}</>;
       }
 
-      onError(
-        error: unknown,
-        originalProps: JSXTE.ElementProps,
-        contextMap: ComponentApi,
-      ): JSX.Element {
+      onError(error: unknown, originalProps: JSXTE.ElementProps, contextMap: ComponentApi): JSX.Element {
         return <h1>Oops. Something went wrong.</h1>;
       }
     }
@@ -935,21 +792,10 @@ describe("renderToJson", () => {
           <html>
             <head>
               <meta charset="utf-8" />
-              <meta
-                http-equiv="x-ua-compatible"
-                content="IE=edge"
-              />
+              <meta http-equiv="x-ua-compatible" content="IE=edge" />
               <title>Page Title</title>
-              <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1"
-              />
-              <link
-                rel="stylesheet"
-                type="text/css"
-                media="screen"
-                href="main.css"
-              />
+              <meta name="viewport" content="width=device-width, initial-scale=1" />
+              <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
             </head>
             <body>{children}</body>
           </html>
@@ -1246,9 +1092,7 @@ describe("renderToJson", () => {
     const RetFalse = () => <span>{false}</span>;
     const RetStr = () => <span>{"Hello World"}</span>;
     const RetNum = () => <span>{1234}</span>;
-    const RetArr = () => (
-      <span>{[undefined, null, true, false, "hi", 423]}</span>
-    );
+    const RetArr = () => <span>{[undefined, null, true, false, "hi", 423]}</span>;
 
     const Main = () => {
       return (
@@ -1417,6 +1261,8 @@ describe("renderToJson", () => {
             throw new Error("I'm failing async");
           };
 
+          Failing.displayName = "Failing";
+
           const FailsEventually = async () => {
             return (
               <span>
@@ -1460,6 +1306,8 @@ describe("renderToJson", () => {
           const Failing = async () => {
             throw new Error("I'm failing async");
           };
+
+          Failing.displayName = "Failing";
 
           const FailsEventually = async () => {
             return (

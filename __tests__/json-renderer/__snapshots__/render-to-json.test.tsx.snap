@@ -249,7 +249,7 @@ exports[`renderToJson > errors > error throw should contain information on which
 <div>
 <FailsEventually>
 <span>
-<Failing2>
+<Failing>
 
 Rendering has failed due to an error: I'm failing async]
 `;
@@ -265,7 +265,7 @@ exports[`renderToJson > errors > error throw should contain information on which
 <div>
 <FailsEventually>
 <span>
-<Failing2>
+<Failing>
 
 Rendering has failed due to an error: I'm failing async]
 `;
