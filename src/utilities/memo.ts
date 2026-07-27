@@ -41,6 +41,7 @@ export const memo = <P extends object & { children?: any }>(
       props: P,
       context: ComponentApi,
     ): Promise<JSXTE.TextNodeElement> => {
+      // @ts-expect-error
       const { children, __self, __source, ...propsNoChildren } = props;
 
       const cachedResult = cache.get(propsNoChildren);
@@ -70,6 +71,7 @@ export const memo = <P extends object & { children?: any }>(
     props: P,
     context: ComponentApi,
   ): JSXTE.TextNodeElement => {
+    // @ts-expect-error
     const { children, __self, __source, ...propsNoChildren } = props;
 
     const cachedResult = cache.get(propsNoChildren);
