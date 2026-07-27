@@ -1,0 +1,50 @@
+{
+  "languages": {
+    "JavaScript": {
+      "language_servers": ["!eslint", "vtsls"],
+      "formatter": {
+        "external": {
+          "command": "dprint",
+          "arguments": ["fmt", "--stdin", "{buffer_path}"]
+        }
+      }
+    },
+    "TypeScript": {
+      "language_servers": ["!eslint", "vtsls"],
+      "formatter": {
+        "external": {
+          "command": "dprint",
+          "arguments": ["fmt", "--stdin", "{buffer_path}"]
+        }
+      }
+    },
+    "TSX": {
+      "language_servers": ["!eslint", "vtsls"],
+      "formatter": {
+        "external": {
+          "command": "dprint",
+          "arguments": ["fmt", "--stdin", "{buffer_path}"]
+        }
+      }
+    },
+    "CSS": {
+      "formatter": {
+        "external": {
+          "command": "dprint",
+          "arguments": ["fmt", "--stdin", "{buffer_path}"]
+        }
+      }
+    },
+    "JSON": {
+      "formatter": {
+        "external": {
+          "command": "dprint",
+          "arguments": ["fmt", "--stdin", "{buffer_path}"]
+        }
+      }
+    }
+  },
+  "lsp": {
+    "eslint": {}
+  }
+}
