@@ -59,7 +59,7 @@
     "jsdom": "^30.0.0",
     "node-os-walk": "~1.0.2",
     "oxlint": "^1.75.0",
-    "pr-changelog-gen": "~1.1.3",
+    "pr-changelog-gen": "~2.0.0",
     "typescript": "latest",
     "vitest": "^4.1.10"
   },
