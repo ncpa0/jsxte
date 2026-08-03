@@ -320,9 +320,9 @@
   integrity sha512-lnyANDaD4+tySEiQVwaQt40TW9iFYPImCRvSwYw8IBpR4sxD/TEELUH8kAwk2humOqHFLqB2iZR+PzMyXVhc5Q==
 
 "@ncpa0cpl/nodepack@^2.4.1":
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/@ncpa0cpl/nodepack/-/nodepack-2.4.1.tgz#bbe248b7814c267e054f24f2ed8c029edac02948"
-  integrity sha512-Y7/Afg2tudOBx9WY1zHIYm+NiRbraK7YQm7F5R0MmrIkqtmJSBq06BnYHkS71Z9lEAUVq+ZQoXbo7hS7bOToOA==
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/@ncpa0cpl/nodepack/-/nodepack-2.4.2.tgz#bf26a70e735f616687f0d83100360cc934147a79"
+  integrity sha512-FFx19n5sOOWQtA+0ivWU/95xwBt++oAKGTf79PuLi7Cu5RVje+m4xFnYg+iV+achcEE+QAzkkKdUQ6SOkR5DXg==
   dependencies:
     "@ncpa0cpl/node-worker-bridge" "^0.0.4"
     "@ts-morph/bootstrap" "^0.29.0"
@@ -685,11 +685,6 @@
     "@types/tough-cookie" "*"
     parse5 "^8.0.0"
     undici-types "^7.21.0"
-
-"@types/json-schema@^7.0.12":
-  version "7.0.12"
-  resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.12.tgz#d70faba7039d5fca54c83c7dbab41051d2b6f6cb"
-  integrity sha512-Hr5Jfhc9eYOQNPYO5WLDq/n4jqijdHNlDXjuAQkkt+mWdQR+XJToOHrsD4cPaMXpn6KO7y2+wM8AZEs8VpBLVA==
 
 "@types/json-schema@^7.0.15":
   version "7.0.15"
@@ -1114,14 +1109,7 @@ dilswer@3.2.1:
     "@types/json-schema" "^7.0.15"
     dedent "^1.7.2"
 
-dilswer@^2.0.2:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/dilswer/-/dilswer-2.1.1.tgz#82a10b128c3f98b89961b1da04b23e4b91b57bd7"
-  integrity sha512-GTpSyWGniwk19hh1JKrVFsENqFqZv4Ga59JxJW5ZvGHMBLcvcGAj4YPzh2gyiz4CLDPBDXyYF9b+xxVW1Md4RA==
-  dependencies:
-    "@types/json-schema" "^7.0.12"
-
-dilswer@^2.1.1:
+dilswer@^2.0.2, dilswer@^2.1.1:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/dilswer/-/dilswer-2.2.0.tgz#e5ab798185d8e049c9fe819236b4bdb6e77a506c"
   integrity sha512-YAaLrSdXZRZjZ0xOrb5bFiZzy7Mdyz/UQ3mYC+FrDLeh83RWWvG8KgNRid/kYa1UK0toHEXPcuif3EcCUBydWw==
